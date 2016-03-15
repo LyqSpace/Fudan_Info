@@ -35,6 +35,10 @@ h1 {
     font-size: 14px;
 }
 
+.text_warn {
+    color: #EF4F4F;
+}
+
 .section_box {
     border: 0px;
     margin: 0.8em 0px 0.5em;

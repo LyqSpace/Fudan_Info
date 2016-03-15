@@ -29,14 +29,14 @@ if (isset($_COOKIE['login_serial'])) {
         <link rel="stylesheet" type="text/css" href="../node_modules/weui/dist/style/weui.min.css" />
         <link rel="stylesheet" type="text/css" href="style.css" />
         <script type="text/javascript" src="functions.js"></script>
-        <title>我的历史发布</title>
+        <title>FDUTOPIA</title>
     </head>
 
     <body ontouchstart>
     <div class="page_header">
         <h1 class="page_title">我的历史发布</h1>
-        <p class="page_desc">维护用户数据，用户名以fdu为前缀必填</p>
-        <p class="page_desc">维护用户数据，用户名以fdu为前缀必填</p>
+        <p class="page_desc">已发布表示已经或将在推送中公开发布</p>
+        <p class="page_desc">列表按照创建时间倒序排序</p>
     </div>
     <div class="page_body">
         <article class="weui_article">

@@ -30,7 +30,7 @@ if (isset($_COOKIE['login_serial'])) {
         <link rel="stylesheet" type="text/css" href="../node_modules/weui/dist/style/weui.min.css" />
         <link rel="stylesheet" type="text/css" href="style.css" />
         <script type="text/javascript" src="functions.js"></script>
-        <title>保存一则活动</title>
+        <title>保存一则活动 | FDUTOPIA</title>
     </head>
 
     <body ontouchstart>

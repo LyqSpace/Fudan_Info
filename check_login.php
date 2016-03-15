@@ -43,7 +43,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             <meta name="author" content="Liang Yongqing, Liu Xueyue">
             <link rel="stylesheet" type="text/css" href="../node_modules/weui/dist/style/weui.min.css" />
             <link rel="stylesheet" type="text/css" href="style.css" />
-            <title></title>
+            <title>FDUTOPIA</title>
         </head>
 
         <body ontouchstart>

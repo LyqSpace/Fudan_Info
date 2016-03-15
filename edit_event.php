@@ -30,14 +30,17 @@ if (isset($_COOKIE['login_serial'])) {
         <link rel="stylesheet" type="text/css" href="../node_modules/weui/dist/style/weui.min.css" />
         <link rel="stylesheet" type="text/css" href="style.css" />
         <script type="text/javascript" src="functions.js"></script>
-        <title>编辑一则活动</title>
+        <title>FDUTOPIA</title>
     </head>
 
     <body ontouchstart>
     <div class="page_header">
         <h1 class="page_title">编辑一则活动</h1>
-        <p class="page_desc">维护用户数据，用户名以fdu为前缀必填</p>
-        <p class="page_desc">维护用户数据，用户名以fdu为前缀必填</p>
+        <p class="page_desc">一个英文占一个字符，一个中文占两个字符</p>
+        <p class="page_desc">标题、时间、地点和类别必填，主办方名字不必填写</p>
+        <p class="page_desc">内容可多次保存/编辑，但若推送已生成，则修改无效</p>
+        <p class="page_desc">请务必填写准确，若信息有误将视情况可能被禁言一学期</p>
+        <p class="page_desc">活动信息将在<strong class="text_warn">每周日晚八点</strong>整理成一则推送</p>
     </div>
     <div class="page_body">
 <?php
@@ -144,7 +147,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 <div class="weui_cells weui_cells_form">
                     <div class="weui_cell">
                         <div class="weui_cell_bd weui_cell_primary">
-                        <textarea class="weui_textarea" id="details_text" placeholder="请输入取票信息或主讲人介绍或活动介绍等，主办方不必填写，将自动补上，如果勾选“有详细描述”，则此栏不可为空"
+                        <textarea class="weui_textarea" id="details_text" placeholder="请输入取票信息或主讲人介绍或活动介绍等，主办方不必填写，将自动补上。如果勾选“有详细描述”，则此栏不可为空"
                                   name="details" rows="7" onkeyup="count('details_text', details_cnt, 300);"><?php echo $row['details'];?></textarea>
                             <div class="weui_textarea_counter"><span id="details_cnt"><?php echo strlen($row['details']);?></span>/300</div>
                         </div>
@@ -153,7 +156,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             </div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell weui_cell_switch">
-                    <div class="weui_cell_hd weui_cell_primary">是否在活动当周的周一公开发布</div>
+                    <div class="weui_cell_hd weui_cell_primary">是否发布在活动当周的图文推送中</div>
                     <div class="weui_cell_ft">
                         <input class="weui_switch" name="publish" type="checkbox" <?php
                             if ($row['publish'] == 1) {
@@ -257,7 +260,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
-                        <textarea class="weui_textarea" id="details_text" placeholder="请输入取票信息或主讲人介绍或活动介绍等，主办方不必填写，将自动补上，如果勾选“有详细描述”，则此栏不可为空"
+                        <textarea class="weui_textarea" id="details_text" placeholder="请输入取票信息或主讲人介绍或活动介绍等，主办方不必填写，将自动补上。如果勾选“有详细描述”，则此栏不可为空"
                                   name="details" rows="7" onkeyup="count('details_text', details_cnt, 300);"></textarea>
                         <div class="weui_textarea_counter"><span id="details_cnt">0</span>/300</div>
                     </div>
@@ -266,7 +269,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
         </div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell weui_cell_switch">
-                <div class="weui_cell_hd weui_cell_primary">是否在活动当周的周一公开发布</div>
+                <div class="weui_cell_hd weui_cell_primary">是否发布在活动当周的图文推送中</div>
                 <div class="weui_cell_ft">
                     <input class="weui_switch" name="publish" type="checkbox" />
                 </div>

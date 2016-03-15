@@ -33,13 +33,16 @@ if (isset($_COOKIE['login_serial'])) {
     <link rel="stylesheet" type="text/css" href="../node_modules/weui/dist/style/weui.min.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script type="text/javascript" src="functions.js"></script>
-    <title>复旦信息</title>
+    <title>FDUTOPIA</title>
 </head>
 
 <body ontouchstart>
 <div class="page_header">
-    <h1 class="page_title">欢迎</h1>
-    <p class="page_desc">为复旦活动量身设计</p>
+    <h1 class="page_title">FDUTOPIA</h1>
+    <p class="page_desc">活动信息将在<strong class="text_warn">每周日晚八点</strong>整理成一则推送</p>
+    <p class="page_desc">招新信息将在<strong class="text_warn">每周五晚八点</strong>整理成一则推送</p>
+    <p class="page_desc">涉及系统安全，请妥善保管好用户名和密码</p>
+    <p class="page_desc">联系管理员请说明用户名和事由，fdutopia@lyq.me</p>
 </div>
 <div class="page_body">
     <div class="weui_btn_area">
