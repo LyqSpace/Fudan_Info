@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Welcome! Contact Me: root@lyq.me -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="keywords" content="Fudan, Informations">
+    <meta name="author" content="Liang Yongqing, Liu Xueyue">
+    <link rel="stylesheet" type="text/css" href="../node_modules/weui/dist/style/weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>复旦信息</title>
+</head>
+
+<body ontouchstart>
+    <div class="page_header">
+        <h1 class="page_title">Login</h1>
+        <p class="page_desc">请先登录</p>
+    </div>
+    <form name="login" method="post" action="check_login.php">
+        <div class="weui_cells weui_cells_form">
+            <div class="weui_cell">
+                <div class="weui_cell_hd">
+                    <label class="weui_label">用户名</label>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input class="weui_input" name="username" type="text" placeholder="请输入用户名" />
+                </div>
+            </div>
+            <div class="weui_cell">
+                <div class="weui_cells_hd">
+                    <label class="weui_label">密码</label>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input class="weui_input" name="password" type="password" placeholder="请输入密码" />
+                </div>
+            </div>
+        </div>
+        <div class="weui_btn_area">
+            <input class="weui_btn weui_btn_plain_primary" name="submit" type="submit" value="登录" />
+        </div>
+        <div class="weui_cells_tips">
+            如果遗忘用户名或密码请联系管理员root@lyq.me
+        </div>
+    </form>
+</body>
+</html>
