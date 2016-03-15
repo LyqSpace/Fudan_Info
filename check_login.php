@@ -10,7 +10,7 @@ function generate_serial($length) {
 }
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
-    $mysql = mysql_connect("localhost", "root", "lyq");
+    $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_select_db("fudan_info");
     $query = sprintf("select password from users where username='%s';",
         mysql_real_escape_string($_POST['username']));

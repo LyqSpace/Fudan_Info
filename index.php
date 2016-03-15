@@ -3,7 +3,7 @@
 $username = '';
 
 if (isset($_COOKIE['login_serial'])) {
-    $mysql = mysql_connect("localhost", "root", "lyq");
+    $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_select_db("fudan_info");
     $query = sprintf("select username from login_serial where serial='%s';",
                     mysql_real_escape_string($_COOKIE['login_serial']));
