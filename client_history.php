@@ -35,6 +35,18 @@ if (isset($_COOKIE['login_serial'])) {
     <body ontouchstart>
     <div class="page_header">
         <h1 class="page_title">我的历史发布</h1>
+        <?php
+            $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+            mysql_query("set names 'utf8'");
+            mysql_select_db("fudan_info");
+
+            $query = sprintf("select * from users where username='%s';", $username);
+            $res = mysql_query($query, $mysql);
+            $row = mysql_fetch_assoc($res);
+            mysql_close($mysql);
+        ?>
+        <p class="page_desc">显示在推送中的全称 : <?php echo $row['fullname'];?></p>
+        <p class="page_desc">预留的联系邮箱 : <?php echo $row['email'];?></p>
         <p class="page_desc">已发布表示已经或将在推送中公开发布</p>
         <p class="page_desc">列表按照创建时间倒序排序</p>
     </div>
