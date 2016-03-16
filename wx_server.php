@@ -64,8 +64,8 @@ function get_access_token() {
     $url = "https://api.weixin.qq.com/cgi-bin/token";
     $get_data = array(
         "grant_type" => "client_credential",
-        "appid" => "wxbe3d87bc87823f45",
-        "secret" => "33106ffc1ebbe50e45c964365fe01114"
+        "appid" => "wxeacc90de62d5cfb2",
+        "secret" => "cd27e5e09167f0fea8b6f26a71cf436e"
     );
     $access_token_xml = send_get($url, $get_data);
     $access_token_obj = simplexml_load_string($access_token_xml, 'SimpleXMLElement', LIBXML_NOCDATA);

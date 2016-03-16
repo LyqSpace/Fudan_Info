@@ -27,7 +27,7 @@ if (isset($_COOKIE['login_serial'])) {
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <meta name="keywords" content="Fudan, Informations">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
-    <link rel="stylesheet" type="text/css" href="../node_modules/weui/dist/style/weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="weui.min.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script type="text/javascript" src="functions.js"></script>
     <title>编辑一则招新 | FDUTOPIA</title>
