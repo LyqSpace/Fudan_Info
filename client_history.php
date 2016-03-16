@@ -129,5 +129,6 @@ if (isset($_COOKIE['login_serial'])) {
             <a class="weui_btn weui_btn_plain_default" href="index.php">返回</a>
         </div>
     </div>
+    <br>
     </body>
     </html>

@@ -30,7 +30,7 @@ if (isset($_COOKIE['login_serial'])) {
         <link rel="stylesheet" type="text/css" href="../node_modules/weui/dist/style/weui.min.css" />
         <link rel="stylesheet" type="text/css" href="style.css" />
         <script type="text/javascript" src="functions.js"></script>
-        <title>FDUTOPIA</title>
+        <title>编辑一则活动 | FDUTOPIA</title>
     </head>
 
     <body ontouchstart>
@@ -287,5 +287,6 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
 }
 ?>
     </div>
+    <br>
     </body>
     </html>
