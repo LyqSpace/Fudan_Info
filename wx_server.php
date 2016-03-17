@@ -81,7 +81,7 @@ function response_text($post_obj, $content) {
 
 function response_query($post_obj) {
 
-    if (is_numeric($post_obj->Content) == 1) {
+    if (is_numeric(strval($post_obj->Content)) == 1) {
 
         $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
         mysql_query("set names 'utf8'");
