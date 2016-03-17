@@ -33,8 +33,9 @@ function check_update() {
 }
 
 function print_header() {
-    $html = '<section><p style="text-align: center;"><span style="font-size: 14px;">这是关于复旦收集与分享的平台</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">有趣的活动将在每周日晚上准时推送</span></p>';
+    $html = '<section><p style="text-align: center;"><span style="font-size: 14px;">这里是复旦乌托邦</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">收集分享一切有趣活动的地方</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">每周日晚上见～</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">带有<strong style="text-align: center; white-space: normal; font-size: 14px; line-height: 22.4px;"><span style="font-size: 14px; line-height: 16px; width: 16px; display: inline-block; border-radius: 50%; height: 16px; color: rgb(255, 255, 255); background-color: #0099CC;">i</span></strong>标签的活动</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">在公众号内回复编号可查看详细信息</span></p>';
     $html .= '<br><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p><br></section>';
@@ -85,11 +86,11 @@ function print_article(&$order_id, $category_name_en, $week_st, $week_ed, $updat
 function print_footer() {
     $html = '<section><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p><br>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">FDUTOPIA致力于打造高效的复旦信息分享平台</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">如果你是社长或主办方，快快联系fdutopia@lyq.me发布活动</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">为了信息的可靠性，请说明身份并附上责任人一卡通照片</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">如果你是社长或主办方</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">请联系fdutopia@lyq.me说明责任人身份</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">获得邀请后即可发布活动</span></p>';
     $html .= '<br></section>';
     echo $html;
-
 }
 
 $update_next_week = check_update();

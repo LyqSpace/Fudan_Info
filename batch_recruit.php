@@ -23,8 +23,8 @@ if (isset($_COOKIE['login_serial'])) {
 <?php
 
 function print_header() {
-    $html = '<section><p style="text-align: center;"><span style="font-size: 14px;">这是关于复旦收集与分享的平台</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">社团的招新将在每周日晚上准时推送</span></p>';
+    $html = '<section><p style="text-align: center;"><span style="font-size: 14px;">这里是复旦乌托邦</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">每周日晚上见～</span></p>';
     $html .= '<br><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p><br></section>';
     echo $html;
 }
@@ -53,11 +53,11 @@ function print_article($mysql) {
 function print_footer() {
     $html = '<section><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p><br>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">FDUTOPIA致力于打造高效的复旦信息分享平台</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">如果你是社长或主办方，快快联系fdutopia@lyq.me发布招新</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">为了信息的可靠性，请说明身份并附上责任人一卡通照片</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">如果你是社长或主办方</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">请联系fdutopia@lyq.me说明责任人身份</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">获得邀请后即可发布活动</span></p>';
     $html .= '<br></section>';
     echo $html;
-
 }
 
 $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");

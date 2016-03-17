@@ -38,8 +38,7 @@ if (isset($_COOKIE['login_serial'])) {
     <h1 class="page_title">编辑一则招新</h1>
     <p class="page_desc">一个英文占一个字符，一个中文占两个字符</p>
     <p class="page_desc">招新内容必填，主办方名字不必填写</p>
-    <p class="page_desc">内容可多次保存/编辑，但若推送已生成，则修改无效</p>
-    <p class="page_desc">请务必填写准确，若信息有误将视情况可能被禁言一学期</p>
+    <p class="page_desc">内容可多次保存/编辑，但若推送已发布，则修改无效</p>
     <p class="page_desc">招新信息将在<strong class="text_warn">每周日晚八点</strong>整理成一则推送</p>
 </div>
 <div class="page_body">
