@@ -130,7 +130,7 @@ function response_query($post_obj) {
             echo $echo_str;
 
         } else {
-            response_text($post_obj, $GLOBALS['default_msg'] . "is_numeric : " . is_numeric($post_obj->Content));
+            response_text($post_obj, $GLOBALS['default_msg'] . " content : " . $post_obj->Content);
         }
     }
 }
