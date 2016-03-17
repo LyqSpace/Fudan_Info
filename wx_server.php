@@ -26,7 +26,8 @@ if ($signature != null && $timestamp != null && $nonce != null && $echo_str != n
 }
 
 $post_str = $GLOBALS['HTTP_RAW_POST_DATA'];
-$default_response = "喵～您的消息我们已收到，将会尽快回复您 (●'◡'●)ノ♥";
+$default_msg = "喵～您的消息我们已收到，将会尽快回复您 (●'◡'●)ノ♥";
+$welcome_msg = "Welcome to FDUTOPIA! To make FDU a better place (●'◡'●)ノ♥";
 
 if ($post_str != null) {
 
@@ -34,18 +35,18 @@ if ($post_str != null) {
     $post_obj = simplexml_load_string($post_str, 'SimpleXMLElement', LIBXML_NOCDATA);
 
     if ($post_obj->MsgType == 'text') {
-        response_text($post_obj);
+        response_query($post_obj);
         exit;
     } else if ($post_obj->MsgType == 'event') {
 
         if ($post_obj->Event == 'subscribe') {
-            response_subscribe($post_obj);
+            response_text($post_obj, $GLOBALS['welcome_msg']);
         } else {
             echo '';
             exit;
         }
     } else {
-        echo $GLOBALS['default_response'];
+        echo response_text($post_obj, $GLOBALS['default_msg']);
         exit;
     }
 } else {
@@ -66,8 +67,7 @@ function get_access_token() {
     return $access_token_obj->access_token;
 }
 
-function response_subscribe($post_obj) {
-
+function response_text($post_obj, $content) {
     $text_template = '<xml>
                         <ToUserName><![CDATA[%s]]></ToUserName>
                         <FromUserName><![CDATA[%s]]></FromUserName>
@@ -75,12 +75,11 @@ function response_subscribe($post_obj) {
                         <MsgType><![CDATA[text]]></MsgType>
                         <Content><![CDATA[%s]]></Content>
                       </xml>';
-    $content = "Welcome to FDUTOPIA! To make FDU a better place (●'◡'●)ノ♥";
     $echo_str = sprintf($text_template, $post_obj->FromUserName, $post_obj->ToUserName, time(), $content);
     echo $echo_str;
 }
 
-function response_text($post_obj) {
+function response_query($post_obj) {
 
     if (is_numeric($post_obj->Content) == 1) {
 
@@ -93,25 +92,16 @@ function response_text($post_obj) {
         $row = mysql_fetch_assoc($res);
         $query_num = intval($post_obj->Content);
 
+        $content = "喵～您输入的编号不在本期活动内，本期共有" . $row['cnt'] . "个活动";
         if ($query_num <= $row['cnt'] && $query_num > 0) {
 
             $query = sprintf("select details from published_event where order_id=%d;", $query_num);
             $res = mysql_query($query, $mysql);
             $row = mysql_fetch_assoc($res);
-            $text_template = '<xml>
-                                <ToUserName><![CDATA[%s]]></ToUserName>
-                                <FromUserName><![CDATA[%s]]></FromUserName>
-                                <CreateTime>%s</CreateTime>
-                                <MsgType><![CDATA[text]]></MsgType>
-                                <Content><![CDATA[%s]]></Content>
-					          </xml>';
             $content = $row['fullname'] . ': ' . $row['details'];
-            $echo_str = sprintf($text_template, $post_obj->FromUserName, $post_obj->ToUserName, time(), $content);
-            echo $echo_str;
-
-        } else {
-            echo "喵～您输入的编号不在本期活动内，本期共有" . $row['cnt'] . "个活动";
         }
+
+        response_text($post_obj, $content);
 
     } else {
         if ($post_obj->Content == '发布') {
@@ -130,7 +120,6 @@ function response_text($post_obj) {
                                         <Url><![CDATA[%s]]></Url>
                                     </item>
                                 </Articles>
-
 					        </xml>';
 
             $title = '发布公告';
@@ -141,10 +130,8 @@ function response_text($post_obj) {
             echo $echo_str;
 
         } else {
-            echo $GLOBALS['default_response'];
+            response_text($post_obj, $GLOBALS['default_msg']);
         }
     }
-
-
 }
 ?>
