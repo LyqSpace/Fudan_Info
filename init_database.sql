@@ -26,7 +26,7 @@ create table event_info (
 	category varchar(20) not null,
 	notification boolean default false,
 	publish boolean default false,
-	details varchar(300) default '喵～信息都已经交代完整啦，祝您参加活动愉快哦～',
+	details varchar(300) not null default '喵～信息都已经交代完整啦，祝您参加活动愉快哦～',
 	edit_time timestamp default current_timestamp
 );
 
@@ -38,9 +38,10 @@ create table recruit_info (
 	edit_time timestamp default current_timestamp
 );
 
-create table week_event (
+create table published_event (
 	order_id integer not null primary key,
-	event_id integer not null
+	fullname varchar(20) not null,
+	details varchar(300) not null
 );
 
 insert into users value ('admin', 'admin', 'root@lyq.me', '2dda1312d69f45a4c0f6e9c8ca20bf6b', 2, 2);

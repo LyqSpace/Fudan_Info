@@ -52,14 +52,13 @@ h1 {
     box-sizing: border-box;
     border-bottom-width: 2px;
     border-bottom-style: solid;
-    border-color: rgb(255, 202, 0);
+    border-color: #FF6666;
     line-height: 1;
     font-size: 1em;
     font-family: inherit;
     font-weight: inherit;
     text-align: center;
     text-decoration: inherit;
-    color: rgb(255, 255, 255);
 }
 
 .section_num {
@@ -74,7 +73,8 @@ h1 {
     font-family: inherit;
     box-sizing: border-box;
     word-wrap: break-word !important;
-    background-color: rgb(255, 202, 0);
+    background-color: #FF6666;
+    color: rgb(255, 255, 255);
 }
 
 .section_body {
@@ -84,7 +84,7 @@ h1 {
     font-weight: bolder;
     text-align: inherit;
     text-decoration: inherit;
-    color: rgb(255, 202, 0);
+    color: #FF6666;
     box-sizing: border-box;
     word-wrap: break-word !important;
 }

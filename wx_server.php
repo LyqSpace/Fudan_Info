@@ -9,147 +9,142 @@ function checkSignature($signature, $timestamp, $nonce, $echostr) {
     if( $tmpStr == $signature ) {
         echo $echostr;
     }else{
-        echo "";
+        echo '';
     }
 }
 
-define("TOKEN", "QingLoveYue");
-$signature = $_GET["signature"];
-$timestamp = $_GET["timestamp"];
-$nonce = $_GET["nonce"];
-$echostr = $_GET["echostr"];
+define('TOKEN', 'QingLoveYue');
+$signature = $_GET['signature'];
+$timestamp = $_GET['timestamp'];
+$nonce = $_GET['nonce'];
+$echo_str = $_GET['echostr'];
 
-if ($signature != null && $timestamp != null && $nonce != null && $echostr != null) {
+if ($signature != null && $timestamp != null && $nonce != null && $echo_str != null) {
 
-    checkSignature($signature, $timestamp, $nonce, $echostr);
+    checkSignature($signature, $timestamp, $nonce, $echo_str);
     exit;
 }
 
-$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+$post_str = $GLOBALS['HTTP_RAW_POST_DATA'];
+$default_response = "喵～您的消息我们已收到，将会尽快回复您 (●'◡'●)ノ♥";
 
-if (!empty($postStr)) {
+if ($post_str != null) {
 
     libxml_disable_entity_loader(true);
-    $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+    $post_obj = simplexml_load_string($post_str, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-    if ($postObj->MsgType == "shortvideo" || $postObj->MsgType == "video") {
-        response_shortvideo($postObj);
+    if ($post_obj->MsgType == 'text') {
+        response_text($post_obj);
         exit;
+    } else if ($post_obj->MsgType == 'event') {
+
+        if ($post_obj->Event == 'subscribe') {
+            response_subscribe($post_obj);
+        } else {
+            echo '';
+            exit;
+        }
     } else {
-        response_defaultmsg($postObj);
+        echo $GLOBALS['default_response'];
         exit;
     }
 } else {
-    echo "";
+    echo '';
     exit;
-}
-
-function send_get($url, $get_data) {
-
-    $get_data = http_build_query($get_data);
-    $options = array(
-        "http" => array(
-            "method" => "GET",
-            "content" => $get_data,
-            'timeout' => 15
-        )
-    );
-    $context = stream_context_create($options);
-    $result = file_get_contents($url, false, $context);
-    return $result;
 }
 
 function get_access_token() {
 
-    $url = "https://api.weixin.qq.com/cgi-bin/token";
+    $url = 'https://api.weixin.qq.com/cgi-bin/token';
     $get_data = array(
-        "grant_type" => "client_credential",
-        "appid" => "wxeacc90de62d5cfb2",
-        "secret" => "cd27e5e09167f0fea8b6f26a71cf436e"
+        'grant_type' => 'client_credential',
+        'appid' => 'wxeacc90de62d5cfb2',
+        'secret' => 'cd27e5e09167f0fea8b6f26a71cf436e'
     );
     $access_token_xml = send_get($url, $get_data);
     $access_token_obj = simplexml_load_string($access_token_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
     return $access_token_obj->access_token;
 }
 
+function response_subscribe($post_obj) {
 
-
-function save_video($video_url, $file_name) {
-
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $video_url);
-    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 3);
-    $video=curl_exec($curl);
-    curl_close($curl);
-    $video_file = @fopen("staticGIF//materials//" . $file_name, "w");
-    fwrite($video_file, $video);
-    fclose($video_file);
-    unset($video, $video_url);
-
+    $text_template = '<xml>
+                        <ToUserName><![CDATA[%s]]></ToUserName>
+                        <FromUserName><![CDATA[%s]]></FromUserName>
+                        <CreateTime>%s</CreateTime>
+                        <MsgType><![CDATA[text]]></MsgType>
+                        <Content><![CDATA[%s]]></Content>
+                      </xml>';
+    $content = "Welcome to FDUTOPIA! To make FDU a better place (●'◡'●)ノ♥";
+    $echo_str = sprintf($text_template, $post_obj->FromUserName, $post_obj->ToUserName, time(), $content);
+    echo $echo_str;
 }
 
-function response_defaultMsg($postObj) {
+function response_text($post_obj) {
 
-    $FromUserName = $postObj->FromUserName;
-    $ToUserName = $postObj->ToUserName;
-    $time = time();
-    $textTemplate = "<xml>
+    if (is_numeric($post_obj->Content)) {
+
+        $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+        mysql_query("set names 'utf8'");
+        mysql_select_db("fudan_info");
+
+        $query = "select count(*) as cnt from published_event;";
+        $res = mysql_query($query, $mysql);
+        $row = mysql_fetch_assoc($res);
+        $query_num = intval($post_obj->Content);
+
+        if ($query_num <= $row['cnt'] && $query_num > 0) {
+
+            $query = sprintf("select details from published_event where order_id=%d;", $query_num);
+            $res = mysql_query($query, $mysql);
+            $row = mysql_fetch_assoc($res);
+            $text_template = '<xml>
 							<ToUserName><![CDATA[%s]]></ToUserName>
 							<FromUserName><![CDATA[%s]]></FromUserName>
 							<CreateTime>%s</CreateTime>
-							<MsgType><![CDATA[%s]]></MsgType>
+							<MsgType><![CDATA[text]]></MsgType>
 							<Content><![CDATA[%s]]></Content>
-					</xml>";
-    $MsgType = "text";
-    $contentStr = "欢迎使用Everlasting～\n";
-    $contentStr .= "您的消息主页君看到后会及时回复滴。\n";
-    $contentStr .= "如果不知道怎么使用请看【第一次玩】，如果想欣赏往期的优秀作品，请看【别人在玩]";
-    $resultStr = sprintf($textTemplate, $FromUserName, $ToUserName, $time, $MsgType, $contentStr);
-    echo $resultStr;
-}
+					      </xml>';
+            $content = $row['fullname'] . ': ' . $row['details'];
+            $echo_str = sprintf($text_template, $post_obj->FromUserName, $post_obj->ToUserName, time(), $content);
+            echo $echo_str;
 
-function response_shortvideo($postObj) {
+        } else {
+            echo "喵～您输入的编号不在本期活动内，本期共有" . $row['cnt'] . "个活动";
+        }
 
-    print_r($postObj);
+    } else {
+        if ($post_obj->Content == '发布') {
 
-    $FromUserName = $postObj->FromUserName;
-    $ToUserName = $postObj->ToUserName;
-    $time = time();
-    $MediaId = $postObj->MediaId;
-    $textTemplate = "<xml>
-							<ToUserName><![CDATA[%s]]></ToUserName>
-							<FromUserName><![CDATA[%s]]></FromUserName>
-							<CreateTime>%s</CreateTime>
-							<MsgType><![CDATA[%s]]></MsgType>
-							<Content><![CDATA[%s]]></Content>
-					</xml>";
-    $MsgType = "text";
+            $text_template = '<xml>
+                                <ToUserName><![CDATA[%s]]></ToUserName>
+							    <FromUserName><![CDATA[%s]]></FromUserName>
+							    <CreateTime>%s</CreateTime>
+							    <MsgType><![CDATA[news]]></MsgType>
+							    <ArticleCount>1</ArticleCount>
+                                <Articles>
+                                    <item>
+                                        <Title><![CDATA[%s]]></Title>
+                                        <Description><![CDATA[%s]]></Description>
+                                        <PicUrl><![CDATA[%s]]></PicUrl>
+                                        <Url><![CDATA[%s]]></Url>
+                                    </item>
+                                </Articles>
 
-    $dirStr = date("Ymdh") . "-";
-    $randomStr = "";
-    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    for ($i = 0; $i < 10; $i++) {
-        $idx = rand(0, strlen($chars)-1);
-        $randomStr .= $chars[$idx];
+					        </xml>';
+
+            $title = '发布公告';
+            $desc = '戳起来看怎么发布公告';
+            $pic_url = 'https://mmbiz.qlogo.cn/mmbiz/h4vaiaNvovPoYxj3usqPibE6cdCQosVoibhtU7FsPIDL8gjXbrHYvcZy3IdvhQ3ZXHUxwvCvpJMj7uz6ebXjfmxyQ/0?wx_fmt=jpeg';
+            $url = 'http://mp.weixin.qq.com/s?__biz=MzI3NjE5NTU3MQ==&mid=402047169&idx=1&sn=404d365a1fd5560e1141657f8d63bf42&scene=0&previewkey=afxeYHJgZGoJ2%2FS8F0m7k8wqSljwj2bfCUaCyDofEow%3D#wechat_redirect';
+            $echo_str = sprintf($text_template, $post_obj->FromUserName, $post_obj->ToUserName, time(), $title, $desc, $pic_url, $url);
+            echo $echo_str;
+
+        } else {
+            echo $GLOBALS['default_response'];
+        }
     }
-    $dirStr .= $randomStr;
 
-    $contentStr = "http://42.96.206.142/Everlasting/" . $randomStr;
-    $resultStr = sprintf($textTemplate, $FromUserName, $ToUserName, $time, $MsgType, $contentStr);
 
-    $access_token = get_access_token();
-
-    $video_url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=".$access_token."&media_id=".$MediaId;
-    $video_name = $randomStr . "mp4";
-    get_video($video_url, $video_name);
-
-    mkdir($dirStr);
-    exec("./statifGIF/staticGIF " . "materials//". $video_name);
-    exec("mv staticGIF/gifs/* " . $dirStr . "/gifs/");
-
-    echo $resultStr;
 }
-
 ?>

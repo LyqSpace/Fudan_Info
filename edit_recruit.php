@@ -40,7 +40,7 @@ if (isset($_COOKIE['login_serial'])) {
     <p class="page_desc">招新内容必填，主办方名字不必填写</p>
     <p class="page_desc">内容可多次保存/编辑，但若推送已生成，则修改无效</p>
     <p class="page_desc">请务必填写准确，若信息有误将视情况可能被禁言一学期</p>
-    <p class="page_desc">招新信息将在<strong class="text_warn">每周五晚八点</strong>整理成一则推送</p>
+    <p class="page_desc">招新信息将在<strong class="text_warn">每周日晚八点</strong>整理成一则推送</p>
 </div>
 <div class="page_body">
     <?php
@@ -73,7 +73,7 @@ if (isset($_COOKIE['login_serial'])) {
                 </div>
                 <div class="weui_cells weui_cells_form">
                     <div class="weui_cell weui_cell_switch">
-                        <div class="weui_cell_hd weui_cell_primary">是否在周五的推送中公开发布</div>
+                        <div class="weui_cell_hd weui_cell_primary">是否在周日的推送中公开发布</div>
                         <div class="weui_cell_ft">
                             <input class="weui_switch" name="publish" type="checkbox" <?php
                             if ($row['publish'] == 1) {

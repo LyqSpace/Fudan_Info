@@ -63,7 +63,7 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
     if (isset($_POST['publish']) && $_POST['publish'] == "on") {
         $publish = 'true';
     }
-    $details = 'null';
+    $details = 'default';
     if (isset($_POST['details']) && $_POST['details'] != "") {
         $details = "'" . mysql_real_escape_string($_POST['details']) . "'";
     }
@@ -91,7 +91,7 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
         }
 
     } else {
-        $query = sprintf("insert into event_info value (null, '%s', '%s', '%s', '%s', '%s', %s, %s, %s, null);",
+        $query = sprintf("insert into event_info value (null,'%s', '%s', '%s', '%s', '%s', %s, %s, %s, null);",
             mysql_real_escape_string($_POST['title']),
             $username,
             $date,

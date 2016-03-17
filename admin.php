@@ -58,7 +58,7 @@ if (isset($_COOKIE['login_serial'])) {
                         请输入一个以fdu为前缀的用户名!
                     </div>
                     <div class="weui_dialog_ft">
-                        <a onclick="dialog_disappear();" class="weui_btn_dialog primary">确定</a>
+                        <a href="javascript:history.back();" class="weui_btn_dialog primary">确定</a>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@ if (isset($_COOKIE['login_serial'])) {
                             ?>
                         </div>
                         <div class="weui_dialog_ft">
-                            <a onclick="dialog_disappear();" class="weui_btn_dialog primary">确定</a>
+                            <a href="javascript:history.back();" class="weui_btn_dialog primary">确定</a>
                         </div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@ if (isset($_COOKIE['login_serial'])) {
                             ?>
                         </div>
                         <div class="weui_dialog_ft">
-                            <a onclick="dialog_disappear();" class="weui_btn_dialog primary">确定</a>
+                            <a href="javascript:history.back();" class="weui_btn_dialog primary">确定</a>
                         </div>
                     </div>
                 </div>
@@ -208,7 +208,7 @@ if (isset($_COOKIE['login_serial'])) {
                             ?>
                         </div>
                         <div class="weui_dialog_ft">
-                            <a onclick="dialog_disappear();" class="weui_btn_dialog primary">确定</a>
+                            <a href="javascript:history.back();" class="weui_btn_dialog primary">确定</a>
                         </div>
                     </div>
                 </div>
