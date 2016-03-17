@@ -26,10 +26,15 @@ if ($signature != null && $timestamp != null && $nonce != null && $echo_str != n
 }
 
 $post_str = $GLOBALS['HTTP_RAW_POST_DATA'];
-$default_msg = "喵～您的消息我们已收到，将会尽快回复您 (●'◡'●)ノ♥";
+$default_msg = array("喵～您的消息我们已收到，将会尽快回复您 (•̀ᴗ•́)و ",
+    "您投喂的饲料已被放入猫盆中，请等待(´・ω・)ﾉ",
+    "收到啦!～给我小雨干我就回复你哦");
 $welcome_msg = "Welcome to FDUTOPIA! To make FDU a better place (●'◡'●)ノ♥";
+$default_msg_id = rand(0, count($default_msg)-1);
 
 if ($post_str != null) {
+
+    global $default_msg, $welcome_msg, $default_msg_id;
 
     libxml_disable_entity_loader(true);
     $post_obj = simplexml_load_string($post_str, 'SimpleXMLElement', LIBXML_NOCDATA);
@@ -40,13 +45,13 @@ if ($post_str != null) {
     } else if ($post_obj->MsgType == 'event') {
 
         if ($post_obj->Event == 'subscribe') {
-            response_text($post_obj, $GLOBALS['welcome_msg']);
+            response_text($post_obj, $welcome_msg);
         } else {
             echo '';
             exit;
         }
     } else {
-        echo response_text($post_obj, $GLOBALS['default_msg']);
+        echo response_text($post_obj, $default_msg[$default_msg_id]);
         exit;
     }
 } else {
@@ -80,6 +85,10 @@ function response_text($post_obj, $content) {
 }
 
 function response_query($post_obj) {
+
+    global $default_msg, $default_msg_id;
+
+    $file = fopen($post_obj->Content, "w");
 
     if (is_numeric(strval($post_obj->Content)) == 1) {
 
@@ -130,7 +139,7 @@ function response_query($post_obj) {
             echo $echo_str;
 
         } else {
-            response_text($post_obj, $GLOBALS['default_msg']);
+            response_text($post_obj, $default_msg[$default_msg_id]);
         }
     }
 }
