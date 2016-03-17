@@ -82,7 +82,7 @@ function response_subscribe($post_obj) {
 
 function response_text($post_obj) {
 
-    if (is_numeric($post_obj->Content)) {
+    if (is_numeric($post_obj->Content) == 1) {
 
         $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
         mysql_query("set names 'utf8'");
@@ -99,12 +99,12 @@ function response_text($post_obj) {
             $res = mysql_query($query, $mysql);
             $row = mysql_fetch_assoc($res);
             $text_template = '<xml>
-							<ToUserName><![CDATA[%s]]></ToUserName>
-							<FromUserName><![CDATA[%s]]></FromUserName>
-							<CreateTime>%s</CreateTime>
-							<MsgType><![CDATA[text]]></MsgType>
-							<Content><![CDATA[%s]]></Content>
-					      </xml>';
+                                <ToUserName><![CDATA[%s]]></ToUserName>
+                                <FromUserName><![CDATA[%s]]></FromUserName>
+                                <CreateTime>%s</CreateTime>
+                                <MsgType><![CDATA[text]]></MsgType>
+                                <Content><![CDATA[%s]]></Content>
+					          </xml>';
             $content = $row['fullname'] . ': ' . $row['details'];
             $echo_str = sprintf($text_template, $post_obj->FromUserName, $post_obj->ToUserName, time(), $content);
             echo $echo_str;
