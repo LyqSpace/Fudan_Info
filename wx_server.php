@@ -129,7 +129,7 @@ function response_query($post_obj) {
                                 </Articles>
 					        </xml>';
 
-            $title = '戳我戳我!发布一则新公告';
+            $title = '戳我戳我！发布一则新公告';
             $desc = '点击“阅读原文”进入后台管理页面';
             $pic_url = 'https://mmbiz.qlogo.cn/mmbiz/h4vaiaNvovPoYxj3usqPibE6cdCQosVoibhtU7FsPIDL8gjXbrHYvcZy3IdvhQ3ZXHUxwvCvpJMj7uz6ebXjfmxyQ/0?wx_fmt=jpeg';
             $url = 'http://mp.weixin.qq.com/s?__biz=MzI3NjE5NTU3MQ==&mid=402047169&idx=1&sn=404d365a1fd5560e1141657f8d63bf42&scene=0&previewkey=afxeYHJgZGoJ2%2FS8F0m7k8wqSljwj2bfCUaCyDofEow%3D#wechat_redirect';
