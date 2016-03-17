@@ -27,8 +27,8 @@ if ($signature != null && $timestamp != null && $nonce != null && $echo_str != n
 
 $post_str = $GLOBALS['HTTP_RAW_POST_DATA'];
 $default_msg = array("喵～您的消息我们已收到，将会尽快回复您 (•̀ᴗ•́)و ",
-    "您投喂的饲料已被放入猫盆中，请等待(´・ω・)ﾉ",
-    "收到啦!～给我小雨干我就回复你哦");
+    "您投喂的饲料已被放入猫盆中，请等待(´,,•ω•,,‘)",
+    "收到啦!～给我小鱼干我就回复你哦ლ(´ڡ`ლ)");
 $welcome_msg = "Welcome to FDUTOPIA! To make FDU a better place (●'◡'●)ノ♥";
 $default_msg_id = rand(0, count($default_msg)-1);
 
@@ -87,8 +87,6 @@ function response_text($post_obj, $content) {
 function response_query($post_obj) {
 
     global $default_msg, $default_msg_id;
-
-    $file = fopen($post_obj->Content, "w");
 
     if (is_numeric(strval($post_obj->Content)) == 1) {
 
