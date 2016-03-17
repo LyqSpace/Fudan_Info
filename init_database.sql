@@ -44,4 +44,4 @@ create table published_event (
 	details varchar(300) not null
 );
 
-insert into users value ('admin', 'admin', 'root@lyq.me', '2dda1312d69f45a4c0f6e9c8ca20bf6b', 2, 2);
+insert into users value ('admin', 'admin', 'root@lyq.me', '73a694ee2938d0d0f12531e2de0643ea', 2, 2);
