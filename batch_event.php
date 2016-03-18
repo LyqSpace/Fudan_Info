@@ -41,8 +41,6 @@ if ($update_next_week) {
     $res = $mysql_query($query);
 }
 
-$update_next_week = true;
-
 print_header();
 $category_id_bias = 0;
 for ($i = 0; $i < $category_cnt; $i++) {
@@ -123,7 +121,9 @@ function print_article(&$order_id, $category_id) {
         $html .= '</p></li>';
 
         if ($update_next_week) {
-            $query = sprintf('insert into published_event value (%d, "%s", "%s")', $order_id, $row['fullname'], $row['details']);
+            $details = ($row['details'] == '') ? 'default' : '"' . $row['details'] . '"';
+            $query = sprintf('insert into published_event value (%d, "%s", %s);', $order_id, $row['title'], $details);
+            echo $query;
             $res = mysql_query($query, $mysql);
         }
 

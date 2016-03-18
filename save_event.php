@@ -65,7 +65,7 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
     if (isset($_POST['publish']) && $_POST['publish'] == "on") {
         $publish = 'true';
     }
-    $details = 'default';
+    $details = 'null';
     if (isset($_POST['details']) && $_POST['details'] != "") {
         $details = "'" . mysql_real_escape_string($_POST['details']) . "'";
     }

@@ -105,7 +105,7 @@ function response_query($post_obj) {
             $query = sprintf("select details from published_event where order_id=%d;", $query_num);
             $res = mysql_query($query, $mysql);
             $row = mysql_fetch_assoc($res);
-            $content = $row['fullname'] . ': ' . $row['details'];
+            $content = '[' . $row['title'] . '] ' . $row['details'];
         }
 
         response_text($post_obj, $content);
