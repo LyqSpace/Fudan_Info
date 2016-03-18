@@ -13,7 +13,9 @@ if (isset($_COOKIE['login_serial'])) {
         header('Location: login.html');
     } else {
         $row = mysql_fetch_assoc($res);
-        $username = $row['username'];
+        if ($row['username'] != 'admin') {
+            header('Location: login.html');
+        }
     }
 } else {
     header('Location: login.html');
@@ -87,7 +89,7 @@ function print_footer() {
     $html = '<section><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p><br>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">FDUTOPIA致力于打造高效的复旦信息分享平台</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">如果你是社长或主办方</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">请联系fdutopia@lyq.me说明责任人身份</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">请联系fdutopia@lyq.me说明负责人身份</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">获得邀请后即可发布活动</span></p>';
     $html .= '<br></section>';
     echo $html;

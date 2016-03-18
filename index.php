@@ -48,6 +48,7 @@ if (isset($_COOKIE['login_serial'])) {
         <a class="weui_btn weui_btn_plain_primary" href="edit_event.php">发布一则活动信息</a>
         <a class="weui_btn weui_btn_plain_primary" href="edit_recruit.php">发布一则招新信息</a>
         <a class="weui_btn weui_btn_plain_primary" href="client_history.php">查看我的历史发布</a>
+        <a class="weui_btn weui_btn_plain_primary" href="edit_profile.php">修改我的基本信息</a>
         <a class="weui_btn weui_btn_plain_default" onclick="logout()">退出</a>
     </div>
 </div>

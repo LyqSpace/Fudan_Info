@@ -128,7 +128,7 @@ if (isset($_COOKIE['login_serial'])) {
             </div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell weui_cell_switch">
-                    <div class="weui_cell_hd weui_cell_primary">是否在周五的推送中公开发布</div>
+                    <div class="weui_cell_hd weui_cell_primary">是否在周日的推送中公开发布</div>
                     <div class="weui_cell_ft">
                         <input class="weui_switch" name="publish" type="checkbox" />
                     </div>
