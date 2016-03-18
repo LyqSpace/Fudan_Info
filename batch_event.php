@@ -118,7 +118,7 @@ function print_article(&$order_id, $category_id) {
         if ($row['notification'] == 1) {
             $html .= '<strong><span style="text-align: center; padding: 0px;line-height: 16px; margin: 0px;width: 16px; display: inline-block; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;height: 16px;background-color: #0099CC; color: rgb(255, 255, 255);">i</span></strong>';
         }
-        $html .= '</p></li>';
+        $html .= '</p></li><br>';
 
         if ($update_next_week) {
             $details = ($row['details'] == '') ? 'default' : '"' . $row['details'] . '"';
@@ -130,7 +130,7 @@ function print_article(&$order_id, $category_id) {
         $order_id++;
     }
 
-    $html .= '</ol><br><br></section>';
+    $html .= '</ol><br></section>';
     echo $html;
 }
 

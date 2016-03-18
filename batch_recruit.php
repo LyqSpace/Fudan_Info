@@ -44,7 +44,7 @@ function print_article($mysql) {
         $html .= '<li>';
         $html .= sprintf('<p style="font-size: 14px;"><strong>%s</strong></p>', $row['fullname']);
         $html .= sprintf('<p style="font-size: 14px;">%s</p>', $row['details']);
-        $html .= '</li>';
+        $html .= '</li><br>';
 
     }
 
