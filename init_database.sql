@@ -21,12 +21,13 @@ create table event_info (
 	event_id integer not null auto_increment primary key,
 	title varchar(70) not null,
 	username varchar(40) not null,
-	date datetime not null,
+	date_st datetime not null,
+	date_ed datetime not null,
 	location varchar(40) not null,
 	category varchar(20) not null,
 	notification boolean default false,
 	publish boolean default false,
-	details varchar(300) not null default '喵～信息都已经交代完整啦，祝您参加活动愉快哦～',
+	details varchar(300),
 	edit_time timestamp default current_timestamp
 );
 
@@ -41,7 +42,7 @@ create table recruit_info (
 create table published_event (
 	order_id integer not null primary key,
 	fullname varchar(20) not null,
-	details varchar(300) not null
+	details varchar(300) not null default '喵～信息都已经交代完整啦，祝您参加活动愉快哦～'
 );
 
 insert into users value ('admin', 'admin', 'root@lyq.me', '73a694ee2938d0d0f12531e2de0643ea', 2, 2);

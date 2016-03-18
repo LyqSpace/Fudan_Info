@@ -87,13 +87,27 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
                     <div class="weui_cell_hd">
-                        <label class="weui_label">时间</label>
+                        <label class="weui_label">活动开始时间</label>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" name="date" type="datetime-local" value="<?php
-                            $pos = strpos($row['date'], " ");
-                            $date = substr($row['date'], 0, $pos) . "T" . substr($row['date'], $pos+1, strlen($row['date'])-$pos-4);
+                        <input class="weui_input" name="date_st" type="datetime-local" value="<?php
+                            $pos = strpos($row['date_st'], " ");
+                            $date = substr($row['date_st'], 0, $pos) . "T" . substr($row['date_st'], $pos+1, strlen($row['date_ed'])-$pos-4);
                             echo $date;
+                        ?>"/>
+                    </div>
+                </div>
+            </div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">活动结束时间</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" name="date_ed" type="datetime-local" value="<?php
+                        $pos = strpos($row['date_ed'], " ");
+                        $date = substr($row['date_ed'], 0, $pos) . "T" . substr($row['date_ed'], $pos+1, strlen($row['date_ed'])-$pos-4);
+                        echo $date;
                         ?>"/>
                     </div>
                 </div>
@@ -110,6 +124,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                                     '<option value="culture">人文</option>' .
                                     '<option value="science">科学</option>' .
                                     '<option value="art">艺术</option>' .
+                                    '<option value="sport">体育</option>' .
                                     '<option value="entertainment">娱乐</option>' .
                                     '<option value="others">其它</option>';
 
@@ -222,10 +237,20 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
                 <div class="weui_cell_hd">
-                    <label class="weui_label">时间</label>
+                    <label class="weui_label">活动开始时间</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" name="date" type="datetime-local" />
+                    <input class="weui_input" name="date_st" type="datetime-local" />
+                </div>
+            </div>
+        </div>
+        <div class="weui_cells weui_cells_form">
+            <div class="weui_cell">
+                <div class="weui_cell_hd">
+                    <label class="weui_label">活动结束时间</label>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input class="weui_input" name="date_ed" type="datetime-local" />
                 </div>
             </div>
         </div>
@@ -240,6 +265,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                         <option value="culture">人文</option>
                         <option value="science">科学</option>
                         <option value="art">艺术</option>
+                        <option value="sport">体育</option>
                         <option value="entertainment">娱乐</option>
                         <option value="others">其它</option>
                     </select>

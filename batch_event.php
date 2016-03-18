@@ -24,6 +24,34 @@ if (isset($_COOKIE['login_serial'])) {
 
 <?php
 
+$update_next_week = check_update();
+$week_st = date('y-m-d 00:00:00', strtotime('next week', time()));
+$week_ed = date('y-m-d 00:00:00', strtotime('next week + 7 day', time()));
+$category_name_cn = array('人文', '科学', '艺术', '体育','娱乐', '其它');
+$category_name_en = array('culture', 'science', 'art', 'sport', 'entertainment', 'others');
+$category_cnt = 6;
+$order_id = 1;
+
+$mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+mysql_query("set names 'utf8'");
+mysql_select_db("fudan_info");
+
+if ($update_next_week) {
+    $query = "delete from published_event;";
+    $res = $mysql_query($query);
+}
+
+$update_next_week = true;
+
+print_header();
+$category_id_bias = 0;
+for ($i = 0; $i < $category_cnt; $i++) {
+    print_article($order_id, $i);
+}
+mysql_close($mysql);
+
+print_footer();
+
 function check_update() {
     $cur_time_week = date('N', time());
     $cur_time_hour = date('H', time());
@@ -55,25 +83,46 @@ function print_title($index, $category_name_cn) {
     echo $html;
 }
 
-function print_article(&$order_id, $category_name_en, $week_st, $week_ed, $update, $mysql) {
+function print_article(&$order_id, $category_id) {
 
-    $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and date>='%s' and date<'%s' order by date;",
-        $category_name_en, $week_st, $week_ed);
+    global $category_id_bias, $category_name_cn, $category_name_en, $week_st, $week_ed, $mysql, $update_next_week;
+    $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and date_st>='%s' and date_st<'%s' order by date_st;",
+        $category_name_en[$category_id], $week_st, $week_ed);
     $res = mysql_query($query, $mysql);
+    if (!mysql_num_rows($res)) {
+        $category_id_bias++;
+        return;
+    } else {
+        $index = $category_id-$category_id_bias+1;
+        print_title($index, $category_name_cn[$category_id]);
+    }
     $html = sprintf('<ol style="list-style-type: decimal;" class=" list-paddingleft-2" start="%d">', $order_id);
     while ($row = mysql_fetch_assoc($res)) {
 
-        $date = date('n月j日 H:i',strtotime($row['date']));
+        $date_st = date('n月j日 H:i',strtotime($row['date_st']));
+        $date_ed = date('n月j日 H:i',strtotime($row['date_ed']));
+        $date_st_pos = strpos($date_st, ' ');
+        $date_ed_pos = strpos($date_ed, ' ');
+        if (substr($date_st, 0, $date_st_pos) == substr($date_ed, 0, $date_ed_pos)) {
+            $date_ed = substr($date_ed, $date_ed_pos+1, strlen($date_ed)-$date_ed_pos-1);
+        } else {
+            $date_st_pos = strpos($date_st, '月');
+            $date_ed_pos = strpos($date_ed, '月');
+            if (substr($date_st, 0, $date_st_pos) == substr($date_ed, 0, $date_ed_pos)) {
+                $date_ed = substr($date_ed, $date_ed_pos+3, strlen($date_ed)-$date_ed_pos-1);
+            }
+        }
+
         $html .= '<li>';
         $html .= sprintf('<p style="font-size: 14px;"><strong>%s</strong></p>', $row['title']);
-        $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;&nbsp;&nbsp;%s</p>', $date, $row['location']);
+        $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;&nbsp;&nbsp;%s</p>', $date_st . ' - ' . $date_ed, $row['location']);
         $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;', $row['fullname']);
         if ($row['notification'] == 1) {
             $html .= '<strong><span style="text-align: center; padding: 0px;line-height: 16px; margin: 0px;width: 16px; display: inline-block; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;height: 16px;background-color: #0099CC; color: rgb(255, 255, 255);">i</span></strong>';
         }
         $html .= '</p></li>';
 
-        if ($update) {
+        if ($update_next_week) {
             $query = sprintf('insert into published_event value (%d, "%s", "%s")', $order_id, $row['fullname'], $row['details']);
             $res = mysql_query($query, $mysql);
         }
@@ -94,31 +143,5 @@ function print_footer() {
     $html .= '<br></section>';
     echo $html;
 }
-
-$update_next_week = check_update();
-$week_st = date('y-m-d 00:00:00', strtotime('next week', time()));
-$week_ed = date('y-m-d 00:00:00', strtotime('next week + 7 day', time()));
-$category_name_cn = array('人文', '科学', '艺术', '娱乐', '其它');
-$category_name_en = array('culture', 'science', 'art', 'entertainment', 'others');
-$category_cnt = 5;
-$order_id = 1;
-
-$mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
-mysql_query("set names 'utf8'");
-mysql_select_db("fudan_info");
-
-if ($update_next_week) {
-    $query = "delete from published_event;";
-    $res = $mysql_query($query);
-}
-
-print_header();
-for ($i = 0; $i < $category_cnt; $i++) {
-    print_title($i+1, $category_name_cn[$i]);
-    print_article($order_id, $category_name_en[$i], $week_st, $week_ed, $update_next_week, $mysql);
-}
-mysql_close($mysql);
-
-print_footer();
 
 ?>
