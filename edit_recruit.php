@@ -44,6 +44,15 @@ if (isset($_COOKIE['login_serial'])) {
 <div class="page_body">
     <?php
 
+    function count_str($str) {
+        $len = 0;
+        preg_match_all("/./us", $str, $matchs);
+        foreach($matchs[0] as $p){
+            $len += preg_match('#^['.chr(0x1).'-'.chr(0xff).']$#',$p) ? 1 : 2;
+        }
+        return $len;
+    }
+
     if (isset($_GET['recruit_id']) && $_GET['recruit_id'] != '') {
 
         $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
@@ -66,7 +75,7 @@ if (isset($_COOKIE['login_serial'])) {
                         <div class="weui_cell_bd weui_cell_primary">
                     <textarea class="weui_textarea" id="details_text" placeholder="请输入详细的社团介绍和招新信息，如部门需求、联系方式等。社团名无需填写，讲会自动补上。此栏不可为空"
                               name="details" rows="7" onkeyup="count('details_text', details_cnt, 300);"><?php echo $row['details'];?></textarea>
-                            <div class="weui_textarea_counter"><span id="details_cnt"><?php echo strlen($row['details']);?></span>/300</div>
+                            <div class="weui_textarea_counter"><span id="details_cnt"><?php echo count_str($row['details']);?></span>/300</div>
                         </div>
                     </div>
                 </div>
