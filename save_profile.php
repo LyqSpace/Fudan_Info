@@ -47,7 +47,7 @@ if (isset($_POST['fullname']) && $_POST['fullname'] != "" &&
         $query = sprintf("update users set fullname='%s', email='%s', password='%s' where username='%s';",
             mysql_real_escape_string($_POST['fullname']),
             mysql_real_escape_string($_POST['email']),
-            mysql_real_escape_string($_POST['password']),
+            md5($_POST['password']),
             $username);
     } else {
         $query = sprintf("update users set fullname='%s', email='%s' where username='%s';",
