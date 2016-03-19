@@ -21,7 +21,7 @@ create table event_info (
 	event_id integer not null auto_increment primary key,
 	title varchar(70) not null,
 	username varchar(40) not null,
-	speaker varchar(40),
+	speaker varchar(50),
 	location varchar(40) not null,
 	date_st datetime not null,
 	date_ed datetime not null,

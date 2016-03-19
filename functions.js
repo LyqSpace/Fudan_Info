@@ -74,7 +74,7 @@ function check_event() {
             len += 1;
         }
     }
-    if (len > 40) error_message += "主讲人介绍超过字数限制<br>";
+    if (len > 50) error_message += "主讲人介绍超过字数限制<br>";
 
     var str = document.getElementById("location").value;
     var len = 0;
