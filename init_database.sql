@@ -36,7 +36,7 @@ create table recruit_info (
 	recruit_id integer not null auto_increment primary key,
 	username varchar(40) not null,
 	publish boolean not null default false,
-	details varchar(140) not null,
+	details varchar(300) not null,
 	edit_time timestamp default current_timestamp
 );
 
