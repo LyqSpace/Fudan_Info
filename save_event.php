@@ -112,8 +112,6 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
             $publish,
             $details);
     }
-
-    echo $query;
     
     $res = mysql_query($query, $mysql);
 
