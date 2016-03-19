@@ -57,7 +57,7 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
 
     $speaker = 'null';
     if (isset($_POST['speaker']) && $_POST['speaker'] != "") {
-        $details = "'" . mysql_real_escape_string($_POST['speaker']) . "'";
+        $speaker = "'" . mysql_real_escape_string($_POST['speaker']) . "'";
     }
 
     $date_st = mysql_date_format($_POST['date_st']);
