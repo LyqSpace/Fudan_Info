@@ -65,6 +65,17 @@ function check_event() {
     if (len > 70) error_message += "标题超过字数限制<br>";
     if (len == 0) error_message += "标题不可为空<br>";
 
+    var str = document.getElementById("speaker").value;
+    var len = 0;
+    for (var i = 0; i < str.length; i++) {
+        if (str.charCodeAt(i) > 255) {
+            len += 2;
+        } else {
+            len += 1;
+        }
+    }
+    if (len > 40) error_message += "主讲人介绍超过字数限制<br>";
+
     var str = document.getElementById("location").value;
     var len = 0;
     for (var i = 0; i < str.length; i++) {

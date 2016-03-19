@@ -55,6 +55,11 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
     mysql_query("set names 'utf8'");
     mysql_select_db("fudan_info");
 
+    $speaker = 'null';
+    if (isset($_POST['speaker']) && $_POST['speaker'] != "") {
+        $details = "'" . mysql_real_escape_string($_POST['speaker']) . "'";
+    }
+
     $date_st = mysql_date_format($_POST['date_st']);
     $date_ed = mysql_date_format($_POST['date_ed']);
     $notification = 'false';
@@ -79,8 +84,9 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
         $res = mysql_query($query, $mysql);
         $row = mysql_fetch_assoc($res);
         if ($row['username'] == $username) {
-            $query = sprintf("update event_info set title='%s', date_st='%s', date_ed='%s', location='%s', category='%s', notification=%s, publish=%s, details=%s, edit_time=null where event_id=%s;",
+            $query = sprintf("update event_info set title='%s', speaker=%s, date_st='%s', date_ed='%s', location='%s', category='%s', notification=%s, publish=%s, details=%s, edit_time=null where event_id=%s;",
                 mysql_real_escape_string($_POST['title']),
+                $speaker,
                 $date_st,
                 $date_ed,
                 mysql_real_escape_string($_POST['location']),
@@ -94,18 +100,21 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
         }
 
     } else {
-        $query = sprintf("insert into event_info value (null,'%s', '%s', '%s', '%s', '%s', '%s', %s, %s, %s, null);",
+        $query = sprintf("insert into event_info value (null,'%s', '%s', %s, '%s', '%s', '%s', '%s', %s, %s, %s, null);",
             mysql_real_escape_string($_POST['title']),
             $username,
+            $speaker,
+            mysql_real_escape_string($_POST['location']),
             $date_st,
             $date_ed,
-            mysql_real_escape_string($_POST['location']),
             mysql_real_escape_string($_POST['category']),
             $notification,
             $publish,
             $details);
     }
 
+    echo $query;
+    
     $res = mysql_query($query, $mysql);
 
     ?>

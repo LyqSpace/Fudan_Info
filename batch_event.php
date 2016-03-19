@@ -112,12 +112,16 @@ function print_article(&$order_id, $category_id) {
         }
 
         $html .= '<li>';
-        $html .= sprintf('<p style="font-size: 14px;"><strong>%s</strong></p>', $row['title']);
+        $html .= sprintf('<p style="font-size: 14px;"><strong>%s', $row['title']);
+        if ($row['notification'] == 1) {
+            $html .= '&nbsp;<span style="text-align: center; padding: 0px;line-height: 16px; margin: 0px;width: 16px; display: inline-block; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;height: 16px;background-color: #0099CC; color: rgb(255, 255, 255);">i</span>';
+        }
+        $html .= '</strong></p>';
+        if (strlen($row['speaker']) > 0) {
+            $html .= sprintf('<p style="font-size: 14px;">主讲人：%s</p>', $row['speaker']);
+        }
         $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;&nbsp;&nbsp;%s</p>', $date_st . ' - ' . $date_ed, $row['location']);
         $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;', $row['fullname']);
-        if ($row['notification'] == 1) {
-            $html .= '<strong><span style="text-align: center; padding: 0px;line-height: 16px; margin: 0px;width: 16px; display: inline-block; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;height: 16px;background-color: #0099CC; color: rgb(255, 255, 255);">i</span></strong>';
-        }
         $html .= '</p></li><br>';
 
         if ($update_next_week) {

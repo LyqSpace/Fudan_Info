@@ -72,6 +72,18 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     </div>
                 </div>
             </div>
+            <div class="weui_cells_title">主讲人</div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                    <textarea class="weui_textarea" id="speaker" placeholder="如果是讲座，此处可作主讲人姓名、职位的简单介绍；如果是活动，此栏不填" name="speaker" rows="2"
+                              onkeyup="count('speaker', speaker_cnt, 40);"><?php echo $row['speaker'];?></textarea>
+                        <div class="weui_textarea_counter">
+                            <span id="speaker_cnt"><?php echo strlen($row['speaker']);?></span>/40
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="weui_cells_title">地点</div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
@@ -221,6 +233,16 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     <textarea class="weui_textarea" id="title" placeholder="请输入活动标题"
                               name="title" rows="3" onkeyup="count('title', title_cnt, 70);" required="required"></textarea>
                     <div class="weui_textarea_counter"><span id="title_cnt">0</span>/70</div>
+                </div>
+            </div>
+        </div>
+        <div class="weui_cells_title">主讲人</div>
+        <div class="weui_cells weui_cells_form">
+            <div class="weui_cell">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <textarea class="weui_textarea" id="speaker" placeholder="如果是讲座，此处可作主讲人姓名、职位的简单介绍；如果是活动，此栏不填"
+                              name="speaker" rows="2" onkeyup="count('speaker', speaker_cnt, 40);"></textarea>
+                    <div class="weui_textarea_counter"><span id="speaker_cnt">0</span>/40</div>
                 </div>
             </div>
         </div>
