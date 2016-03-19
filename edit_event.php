@@ -44,6 +44,15 @@ if (isset($_COOKIE['login_serial'])) {
     <div class="page_body">
 <?php
 
+function count_str($str) {
+    $len = 0;
+    preg_match_all("/./us", $str, $matchs);
+    foreach($matchs[0] as $p){
+        $len += preg_match('#^['.chr(0x1).'-'.chr(0xff).']$#',$p) ? 1 : 2;
+    }
+    return $len;
+}
+
 if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
 
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
@@ -67,7 +76,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     <textarea class="weui_textarea" id="title" placeholder="请输入活动标题" name="title" rows="3"
                               onkeyup="count('title', title_cnt, 70);" required="required"><?php echo $row['title'];?></textarea>
                         <div class="weui_textarea_counter">
-                            <span id="title_cnt"><?php echo strlen($row['title']);?></span>/70
+                            <span id="title_cnt"><?php echo count_str($row['title']);?></span>/70
                         </div>
                     </div>
                 </div>
@@ -79,7 +88,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     <textarea class="weui_textarea" id="speaker" placeholder="如果是讲座，此处可作主讲人姓名、职位的简单介绍；如果是活动，此栏不填" name="speaker" rows="2"
                               onkeyup="count('speaker', speaker_cnt, 50);"><?php echo $row['speaker'];?></textarea>
                         <div class="weui_textarea_counter">
-                            <span id="speaker_cnt"><?php echo strlen($row['speaker']);?></span>/50
+                            <span id="speaker_cnt"><?php echo count_str($row['speaker']);?></span>/50
                         </div>
                     </div>
                 </div>
@@ -91,7 +100,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     <textarea class="weui_textarea" id="location" placeholder="请输入活动地点" name="location" rows="2"
                               onkeyup="count('location', location_cnt, 40);" required="required"><?php echo $row['location'];?></textarea>
                         <div class="weui_textarea_counter">
-                            <span id="location_cnt"><?php echo strlen($row['location']);?></span>/40
+                            <span id="location_cnt"><?php echo count_str($row['location']);?></span>/40
                         </div>
                     </div>
                 </div>
@@ -175,7 +184,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                         <div class="weui_cell_bd weui_cell_primary">
                         <textarea class="weui_textarea" id="details_text" placeholder="请输入取票信息或主讲人介绍或活动介绍等，主办方不必填写，将自动补上。如果勾选“有详细描述”，则此栏不可为空"
                                   name="details" rows="7" onkeyup="count('details_text', details_cnt, 300);"><?php echo $row['details'];?></textarea>
-                            <div class="weui_textarea_counter"><span id="details_cnt"><?php echo strlen($row['details']);?></span>/300</div>
+                            <div class="weui_textarea_counter"><span id="details_cnt"><?php echo count_str($row['details']);?></span>/300</div>
                         </div>
                     </div>
                 </div>
