@@ -42,7 +42,7 @@ if (isset($_COOKIE['login_serial'])) {
     <p class="page_desc">活动和招新信息将在<strong class="text_warn">每周日晚八点</strong>整理成一则推送</p>
     <p class="page_desc">涉及系统安全，请妥善保管好用户名和密码</p>
     <p class="page_desc">联系管理员请说明用户名和事由，fdutopia@lyq.me</p>
-    <p class="page_desc">现有主办方数 : <?php
+    <p class="page_desc">已入驻的社团数 : <?php
         $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
         mysql_query("set names 'utf8'");
         mysql_select_db("fudan_info");
