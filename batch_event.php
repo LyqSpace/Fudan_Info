@@ -25,8 +25,13 @@ if (isset($_COOKIE['login_serial'])) {
 <?php
 
 $update_next_week = check_update();
-$week_st = date('y-m-d 00:00:00', strtotime('next week', time()));
-$week_ed = date('y-m-d 00:00:00', strtotime('next week + 7 day', time()));
+if (date('N', time()) != 7) {
+    $week_st = date('y-m-d 00:00:00', strtotime('next week', time()));
+    $week_ed = date('y-m-d 00:00:00', strtotime('next week + 7 day', time()));
+} else {
+    $week_st = date('y-m-d 00:00:00', strtotime('this week', time()));
+    $week_ed = date('y-m-d 00:00:00', strtotime('this week + 7 day', time()));
+}
 $category_name_cn = array('人文', '科学', '艺术', '金融', '体育','娱乐', '其它');
 $category_name_en = array('culture', 'science', 'art', 'finance', 'sport', 'entertainment', 'others');
 $category_cnt = 7;
