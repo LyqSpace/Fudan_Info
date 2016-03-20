@@ -58,6 +58,8 @@ print_footer();
 function check_update() {
     $cur_time_week = date('N', time());
     $cur_time_hour = date('H', time());
+echo $cur_time_week;
+echo $cur_time_hour;
     if ($cur_time_week == 7 && 24 - $cur_time_hour <= 4) {
         return true;
     }
@@ -65,7 +67,7 @@ function check_update() {
 }
 
 function print_header() {
-    $html = '<section><p style="text-align: center;"><span style="font-size: 14px;">复旦乌托邦</span></p>';
+    $html = '<section><p style="text-align: center;"><span style="font-size: 14px;">这是复旦乌托邦</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">不再错过，不再遗忘，我们收集与分享</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">每周日晚上见～</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">带有<strong style="text-align: center; white-space: normal; font-size: 14px; line-height: 22.4px;"><span style="font-size: 14px; line-height: 16px; width: 16px; display: inline-block; border-radius: 50%; height: 16px; color: rgb(255, 255, 255); background-color: #0099CC;">i</span></strong>标签的活动</span></p>';
@@ -148,6 +150,7 @@ function print_footer() {
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">如果你是社长或主办方</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">请联系fdutopia@lyq.me说明负责人身份</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">获得邀请后即可发布活动</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">©2016 FDUTOPIA. All rights reserved.</span></p>';
     $html .= '<br></section>';
     echo $html;
 }

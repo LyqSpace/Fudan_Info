@@ -25,7 +25,7 @@ if (isset($_COOKIE['login_serial'])) {
 <?php
 
 function print_header() {
-    $html = '<section><p style="text-align: center;"><span style="font-size: 14px;">这里是复旦乌托邦</span></p>';
+    $html = '<section><p style="text-align: center;"><span style="font-size: 14px;">这是复旦乌托邦</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">让美好遇见欣赏，让有趣告别雪藏</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">每周日晚上见～</span></p>';
     $html .= '<br><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p></section>';
@@ -58,6 +58,7 @@ function print_footer() {
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">如果你是社长或主办方</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">请联系fdutopia@lyq.me说明负责人身份</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">获得邀请后即可发布招新</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">©2016 FDUTOPIA. All rights reserved.</span></p>';
     $html .= '<br></section>';
     echo $html;
 }
