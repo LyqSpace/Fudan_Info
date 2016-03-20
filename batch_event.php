@@ -36,14 +36,13 @@ $category_name_cn = array('人文', '科学', '艺术', '金融', '体育','娱�
 $category_name_en = array('culture', 'science', 'art', 'finance', 'sport', 'entertainment', 'others');
 $category_cnt = 7;
 $order_id = 1;
-
 $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
 mysql_query("set names 'utf8'");
 mysql_select_db("fudan_info");
 
 if ($update_next_week) {
     $query = "delete from published_event;";
-    $res = $mysql_query($query);
+    mysql_query($query, $mysql);
 }
 
 print_header();
@@ -58,9 +57,13 @@ print_footer();
 function check_update() {
     $cur_time_week = date('N', time());
     $cur_time_hour = date('H', time());
+<<<<<<< HEAD
 echo $cur_time_week;
 echo $cur_time_hour;
     if ($cur_time_week == 7 && 24 - $cur_time_hour <= 4) {
+=======
+    if ($cur_time_week == 7 && (24 - $cur_time_hour) <= 4) {
+>>>>>>> e8fc974f4b64288b28aca54938f9421c81640089
         return true;
     }
     return false;
@@ -131,10 +134,9 @@ function print_article(&$order_id, $category_id) {
         $html .= '</p></li><br>';
 
         if ($update_next_week) {
-            $details = ($row['details'] == '') ? 'default' : '"' . $row['details'] . '"';
+            $details = ($row['details'] == '') ? 'default' : '"' . mysql_real_escape_string($row['details']) . '"';
             $query = sprintf('insert into published_event value (%d, "%s", %s);', $order_id, $row['title'], $details);
-            echo $query;
-            $res = mysql_query($query, $mysql);
+            mysql_query($query, $mysql);
         }
 
         $order_id++;
