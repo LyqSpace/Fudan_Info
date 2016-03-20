@@ -57,13 +57,7 @@ print_footer();
 function check_update() {
     $cur_time_week = date('N', time());
     $cur_time_hour = date('H', time());
-<<<<<<< HEAD
-echo $cur_time_week;
-echo $cur_time_hour;
-    if ($cur_time_week == 7 && 24 - $cur_time_hour <= 4) {
-=======
     if ($cur_time_week == 7 && (24 - $cur_time_hour) <= 4) {
->>>>>>> e8fc974f4b64288b28aca54938f9421c81640089
         return true;
     }
     return false;
