@@ -58,8 +58,7 @@ print_footer();
 function check_update() {
     $cur_time_week = date('N', time());
     $cur_time_hour = date('H', time());
-    $sunday_week = date('N', strtotime("Sunday"));
-    if ($cur_time_week == $sunday_week && 24 - $cur_time_hour <= 4) {
+    if ($cur_time_week == 7 && 24 - $cur_time_hour <= 4) {
         return true;
     }
     return false;
@@ -71,7 +70,7 @@ function print_header() {
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">每周日晚上见～</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">带有<strong style="text-align: center; white-space: normal; font-size: 14px; line-height: 22.4px;"><span style="font-size: 14px; line-height: 16px; width: 16px; display: inline-block; border-radius: 50%; height: 16px; color: rgb(255, 255, 255); background-color: #0099CC;">i</span></strong>标签的活动</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">在公众号内发送编号可查看取票等详细信息</span></p>';
-    $html .= '<br><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p><br></section>';
+    $html .= '<br><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p></section>';
     echo $html;
 }
 

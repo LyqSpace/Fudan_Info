@@ -28,7 +28,7 @@ function print_header() {
     $html = '<section><p style="text-align: center;"><span style="font-size: 14px;">这里是复旦乌托邦</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">让美好遇见欣赏，让有趣告别雪藏</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">每周日晚上见～</span></p>';
-    $html .= '<br><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p><br></section>';
+    $html .= '<br><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p></section>';
     echo $html;
 }
 
