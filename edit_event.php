@@ -192,7 +192,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             </div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell weui_cell_switch">
-                    <div class="weui_cell_hd weui_cell_primary">是否发布在活动当周的图文推送中</div>
+                    <div class="weui_cell_hd weui_cell_primary">是否发布在活动前两周内的推送中</div>
                     <div class="weui_cell_ft">
                         <input class="weui_switch" name="publish" type="checkbox" <?php
                             if ($row['publish'] == 1) {
@@ -327,7 +327,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
         </div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell weui_cell_switch">
-                <div class="weui_cell_hd weui_cell_primary">是否发布在活动当周的图文推送中</div>
+                <div class="weui_cell_hd weui_cell_primary">是否发布在活动前两周内的推送中</div>
                 <div class="weui_cell_ft">
                     <input class="weui_switch" name="publish" type="checkbox" />
                 </div>

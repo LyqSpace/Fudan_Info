@@ -42,6 +42,16 @@ if (isset($_COOKIE['login_serial'])) {
     <p class="page_desc">活动和招新信息将在<strong class="text_warn">每周日晚八点</strong>整理成一则推送</p>
     <p class="page_desc">涉及系统安全，请妥善保管好用户名和密码</p>
     <p class="page_desc">联系管理员请说明用户名和事由，fdutopia@lyq.me</p>
+    <p class="page_desc">现有主办方数 : <?php
+        $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+        mysql_query("set names 'utf8'");
+        mysql_select_db("fudan_info");
+        $query = "select count(*) as cnt from users;";
+        $res = mysql_query($query, $mysql);
+        $row = mysql_fetch_assoc($res);
+        echo $row['cnt']-2;
+        mysql_close($mysql);
+        ?></p>
 </div>
 <div class="page_body">
     <div class="weui_btn_area">

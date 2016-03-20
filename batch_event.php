@@ -27,10 +27,10 @@ if (isset($_COOKIE['login_serial'])) {
 $update_next_week = check_update();
 if (date('N', time()) != 7) {
     $week_st = date('y-m-d 00:00:00', strtotime('next week', time()));
-    $week_ed = date('y-m-d 00:00:00', strtotime('next week + 7 day', time()));
+    $week_ed = date('y-m-d 00:00:00', strtotime('next week + 14 day', time()));
 } else {
     $week_st = date('y-m-d 00:00:00', strtotime('this week', time()));
-    $week_ed = date('y-m-d 00:00:00', strtotime('this week + 7 day', time()));
+    $week_ed = date('y-m-d 00:00:00', strtotime('this week + 14 day', time()));
 }
 $category_name_cn = array('人文', '科学', '艺术', '金融', '体育','娱乐', '其它');
 $category_name_en = array('culture', 'science', 'art', 'finance', 'sport', 'entertainment', 'others');
@@ -89,7 +89,7 @@ function print_title($index, $category_name_cn) {
 function print_article(&$order_id, $category_id) {
 
     global $category_id_bias, $category_name_cn, $category_name_en, $week_st, $week_ed, $mysql, $update_next_week;
-    $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and date_st>='%s' and date_st<'%s' order by date_st;",
+    $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and date_ed>='%s' and date_st<'%s' order by date_st;",
         $category_name_en[$category_id], $week_st, $week_ed);
     $res = mysql_query($query, $mysql);
     if (!mysql_num_rows($res)) {

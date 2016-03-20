@@ -46,6 +46,7 @@ if (isset($_COOKIE['login_serial'])) {
             $res = mysql_query($query, $mysql);
             $row = mysql_fetch_assoc($res);
             echo $row['cnt']-2;
+            mysql_close($mysql);
             ?></p>
     </div>
     <div class="page_body">
