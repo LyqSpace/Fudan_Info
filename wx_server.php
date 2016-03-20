@@ -102,10 +102,10 @@ function response_query($post_obj) {
         $content = "喵～您输入的编号不在本期活动内，本期共有" . $row['cnt'] . "个活动";
         if ($query_num <= $row['cnt'] && $query_num > 0) {
 
-            $query = sprintf("select details from published_event where order_id=%d;", $query_num);
+            $query = sprintf("select * from published_event where order_id=%d;", $query_num);
             $res = mysql_query($query, $mysql);
             $row = mysql_fetch_assoc($res);
-            $content = '[' . $row['title'] . '] ' . $row['details'];
+            $content = '【' . $row['title'] . '】 ' . $row['details'];
         }
 
         response_text($post_obj, $content);
