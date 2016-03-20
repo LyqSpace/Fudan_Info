@@ -40,6 +40,7 @@ if (isset($_COOKIE['login_serial'])) {
         <p class="page_desc">标题、时间、地点和类别必填，主办方名字不必填写</p>
         <p class="page_desc">内容可多次保存/编辑，但若推送已发布，则修改无效</p>
         <p class="page_desc">活动信息将在<strong class="text_warn">每周日晚八点</strong>整理成一则推送</p>
+        <p class="page_desc">每次周日推送将会收录下周和下下周的已发布的活动</p>
     </div>
     <div class="page_body">
 <?php
