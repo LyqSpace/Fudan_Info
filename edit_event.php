@@ -114,7 +114,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     <div class="weui_cell_bd weui_cell_primary">
                         <input class="weui_input" name="date_st" type="datetime-local" value="<?php
                             $pos = strpos($row['date_st'], " ");
-                            $date = substr($row['date_st'], 0, $pos) . "T" . substr($row['date_st'], $pos+1, strlen($row['date_ed'])-$pos-4);
+                            $date = substr($row['date_st'], 0, $pos) . "T" . substr($row['date_st'], $pos+1, strlen($row['date_st'])-$pos-4);
                             echo $date;
                         ?>"/>
                     </div>
@@ -163,13 +163,61 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             </div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell weui_cell_switch">
+                    <div class="weui_cell_hd weui_cell_primary">是否需要提前报名</div>
+                    <div class="weui_cell_ft">
+                        <input class="weui_switch" name="register" type="checkbox" onclick="show_register()" <?php
+                        if ($row['register'] == 1) {
+                            echo 'checked="checked"';
+                        }
+                        ?>>
+                    </div>
+                </div>
+            </div>
+            <div id="register_form" style="display:<?php
+                if ($row['register'] == 1) {
+                    echo 'display';
+                } else {
+                    echo 'none';
+                }
+            ?>">
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd">
+                            <label class="weui_label">报名开始时间</label>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" name="register_st" type="datetime-local" value="<?php
+                            $pos = strpos($row['register_st'], " ");
+                            $date = substr($row['register_st'], 0, $pos) . "T" . substr($row['register_st'], $pos+1, strlen($row['register_st'])-$pos-4);
+                            echo $date;
+                            ?>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd">
+                            <label class="weui_label">报名结束时间</label>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" name="register_ed" type="datetime-local" value="<?php
+                            $pos = strpos($row['register_ed'], " ");
+                            $date = substr($row['register_ed'], 0, $pos) . "T" . substr($row['register_ed'], $pos+1, strlen($row['register_ed'])-$pos-4);
+                            echo $date;
+                            ?>"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell weui_cell_switch">
                     <div class="weui_cell_hd weui_cell_primary">是否有详细描述</div>
                     <div class="weui_cell_ft">
                         <input class="weui_switch" name="notification" type="checkbox" onclick="show_details()" <?php
                             if ($row['notification'] == 1) {
                                 echo 'checked="checked"';
                             }
-                        ?>">
+                        ?>>
                     </div>
                 </div>
             </div>
@@ -199,7 +247,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                             if ($row['publish'] == 1) {
                                 echo 'checked="checked"';
                             }
-                        ?>">
+                        ?>>
                     </div>
                 </div>
             </div>
@@ -303,6 +351,36 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                         <option value="entertainment">娱乐</option>
                         <option value="others">其它</option>
                     </select>
+                </div>
+            </div>
+        </div>
+        <div class="weui_cells weui_cells_form">
+            <div class="weui_cell weui_cell_switch">
+                <div class="weui_cell_hd weui_cell_primary">是否需要提前报名</div>
+                <div class="weui_cell_ft">
+                    <input class="weui_switch" name="register" type="checkbox" onclick="show_register()">
+                </div>
+            </div>
+        </div>
+        <div id="register_form" style="display:none">
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">报名开始时间</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" name="register_st" type="datetime-local"/>
+                    </div>
+                </div>
+            </div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">报名结束时间</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" name="register_ed" type="datetime-local"/>
+                    </div>
                 </div>
             </div>
         </div>

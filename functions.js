@@ -16,8 +16,20 @@ function show_details() {
     }
 }
 
+function show_register() {
+    register_form = document.getElementById('register_form');
+    register_check = document.getElementsByName('register')[0];
+    if (register_check == null) return;
+    if (register_check.checked) {
+        register_form.style.display = "block";
+    } else {
+        register_form.style.display = "none";
+    }
+}
+
 window.onload = function () {
     show_details();
+    show_register();
 }
 
 function count(text_id, cnt_id, cnt_limit) {
@@ -102,6 +114,15 @@ function check_event() {
 
     var check_ele = document.getElementsByName("category");
     if (check_ele[0].value == "") error_message += "类别不可为空<br>";
+
+    var register_st = document.getElementsByName("register_st")[0].value;
+    var register_ed = document.getElementsByName("register_ed")[0].value;
+    if (register_st != "" && register_ed != "") {
+        if (register_st >= register_ed) error_message += "报名结束时间不可早于开始时间<br>";
+    }
+    var register_ele = document.getElementsByName("register")[0];
+    if (register_ele.checked == true && (register_st == "" || register_ed == "")) error_message += "报名时间不可为空<br>";
+    if (register_ele.checked == false && (register_st != "" || register_ed != "")) error_message += "报名时间不为空，请勾选需要提前报名<br>";
 
     var str = document.getElementById("details_text").value;
     var len = 0;

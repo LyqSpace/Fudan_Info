@@ -27,10 +27,10 @@ if (isset($_COOKIE['login_serial'])) {
 $update_next_week = check_update();
 if (date('N', time()) != 7) {
     $week_st = date('y-m-d 00:00:00', strtotime('next week', time()));
-    $week_ed = date('y-m-d 00:00:00', strtotime('next week + 14 day', time()));
+    $week_ed = date('y-m-d 00:00:00', strtotime('next week + 8 day', time()));
 } else {
     $week_st = date('y-m-d 00:00:00', strtotime('this week', time()));
-    $week_ed = date('y-m-d 00:00:00', strtotime('this week + 14 day', time()));
+    $week_ed = date('y-m-d 00:00:00', strtotime('this week + 8 day', time()));
 }
 $category_name_cn = array('人文', '科学', '艺术', '金融', '体育','娱乐', '其它');
 $category_name_en = array('culture', 'science', 'art', 'finance', 'sport', 'entertainment', 'others');
@@ -63,12 +63,30 @@ function check_update() {
     return false;
 }
 
+function format_date(&$date_st, &$date_ed, $row_date_st, $row_date_ed) {
+    $date_st = date('n月j日 H:i', $row_date_st);
+    $date_ed = date('n月j日 H:i', $row_date_ed);
+    $date_st_pos = strpos($date_st, ' ');
+    $date_ed_pos = strpos($date_ed, ' ');
+    if (substr($date_st, 0, $date_st_pos) == substr($date_ed, 0, $date_ed_pos)) {
+        $date_ed = substr($date_ed, $date_ed_pos+1, strlen($date_ed)-$date_ed_pos-1);
+    } else {
+        $date_st_pos = strpos($date_st, '月');
+        $date_ed_pos = strpos($date_ed, '月');
+        if (substr($date_st, 0, $date_st_pos) == substr($date_ed, 0, $date_ed_pos)) {
+            $date_ed = substr($date_ed, $date_ed_pos+3, strlen($date_ed)-$date_ed_pos-1);
+        }
+    }
+}
+
 function print_header() {
     $html = '<section><p style="text-align: center;"><span style="font-size: 14px;">这是复旦乌托邦</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">不再错过，不再遗忘，我们收集与分享</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">每周日晚上见～</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">带有<strong style="text-align: center; white-space: normal; font-size: 14px; line-height: 22.4px;"><span style="font-size: 14px; line-height: 16px; width: 16px; display: inline-block; border-radius: 50%; height: 16px; color: rgb(255, 255, 255); background-color: #0099CC;">i</span></strong>标签的活动</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">在公众号内发送编号可查看取票等详细信息</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">在公众号内发送编号可查看详细信息</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">带有<strong style="text-align: center; white-space: normal; font-size: 14px; line-height: 22.4px;"><span style="font-size: 14px; line-height: 16px; width: 16px; display: inline-block; border-radius: 50%; height: 16px; color: rgb(255, 255, 255); background-color: #0099CC;">i</span></strong>标签的活动</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">在公众号内发送编号可查看取票/报名信息</span></p>';
     $html .= '<br><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p></section>';
     echo $html;
 }
@@ -87,8 +105,9 @@ function print_title($index, $category_name_cn) {
 function print_article(&$order_id, $category_id) {
 
     global $category_id_bias, $category_name_cn, $category_name_en, $week_st, $week_ed, $mysql, $update_next_week;
-    $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and date_ed>='%s' and date_st<'%s' order by date_st;",
-        $category_name_en[$category_id], $week_st, $week_ed);
+    $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and
+        ((date_ed>='%s' and date_st<'%s') or (register=1 and register_ed>='%s' and register_st<='%s')) order by date_st;",
+        $category_name_en[$category_id], $week_st, $week_ed, $week_st, $week_ed);
     $res = mysql_query($query, $mysql);
     if (!mysql_num_rows($res)) {
         $category_id_bias++;
@@ -100,19 +119,12 @@ function print_article(&$order_id, $category_id) {
     $html = sprintf('<ol style="list-style-type: decimal;" class=" list-paddingleft-2" start="%d">', $order_id);
     while ($row = mysql_fetch_assoc($res)) {
 
-        $date_st = date('n月j日 H:i',strtotime($row['date_st']));
-        $date_ed = date('n月j日 H:i',strtotime($row['date_ed']));
-        $date_st_pos = strpos($date_st, ' ');
-        $date_ed_pos = strpos($date_ed, ' ');
-        if (substr($date_st, 0, $date_st_pos) == substr($date_ed, 0, $date_ed_pos)) {
-            $date_ed = substr($date_ed, $date_ed_pos+1, strlen($date_ed)-$date_ed_pos-1);
-        } else {
-            $date_st_pos = strpos($date_st, '月');
-            $date_ed_pos = strpos($date_ed, '月');
-            if (substr($date_st, 0, $date_st_pos) == substr($date_ed, 0, $date_ed_pos)) {
-                $date_ed = substr($date_ed, $date_ed_pos+3, strlen($date_ed)-$date_ed_pos-1);
-            }
-        }
+        $date_st = "";
+        $date_ed = "";
+        $register_st = "";
+        $register_ed = "";
+        format_date($date_st, $date_ed, $row['date_st'], $row['date_ed']);
+        format_date($register_st, $register_ed, $row['register_st'], $row['register_ed']);
 
         $html .= '<li>';
         $html .= sprintf('<p style="font-size: 14px;"><strong>%s', $row['title']);
@@ -120,6 +132,7 @@ function print_article(&$order_id, $category_id) {
             $html .= '&nbsp;<span style="text-align: center; padding: 0px;line-height: 16px; margin: 0px;width: 16px; display: inline-block; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;height: 16px;background-color: #0099CC; color: rgb(255, 255, 255);">i</span>';
         }
         $html .= '</strong></p>';
+        $html .= sprintf('<p style="font-size: 14px;">报名时间 : %s</p>', $register_st . ' - ' . $register_ed);
         if (strlen($row['speaker']) > 0) {
             $html .= sprintf('<p style="font-size: 14px;">主讲人：%s</p>', $row['speaker']);
         }
