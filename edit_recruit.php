@@ -39,6 +39,7 @@ if (isset($_COOKIE['login_serial'])) {
     <p class="page_desc">一个英文占一个字符，一个中文占两个字符</p>
     <p class="page_desc">招新内容必填，主办方名字不必填写</p>
     <p class="page_desc">内容可多次保存/编辑，但若推送已发布，则修改无效</p>
+    <p class="page_desc">招新信息只在<span class="text_warn">每学期前四周</span>被推送</p>
 </div>
 <div class="page_body">
     <?php

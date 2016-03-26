@@ -63,9 +63,9 @@ function check_update() {
     return false;
 }
 
-function add_week(&$date) {
+function add_week(&$date, $row_date) {
     $week_arr = array('周一', '周二', '周三', '周四', '周五', '周六', '周日');
-    $week_str = '(' . $week_arr[date('N', strotime($date))] . ')';
+    $week_str = '(' . $week_arr[date('N', strtotime($row_date))] . ')';
     $pos = strpos($date, ' ');
     if ($pos == false) return;
     $date = substr($date, 0, $pos) . $week_str .substr($date, $pos, strlen($date) - $pos);
@@ -86,9 +86,8 @@ function format_date(&$date_st, &$date_ed, $row_date_st, $row_date_ed) {
             $date_ed = substr($date_ed, $date_ed_pos+3, strlen($date_ed)-$date_ed_pos-1);
         }
     }
-
-    add_week($date_st);
-    add_week($date_ed);
+    add_week($date_st, $row_date_st);
+    add_week($date_ed, $row_date_ed);
 
 }
 
@@ -148,7 +147,7 @@ function print_article(&$order_id, $category_id) {
             $register_st = "";
             $register_ed = "";
             format_date($register_st, $register_ed, $row['register_st'], $row['register_ed']);
-            if (strtotime($row['register_ed']) - strtotime($row['register_st']) > 2 * 3600) {
+            if (strtotime($row['register_ed']) - strtotime($row['register_st']) > 3 * 3600) {
                 $html .= sprintf('<p style="font-size: 14px;">报名/取票时间 : %s</p>', $register_st . ' - ' . $register_ed);
             } else {
                 $html .= sprintf('<p style="font-size: 14px;">报名/取票时间 : %s</p>', $register_st);
@@ -157,9 +156,10 @@ function print_article(&$order_id, $category_id) {
         if (strlen($row['speaker']) > 0) {
             $html .= sprintf('<p style="font-size: 14px;">主讲人：%s</p>', $row['speaker']);
         }
-        if (strtotime($row['date_ed']) - strtotime($row['date_st']) > 2 * 3600) {
-            $html .= sprintf('<p style="font-size: 14px;">%s</p>', $date_st . ' - ' . $date_ed);
-            $html .= sprintf('<p style="font-size: 14px;">%s</p>', $row['location']);
+        if (strtotime($row['date_ed']) - strtotime($row['date_st']) > 3 * 3600) {
+            //$html .= sprintf('<p style="font-size: 14px;">%s</p>', $date_st . ' - ' . $date_ed);
+            //$html .= sprintf('<p style="font-size: 14px;">%s</p>', $row['location']);
+            $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;&nbsp;%s</p>', $date_st . ' - ' . $date_ed, $row['location']);
         } else {
             $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;&nbsp;%s</p>', $date_st, $row['location']);
         }

@@ -37,9 +37,9 @@ if (isset($_COOKIE['login_serial'])) {
     <div class="page_header">
         <h1 class="page_title">编辑一则活动</h1>
         <p class="page_desc">一个英文占一个字符，一个中文占两个字符</p>
-        <p class="page_desc">标题、时间、地点和类别必填，主办方名字不必填写</p>
+        <p class="page_desc"><span class="text_warn">标题</span>、<span class="text_warn">地点</span>、<span class="text_warn">时间</span>和<span class="text_warn">类别</span>必填，主办方名字不必填写</p>
         <p class="page_desc">内容可多次保存/编辑，但若推送已发布，则修改无效</p>
-        <p class="page_desc">推送将会收录下周一到下下周一（含）的已发布的活动</p>
+        <p class="page_desc">推送将会收录<span class="text_warn">下周一到下下周一（含）</span>的已发布的活动</p>
         <p class="page_desc">如果活动的报名时间在区间内则也会被收录</p>
     </div>
     <div class="page_body">
