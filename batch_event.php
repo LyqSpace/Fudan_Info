@@ -63,7 +63,16 @@ function check_update() {
     return false;
 }
 
+function add_week(&$date) {
+    $week_arr = array('周一', '周二', '周三', '周四', '周五', '周六', '周日');
+    $week_str = '(' . $week_arr[date('N', strotime($date))] . ')';
+    $pos = strpos($date, ' ');
+    if ($pos == false) return;
+    $date = substr($date, 0, $pos) . $week_str .substr($date, $pos, strlen($date) - $pos);
+}
+
 function format_date(&$date_st, &$date_ed, $row_date_st, $row_date_ed) {
+
     $date_st = date('n月j日 H:i', strtotime($row_date_st));
     $date_ed = date('n月j日 H:i', strtotime($row_date_ed));
     $date_st_pos = strpos($date_st, ' ');
@@ -77,6 +86,10 @@ function format_date(&$date_st, &$date_ed, $row_date_st, $row_date_ed) {
             $date_ed = substr($date_ed, $date_ed_pos+3, strlen($date_ed)-$date_ed_pos-1);
         }
     }
+
+    add_week($date_st);
+    add_week($date_ed);
+
 }
 
 function print_header() {
@@ -85,7 +98,7 @@ function print_header() {
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">每周日晚上见～</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">带有<strong style="text-align: center; white-space: normal; font-size: 14px; line-height: 22.4px;"><span style="font-size: 14px; line-height: 16px; width: 16px; display: inline-block; border-radius: 50%; height: 16px; color: rgb(255, 255, 255); background-color: #0099CC;">i</span></strong>标签的活动</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">在公众号内发送编号可查看详细信息</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">带有<strong style="text-align: center; white-space: normal; font-size: 14px; line-height: 22.4px;"><span style="font-size: 14px; line-height: 16px; width: 16px; display: inline-block; border-radius: 50%; height: 16px; color: rgb(255, 255, 255); background-color: #0099CC;">i</span></strong>标签的活动</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">带有<strong style="text-align: center; white-space: normal; font-size: 14px; line-height: 22.4px;"><span style="font-size: 14px; line-height: 16px; width: 16px; display: inline-block; border-radius: 50%; height: 16px; color: rgb(255, 255, 255); background-color: #F44336;">i</span></strong>标签的活动</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">在公众号内发送编号可查看报名/取票信息</span></p>';
     $html .= '<br><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p></section>';
     echo $html;
@@ -135,12 +148,21 @@ function print_article(&$order_id, $category_id) {
             $register_st = "";
             $register_ed = "";
             format_date($register_st, $register_ed, $row['register_st'], $row['register_ed']);
-            $html .= sprintf('<p style="font-size: 14px;">报名/取票时间 : %s</p>', $register_st . ' - ' . $register_ed);
+            if (strtotime($row['register_ed']) - strtotime($row['register_st']) > 2 * 3600) {
+                $html .= sprintf('<p style="font-size: 14px;">报名/取票时间 : %s</p>', $register_st . ' - ' . $register_ed);
+            } else {
+                $html .= sprintf('<p style="font-size: 14px;">报名/取票时间 : %s</p>', $register_st);
+            }
         }
         if (strlen($row['speaker']) > 0) {
             $html .= sprintf('<p style="font-size: 14px;">主讲人：%s</p>', $row['speaker']);
         }
-        $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;&nbsp;&nbsp;%s</p>', $date_st . ' - ' . $date_ed, $row['location']);
+        if (strtotime($row['date_ed']) - strtotime($row['date_st']) > 2 * 3600) {
+            $html .= sprintf('<p style="font-size: 14px;">%s</p>', $date_st . ' - ' . $date_ed);
+            $html .= sprintf('<p style="font-size: 14px;">%s</p>', $row['location']);
+        } else {
+            $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;&nbsp;%s</p>', $date_st, $row['location']);
+        }
         $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;', $row['fullname']);
         $html .= '</p></li><br>';
 

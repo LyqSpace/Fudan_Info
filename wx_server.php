@@ -30,7 +30,10 @@ $default_msg = array("喵～您的消息我们已收到，将会尽快回复您 
     "您投喂的饲料已被放入猫盆中，请等待(´,,•ω•,,‘)",
     "收到啦!～给我小鱼干我就回复你哦ლ(´ڡ`ლ)");
 $welcome_msg = "Welcome to FDUTOPIA! To make FDU a better place (●'◡'●)ノ♥";
+$query_msg = array("咦？这个数字太大了我还没有学会呢～",
+    "好调皮哦，这个数字没有对应的详细信息呢～");
 $default_msg_id = rand(0, count($default_msg)-1);
+$query_msg_id = rand(0, count($query_msg)-1);
 
 if ($post_str != null) {
 
@@ -86,7 +89,7 @@ function response_text($post_obj, $content) {
 
 function response_query($post_obj) {
 
-    global $default_msg, $default_msg_id;
+    global $default_msg, $default_msg_id, $query_msg, $query_msg_id;
 
     if (is_numeric(strval($post_obj->Content)) == 1) {
 
@@ -99,7 +102,7 @@ function response_query($post_obj) {
         $row = mysql_fetch_assoc($res);
         $query_num = intval($post_obj->Content);
 
-        $content = "喵～您输入的编号不在本期活动内，本期共有" . $row['cnt'] . "个活动";
+        $content = $query_msg[$query_msg_id] . "本期共有" . $row['cnt'] . "个活动";
         if ($query_num <= $row['cnt'] && $query_num > 0) {
 
             $query = sprintf("select * from published_event where order_id=%d;", $query_num);

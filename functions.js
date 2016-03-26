@@ -57,6 +57,17 @@ function count(text_id, cnt_id, cnt_limit) {
     cnt_id.innerHTML = len;
 }
 
+function change_date_ed(date_st_name, date_ed_name) {
+    var date_st = document.getElementsByName(date_st_name)[0].value;
+    if (date_st == "") return;
+    var T = date_st.search(/T/);
+    var date_ed = date_st.substr(0, T);
+    var h = String(Number(date_st.substr(T+1, 2)) + 2);
+    h = h.length > 1 ? h : '0' + h;
+    date_ed += 'T' + String(h) + date_st.substr(T+3, date_st.length-T-3);
+    document.getElementsByName(date_ed_name)[0].value = date_ed;
+}
+
 function dialog_disappear() {
     var dialog = document.getElementById('dialog');
     dialog.style.display = "none";

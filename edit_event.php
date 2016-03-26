@@ -39,7 +39,6 @@ if (isset($_COOKIE['login_serial'])) {
         <p class="page_desc">一个英文占一个字符，一个中文占两个字符</p>
         <p class="page_desc">标题、时间、地点和类别必填，主办方名字不必填写</p>
         <p class="page_desc">内容可多次保存/编辑，但若推送已发布，则修改无效</p>
-        <p class="page_desc">活动信息将在<strong class="text_warn">每周日晚八点</strong>被整理成推送</p>
         <p class="page_desc">推送将会收录下周一到下下周一（含）的已发布的活动</p>
         <p class="page_desc">如果活动的报名时间在区间内则也会被收录</p>
     </div>
@@ -117,7 +116,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                             $pos = strpos($row['date_st'], " ");
                             $date = substr($row['date_st'], 0, $pos) . "T" . substr($row['date_st'], $pos+1, strlen($row['date_st'])-$pos-4);
                             echo $date;
-                        ?>"/>
+                        ?>" onkeyup="change_date_ed('date_st', 'date_ed');"/>
                     </div>
                 </div>
             </div>
@@ -191,7 +190,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                             $pos = strpos($row['register_st'], " ");
                             $date = substr($row['register_st'], 0, $pos) . "T" . substr($row['register_st'], $pos+1, strlen($row['register_st'])-$pos-4);
                             echo $date;
-                            ?>"/>
+                            ?>"  onkeyup="change_date_ed('register_st', 'register_ed');"/>
                         </div>
                     </div>
                 </div>
@@ -322,7 +321,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     <label class="weui_label">活动开始时间</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" name="date_st" type="datetime-local" />
+                    <input class="weui_input" name="date_st" type="datetime-local"  onkeyup="change_date_ed('date_st', 'date_ed');"/>
                 </div>
             </div>
         </div>
@@ -370,7 +369,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                         <label class="weui_label">报名开始时间</label>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" name="register_st" type="datetime-local"/>
+                        <input class="weui_input" name="register_st" type="datetime-local" onkeyup="change_date_ed('register_st', 'register_ed');"/>
                     </div>
                 </div>
 <!--            </div>-->
@@ -389,7 +388,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             <div class="weui_cell weui_cell_switch">
                 <div class="weui_cell_hd weui_cell_primary">是否有详细描述</div>
                 <div class="weui_cell_ft">
-                    <input class="weui_switch" name="notification" type="checkbox" onclick="show_details(details_form)">
+                    <input class="weui_switch" name="notification" type="checkbox" onclick="show_details(details_form)" />
                 </div>
             </div>
         </div>
