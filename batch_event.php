@@ -64,7 +64,7 @@ function check_update() {
 }
 
 function add_week(&$date, $row_date) {
-    $week_arr = array('周日', '周一', '周二', '周三', '周四', '周五', '周六');
+    $week_arr = array('', '周一', '周二', '周三', '周四', '周五', '周六', '周日');
     $week_str = '(' . $week_arr[date('N', strtotime($row_date))] . ')';
     $pos = strpos($date, ' ');
     if ($pos == false) return;
