@@ -64,8 +64,8 @@ function check_update() {
 }
 
 function format_date(&$date_st, &$date_ed, $row_date_st, $row_date_ed) {
-    $date_st = date('n月j日 H:i', $row_date_st);
-    $date_ed = date('n月j日 H:i', $row_date_ed);
+    $date_st = date('n月j日 H:i', strtotime($row_date_st));
+    $date_ed = date('n月j日 H:i', strtotime($row_date_ed));
     $date_st_pos = strpos($date_st, ' ');
     $date_ed_pos = strpos($date_ed, ' ');
     if (substr($date_st, 0, $date_st_pos) == substr($date_ed, 0, $date_ed_pos)) {
