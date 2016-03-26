@@ -372,8 +372,8 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                         <input class="weui_input" name="register_st" type="datetime-local"/>
                     </div>
                 </div>
-            </div>
-            <div class="weui_cells weui_cells_form">
+<!--            </div>-->
+<!--            <div class="weui_cells weui_cells_form">-->
                 <div class="weui_cell">
                     <div class="weui_cell_hd">
                         <label class="weui_label">报名结束时间</label>
