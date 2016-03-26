@@ -37,9 +37,9 @@ if (isset($_COOKIE['login_serial'])) {
     <div class="page_header">
         <h1 class="page_title">编辑一则活动</h1>
         <p class="page_desc">一个英文占一个字符，一个中文占两个字符</p>
-        <p class="page_desc"><span class="text_warn">标题</span>、<span class="text_warn">地点</span>、<span class="text_warn">时间</span>和<span class="text_warn">类别</span>必填，主办方名字不必填写</p>
-        <p class="page_desc">内容可多次保存/编辑，但若推送已发布，则修改无效</p>
-        <p class="page_desc">推送将会收录<span class="text_warn">下周一到下下周一（含）</span>的已发布的活动</p>
+        <p class="page_desc"><span class="text_warn">标题</span>、<span class="text_warn">地点</span>、<span class="text_warn">时间</span>和<span class="text_warn">类别</span>必填</p>
+        <p class="page_desc">内容可多次编辑，但若推送已发布，则修改无效</p>
+        <p class="page_desc">推送将会收录<span class="text_warn">下周一到下下周一</span>的已发布的活动</p>
         <p class="page_desc">如果活动的报名时间在区间内则也会被收录</p>
     </div>
     <div class="page_body">
@@ -86,7 +86,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" id="speaker" placeholder="如果是讲座，此处可作主讲人姓名、职位的简单介绍；如果是活动，此栏不填" name="speaker" rows="2"
+                    <textarea class="weui_textarea" id="speaker" placeholder="此处可作主讲人姓名、职位的简单介绍；活动不填" name="speaker" rows="2"
                               onkeyup="count('speaker', speaker_cnt, 50);"><?php echo $row['speaker'];?></textarea>
                         <div class="weui_textarea_counter">
                             <span id="speaker_cnt"><?php echo count_str($row['speaker']);?></span>/50
@@ -163,7 +163,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             </div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell weui_cell_switch">
-                    <div class="weui_cell_hd weui_cell_primary">是否需要提前报名/取票/预约</div>
+                    <div class="weui_cell_hd weui_cell_primary">是否需要提前取票/报名</div>
                     <div class="weui_cell_ft">
                         <input class="weui_switch" name="register" type="checkbox" onclick="show_register()" <?php
                         if ($row['register'] == 1) {
@@ -299,7 +299,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" id="speaker" placeholder="如果是讲座，此处可作主讲人姓名、职位的简单介绍；如果是活动，此栏不填"
+                    <textarea class="weui_textarea" id="speaker" placeholder="此处可作主讲人姓名、职位的简单介绍；活动不填"
                               name="speaker" rows="2" onkeyup="count('speaker', speaker_cnt, 50);"></textarea>
                     <div class="weui_textarea_counter"><span id="speaker_cnt">0</span>/50</div>
                 </div>
@@ -356,7 +356,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
         </div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell weui_cell_switch">
-                <div class="weui_cell_hd weui_cell_primary">是否需要提前报名/取票/预约</div>
+                <div class="weui_cell_hd weui_cell_primary">是否需要提前取票/报名</div>
                 <div class="weui_cell_ft">
                     <input class="weui_switch" name="register" type="checkbox" onclick="show_register()">
                 </div>

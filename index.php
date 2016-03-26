@@ -60,6 +60,7 @@ if (isset($_COOKIE['login_serial'])) {
         <a class="weui_btn weui_btn_plain_primary" href="edit_profile.php">修改我的基本信息</a>
         <a class="weui_btn weui_btn_plain_default" onclick="logout()">退出</a>
     </div>
+    <br>
 </div>
 </body>
 </html>

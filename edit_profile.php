@@ -93,6 +93,7 @@ if (isset($_COOKIE['login_serial'])) {
         </div>
         <div id="error_message"></div>
     </div>
+<br>
 </body>
 </html>
 
