@@ -39,7 +39,8 @@ if (isset($_COOKIE['login_serial'])) {
 <body ontouchstart>
 <div class="page_header">
     <h1 class="page_title">FDUTOPIA</h1>
-    <p class="page_desc">活动和招新信息将在<strong class="text_warn">每周日晚八点</strong>整理成一则推送</p>
+    <p class="page_desc"><strong class="text_warn">每周日晚八点</strong>将生成新的推送</p>
+    <p class="page_desc">招新信息只在<strong class="text_warn">每学期前四周</strong>被推送</p>
     <p class="page_desc">涉及系统安全，请妥善保管好用户名和密码</p>
     <p class="page_desc">联系管理员请说明用户名和事由，fdutopia@lyq.me</p>
     <p class="page_desc">已入驻的社团数 : <?php

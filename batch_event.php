@@ -86,7 +86,7 @@ function print_header() {
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">带有<strong style="text-align: center; white-space: normal; font-size: 14px; line-height: 22.4px;"><span style="font-size: 14px; line-height: 16px; width: 16px; display: inline-block; border-radius: 50%; height: 16px; color: rgb(255, 255, 255); background-color: #0099CC;">i</span></strong>标签的活动</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">在公众号内发送编号可查看详细信息</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">带有<strong style="text-align: center; white-space: normal; font-size: 14px; line-height: 22.4px;"><span style="font-size: 14px; line-height: 16px; width: 16px; display: inline-block; border-radius: 50%; height: 16px; color: rgb(255, 255, 255); background-color: #0099CC;">i</span></strong>标签的活动</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">在公众号内发送编号可查看取票/报名信息</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">在公众号内发送编号可查看报名/取票信息</span></p>';
     $html .= '<br><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p></section>';
     echo $html;
 }
@@ -116,7 +116,7 @@ function print_article(&$order_id, $category_id) {
         $index = $category_id-$category_id_bias+1;
         print_title($index, $category_name_cn[$category_id]);
     }
-    $html = sprintf('<ol style="list-style-type: decimal;" class=" list-paddingleft-2" start="%d">', $order_id);
+    $html = sprintf('<ol style="list-style-type: decimal; padding-left: 35px;" start="%d">', $order_id);
     while ($row = mysql_fetch_assoc($res)) {
 
         $date_st = "";
@@ -125,7 +125,9 @@ function print_article(&$order_id, $category_id) {
 
         $html .= '<li>';
         $html .= sprintf('<p style="font-size: 14px;"><strong>%s', $row['title']);
-        if ($row['notification'] == 1) {
+        if ($row['register'] == 1) {
+            $html .= '&nbsp;<span style="text-align: center; padding: 0px;line-height: 16px; margin: 0px;width: 16px; display: inline-block; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;height: 16px;background-color: #F44336; color: rgb(255, 255, 255);">i</span>';
+        } else if ($row['notification'] == 1) {
             $html .= '&nbsp;<span style="text-align: center; padding: 0px;line-height: 16px; margin: 0px;width: 16px; display: inline-block; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;height: 16px;background-color: #0099CC; color: rgb(255, 255, 255);">i</span>';
         }
         $html .= '</strong></p>';
@@ -133,7 +135,7 @@ function print_article(&$order_id, $category_id) {
             $register_st = "";
             $register_ed = "";
             format_date($register_st, $register_ed, $row['register_st'], $row['register_ed']);
-            $html .= sprintf('<p style="font-size: 14px;">报名时间 : %s</p>', $register_st . ' - ' . $register_ed);
+            $html .= sprintf('<p style="font-size: 14px;">报名/取票时间 : %s</p>', $register_st . ' - ' . $register_ed);
         }
         if (strlen($row['speaker']) > 0) {
             $html .= sprintf('<p style="font-size: 14px;">主讲人：%s</p>', $row['speaker']);
