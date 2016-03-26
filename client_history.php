@@ -47,8 +47,10 @@ if (isset($_COOKIE['login_serial'])) {
         ?>
         <p class="page_desc">显示在推送中的全称 : <?php echo $row['fullname'];?></p>
         <p class="page_desc">预留的联系邮箱 : <?php echo $row['email'];?></p>
-        <p class="page_desc">已发布表示已经或将在推送中公开发布</p>
-        <p class="page_desc">每次周日推送将会收录下周和下下周的已发布的活动</p>
+        <p class="page_desc"><span class="info_publish">已发布</span>表示已经或将在推送中公开发布</p>
+        <p class="page_desc">活动推送将会收录<strong class="text_warn">下周一到下下周一（含）</strong>的已发布的活动</p>
+        <p class="page_desc">如果活动的报名时间在区间内则也会被收录</p>
+        <p class="page_desc">招新信息只在<strong class="text_warn">每学期前四周</strong>被推送</p>
     </div>
     <div class="page_body">
         <article class="weui_article">
