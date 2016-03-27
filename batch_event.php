@@ -128,7 +128,7 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
         format_date($date_st, $date_ed, $row['date_st'], $row['date_ed']);
 
         $html .= '<li>';
-        $html .= sprintf('<p style="font-size: 14px;"><strong>%s', $row['title']);
+        $html .= sprintf('<p style="font-size: 15px;"><strong>%s', $row['title']);
         if ($register == 1 || $row['notification'] == 1) {
             $html .= '&nbsp;<span style="text-align: center; padding: 0px;line-height: 16px; margin: 0px;width: 16px; display: inline-block; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;height: 16px;background-color: #0099CC; color: rgb(255, 255, 255);">i</span>';
         }
