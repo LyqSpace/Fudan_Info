@@ -138,9 +138,9 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
             $register_ed = "";
             format_date($register_st, $register_ed, $row['register_st'], $row['register_ed']);
             if (strtotime($row['register_ed']) - strtotime($row['register_st']) > 3 * 3600) {
-                $html .= sprintf('<p style="font-size: 14px;">报名/取票时间 : %s</p>', $register_st . ' - ' . $register_ed);
+                $html .= sprintf('<p style="font-size: 14px;">报名时间 : %s</p>', $register_st . ' - ' . $register_ed);
             } else {
-                $html .= sprintf('<p style="font-size: 14px;">报名/取票时间 : %s</p>', $register_st);
+                $html .= sprintf('<p style="font-size: 14px;">报名时间 : %s</p>', $register_st);
             }
         }
         if (strlen($row['speaker']) > 0) {
