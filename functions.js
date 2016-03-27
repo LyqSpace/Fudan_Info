@@ -24,6 +24,8 @@ function show_register() {
         register_form.style.display = "block";
     } else {
         register_form.style.display = "none";
+        document.getElementsByName('register_st')[0].value = null;
+        document.getElementsByName('register_ed')[0].value = null;
     }
 }
 
