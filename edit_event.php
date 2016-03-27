@@ -82,7 +82,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     </div>
                 </div>
             </div>
-            <div class="weui_cells_title">主讲人</div>
+            <div class="weui_cells_title">嘉宾</div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
@@ -295,7 +295,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 </div>
             </div>
         </div>
-        <div class="weui_cells_title">主讲人</div>
+        <div class="weui_cells_title">嘉宾</div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">

@@ -144,7 +144,7 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
             }
         }
         if (strlen($row['speaker']) > 0) {
-            $html .= sprintf('<p style="font-size: 14px;">主讲人：%s</p>', $row['speaker']);
+            $html .= sprintf('<p style="font-size: 14px;">嘉宾：%s</p>', $row['speaker']);
         }
         if (strtotime($row['date_ed']) - strtotime($row['date_st']) > 3 * 3600) {
             $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;&nbsp;%s</p>', $date_st . ' - ' . $date_ed, $row['location']);
