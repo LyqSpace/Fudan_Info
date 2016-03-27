@@ -112,11 +112,11 @@ function print_title($index, $category_name_cn) {
     echo $html;
 }
 
-function print_events(&$html, &$res, &$mysql, &$order_id, $update_next_week) {
+function print_events(&$html, &$res, &$order_id, $update_next_week) {
 
     global $week_ed, $week_st;
 
-    while ($row = mysql_fetch_assoc($res, $mysql)) {
+    while ($row = mysql_fetch_assoc($res)) {
 
         $register = false;
         if ($row['register'] == 1 && $row['register_ed'] > $week_st && $row['register_st'] < $week_ed) {
@@ -180,14 +180,14 @@ function print_article(&$order_id, $category_id) {
     }
     $html = sprintf('<ol style="list-style-type: decimal; padding-left: 35px;" start="%d">', $order_id);
 
-    print_events($html, $res, $mysql, $order_id, $update_next_week);
+    print_events($html, $res, $order_id, $update_next_week);
 
     $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and
         ((date_ed>='%s' and date_st<'%s') or (register=1 and register_ed>='%s' and register_st<='%s')) order by date_st;",
         $category_name_en[$category_id], $week_st, $week_st, $week_st, $week_st);
     $res = mysql_query($query, $mysql);
 
-    print_events($html, $res, $mysql, $order_id, $update_next_week);
+    print_events($html, $res, $order_id, $update_next_week);
 
     $html .= '</ol><br></section>';
     echo $html;
