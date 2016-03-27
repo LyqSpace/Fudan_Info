@@ -119,7 +119,7 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
     while ($row = mysql_fetch_assoc($res)) {
 
         $register = false;
-        if ($row['register'] == 1 && $row['register_ed'] > $week_st && $row['register_st'] < $week_ed) {
+        if ($row['register'] == 1 && strtotime($row['register_ed']) > strtotime($week_st) && strtotime($row['register_st']) < strtotime($week_ed)) {
             $register = true;
         }
 
@@ -183,8 +183,9 @@ function print_article(&$order_id, $category_id) {
     print_events($html, $res, $order_id, $update_next_week);
 
     $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and
-        ((date_ed>='%s' and date_st<'%s') or (register=1 and register_ed>='%s' and register_st<='%s')) order by date_st;",
-        $category_name_en[$category_id], $week_st, $week_st, $week_st, $week_st);
+        ((date_ed>='%s' and date_st<'%s' and (register=0 or (register=1 and register_st<'%s'))) or
+        (date_st>'%s' and register=1 and register_ed>='%s' and register_st<'%s')) order by date_st;",
+        $category_name_en[$category_id], $week_st, $week_st, $week_st, $week_ed, $week_st, $week_st);
     $res = mysql_query($query, $mysql);
 
     print_events($html, $res, $order_id, $update_next_week);
