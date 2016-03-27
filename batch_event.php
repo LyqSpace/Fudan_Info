@@ -157,7 +157,7 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
         if ($update_next_week) {
             $details = ($row['details'] == '') ? 'default' : '"' . mysql_real_escape_string($row['details']) . '"';
             $query = sprintf('insert into published_event value (%d, "%s", %s);', $order_id, $row['title'], $details);
-            mysql_query($query, $mysql);
+            mysql_query($query);
         }
 
         $order_id++;
