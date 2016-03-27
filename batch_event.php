@@ -96,9 +96,7 @@ function print_header() {
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">不再错过，不再遗忘，我们收集与分享</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">每周日晚上见～</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">带有<strong style="text-align: center; white-space: normal; font-size: 14px; line-height: 22.4px;"><span style="font-size: 14px; line-height: 16px; width: 16px; display: inline-block; border-radius: 50%; height: 16px; color: rgb(255, 255, 255); background-color: #0099CC;">i</span></strong>标签的活动</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">在公众号内发送编号可查看详细信息</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">带有<strong style="text-align: center; white-space: normal; font-size: 14px; line-height: 22.4px;"><span style="font-size: 14px; line-height: 16px; width: 16px; display: inline-block; border-radius: 50%; height: 16px; color: rgb(255, 255, 255); background-color: #F44336;">i</span></strong>标签的活动</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">在公众号内发送编号可查看报名/取票信息</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">在公众号内发送编号可查看报名等详细信息</span></p>';
     $html .= '<br><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p></section>';
     echo $html;
 }
@@ -115,7 +113,15 @@ function print_title($index, $category_name_cn) {
 }
 
 function print_events(&$html, &$res, &$mysql, &$order_id, $update_next_week) {
+
+    global $week_ed, $week_st;
+
     while ($row = mysql_fetch_assoc($res, $mysql)) {
+
+        $register = false;
+        if ($row['register'] == 1 && $row['register_ed'] > $week_st && $row['register_st'] < $week_ed) {
+            $register = true;
+        }
 
         $date_st = "";
         $date_ed = "";
@@ -123,13 +129,11 @@ function print_events(&$html, &$res, &$mysql, &$order_id, $update_next_week) {
 
         $html .= '<li>';
         $html .= sprintf('<p style="font-size: 14px;"><strong>%s', $row['title']);
-        if ($row['register'] == 1) {
-            $html .= '&nbsp;<span style="text-align: center; padding: 0px;line-height: 16px; margin: 0px;width: 16px; display: inline-block; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;height: 16px;background-color: #F44336; color: rgb(255, 255, 255);">i</span>';
-        } else if ($row['notification'] == 1) {
+        if ($register == 1 || $row['notification'] == 1) {
             $html .= '&nbsp;<span style="text-align: center; padding: 0px;line-height: 16px; margin: 0px;width: 16px; display: inline-block; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;height: 16px;background-color: #0099CC; color: rgb(255, 255, 255);">i</span>';
         }
         $html .= '</strong></p>';
-        if ($row['register'] == 1) {
+        if ($register) {
             $register_st = "";
             $register_ed = "";
             format_date($register_st, $register_ed, $row['register_st'], $row['register_ed']);
@@ -164,7 +168,7 @@ function print_article(&$order_id, $category_id) {
 
     global $category_id_bias, $category_name_cn, $category_name_en, $week_st, $week_ed, $mysql, $update_next_week;
     $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and
-        ((date_ed>='%s' and date_st<'%s') or (register=1 and register_ed>='%s' and register_st<='%s')) order by date_st;",
+        ((date_st>='%s' and date_st<'%s') or (register=1 and register_st>='%s' and register_st<='%s')) order by date_st;",
         $category_name_en[$category_id], $week_st, $week_ed, $week_st, $week_ed);
     $res = mysql_query($query, $mysql);
     if (!mysql_num_rows($res)) {
@@ -180,7 +184,7 @@ function print_article(&$order_id, $category_id) {
 
     $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and
         ((date_ed>='%s' and date_st<'%s') or (register=1 and register_ed>='%s' and register_st<='%s')) order by date_st;",
-        $category_name_en[$category_id], $week_st, $week_ed, $week_st, $week_ed);
+        $category_name_en[$category_id], $week_st, $week_st, $week_st, $week_st);
     $res = mysql_query($query, $mysql);
 
     print_events($html, $res, $mysql, $order_id, $update_next_week);
