@@ -28,7 +28,8 @@ if ($signature != null && $timestamp != null && $nonce != null && $echo_str != n
 $post_str = $GLOBALS['HTTP_RAW_POST_DATA'];
 $default_msg = array("喵～您的消息我们已收到，将会尽快回复您 (•∀•́)و ",
     "您投喂的饲料已被放入猫盆中，请等待(´,,•ω•,,‘)",
-    "收到啦!～给我小鱼干我就回复你哦ლ(´ڡ`ლ)");
+    "收到啦!～给我小鱼干我就回复你哦ლ(´ڡ`ლ)",
+    "收到啦，春天快乐，送你一朵小花花吧～❀");
 $welcome_msg = "Welcome to FDUTOPIA! To make FDU a better place (●'◡'●)ノ♥";
 $query_msg = array("咦？这个数字太大了我还没有学会呢～",
     "好调皮哦，这个数字没有对应的详细信息呢～");
@@ -102,7 +103,7 @@ function response_query($post_obj) {
         $row = mysql_fetch_assoc($res);
         $query_num = intval($post_obj->Content);
 
-        $content = $query_msg[$query_msg_id] . "本期共有" . $row['cnt'] . "个活动";
+        $content = $query_msg[$query_msg_id] . "本期只有" . $row['cnt'] . "个活动呢～";
         if ($query_num <= $row['cnt'] && $query_num > 0) {
 
             $query = sprintf("select * from published_event where order_id=%d;", $query_num);
