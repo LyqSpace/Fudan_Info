@@ -24,7 +24,6 @@ create table event_info (
 	speaker varchar(50),
 	location varchar(40) not null,
 	date_st datetime not null,
-	date_ed datetime not null,
 	category varchar(20) not null,
 	register boolean not null,
 	register_st datetime,

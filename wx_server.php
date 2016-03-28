@@ -98,7 +98,7 @@ function response_query($post_obj) {
         mysql_query("set names 'utf8'");
         mysql_select_db("fudan_info");
 
-        $query = "select max(order_id) as cnt from published_event;";
+        $query = "select count(*) as cnt from published_event;";
         $res = mysql_query($query, $mysql);
         $row = mysql_fetch_assoc($res);
         $query_num = intval($post_obj->Content);

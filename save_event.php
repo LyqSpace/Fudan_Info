@@ -48,7 +48,6 @@ function mysql_date_format($input_date) {
 if (isset($_POST['title']) && $_POST['title'] != "" &&
     isset($_POST['location']) && $_POST['location'] != "" &&
     isset($_POST['date_st']) && $_POST['date_st'] != "" &&
-    isset($_POST['date_ed']) && $_POST['date_ed'] != "" &&
     isset($_POST['category']) && $_POST['category'] != "") {
 
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
@@ -61,7 +60,6 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
     }
 
     $date_st = mysql_date_format($_POST['date_st']);
-    $date_ed = mysql_date_format($_POST['date_ed']);
     $register_st = mysql_date_format($_POST['register_st']);
     $register_ed = mysql_date_format($_POST['register_ed']);
 
@@ -91,13 +89,12 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
         $res = mysql_query($query, $mysql);
         $row = mysql_fetch_assoc($res);
         if ($row['username'] == $username) {
-            $query = sprintf("update event_info set title='%s', speaker=%s, date_st='%s', date_ed='%s',
+            $query = sprintf("update event_info set title='%s', speaker=%s, date_st='%s',
                 location='%s', category='%s', register=%s, register_st='%s', register_ed='%s',
                 notification=%s, publish=%s, details=%s, edit_time=null where event_id=%s;",
                 mysql_real_escape_string($_POST['title']),
                 $speaker,
                 $date_st,
-                $date_ed,
                 mysql_real_escape_string($_POST['location']),
                 mysql_real_escape_string($_POST['category']),
                 $register,
@@ -112,13 +109,12 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
         }
 
     } else {
-        $query = sprintf("insert into event_info value (null,'%s', '%s', %s, '%s', '%s', '%s', '%s', %s, '%s', '%s', %s, %s, %s, null);",
+        $query = sprintf("insert into event_info value (null,'%s', '%s', %s, '%s', '%s', '%s', %s, '%s', '%s', %s, %s, %s, null);",
             mysql_real_escape_string($_POST['title']),
             $username,
             $speaker,
             mysql_real_escape_string($_POST['location']),
             $date_st,
-            $date_ed,
             mysql_real_escape_string($_POST['category']),
             $register,
             $register_st,

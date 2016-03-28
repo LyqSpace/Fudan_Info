@@ -33,7 +33,7 @@ if (date('N', time()) != 7) {
     $week_ed = date('y-m-d 00:00:00', strtotime('this week + 8 day', time()));
 }
 
-$category_name_cn = array('人文', '科学', '艺术', '金融', '体育','娱乐', '其它');
+$category_name_cn = array('人文与社科', '科学', '艺术', '金融', '体育','娱乐', '其它');
 $category_name_en = array('culture', 'science', 'art', 'finance', 'sport', 'entertainment', 'others');
 $category_cnt = 7;
 $order_id = 1;
@@ -124,9 +124,8 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
             $register = true;
         }
 
-        $date_st = "";
-        $date_ed = "";
-        format_date($date_st, $date_ed, $row['date_st'], $row['date_ed']);
+        $date_st = date('n月j日 H:i', strtotime($row['date_st']));
+        add_week($date_st, $row['date_st']);
 
         $html .= '<li>';
         $html .= sprintf('<p style="font-size: 15px;"><strong>%s', $row['title']);
@@ -147,12 +146,10 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
         if (strlen($row['speaker']) > 0) {
             $html .= sprintf('<p style="font-size: 14px;">嘉宾：%s</p>', $row['speaker']);
         }
-        if (strtotime($row['date_ed']) - strtotime($row['date_st']) > 3 * 3600) {
-            $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;&nbsp;%s</p>', $date_st . ' - ' . $date_ed, $row['location']);
-        } else {
-            $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;&nbsp;%s</p>', $date_st, $row['location']);
+        $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;&nbsp;%s</p>', $date_st, $row['location']);
+        if ($row['username'] != 'fdubot') {
+            $html .= sprintf('<p style="font-size: 14px;">%s', $row['fullname']);
         }
-        $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;', $row['fullname']);
         $html .= '</p></li><br>';
 
         if ($update_next_week) {
@@ -170,8 +167,8 @@ function print_article(&$order_id, $category_id) {
 
     global $category_id_bias, $category_name_cn, $category_name_en, $week_st, $week_ed, $mysql, $update_next_week;
     $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and
-        ((date_st>='%s' and date_st<'%s') or (register=1 and register_st>='%s' and register_st<='%s')) order by date_st;",
-        $category_name_en[$category_id], $week_st, $week_ed, $week_st, $week_ed);
+        ((date_st>='%s') or (register=1 and register_st>='%s' and register_st<='%s')) order by date_st;",
+        $category_name_en[$category_id], $week_st, $week_st, $week_ed);
     $res = mysql_query($query, $mysql);
     if (!mysql_num_rows($res)) {
         $category_id_bias++;
@@ -185,9 +182,8 @@ function print_article(&$order_id, $category_id) {
     print_events($html, $res, $order_id, $update_next_week);
 
     $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and
-        ((date_ed>='%s' and date_st<'%s' and (register=0 or (register=1 and register_st<'%s'))) or
         (date_st>'%s' and register=1 and register_ed>='%s' and register_st<'%s')) order by date_st;",
-        $category_name_en[$category_id], $week_st, $week_st, $week_st, $week_ed, $week_st, $week_st);
+        $category_name_en[$category_id], $week_ed, $week_st, $week_st);
     $res = mysql_query($query, $mysql);
 
     print_events($html, $res, $order_id, $update_next_week);

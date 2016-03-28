@@ -116,15 +116,6 @@ function check_event() {
     var check_ele = document.getElementsByName("date_st");
     if (check_ele[0].value == "") error_message += "活动开始时间不可为空<br>";
 
-    var check_ele = document.getElementsByName("date_ed");
-    if (check_ele[0].value == "") error_message += "活动结束时间不可为空<br>";
-
-    var date_st = document.getElementsByName("date_st")[0].value;
-    var date_ed = document.getElementsByName("date_ed")[0].value;
-    if (date_st != "" && date_ed != "") {
-        if (date_st >= date_ed) error_message += "活动结束时间不可早于开始时间<br>";
-    }
-
     var check_ele = document.getElementsByName("category");
     if (check_ele[0].value == "") error_message += "类别不可为空<br>";
 
