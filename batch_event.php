@@ -33,9 +33,6 @@ if (date('N', time()) != 7) {
     $week_ed = date('y-m-d 00:00:00', strtotime('this week + 8 day', time()));
 }
 
-$week_st = date('y-m-d 00:00:00', strtotime('this Monday', time()));
-$week_ed = date('y-m-d 00:00:00', strtotime('this Saturday', time()));
-
 $category_name_cn = array('人文', '科学', '艺术', '金融', '体育','娱乐', '其它');
 $category_name_en = array('culture', 'science', 'art', 'finance', 'sport', 'entertainment', 'others');
 $category_cnt = 7;
@@ -163,7 +160,6 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
             $query = sprintf('insert into published_event value (%d, "%s", %s);',
                 $order_id, mysql_real_escape_string($row['title']), mysql_real_escape_string($details));
             mysql_query($query);
-            echo mysql_error();
         }
 
         $order_id++;
