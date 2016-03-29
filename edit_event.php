@@ -176,7 +176,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                             $pos = strpos($row['register_st'], " ");
                             $date = substr($row['register_st'], 0, $pos) . "T" . substr($row['register_st'], $pos+1, strlen($row['register_st'])-$pos-4);
                             echo $date;
-                            ?>"  onchange="change_date_ed('register_st', 'register_ed');"/>
+                            ?>"  onchange="change_date_ed('register_st', 'register_ed');" onblur="change_date_ed('register_st', 'register_ed');"/>
                         </div>
                     </div>
                 </div>
@@ -345,7 +345,8 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                         <label class="weui_label">报名开始时间</label>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" name="register_st" type="datetime-local" onchange="change_date_ed('register_st', 'register_ed');"/>
+                        <input class="weui_input" name="register_st" type="datetime-local"
+                               onchange="change_date_ed('register_st', 'register_ed');" onblur="change_date_ed('register_st', 'register_ed');"/>
                     </div>
                 </div>
 <!--            </div>-->
