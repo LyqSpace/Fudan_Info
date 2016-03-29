@@ -168,6 +168,10 @@ function check_event() {
             '       </div>' +
             '   </div>' +
             '</div>';
+
+        btn.className = btn.className.replace("disabled", "");
+        btn.removeAttribute("disabled");
+
         return false;
     }
 
@@ -214,6 +218,9 @@ function delete_event() {
         '   </div>' +
         '</div>';
 
+    btn.className = btn.className.replace("disabled", "");
+    btn.removeAttribute("disabled");
+
     return false;
 }
 
@@ -256,6 +263,10 @@ function check_recruit() {
             '       </div>' +
             '   </div>' +
             '</div>';
+
+        btn.className = btn.className.replace("disabled", "");
+        btn.removeAttribute("disabled");
+
         return false;
     }
 }
@@ -300,6 +311,9 @@ function delete_recruit() {
         '       </div>' +
         '   </div>' +
         '</div>';
+
+    btn.className = btn.className.replace("disabled", "");
+    btn.removeAttribute("disabled");
 
     return false;
 }
@@ -352,6 +366,10 @@ function check_profile() {
             '       </div>' +
             '   </div>' +
             '</div>';
+
+        btn.className = btn.className.replace("disabled", "");
+        btn.removeAttribute("disabled");
+
         return false;
     }
 }
@@ -390,6 +408,10 @@ function check_review() {
             '       </div>' +
             '   </div>' +
             '</div>';
+
+        btn.className = btn.className.replace("disabled", "");
+        btn.removeAttribute("disabled");
+
         return false;
     }
 

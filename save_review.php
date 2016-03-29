@@ -56,10 +56,6 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
         $forbid = true;
     }
 
-    echo $forbid . '<br>';
-    echo $query;
-
-
     if (!$forbid) $res = mysql_query($query, $mysql);
 
     ?>
