@@ -77,6 +77,10 @@ function dialog_disappear() {
 
 function check_event() {
 
+    var btn = document.getElementsByName("save")[0];
+    btn.setAttribute("disabled", true);
+    btn.className += " disabled";
+
     var error_message = "";
     var str = document.getElementById("title").value;
     var len = 0;
@@ -163,7 +167,10 @@ function check_event() {
             '</div>';
         return false;
     }
+
 }
+
+
 
 function reedit_event(submited) {
 
@@ -185,6 +192,11 @@ function confirm_delete_event() {
 }
 
 function delete_event() {
+
+    var btn = document.getElementsByName("delete")[0];
+    btn.setAttribute("disabled", true);
+    btn.className += " disabled";
+
     var confirm_box = document.getElementById("confirm_message");
     confirm_box.innerHTML =
         '<div id="dialog">' +
@@ -200,10 +212,15 @@ function delete_event() {
         '       </div>' +
         '   </div>' +
         '</div>';
+
     return false;
 }
 
 function check_recruit() {
+
+    var btn = document.getElementsByName("save")[0];
+    btn.setAttribute("disabled", true);
+    btn.className += " disabled";
 
     var error_message = "";
 
@@ -262,6 +279,11 @@ function confirm_delete_recruit() {
 }
 
 function delete_recruit() {
+
+    var btn = document.getElementsByName("delete")[0];
+    btn.setAttribute("disabled", true);
+    btn.className += " disabled";
+
     var confirm_box = document.getElementById("confirm_message");
     confirm_box.innerHTML =
         '<div id="dialog">' +
@@ -277,10 +299,15 @@ function delete_recruit() {
         '       </div>' +
         '   </div>' +
         '</div>';
+
     return false;
 }
 
 function check_profile() {
+
+    var btn = document.getElementsByName("save")[0];
+    btn.setAttribute("disabled", true);
+    btn.className += " disabled";
 
     var error_message = "";
 
@@ -326,4 +353,43 @@ function check_profile() {
             '</div>';
         return false;
     }
+}
+
+function check_review() {
+
+    var btn = document.getElementsByName("save")[0];
+    btn.setAttribute("disabled", true);
+    btn.className += " disabled";
+
+    var str = document.getElementById("review_url").value;
+    var error_message = "";
+    for (var i = 0; i < str.length; i++) {
+        if (str.charCodeAt(i) > 255) {
+            error_message += "只粘贴公众号推送链接，请不要写入其它汉字内容<br>";
+            break;
+        }
+    }
+
+    if (error_message === "") {
+        return true;
+    } else {
+        var msg_box = document.getElementById("error_message");
+        msg_box.innerHTML =
+            '<div id="dialog">' +
+            '   <div class="weui_mask"></div>' +
+            '   <div class="weui_dialog">' +
+            '       <div class="weui_dialog_hd">' +
+            '           <strong class="weui_dialog_title">保存结果</strong>' +
+            '      </div>' +
+            '       <div class="weui_dialog_bd">' +
+            error_message +
+            '       </div>' +
+            '       <div class="weui_dialog_ft">' +
+            '           <a onclick="dialog_disappear();" class="weui_btn_dialog primary">确定</a>' +
+            '       </div>' +
+            '   </div>' +
+            '</div>';
+        return false;
+    }
+
 }

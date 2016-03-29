@@ -73,14 +73,15 @@ if (isset($_COOKIE['login_serial'])) {
                     <h3 class="info_title"><?php echo $event_cnt . ". " . $row['title'];?></h3>
                     <div class="info_box">
                         <p class="info_time">最后编辑于<?php
-                            echo substr($row['edit_time'], 0, 16);
+                            echo substr($row['edit_time'], 0, 10);
                             if ($row['publish'] == 1) {
                                 echo ' <span class="info_publish">已发布</span>';
                             } else {
                                 echo ' <span class="text_warn">未发布</span>';
                             }
                             ?></p>
-                        <a id="info_edit" class="weui_btn weui_btn_mini" href="edit_event.php?event_id=<?php echo $row['event_id'];?>">编辑</a>
+                        <a class="weui_btn weui_btn_mini info_review" href="edit_review.php?event_id=<?php echo $row['event_id'];?>">回顾</a>
+                        <a class="weui_btn weui_btn_mini info_edit" href="edit_event.php?event_id=<?php echo $row['event_id'];?>">编辑</a>
                     </div>
                     <?php
                 }
@@ -110,7 +111,7 @@ if (isset($_COOKIE['login_serial'])) {
                     <h3 class="info_title"><?php echo $recruit_cnt . ". " . $row['details'];?></h3>
                     <div class="info_box">
                         <p class="info_time">最后编辑于<?php
-                            echo substr($row['edit_time'], 0, 16);
+                            echo substr($row['edit_time'], 0, 10);
                             if ($row['publish'] == 1) {
                                 echo ' <span class="info_publish">已发布</span>';
                             } else {

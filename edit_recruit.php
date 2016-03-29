@@ -113,7 +113,7 @@ if (isset($_COOKIE['login_serial'])) {
                     <strong class="weui_dialog_title">访问违规</strong>
                 </div>
                 <div class="weui_dialog_bd">
-                    只能编辑自己的文章!
+                    只能编辑自己的招新!
                 </div>
                 <div class="weui_dialog_ft">
                     <a href="index.php" weui_btn_dialog primary">确定</a>
@@ -139,7 +139,7 @@ if (isset($_COOKIE['login_serial'])) {
                 <div class="weui_cell weui_cell_switch">
                     <div class="weui_cell_hd weui_cell_primary">是否在周日的推送中公开发布</div>
                     <div class="weui_cell_ft">
-                        <input class="weui_switch" name="publish" type="checkbox" />
+                        <input class="weui_switch" name="publish" type="checkbox" checked="checked"/>
                     </div>
                 </div>
             </div>

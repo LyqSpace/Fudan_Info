@@ -31,6 +31,7 @@ create table event_info (
 	notification boolean default false,
 	publish boolean default false,
 	details varchar(300),
+	review_url varchar(300),
 	edit_time timestamp default current_timestamp
 );
 

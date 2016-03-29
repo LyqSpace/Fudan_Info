@@ -109,7 +109,7 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
         }
 
     } else {
-        $query = sprintf("insert into event_info value (null,'%s', '%s', %s, '%s', '%s', '%s', %s, '%s', '%s', %s, %s, %s, null);",
+        $query = sprintf("insert into event_info value (null,'%s', '%s', %s, '%s', '%s', '%s', %s, '%s', '%s', %s, %s, %s, null, null);",
             mysql_real_escape_string($_POST['title']),
             $username,
             $speaker,
@@ -123,7 +123,8 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
             $publish,
             $details);
     }
-    $res = mysql_query($query, $mysql);
+
+    if (!$forbid) $res = mysql_query($query, $mysql);
 
     ?>
     <div class="weui_mask"></div>

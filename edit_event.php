@@ -259,7 +259,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 <strong class="weui_dialog_title">访问违规</strong>
             </div>
             <div class="weui_dialog_bd">
-                只能编辑自己的文章!
+                只能编辑自己的活动！
             </div>
             <div class="weui_dialog_ft">
                 <a href="index.php" weui_btn_dialog primary">确定</a>
@@ -384,7 +384,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             <div class="weui_cell weui_cell_switch">
                 <div class="weui_cell_hd weui_cell_primary">是否发布在活动推送中</div>
                 <div class="weui_cell_ft">
-                    <input class="weui_switch" name="publish" type="checkbox" />
+                    <input class="weui_switch" name="publish" type="checkbox" checked="checked" />
                 </div>
             </div>
         </div>
