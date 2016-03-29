@@ -38,24 +38,37 @@ if (isset($_COOKIE['login_serial'])) {
 <body ontouchstart>
 <div class="page_header">
     <h1 class="page_title">维护用户数据</h1>
-    <p class="page_desc">用户名以fdu为前缀必填</p>
 </div>
 <div class="page_body">
     <?php
 
     if (isset($_POST['username']) && $_POST['username'] != '') {
 
-        $pre_str = substr($_POST['username'], 0, 3);
-        if ($pre_str != 'fdu' && $pre_str != 'adm') {
+        $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+        mysql_query("set names 'utf8'");
+        mysql_select_db("fudan_info");
+
+        if (isset($_POST['search'])) {
+            $query = sprintf("select * from users where username='%s';",
+                mysql_real_escape_string($_POST['username']));
+            $res = mysql_query($query, $mysql);
             ?>
             <div id="dialog">
                 <div class="weui_mask"></div>
                 <div class="weui_dialog">
                     <div class="weui_dialog_hd">
-                        <strong class="weui_dialog_title">操作失败</strong>
+                        <strong class="weui_dialog_title">查询结果</strong>
                     </div>
                     <div class="weui_dialog_bd">
-                        请输入一个以fdu为前缀的用户名!
+                        <?php
+                        if (!mysql_num_rows($res)) {
+                            echo '该用户不存在!';
+                        } else {
+                            $row = mysql_fetch_assoc($res);
+                            printf('用户名 : %s<br>全称 : %s<br>邮件 : %s<br>活动可发布次数 : %s<br>招新可发布次数 : %s',
+                                $row['username'], $row['fullname'], $row['email'], $row['event_limit'], $row['recruit_limit']);
+                        }
+                        ?>
                     </div>
                     <div class="weui_dialog_ft">
                         <a href="javascript:history.back();" class="weui_btn_dialog primary">确定</a>
@@ -63,160 +76,125 @@ if (isset($_COOKIE['login_serial'])) {
                 </div>
             </div>
             <?php
-        } else {
 
-            $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
-            mysql_query("set names 'utf8'");
-            mysql_select_db("fudan_info");
+        } else if (isset($_POST['insert'])) {
 
-            if (isset($_POST['search'])) {
-                $query = sprintf("select * from users where username='%s';",
+            $query = sprintf("insert into users value ('%s', '%s', '%s', '%s', %s, %s);",
+                mysql_real_escape_string($_POST['username']),
+                mysql_real_escape_string($_POST['fullname']),
+                mysql_real_escape_string($_POST['email']),
+                mysql_real_escape_string(md5($_POST['password'])),
+                mysql_real_escape_string($_POST['event_limit']),
+                mysql_real_escape_string($_POST['recruit_limit']));
+            $res = mysql_query($query, $mysql);
+
+            ?>
+            <div id="dialog">
+                <div class="weui_mask"></div>
+                <div class="weui_dialog">
+                    <div class="weui_dialog_hd">
+                        <strong class="weui_dialog_title">新建结果</strong>
+                    </div>
+                    <div class="weui_dialog_bd">
+                        <?php
+                        if ($res != false) {
+                            echo '新建用户成功!';
+                        } else {
+                            echo '新建用户失败!';
+                        }
+                        ?>
+                    </div>
+                    <div class="weui_dialog_ft">
+                        <a href="javascript:history.back();" class="weui_btn_dialog primary">确定</a>
+                    </div>
+                </div>
+            </div>
+            <?php
+
+        } else if (isset($_POST['update'])) {
+
+            $update_res = '';
+
+            if (isset($_POST['fullname']) && $_POST['fullname'] != '') {
+                $query = sprintf("update users set fullname='%s' where username='%s';",
+                    mysql_real_escape_string($_POST['fullname']),
                     mysql_real_escape_string($_POST['username']));
                 $res = mysql_query($query, $mysql);
-                ?>
-                <div id="dialog">
-                    <div class="weui_mask"></div>
-                    <div class="weui_dialog">
-                        <div class="weui_dialog_hd">
-                            <strong class="weui_dialog_title">查询结果</strong>
-                        </div>
-                        <div class="weui_dialog_bd">
-                            <?php
-                            if (!mysql_num_rows($res)) {
-                                echo '该用户不存在!';
-                            } else {
-                                $row = mysql_fetch_assoc($res);
-                                printf('用户名 : %s<br>全称 : %s<br>邮件 : %s<br>活动可发布次数 : %s<br>招新可发布次数 : %s',
-                                    $row['username'], $row['fullname'], $row['email'], $row['event_limit'], $row['recruit_limit']);
-                            }
-                            ?>
-                        </div>
-                        <div class="weui_dialog_ft">
-                            <a href="javascript:history.back();" class="weui_btn_dialog primary">确定</a>
-                        </div>
-                    </div>
-                </div>
-                <?php
-
-            } else if (isset($_POST['insert'])) {
-
-                $query = sprintf("insert into users value ('%s', '%s', '%s', '%s', %s, %s);",
-                    mysql_real_escape_string($_POST['username']),
-                    mysql_real_escape_string($_POST['fullname']),
-                    mysql_real_escape_string($_POST['email']),
-                    mysql_real_escape_string(md5($_POST['password'])),
-                    mysql_real_escape_string($_POST['event_limit']),
-                    mysql_real_escape_string($_POST['recruit_limit']));
-                $res = mysql_query($query, $mysql);
-
-                ?>
-                <div id="dialog">
-                    <div class="weui_mask"></div>
-                    <div class="weui_dialog">
-                        <div class="weui_dialog_hd">
-                            <strong class="weui_dialog_title">新建结果</strong>
-                        </div>
-                        <div class="weui_dialog_bd">
-                            <?php
-                            if ($res != false) {
-                                echo '新建用户成功!';
-                            } else {
-                                echo '新建用户失败!';
-                            }
-                            ?>
-                        </div>
-                        <div class="weui_dialog_ft">
-                            <a href="javascript:history.back();" class="weui_btn_dialog primary">确定</a>
-                        </div>
-                    </div>
-                </div>
-                <?php
-
-            } else if (isset($_POST['update'])) {
-
-                $update_res = '';
-
-                if (isset($_POST['fullname']) && $_POST['fullname'] != '') {
-                    $query = sprintf("update users set fullname='%s' where username='%s';",
-                        mysql_real_escape_string($_POST['fullname']),
-                        mysql_real_escape_string($_POST['username']));
-                    $res = mysql_query($query, $mysql);
-                    if ($res) {
-                        $update_res .= '更新全称成功<br>';
-                    } else {
-                        $update_res .= '更新全称失败<br>';
-                    }
+                if ($res) {
+                    $update_res .= '更新全称成功<br>';
+                } else {
+                    $update_res .= '更新全称失败<br>';
                 }
-
-                if (isset($_POST['email']) && $_POST['email'] != '') {
-                    $query = sprintf("update users set email='%s' where username='%s';",
-                        mysql_real_escape_string($_POST['email']),
-                        mysql_real_escape_string($_POST['username']));
-                    $res = mysql_query($query, $mysql);
-                    if ($res) {
-                        $update_res .= '更新邮箱成功<br>';
-                    } else {
-                        $update_res .= '更新邮箱失败<br>';
-                    }
-                }
-
-                if (isset($_POST['password']) && $_POST['password'] != '') {
-                    $query = sprintf("update users set password='%s' where username='%s';",
-                        mysql_real_escape_string(md5($_POST['password'])),
-                        mysql_real_escape_string($_POST['username']));
-                    $res = mysql_query($query, $mysql);
-                    if ($res) {
-                        $update_res .= '更新密码成功<br>';
-                    } else {
-                        $update_res .= '更新密码失败<br>';
-                    }
-                }
-
-                if (isset($_POST['event_limit']) && $_POST['event_limit'] != '') {
-                    $query = sprintf("update users set event_limit='%s' where username='%s';",
-                        mysql_real_escape_string($_POST['event_limit']),
-                        mysql_real_escape_string($_POST['username']));
-                    $res = mysql_query($query, $mysql);
-                    if ($res) {
-                        $update_res .= '更新活动可用次数成功<br>';
-                    } else {
-                        $update_res .= '更新活动可用次数失败<br>';
-                    }
-                }
-                if (isset($_POST['recruit_limit']) && $_POST['recruit_limit'] != '') {
-                    $query = sprintf("update users set recruit_limit='%s' where username='%s';",
-                        mysql_real_escape_string($_POST['recruit_limit']),
-                        mysql_real_escape_string($_POST['username']));
-                    $res = mysql_query($query, $mysql);
-                    if ($res) {
-                        $update_res .= '更新招新可用次数成功<br>';
-                    } else {
-                        $update_res .= '更新招新可用次数失败<br>';
-                    }
-                }
-
-                ?>
-                <div id="dialog">
-                    <div class="weui_mask"></div>
-                    <div class="weui_dialog">
-                        <div class="weui_dialog_hd">
-                            <strong class="weui_dialog_title">更新结果</strong>
-                        </div>
-                        <div class="weui_dialog_bd">
-                            <?php
-                            echo $update_res;
-                            ?>
-                        </div>
-                        <div class="weui_dialog_ft">
-                            <a href="javascript:history.back();" class="weui_btn_dialog primary">确定</a>
-                        </div>
-                    </div>
-                </div>
-                <?php
             }
 
-            mysql_close($mysql);
+            if (isset($_POST['email']) && $_POST['email'] != '') {
+                $query = sprintf("update users set email='%s' where username='%s';",
+                    mysql_real_escape_string($_POST['email']),
+                    mysql_real_escape_string($_POST['username']));
+                $res = mysql_query($query, $mysql);
+                if ($res) {
+                    $update_res .= '更新邮箱成功<br>';
+                } else {
+                    $update_res .= '更新邮箱失败<br>';
+                }
+            }
+
+            if (isset($_POST['password']) && $_POST['password'] != '') {
+                $query = sprintf("update users set password='%s' where username='%s';",
+                    mysql_real_escape_string(md5($_POST['password'])),
+                    mysql_real_escape_string($_POST['username']));
+                $res = mysql_query($query, $mysql);
+                if ($res) {
+                    $update_res .= '更新密码成功<br>';
+                } else {
+                    $update_res .= '更新密码失败<br>';
+                }
+            }
+
+            if (isset($_POST['event_limit']) && $_POST['event_limit'] != '') {
+                $query = sprintf("update users set event_limit='%s' where username='%s';",
+                    mysql_real_escape_string($_POST['event_limit']),
+                    mysql_real_escape_string($_POST['username']));
+                $res = mysql_query($query, $mysql);
+                if ($res) {
+                    $update_res .= '更新活动可用次数成功<br>';
+                } else {
+                    $update_res .= '更新活动可用次数失败<br>';
+                }
+            }
+            if (isset($_POST['recruit_limit']) && $_POST['recruit_limit'] != '') {
+                $query = sprintf("update users set recruit_limit='%s' where username='%s';",
+                    mysql_real_escape_string($_POST['recruit_limit']),
+                    mysql_real_escape_string($_POST['username']));
+                $res = mysql_query($query, $mysql);
+                if ($res) {
+                    $update_res .= '更新招新可用次数成功<br>';
+                } else {
+                    $update_res .= '更新招新可用次数失败<br>';
+                }
+            }
+
+            ?>
+            <div id="dialog">
+                <div class="weui_mask"></div>
+                <div class="weui_dialog">
+                    <div class="weui_dialog_hd">
+                        <strong class="weui_dialog_title">更新结果</strong>
+                    </div>
+                    <div class="weui_dialog_bd">
+                        <?php
+                        echo $update_res;
+                        ?>
+                    </div>
+                    <div class="weui_dialog_ft">
+                        <a href="javascript:history.back();" class="weui_btn_dialog primary">确定</a>
+                    </div>
+                </div>
+            </div>
+            <?php
         }
+
+        mysql_close($mysql);
     }
     ?>
 
