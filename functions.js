@@ -60,6 +60,9 @@ function count(text_id, cnt_id, cnt_limit) {
 }
 
 function change_date_ed(date_st_name, date_ed_name) {
+
+    if (document.getElementsByName(date_ed_name)[0].value != "") return;
+
     var date_st = document.getElementsByName(date_st_name)[0].value;
     if (date_st == "") return;
     var T = date_st.search(/T/);
@@ -169,8 +172,6 @@ function check_event() {
     }
 
 }
-
-
 
 function reedit_event(submited) {
 
