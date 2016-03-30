@@ -32,13 +32,6 @@ if (date('N', time()) != 7) {
     $week_st = date('y-m-d 00:00:00', strtotime('this week', time()));
     $week_ed = date('y-m-d 00:00:00', strtotime('this week + 7 day', time()));
 }
-$week_st = date('y-m-d 00:00:00', strtotime('this week', time()));
-$week_ed = date('y-m-d 00:00:00', strtotime('this week + 8 day', time()));
-echo $week_st;
-echo $week_ed;
-
-$update_next_week = true;
-
 $category_name_cn = array('人文与社科', '科学', '艺术', '金融', '体育','娱乐', '其它');
 $category_name_en = array('culture', 'science', 'art', 'finance', 'sport', 'entertainment', 'others');
 $category_cnt = 7;
@@ -189,7 +182,6 @@ function print_article(&$order_id, $category_id) {
     $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and
        	((date_st<'%s' and (event_id=68 or event_id=53 or event_id=21 or event_id=43)) or (date_st>='%s' and register=1 and register_ed>='%s' and register_st<'%s')) order by date_st;",
         $category_name_en[$category_id], $week_st, $week_ed, $week_st, $week_st);
-echo $query;
     $res = mysql_query($query, $mysql);
 
     print_events($html, $res, $order_id, $update_next_week);
