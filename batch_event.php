@@ -50,6 +50,12 @@ $category_id_bias = 0;
 for ($i = 0; $i < $category_cnt; $i++) {
     print_article($order_id, $i);
 }
+
+if ($update_next_week) {
+    $query = sprintf("update event_info set publish_date='%s' where event_id in published_event;",
+        mysql_real_escape_string($week_st));
+    mysql_query($query, $mysql);
+}
 mysql_close($mysql);
 
 print_footer();
@@ -118,36 +124,29 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
 
     while ($row = mysql_fetch_assoc($res)) {
 
-        $register = false;
-        if ($row['register'] == 1 && strtotime($row['register_ed']) > strtotime($week_st) && strtotime($row['register_st']) < strtotime($week_ed)) {
-            $register = true;
+        $date = date('n月j日 H:i', strtotime($row['date']));
+        add_week($date, $row['date']);
+        if ($row['date_type'] == "date_ed") {
+            $date .= ' 截止';
+        }
+        if ($row['register'] == 1) {
+            $date .= ' 需报名';
         }
 
-        $date_st = date('n月j日 H:i', strtotime($row['date_st']));
-        add_week($date_st, $row['date_st']);
-
         $html .= '<li>';
-        $html .= sprintf('<p style="font-size: 15px;"><strong>%s', $row['title']);
-        if ($register == 1 || $row['notification'] == 1) {
+        $html .= sprintf('<p style="font-size: 16px;"><strong>%s', $row['title']);
+        if ($row['notification'] == 1) {
             $html .= '&nbsp;<span style="text-align: center; padding: 0px;line-height: 16px; margin: 0px;width: 16px; display: inline-block; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;height: 16px;background-color: #0099CC; color: rgb(255, 255, 255);">i</span>';
         }
         $html .= '</strong></p>';
-        if ($register) {
-            $register_st = "";
-            $register_ed = "";
-            format_date($register_st, $register_ed, $row['register_st'], $row['register_ed']);
-            if (strtotime($row['register_ed']) - strtotime($row['register_st']) > 3 * 3600) {
-                $html .= sprintf('<p style="font-size: 14px;">报名时间 : %s</p>', $register_st . ' - ' . $register_ed);
-            } else {
-                $html .= sprintf('<p style="font-size: 14px;">报名时间 : %s</p>', $register_st);
-            }
-        }
         if (strlen($row['speaker']) > 0) {
-            $html .= sprintf('<p style="font-size: 14px;">嘉宾：%s</p>', $row['speaker']);
+            $html .= sprintf('<p style="font-size: 14px;">【嘉宾】%s</p>', $row['speaker']);
         }
-        $html .= sprintf('<p style="font-size: 14px;">%s&nbsp;&nbsp;%s</p>', $date_st, $row['location']);
+        
+        $html .= sprintf('<p style="font-size: 14px;">【时间】%s</p>', $date);
+        $html .= sprintf('<p style="font-size: 14px;">【地点】%s</p>', $row['location']);
         if ($row['username'] != 'fdubot') {
-            $html .= sprintf('<p style="font-size: 14px;">%s', $row['fullname']);
+            $html .= sprintf('<p style="font-size: 14px;">【主办方】%s', $row['fullname']);
         }
         $html .= '</p></li><br>';
 
@@ -165,8 +164,12 @@ function print_article(&$order_id, $category_id) {
 
     global $category_id_bias, $category_name_cn, $category_name_en, $week_st, $week_ed, $mysql, $update_next_week;
     $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and
-        ((date_st>='%s' and date_st<'%s') or (register=1 and register_st>='%s' and register_st<='%s')) order by date_st;",
-        $category_name_en[$category_id], $week_st, $week_ed, $week_st, $week_ed);
+        ((date_type='date_st' and date>='%s' and date<'%s') or
+         (date_type='date_ed' and date>='%s') or
+         (register_date_type='date_st' and register_date>='%s' and register_date<'%s') or
+         (register_date_type='date_ed' and register_date>='%s')) order by date;",
+        $category_name_en[$category_id], $week_st, $week_ed, $week_st, $week_st, $week_ed, $week_st);
+
     $res = mysql_query($query, $mysql);
     if (!mysql_num_rows($res)) {
         $category_id_bias++;
@@ -176,13 +179,6 @@ function print_article(&$order_id, $category_id) {
         print_title($index, $category_name_cn[$category_id]);
     }
     $html = sprintf('<ol style="list-style-type: decimal; padding-left: 35px;" start="%d">', $order_id);
-
-    print_events($html, $res, $order_id, $update_next_week);
-
-    $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and
-       	((date_st<'%s' and (event_id=68 or event_id=53 or event_id=21 or event_id=43)) or (date_st>='%s' and register=1 and register_ed>='%s' and register_st<'%s')) order by date_st;",
-        $category_name_en[$category_id], $week_st, $week_ed, $week_st, $week_st);
-    $res = mysql_query($query, $mysql);
 
     print_events($html, $res, $order_id, $update_next_week);
 

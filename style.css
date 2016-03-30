@@ -35,6 +35,14 @@ h1 {
     font-size: 14px;
 }
 
+.cell_hd_date_type {
+    margin-left: -5px; !important;
+}
+
+.select_date_type {
+    padding-left: 0; !important;
+}
+
 .text_warn {
     color: #EF4F4F;
 }

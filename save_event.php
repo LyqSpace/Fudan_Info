@@ -47,7 +47,7 @@ function mysql_date_format($input_date) {
 
 if (isset($_POST['title']) && $_POST['title'] != "" &&
     isset($_POST['location']) && $_POST['location'] != "" &&
-    isset($_POST['date_st']) && $_POST['date_st'] != "" &&
+    isset($_POST['date']) && $_POST['date'] != "" &&
     isset($_POST['category']) && $_POST['category'] != "") {
 
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
@@ -59,9 +59,8 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
         $speaker = "'" . mysql_real_escape_string($_POST['speaker']) . "'";
     }
 
-    $date_st = mysql_date_format($_POST['date_st']);
-    $register_st = mysql_date_format($_POST['register_st']);
-    $register_ed = mysql_date_format($_POST['register_ed']);
+    $date = mysql_date_format($_POST['date']);
+    $register_date = mysql_date_format($_POST['register_date']);
 
     $notification = 'false';
     if (isset($_POST['notification']) && $_POST['notification'] == "on") {
@@ -89,17 +88,18 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
         $res = mysql_query($query, $mysql);
         $row = mysql_fetch_assoc($res);
         if ($row['username'] == $username) {
-            $query = sprintf("update event_info set title='%s', speaker=%s, date_st='%s',
-                location='%s', category='%s', register=%s, register_st='%s', register_ed='%s',
+            $query = sprintf("update event_info set title='%s', speaker=%s, date_type='%s', date='%s',
+                location='%s', category='%s', register=%s, register_date_type='%s', register_date='%s',
                 notification=%s, publish=%s, details=%s, edit_time=null where event_id=%s;",
                 mysql_real_escape_string($_POST['title']),
                 $speaker,
-                $date_st,
+                mysql_real_escape_string($_POST['date_type']),
+                $date,
                 mysql_real_escape_string($_POST['location']),
                 mysql_real_escape_string($_POST['category']),
                 $register,
-                $register_st,
-                $register_ed,
+                mysql_real_escape_string($_POST['register_date_type']),
+                $register_date,
                 $notification,
                 $publish,
                 $details,
@@ -109,16 +109,17 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
         }
 
     } else {
-        $query = sprintf("insert into event_info value (null,'%s', '%s', %s, '%s', '%s', '%s', %s, '%s', '%s', %s, %s, %s, null, null);",
+        $query = sprintf("insert into event_info value (null,'%s', '%s', %s, '%s', '%s', '%s', '%s', %s, '%s', '%s', %s, %s, %s, null, null, null);",
             mysql_real_escape_string($_POST['title']),
             $username,
             $speaker,
             mysql_real_escape_string($_POST['location']),
-            $date_st,
+            mysql_real_escape_string($_POST['$date_type']),
+            $date,
             mysql_real_escape_string($_POST['category']),
             $register,
-            $register_st,
-            $register_ed,
+            mysql_real_escape_string($_POST['$register_date_type']),
+            $register_date,
             $notification,
             $publish,
             $details);

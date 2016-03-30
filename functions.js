@@ -16,22 +16,34 @@ function show_details() {
     }
 }
 
-function show_register() {
-    register_form = document.getElementById('register_form');
+function show_register_form() {
+    var register_form = document.getElementById("register_form");
+    var date_type = document.getElementsByName("date_type")[0];
+    if (date_type.value == "date_st") {
+        register_form.style.display = "block";
+    } else {
+        document.getElementsByName('register')[0].checked = null;
+        show_register_date();
+        register_form.style.display = "none";
+    }
+}
+
+function show_register_date() {
+    register_form = document.getElementById('register_date_form');
     register_check = document.getElementsByName('register')[0];
     if (register_check == null) return;
     if (register_check.checked) {
         register_form.style.display = "block";
     } else {
         register_form.style.display = "none";
-        document.getElementsByName('register_st')[0].value = null;
-        document.getElementsByName('register_ed')[0].value = null;
+        document.getElementsByName('register_date')[0].value = null;
     }
 }
 
 window.onload = function () {
     show_details();
-    show_register();
+    show_register_form();
+    show_register_date();
 }
 
 function count(text_id, cnt_id, cnt_limit) {
@@ -57,20 +69,6 @@ function count(text_id, cnt_id, cnt_limit) {
     }
     textarea.value = new_str;
     cnt_id.innerHTML = len;
-}
-
-function change_date_ed(date_st_name, date_ed_name) {
-
-    if (document.getElementsByName(date_ed_name)[0].value != "") return;
-
-    var date_st = document.getElementsByName(date_st_name)[0].value;
-    if (date_st == "") return;
-    var T = date_st.search(/T/);
-    var date_ed = date_st.substr(0, T);
-    var h = String(Number(date_st.substr(T+1, 2)) + 2);
-    h = h.length > 1 ? h : '0' + h;
-    date_ed += 'T' + String(h) + date_st.substr(T+3, date_st.length-T-3);
-    document.getElementsByName(date_ed_name)[0].value = date_ed;
 }
 
 function dialog_disappear() {
@@ -120,20 +118,21 @@ function check_event() {
     if (len > 40) error_message += "地点超过字数限制<br>";
     if (len == 0) error_message += "地点不可为空<br>";
 
-    var check_ele = document.getElementsByName("date_st");
-    if (check_ele[0].value == "") error_message += "活动开始时间不可为空<br>";
+    var date = document.getElementsByName("date")[0].value;
+    if (date == "") error_message += "活动时间不可为空<br>";
 
     var check_ele = document.getElementsByName("category");
     if (check_ele[0].value == "") error_message += "类别不可为空<br>";
 
-    var register_st = document.getElementsByName("register_st")[0].value;
-    var register_ed = document.getElementsByName("register_ed")[0].value;
-    if (register_st != "" && register_ed != "") {
-        if (register_st >= register_ed) error_message += "报名结束时间不可早于开始时间<br>";
+    var register_date = document.getElementsByName("register_date")[0].value;
+    if (date != "" && register_date != "") {
+        if (date <= register_date) error_message += "报名时间不可晚于活动时间<br>";
     }
-    var register_ele = document.getElementsByName("register")[0];
-    if (register_ele.checked == true && (register_st == "" || register_ed == "")) error_message += "报名时间不可为空<br>";
-    if (register_ele.checked == false && (register_st != "" || register_ed != "")) error_message += "报名时间不为空，请勾选需要提前报名<br>";
+    var register_check = document.getElementsByName("register")[0];
+    var date_type = document.getElementsByName("date_type")[0].value;
+    if (date_type == "date_ed" && register_check.checked == true) error_message += "选了截止时间不可再填报名时间<br>";
+    if (register_check.checked == true && register_date == "") error_message += "报名时间不可为空<br>";
+    if (register_check.checked == false && register_date != "") error_message += "报名时间不为空，请勾选需要提前报名<br>";
 
     var str = document.getElementById("details_text").value;
     var len = 0;

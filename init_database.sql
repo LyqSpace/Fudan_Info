@@ -23,15 +23,17 @@ create table event_info (
 	username varchar(40) not null,
 	speaker varchar(50),
 	location varchar(40) not null,
-	date_st datetime not null,
+	date_type varchar(10) not null default 'date_st',
+	date datetime not null,
 	category varchar(20) not null,
 	register boolean not null,
-	register_st datetime,
-	register_ed datetime,
+	register_date_type varchar(10) default 'date_st',
+	register_date datetime,
 	notification boolean default false,
 	publish boolean default false,
 	details varchar(300),
 	review_url varchar(300),
+	publish_date datetime,
 	edit_time timestamp default current_timestamp
 );
 
