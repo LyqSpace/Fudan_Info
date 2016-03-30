@@ -45,8 +45,7 @@ create table recruit_info (
 
 create table published_event (
 	order_id integer not null primary key,
-	title varchar(70) not null,
-	details varchar(300) not null default '喵～信息都已经交代完整啦，祝您参加活动愉快哦～'
+	event_id integer not null
 );
 
 insert into users value ('admin', 'admin', 'root@lyq.me', '73a694ee2938d0d0f12531e2de0643ea', 2, 2);

@@ -106,10 +106,15 @@ function response_query($post_obj) {
         $content = $query_msg[$query_msg_id] . "本期只有" . $row['cnt'] . "个活动呢～";
         if ($query_num <= $row['cnt'] && $query_num > 0) {
 
-            $query = sprintf("select * from published_event where order_id=%d;", $query_num);
+            $query = sprintf("select * from published_event natural join event_info where order_id=%d;", $query_num);
             $res = mysql_query($query, $mysql);
             $row = mysql_fetch_assoc($res);
-            $content = '【' . $row['title'] . '】 ' . $row['details'];
+            $content = '【' . $row['title'] . '】 ';
+            $details = '喵～信息都已经交代完整啦，祝您参加活动愉快哦～';
+            if ($row['details'] != null && $row['details'] != '') {
+                $details = $row['details'];
+            }
+            $content .= $details;
         }
 
         response_text($post_obj, $content);
