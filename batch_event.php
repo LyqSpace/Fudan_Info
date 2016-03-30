@@ -140,13 +140,13 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
         }
         $html .= '</strong></p>';
         if (strlen($row['speaker']) > 0) {
-            $html .= sprintf('<p style="font-size: 14px;">【嘉宾】%s</p>', $row['speaker']);
+            $html .= sprintf('<p style="font-size: 14px; margin-left: -0.75em;">【嘉宾】%s</p>', $row['speaker']);
         }
         
-        $html .= sprintf('<p style="font-size: 14px;">【时间】%s</p>', $date);
-        $html .= sprintf('<p style="font-size: 14px;">【地点】%s</p>', $row['location']);
+        $html .= sprintf('<p style="font-size: 14px; margin-left: -0.75em;">【时间】%s</p>', $date);
+        $html .= sprintf('<p style="font-size: 14px; margin-left: -0.75em;">【地点】%s</p>', $row['location']);
         if ($row['username'] != 'fdubot') {
-            $html .= sprintf('<p style="font-size: 14px;">【主办方】%s', $row['fullname']);
+            $html .= sprintf('<p style="font-size: 14px; margin-left: -0.75em;">【主办方】%s', $row['fullname']);
         }
         $html .= '</p></li><br>';
 
