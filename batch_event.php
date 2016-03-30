@@ -74,7 +74,7 @@ function add_week(&$date, $row_date) {
     $week_str = '（' . $week_arr[date('N', strtotime($row_date))] . '）';
     $pos = strpos($date, ' ');
     if ($pos == false) return;
-    $date = substr($date, 0, $pos) . $week_str .substr($date, $pos, strlen($date) - $pos);
+    $date = substr($date, 0, $pos) . $week_str .substr($date, $pos+1, strlen($date) - $pos);
 }
 
 function format_date(&$date_st, &$date_ed, $row_date_st, $row_date_ed) {
