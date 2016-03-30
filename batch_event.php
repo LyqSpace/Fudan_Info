@@ -27,11 +27,17 @@ if (isset($_COOKIE['login_serial'])) {
 $update_next_week = check_update();
 if (date('N', time()) != 7) {
     $week_st = date('y-m-d 00:00:00', strtotime('next week', time()));
-    $week_ed = date('y-m-d 00:00:00', strtotime('next week + 8 day', time()));
+    $week_ed = date('y-m-d 00:00:00', strtotime('next week + 7 day', time()));
 } else {
     $week_st = date('y-m-d 00:00:00', strtotime('this week', time()));
-    $week_ed = date('y-m-d 00:00:00', strtotime('this week + 8 day', time()));
+    $week_ed = date('y-m-d 00:00:00', strtotime('this week + 7 day', time()));
 }
+$week_st = date('y-m-d 00:00:00', strtotime('this week', time()));
+$week_ed = date('y-m-d 00:00:00', strtotime('this week + 8 day', time()));
+echo $week_st;
+echo $week_ed;
+
+$update_next_week = true;
 
 $category_name_cn = array('人文与社科', '科学', '艺术', '金融', '体育','娱乐', '其它');
 $category_name_en = array('culture', 'science', 'art', 'finance', 'sport', 'entertainment', 'others');
@@ -166,8 +172,8 @@ function print_article(&$order_id, $category_id) {
 
     global $category_id_bias, $category_name_cn, $category_name_en, $week_st, $week_ed, $mysql, $update_next_week;
     $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and
-        ((date_st>='%s') or (register=1 and register_st>='%s' and register_st<='%s')) order by date_st;",
-        $category_name_en[$category_id], $week_st, $week_st, $week_ed);
+        ((date_st>='%s' and date_st<'%s') or (register=1 and register_st>='%s' and register_st<='%s')) order by date_st;",
+        $category_name_en[$category_id], $week_st, $week_ed, $week_st, $week_ed);
     $res = mysql_query($query, $mysql);
     if (!mysql_num_rows($res)) {
         $category_id_bias++;
@@ -181,8 +187,9 @@ function print_article(&$order_id, $category_id) {
     print_events($html, $res, $order_id, $update_next_week);
 
     $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and
-        (date_st>'%s' and register=1 and register_ed>='%s' and register_st<'%s')) order by date_st;",
-        $category_name_en[$category_id], $week_ed, $week_st, $week_st);
+       	((date_st<'%s' and (event_id=2 or event_id=3)) or (date_st>='%s' and register=1 and register_ed>='%s' and register_st<'%s')) order by date_st;",
+        $category_name_en[$category_id], $week_st, $week_ed, $week_st, $week_st);
+echo $query;
     $res = mysql_query($query, $mysql);
 
     print_events($html, $res, $order_id, $update_next_week);
