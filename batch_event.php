@@ -134,19 +134,19 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
         }
 
         $html .= '<li>';
-        $html .= sprintf('<p style="font-size: 116.67%;"><strong>%s', $row['title']);
+        $html .= sprintf('<p style="font-size: 16px;"><strong>%s', $row['title']);
         if ($row['notification'] == 1) {
             $html .= '&nbsp;<span style="text-align: center; padding: 0px;line-height: 16px; margin: 0px;width: 16px; display: inline-block; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;height: 16px;background-color: #0099CC; color: rgb(255, 255, 255);">i</span>';
         }
         $html .= '</strong></p>';
         if (strlen($row['speaker']) > 0) {
-            $html .= sprintf('<p style="font-size: 75%; margin-left: -0.75em;">【嘉宾】%s</p>', $row['speaker']);
+            $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【嘉宾】%s</p>', $row['speaker']);
         }
 
-        $html .= sprintf('<p style="font-size: 75%; margin-left: -0.75em;">【时间】%s</p>', $date);
-        $html .= sprintf('<p style="font-size: 75%; margin-left: -0.75em;">【地点】%s</p>', $row['location']);
+        $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【时间】%s</p>', $date);
+        $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【地点】%s</p>', $row['location']);
         if ($row['username'] != 'fdubot') {
-            $html .= sprintf('<p style="font-size: 75%; margin-left: -0.75em;">【主办方】%s', $row['fullname']);
+            $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s', $row['fullname']);
         }
         $html .= '</p></li><br>';
 
