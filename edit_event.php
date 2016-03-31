@@ -109,7 +109,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
                     <div class="weui_cell_hd cell_hd_date_type">
-                        <select class="weui_select select_date_type" name="date_type" onclick="show_register_form();">
+                        <select class="weui_select select_date_type" name="date_type" onchange="show_register_form();">
                             <?php
                             $options =
                                 '<option value="date_st">开始时间</option>' .
@@ -313,7 +313,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
                 <div class="weui_cell_hd cell_hd_date_type">
-                    <select class="weui_select select_date_type" name="date_type" onclick="show_register_form();">
+                    <select class="weui_select select_date_type" name="date_type" onchange="show_register_form();">
                         <option selected value="date_st">开始时间</option>
                         <option value="date_ed">截止时间</option>
                     </select>
