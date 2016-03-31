@@ -51,6 +51,13 @@ if (isset($_COOKIE['login_serial'])) {
         echo $row['cnt']-2;
         mysql_close($mysql);
         ?></p>
+    <p class="page_desc"><?php
+        $hour = date('G', time());
+        if ($hour >= 0 && $hour < 6) echo '夜深了，' . $username . '，早点休息哦～';
+        if ($hour >= 6 && $hour < 12) echo '早上好，' . $username;
+        if ($hour >= 12 && $hour < 18) echo '下午好，' . $username;
+        if ($hour >= 18 && $hour < 24) echo '晚上好，' . $username;
+        ?></p>
 </div>
 <div class="page_body">
     <div class="weui_btn_area">
