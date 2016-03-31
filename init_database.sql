@@ -46,8 +46,10 @@ create table recruit_info (
 );
 
 create table published_event (
-	order_id integer not null primary key,
-	event_id integer not null
+	order_id integer not null,
+	event_id integer not null,
+	published_date datetime not null,
+	primary key (event_id, published_date)
 );
 
 insert into users value ('admin', 'admin', 'root@lyq.me', '73a694ee2938d0d0f12531e2de0643ea', 2, 2);
