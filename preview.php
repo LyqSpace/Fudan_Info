@@ -213,7 +213,7 @@ if (isset($_COOKIE['login_serial'])) {
         $res = mysql_query($query, $mysql);
         while ($row = mysql_fetch_assoc($res)) {
             if ($row['review_url'] != null && $row['review_url'] != '') {
-                $html .= sprintf('<li><p style="font-size: 16px;"><a href="%s"><strong>%s</strong></a></p></li>', $row['review_url'], $row[title]);
+                $html .= sprintf('<li><a href="%s" style="font-size: 16px; color: black;"><strong>%s</strong></a></li>', $row['review_url'], $row[title]);
                 if ($row['username'] != 'fdubot') {
                     $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s', $row['fullname']);
                 }
