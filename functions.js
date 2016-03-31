@@ -19,6 +19,7 @@ function show_details() {
 function show_register_form() {
     var register_form = document.getElementById("register_form");
     var date_type = document.getElementsByName("date_type")[0];
+    if (date_type == null) return;
     if (date_type.value == "date_st") {
         register_form.style.display = "block";
     } else {
