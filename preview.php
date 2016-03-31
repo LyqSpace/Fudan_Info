@@ -54,10 +54,10 @@ if (isset($_COOKIE['login_serial'])) {
 
         if (date('N', time()) != 7) {
             $week_st = date('y-m-d 00:00:00', strtotime('next week', time()));
-            $week_ed = date('y-m-d 00:00:00', strtotime('next week + 7 day', time()));
+            $week_ed = date('y-m-d 00:00:00', strtotime('next week + 8 day', time()));
         } else {
             $week_st = date('y-m-d 00:00:00', strtotime('this week', time()));
-            $week_ed = date('y-m-d 00:00:00', strtotime('this week + 7 day', time()));
+            $week_ed = date('y-m-d 00:00:00', strtotime('this week + 8 day', time()));
         }
         $category_name_cn = array('人文与社科', '科学', '艺术', '金融', '体育','娱乐', '其它');
         $category_name_en = array('culture', 'science', 'art', 'finance', 'sport', 'entertainment', 'others');
@@ -194,6 +194,33 @@ if (isset($_COOKIE['login_serial'])) {
         $html .= '</ol></section>';
         echo $html;
 
+    ?>
+    <br>
+    <p class="page_desc">阅读原文中显示的上周回顾</p>
+    <br>
+    <?php
+
+        if (date('N', time()) != 7) {
+            $last_week_st = date('y-m-d 00:00:00', strtotime('next week - 7 day', time()));
+        } else {
+            $last_week_st = date('y-m-d 00:00:00', strtotime('this week - 7 day', time()));
+        }
+
+        $html = '<section><ol style="list-style-type: decimal; padding-left: 35px;">';
+
+        $query = sprintf('select * from published_event where published_date="%s" order by order_id;', $last_week_st);
+        $res = mysql_query($query, $mysql);
+        while ($row = mysql_fetch_assoc($res)) {
+            if ($row['review_url'] != null && $row['review_url'] != '') {
+                $html .= sprintf('<li><a style="font-size: 16px;" href="%s"><strong>%s</strong></a></li>', $row['review_url'], $row[title]);
+                if ($row['username'] != 'fdubot') {
+                    $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s', $row['fullname']);
+                }
+            }
+        }
+
+        $html .= '</ol></section>';
+        echo $html;
         mysql_close($mysql);
     ?>
     <br>

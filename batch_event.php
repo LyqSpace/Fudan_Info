@@ -27,10 +27,10 @@ if (isset($_COOKIE['login_serial'])) {
 $update_next_week = check_update();
 if (date('N', time()) != 7) {
     $week_st = date('y-m-d 00:00:00', strtotime('next week', time()));
-    $week_ed = date('y-m-d 00:00:00', strtotime('next week + 7 day', time()));
+    $week_ed = date('y-m-d 00:00:00', strtotime('next week + 8 day', time()));
 } else {
     $week_st = date('y-m-d 00:00:00', strtotime('this week', time()));
-    $week_ed = date('y-m-d 00:00:00', strtotime('this week + 7 day', time()));
+    $week_ed = date('y-m-d 00:00:00', strtotime('this week + 8 day', time()));
 }
 $category_name_cn = array('人文与社科', '科学', '艺术', '金融', '体育','娱乐', '其它');
 $category_name_en = array('culture', 'science', 'art', 'finance', 'sport', 'entertainment', 'others');
@@ -41,7 +41,7 @@ mysql_query("set names 'utf8'");
 mysql_select_db("fudan_info");
 
 if ($update_next_week) {
-    $query = "delete from published_event;";
+    $query = sprintf("delete from published_event where date='%s';", $week_st);
     mysql_query($query, $mysql);
 }
 
@@ -120,7 +120,7 @@ function print_title($index, $category_name_cn) {
 
 function print_events(&$html, &$res, &$order_id, $update_next_week) {
 
-    global $week_ed, $week_st;
+    global $week_st;
 
     while ($row = mysql_fetch_assoc($res)) {
 
@@ -151,8 +151,8 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
         $html .= '</p></li><br>';
 
         if ($update_next_week) {
-            $query = sprintf('insert into published_event value (%d, %d);',
-                $order_id, $row['event_id']);
+            $query = sprintf('insert into published_event value (%d, %d, "%s");',
+                $order_id, $row['event_id'], $week_st);
             mysql_query($query);
         }
 
