@@ -29,12 +29,12 @@ if (isset($_COOKIE['login_serial'])) {
     <link rel="stylesheet" type="text/css" href="weui.min.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script type="text/javascript" src="functions.js"></script>
-    <title>预览我的本周推送 | FDUTOPIA</title>
+    <title>预览我的排版 | FDUTOPIA</title>
 </head>
 
 <body ontouchstart>
 <div class="page_header">
-    <h1 class="page_title">预览我的本周推送</h1>
+    <h1 class="page_title">预览我的排版</h1>
     <?php
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_query("set names 'utf8'");
