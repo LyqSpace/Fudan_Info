@@ -208,7 +208,7 @@ if (isset($_COOKIE['login_serial'])) {
 
         $html = '<section><ol style="list-style-type: decimal; padding-left: 35px;">';
 
-        $query = sprintf('select * from published_event natural join event_info where published_date="%s" and username="%s" and review_url is not null order by order_id;',
+        $query = sprintf('select * from published_event natural join event_info natural join users where published_date="%s" and username="%s" and review_url is not null order by order_id;',
             $last_week_st, $username);
         $res = mysql_query($query, $mysql);
         while ($row = mysql_fetch_assoc($res)) {

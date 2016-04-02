@@ -118,7 +118,7 @@ if (isset($_COOKIE['login_serial'])) {
                             echo ' <span>未发布</span>';
                         }
                         ?></p>
-                    <a id="info_edit" class="weui_btn weui_btn_mini" href="edit_recruit.php?recruit_id=<?php echo $row['recruit_id'];?>">编辑</a>
+                    <a class="weui_btn weui_btn_mini info_edit_single" href="edit_recruit.php?recruit_id=<?php echo $row['recruit_id'];?>">编辑</a>
                 </div>
                 <?php
             }
