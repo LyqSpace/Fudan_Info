@@ -5,6 +5,7 @@ $fullname = '';
 
 if (isset($_COOKIE['login_serial'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+    mysql_query("set names 'utf8'");
     mysql_select_db("fudan_info");
     $query = sprintf("select username, fullname from login_serial natural join users where serial='%s';",
                     mysql_real_escape_string($_COOKIE['login_serial']));
