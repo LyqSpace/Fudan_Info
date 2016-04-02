@@ -214,7 +214,8 @@ if (isset($_COOKIE['login_serial'])) {
         while ($row = mysql_fetch_assoc($res)) {
             if ($row['review_url'] != null && $row['review_url'] != '') {
                 $url = '';
-                if (substr($row['review_url'], 0, 8) == 'https://' or substr($row['review_url'], 0, 7) == 'http://') {
+                if (strtolower(substr($row['review_url'], 0, 8)) == 'https://' or
+                    strtolower(substr($row['review_url'], 0, 7) == 'http://')) {
                     $url = $row['review_url'];
                 } else {
                     $url = 'http://' . $row['review_url'];
