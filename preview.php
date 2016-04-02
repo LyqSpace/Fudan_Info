@@ -182,7 +182,7 @@ if (isset($_COOKIE['login_serial'])) {
                 }
             }
             if ($row['details'] != null && $row['details'] != '') {
-                $details .= $row['details'];
+                $details .= nl2br($row['details']);
             } else {
                 $details .= '喵～信息都已经交代完整啦，祝您参加活动愉快哦～';
             }
