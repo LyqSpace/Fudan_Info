@@ -132,8 +132,8 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     </div>
                 </div>
             </div>
-            <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动 </div>
-            <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览"</div>
+            <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动</div>
+            <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览</div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell weui_cell_select weui_select_after">
                     <div class="weui_cell_hd">
@@ -328,8 +328,8 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 </div>
             </div>
         </div>
-        <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动 </div>
-        <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览"</div>
+        <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动</div>
+        <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览</div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell weui_cell_select weui_select_after">
                 <div class="weui_cell_hd">
