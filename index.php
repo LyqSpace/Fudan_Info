@@ -1,6 +1,7 @@
 <?php
 
 $username = '';
+$fullname = '';
 
 if (isset($_COOKIE['login_serial'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
@@ -8,7 +9,6 @@ if (isset($_COOKIE['login_serial'])) {
     $query = sprintf("select username, fullname from login_serial natural join users where serial='%s';",
                     mysql_real_escape_string($_COOKIE['login_serial']));
     $res = mysql_query($query, $mysql);
-    mysql_close($mysql);
     if (!mysql_num_rows($res)) {
         header('Location: login.html');
     } else {
@@ -19,6 +19,7 @@ if (isset($_COOKIE['login_serial'])) {
             header('Location: admin.php');
         }
     }
+    mysql_close($mysql);
 } else {
     header('Location: login.html');
 }
