@@ -48,6 +48,7 @@ if (isset($_COOKIE['login_serial'])) {
     <p class="page_desc">显示在推送中的全称 : <?php echo $row['fullname'];?></p>
     <p class="page_desc">预留的联系邮箱 : <?php echo $row['email'];?></p>
     <p class="page_desc"><span class="info_publish">已发布</span>表示已经或将在推送中公开发布</p>
+    <p class="page_desc">如果想使用旧的信息，编辑后请选择【另存为】</p>
 </div>
 <div class="page_body">
     <article class="weui_article">
