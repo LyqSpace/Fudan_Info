@@ -98,8 +98,7 @@ function format_date(&$date_st, &$date_ed, $row_date_st, $row_date_ed) {
 }
 
 function print_header() {
-    $html = '<section><p style="text-align: center;"><span style="font-size: 14px;">这是复旦乌托邦</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">不再错过，不再遗忘，我们收集与分享</span></p>';
+    $html = '<section><p style="text-align: center;"><span style="font-size: 14px;">复旦乌托邦，素心无用，自由分享</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">每周日晚上见～</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">带有<strong style="text-align: center; white-space: normal; font-size: 14px; line-height: 22.4px;"><span style="font-size: 14px; line-height: 16px; width: 16px; display: inline-block; border-radius: 50%; height: 16px; color: rgb(255, 255, 255); background-color: #0099CC;">i</span></strong>标签的活动</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">在公众号内发送编号可查看报名等详细信息</span></p>';
