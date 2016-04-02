@@ -77,9 +77,8 @@ function dialog_disappear() {
     dialog.style.display = "none";
 }
 
-function check_event() {
+function check_event(btn) {
 
-    var btn = document.getElementsByName("save")[0];
     btn.setAttribute("disabled", true);
     btn.className += " disabled";
 
@@ -180,9 +179,13 @@ function check_event() {
 function reedit_event(submited) {
 
     var form = document.getElementsByName("edit_event")[0];
-    if (submited == "save") {
+    if (submited == "save" || submited == "save_as") {
         form.action = "save_event.php";
-        return check_event();
+        if (submited == "save_as") {
+            document.getElementsByName("event_id")[0].value = null;
+        }
+        var btn = document.getElementsByName(submited)[0];
+        return check_event(btn);
     } else if (submited == "delete") {
         delete_event();
         return false;

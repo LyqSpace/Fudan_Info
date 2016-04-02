@@ -114,7 +114,8 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                             $options =
                                 '<option value="date_st">开始时间</option>' .
                                 '<option value="date_ed">截止时间</option>';
-                            $pos = strpos($options, $row['date_type']);
+                            $date_type = strlen($row['date_type']) > 0 ? $row['date_type'] : 'date_st';
+                            $pos = strpos($options, $date_type);
                             $part1 = substr($options, 0, $pos-7);
                             $part2 = substr($options, $pos-7, strlen($options) - $pos + 7);
                             $options = $part1 . 'selected ' . $part2;
@@ -132,7 +133,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 </div>
             </div>
             <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动 </div>
-            <div class="weui_cells_tips">”截止时间“ 提供给长时间比赛和展览"</div>
+            <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览"</div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell weui_cell_select weui_select_after">
                     <div class="weui_cell_hd">
@@ -182,7 +183,8 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                                     $options =
                                         '<option value="date_st">报名开始时间</option>' .
                                         '<option value="date_ed">报名截止时间</option>';
-                                    $pos = strpos($options, $row['register_date_type']);
+                                    $register_date_type = strlen($row['register_date_type']) > 0 ? $row['register_date_type'] : 'date_st';
+                                    $pos = strpos($options, $register_date_type);
                                     $part1 = substr($options, 0, $pos-7);
                                     $part2 = substr($options, $pos-7, strlen($options) - $pos + 7);
                                     $options = $part1 . 'selected ' . $part2;
@@ -248,6 +250,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             </div>
             <div class="weui_btn_area">
                 <input class="weui_btn weui_btn_plain_primary" name="save" type="submit" onclick="this.form.submited=this.name" value="保存" />
+            </div>
+            <div class="weui_btn_area">
+                <input class="weui_btn weui_btn_plain_primary" name="save_as" type="submit" onclick="this.form.submited=this.name" value="另存为一则新的活动" />
             </div>
             <div class="weui_btn_area">
                 <input id="weui_btn_plain_warn" class="weui_btn weui_btn_plain_primary" name="delete" type="submit" onclick="this.form.submited=this.name" value="删除" />
@@ -324,7 +329,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             </div>
         </div>
         <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动 </div>
-        <div class="weui_cells_tips">”截止时间“ 提供给长时间比赛和展览"</div>
+        <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览"</div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell weui_cell_select weui_select_after">
                 <div class="weui_cell_hd">

@@ -114,17 +114,16 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
             $username,
             $speaker,
             mysql_real_escape_string($_POST['location']),
-            mysql_real_escape_string($_POST['$date_type']),
+            mysql_real_escape_string($_POST['date_type']),
             $date,
             mysql_real_escape_string($_POST['category']),
             $register,
-            mysql_real_escape_string($_POST['$register_date_type']),
+            mysql_real_escape_string($_POST['register_date_type']),
             $register_date,
             $notification,
             $publish,
             $details);
     }
-
     if (!$forbid) $res = mysql_query($query, $mysql);
 
     ?>
