@@ -5,7 +5,7 @@ $username = '';
 if (isset($_COOKIE['login_serial'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_select_db("fudan_info");
-    $query = sprintf("select username from login_serial where serial='%s';",
+    $query = sprintf("select username, fullname from login_serial where serial='%s';",
                     mysql_real_escape_string($_COOKIE['login_serial']));
     $res = mysql_query($query, $mysql);
     mysql_close($mysql);
@@ -14,6 +14,7 @@ if (isset($_COOKIE['login_serial'])) {
     } else {
         $row = mysql_fetch_assoc($res);
         $username = $row['username'];
+        $fullname = $row['fullname'];
         if ($username == 'admin') {
             header('Location: admin.php');
         }
@@ -53,10 +54,10 @@ if (isset($_COOKIE['login_serial'])) {
         ?></p>
     <p class="page_desc"><?php
         $hour = date('G', time());
-        if ($hour >= 0 && $hour < 6) echo '夜深了，' . $username . '，早点休息哦～';
-        if ($hour >= 6 && $hour < 12) echo '早上好，' . $username;
-        if ($hour >= 12 && $hour < 18) echo '下午好，' . $username;
-        if ($hour >= 18 && $hour < 24) echo '晚上好，' . $username;
+        if ($hour >= 0 && $hour < 6) echo '夜深了，' . $fullname . '，早点休息哦～';
+        if ($hour >= 6 && $hour < 12) echo '早上好，' . $fullname;
+        if ($hour >= 12 && $hour < 18) echo '下午好，' . $fullname;
+        if ($hour >= 18 && $hour < 24) echo '晚上好，' . $fullname;
         ?></p>
 </div>
 <div class="page_body">

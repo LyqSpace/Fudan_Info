@@ -220,10 +220,11 @@ if (isset($_COOKIE['login_serial'])) {
                 } else {
                     $url = 'http://' . $row['review_url'];
                 }
-                $html .= sprintf('<li><a href="%s" style="font-size: 16px; color: black;"><strong>%s</strong></a></li>', $url, $row[title]);
+                $html .= sprintf('<li><a href="%s" style="font-size: 16px; color: black;"><strong>%s</strong></a>', $url, $row[title]);
                 if ($row['username'] != 'fdubot') {
-                    $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s', $row['fullname']);
+                    $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['fullname']);
                 }
+                $html .= '</li>';
             }
         }
 

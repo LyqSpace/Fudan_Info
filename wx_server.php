@@ -98,7 +98,13 @@ function response_query($post_obj) {
         mysql_query("set names 'utf8'");
         mysql_select_db("fudan_info");
 
-        $query = "select count(*) as cnt from published_event;";
+        if (date('N', time()) != 7) {
+            $last_week_st = date('y-m-d 00:00:00', strtotime('this week', time()));
+        } else {
+            $last_week_st = date('y-m-d 00:00:00', strtotime('last week', time()));
+        }
+
+        $query = sprintf("select count(*) as cnt from published_event where published_date='%s';", $last_week_st);
         $res = mysql_query($query, $mysql);
         $row = mysql_fetch_assoc($res);
         $query_num = intval($post_obj->Content);
