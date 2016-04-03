@@ -64,6 +64,13 @@ mysql_close($mysql);
 
 print_footer();
 
+if (date('N', time()) != 7) {
+    $last_week_st = date('Y-m-d 00:00:00', strtotime('this week', time()));
+} else {
+    $last_week_st = date('Y-m-d 00:00:00', strtotime('last week', time()));
+}
+echo 'http://fdutopia.lyq.me/review.php?datestamp=' . $last_week_st;
+
 function check_update() {
     $cur_time_week = date('N', time());
     $cur_time_hour = date('H', time());

@@ -117,15 +117,15 @@ function response_query($post_obj) {
             $row = mysql_fetch_assoc($res);
             $content = '【' . $row['title'] . '】';
             $details = '';
-//            if ($row['register'] == 1) {
-//                if ($row['register_date_type'] == 'date_st') {
-//                    $details = '报名开始时间是';
-//                    $details .= date('n月j日 H:i ', strtotime($row['register_date']));
-//                } else if ($row['register_date_type'] == 'date_ed') {
-//                    $details = '报名截止时间是';
-//                    $details .= date('n月j日 H:i ', strtotime($row['register_date']));
-//                }
-//            }
+            if ($row['register'] == 1) {
+                if ($row['register_date_type'] == 'date_st') {
+                    $details = '报名开始时间是';
+                    $details .= date('n月j日 H:i ', strtotime($row['register_date']));
+                } else if ($row['register_date_type'] == 'date_ed') {
+                    $details = '报名截止时间是';
+                    $details .= date('n月j日 H:i ', strtotime($row['register_date']));
+                }
+            }
             if ($row['details'] != null && $row['details'] != '') {
                 $details .= nl2br($row['details']);
             } else {
