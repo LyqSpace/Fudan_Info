@@ -109,10 +109,10 @@ if (!$forbid) {
     <div class="weui_mask"></div>
     <div class="weui_dialog">
         <div class="weui_dialog_hd">
-            <strong class="weui_dialog_title">抱歉!口令有误!</strong>
+            <strong class="weui_dialog_title">错误的打开方式</strong>
         </div>
         <div class="weui_dialog_bd">
-            如果你是自己人，请从公众号FDUTOPIA进入!
+            请从公众号FDUTOPIA进入动物城～
         </div>
         <div class="weui_dialog_ft">
             <a href="javascript:history.back();" class="weui_btn_dialog primary">确定</a>
