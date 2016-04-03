@@ -30,7 +30,7 @@ $default_msg = array("喵～您的消息我们已收到，将会尽快回复您 
     "您投喂的饲料已被放入猫盆中，请等待(´,,•ω•,,‘)",
     "收到啦!～给我小鱼干我就回复你哦ლ(´ڡ`ლ)",
     "收到啦，春天快乐，送你一朵小花花吧～❀");
-$welcome_msg = "Welcome to FDUTOPIA! To make FDU a better place (●'◡'●)ノ♥";
+$welcome_msg = "Welcome to FDUTOPIA (●'◡'●)ノ♥ 素心无用，自由分享。每周日晚都会推送复旦的讲座活动合集，可以戳历史记录看看噢～";
 $query_msg = array("咦？这个数字太大了我还没有学会呢～",
     "好调皮哦，这个数字没有对应的详细信息呢～");
 $default_msg_id = rand(0, count($default_msg)-1);
