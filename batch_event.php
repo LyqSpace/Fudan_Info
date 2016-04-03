@@ -199,7 +199,7 @@ function print_article(&$order_id, $category_id) {
 }
 
 function print_footer() {
-    $html = '<section><p style="text-align: center;"><span style="font-size: 14px;">新的菜单：戳阅读原文可看上周讲座活动的回顾呦～错过的就补上吧！</span></p><br>';
+    $html = '<br><section><p style="text-align: center;"><span style="font-size: 14px;">新的彩蛋：<span style="color: rgb(92, 137, 183);">戳阅读原</span>文可看上周讲座活动的回顾呦～错过的就补上吧！</span></p><br>';
     $html .= '<p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p><br>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">FDUTOPIA致力于打造高效的复旦信息分享平台</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">如果你是社长或主办方</span></p>';
