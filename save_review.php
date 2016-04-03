@@ -49,9 +49,17 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
     $res = mysql_query($query, $mysql);
     $row = mysql_fetch_assoc($res);
     if ($row['username'] == $username) {
-        $query = sprintf("update event_info set review_url='%s' where event_id=%s;",
-            mysql_real_escape_string($_POST['review_url']),
+        $review_url = 'null';
+        if (isset($_POST['review_url']) && $_POST['review_url'] != '') {
+            preg_match_all('[\S+]', $_POST['review_url'], $matches);
+            if (strlen($matches[0][0]) > 0) {
+                $review_url = "'" . mysql_real_escape_string($matches[0][0]) . "'";
+            }
+        }
+        $query = sprintf("update event_info set review_url=%s where event_id=%s;",
+            $review_url,
             $_POST['event_id']);
+        echo $query;
     } else {
         $forbid = true;
     }
@@ -108,7 +116,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
             本页面禁止违规访问!
         </div>
         <div class="weui_dialog_ft">
-            <a href="index.php"" class="weui_btn_dialog primary">确定</a>
+            <a href="index.php" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php

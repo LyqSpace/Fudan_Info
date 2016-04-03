@@ -45,20 +45,6 @@ if (isset($_COOKIE['login_serial'])) {
     <div class="page_body">
 <?php
 
-function charCodeAt($str, $index)
-{
-    $char = mb_substr($str, $index, 1, 'UTF-8');
- 
-    if (mb_check_encoding($char, 'UTF-8'))
-    {
-        $ret = mb_convert_encoding($char, 'UTF-32BE', 'UTF-8');
-        return hexdec(bin2hex($ret));
-    }
-    else
-    {
-        return null;
-    }
-}
 function count_str($str) {
     $len = 0;
     preg_match_all("/./us", $str, $matchs);

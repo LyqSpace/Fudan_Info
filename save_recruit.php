@@ -127,7 +127,7 @@ if (isset($_POST['details']) && $_POST['details'] != "") {
             本页面禁止违规访问!
         </div>
         <div class="weui_dialog_ft">
-            <a href="index.php"" class="weui_btn_dialog primary">确定</a>
+            <a href="index.php" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php
