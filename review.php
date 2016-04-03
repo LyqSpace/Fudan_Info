@@ -43,7 +43,7 @@ if (!$forbid) {
 <div class="page_header">
     <div class="logo_img"></div>
     <?php
-        $intro_names = array('朱迪', '尼克', '朱迪', '尼克', '朱迪', '尼克', '博戈局长', '本杰明警官', '大先生', '闪电');
+        $intro_names = array('朱迪', '尼克', '朱迪', '尼克', '朱迪', '尼克', '博戈局长', '本杰明警官', '闪电');
         $intro_cities = array('冰川镇', '撒哈拉广场', '火车站', '雨林区', '兔窝区', '草原中心', '小型啮齿动物镇', '警察局');
         for ($i = 0; $i < 4; $i++) $intro_num .= rand(0, 9) . '';
     ?>
@@ -70,9 +70,9 @@ if (!$forbid) {
             }
             $html .= sprintf('<div class="review_item" id="review_item%s"><ol style="list-style-type: decimal; padding-left: 35px;" start=%d><li>', $cnt-1, $cnt);
             $html .= sprintf('<a href="%s" style="font-size: 16px; color: black;"><strong>%s</strong></a>', $url, $row[title]);
-            //if ($row['username'] != 'fdubot') {
+            if ($row['username'] != 'fdubot') {
                 $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['fullname']);
-            //}
+            }
             $html .= '</li></ol></div>';
             $cnt++;
         }
@@ -88,8 +88,7 @@ if (!$forbid) {
     <p class="page_desc">素心无用，自由分享</p>
     <p class="page_desc">分享复旦内有生命力的讲座活动</p>
     <p class="page_desc">守望复旦人澎湃不息的赤子之心</p>
-    <p class="page_desc">如果你喜欢我们，长按二维码关注FDUTOPIA</p>
-    <div class="qrcode_img"></div>
+    <p class="page_desc">如果你喜欢我们，戳<a style="color: darkorange" href="http://weixin.qq.com/r/JTgaApzEpMHbrdhh9203">这里关注FDUTOPIA</p>
     <br>
     <p style="font-size: 14px;color: #888;">阅读 <?php
 
