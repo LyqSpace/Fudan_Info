@@ -32,7 +32,7 @@ if (date('N', time()) != 7) {
     $week_st = date('y-m-d 00:00:00', strtotime('this week', time()));
     $week_ed = date('y-m-d 00:00:00', strtotime('this week + 8 day', time()));
 }
-$category_name_cn = array('人文与社科', '科学', '艺术', '金融', '体育','娱乐', '其它');
+$category_name_cn = array('人文与社科', '理科与工程', '艺术', '金融', '体育','娱乐', '其它');
 $category_name_en = array('culture', 'science', 'art', 'finance', 'sport', 'entertainment', 'others');
 $category_cnt = 7;
 $order_id = 1;
@@ -158,9 +158,9 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
         $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【时间】%s</p>', $date);
         $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【地点】%s</p>', $row['location']);
         if ($row['username'] != 'fdubot') {
-            $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s', $row['fullname']);
+            $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['fullname']);
         }
-        $html .= '</p></li><br>';
+        $html .= '</li><br>';
 
         if ($update_next_week) {
             $query = sprintf('insert into published_event value (%d, %d, "%s");',

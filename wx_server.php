@@ -88,6 +88,15 @@ function response_text($post_obj, $content) {
     echo $echo_str;
 }
 
+function check_update() {
+    $cur_time_week = date('N', time());
+    $cur_time_hour = date('H', time());
+    if ($cur_time_week == 7 && (24 - $cur_time_hour) <= 4) {
+        return true;
+    }
+    return false;
+}
+
 function response_query($post_obj) {
 
     global $default_msg, $default_msg_id, $query_msg, $query_msg_id;
@@ -98,13 +107,22 @@ function response_query($post_obj) {
         mysql_query("set names 'utf8'");
         mysql_select_db("fudan_info");
 
-        if (date('N', time()) != 7) {
-            $last_week_st = date('y-m-d 00:00:00', strtotime('this week', time()));
+        $updated = check_update();
+        if ($updated) {
+            if (date('N', time()) != 7) {
+                $published_date = date('y-m-d 00:00:00', strtotime('next week', time()));
+            } else {
+                $published_date = date('y-m-d 00:00:00', strtotime('this week', time()));
+            }
         } else {
-            $last_week_st = date('y-m-d 00:00:00', strtotime('last week', time()));
+            if (date('N', time()) != 7) {
+                $published_date = date('y-m-d 00:00:00', strtotime('this week', time()));
+            } else {
+                $published_date = date('y-m-d 00:00:00', strtotime('last week', time()));
+            }
         }
 
-        $query = sprintf("select count(*) as cnt from published_event where published_date='%s';", $last_week_st);
+        $query = sprintf("select count(*) as cnt from published_event where published_date='%s';", $published_date);
         $res = mysql_query($query, $mysql);
         $row = mysql_fetch_assoc($res);
         $query_num = intval($post_obj->Content);
