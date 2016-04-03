@@ -112,7 +112,6 @@ function format_date(&$date_st, &$date_ed, $row_date_st, $row_date_ed) {
 function print_header() {
     $html = '<section><p style="text-align: center;"><span style="font-size: 14px;">复旦乌托邦，素心无用，自由分享</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">每周日晚上见～</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">为了鼓励鼓励大黄猫，要不要转发一次呢～</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">带有<strong style="text-align: center; white-space: normal; font-size: 14px; line-height: 22.4px;"><span style="font-size: 14px; line-height: 16px; width: 16px; display: inline-block; border-radius: 50%; height: 16px; color: rgb(255, 255, 255); background-color: #0099CC;">i</span></strong>标签的活动</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">在公众号内发送编号可查看报名等详细信息</span></p>';
     $html .= '<br><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p></section>';
@@ -199,7 +198,7 @@ function print_article(&$order_id, $category_id) {
 }
 
 function print_footer() {
-    $html = '<br><section><p style="text-align: center;"><span style="font-size: 14px;">新的彩蛋：戳<span style="color: rgb(92, 137, 183);">阅读原文</span>可看上周讲座活动的回顾呦～错过的就补上吧！</span></p><br>';
+    $html = '<br><section><p style="text-align: center;"><span style="font-size: 15px;">新的彩蛋：戳<span style="color: rgb(92, 137, 183);">阅读原文</span>可看上周讲座活动的回顾呦～错过的就补上吧！</span></p><br>';
     $html .= '<p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p><br>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">FDUTOPIA致力于打造高效的复旦信息分享平台</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">如果你是社长或主办方</span></p>';
