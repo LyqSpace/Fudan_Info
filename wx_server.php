@@ -109,11 +109,7 @@ function response_query($post_obj) {
 
         $updated = check_update();
         if ($updated) {
-            if (date('N', time()) != 7) {
-                $published_date = date('y-m-d 00:00:00', strtotime('next week', time()));
-            } else {
-                $published_date = date('y-m-d 00:00:00', strtotime('this week', time()));
-            }
+            $published_date = date('y-m-d 00:00:00', strtotime('this week', time()));
         } else {
             if (date('N', time()) != 7) {
                 $published_date = date('y-m-d 00:00:00', strtotime('this week', time()));
