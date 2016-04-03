@@ -59,7 +59,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
         $query = sprintf("update event_info set review_url=%s where event_id=%s;",
             $review_url,
             $_POST['event_id']);
-        echo $query;
+        
     } else {
         $forbid = true;
     }
