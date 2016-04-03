@@ -47,10 +47,13 @@ if (!$forbid) {
         $intro_cities = array('冰川镇', '撒哈拉广场', '火车站', '雨林区', '兔窝区', '草原中心', '小型啮齿动物镇', '警察局');
         for ($i = 0; $i < 4; $i++) $intro_num .= rand(0, 9) . '';
     ?>
-    <p class="page_desc">我是复旦乌托邦的<?php $rand_id = rand(0, count($intro_names)-1); echo $intro_names[$rand_id];?></p>
-    <p class="page_desc">欢迎来到动物城的<?php $rand_id = rand(0, count($intro_cities)-1); echo $intro_cities[$rand_id];?></p>
-    <p class="page_desc">下面的爪爪棒冰，戳标题即可享用</p>
-    <p class="page_desc">生产日期<?php echo $date_st . '-' . $date_ed;?></p>
+<!--    <p class="page_desc">我是复旦乌托邦的--><?php //$rand_id = rand(0, count($intro_names)-1); echo $intro_names[$rand_id];?><!--</p>-->
+<!--    <p class="page_desc">欢迎来到动物城的--><?php //$rand_id = rand(0, count($intro_cities)-1); echo $intro_cities[$rand_id];?><!--</p>-->
+<!--    <p class="page_desc">下面的爪爪棒冰，戳标题即可享用</p>-->
+<!--    <p class="page_desc">生产日期--><?php //echo $date_st . '-' . $date_ed;?><!--</p>-->
+    <p class="page_desc">恭喜发现彩蛋～</p>
+    <p class="page_desc">这里是复旦乌托邦的雨林区</p>
+    <p class="page_desc">下面的爪爪冰棍儿，点击标题即刻享用</p>
 </div>
 
 <div class="page_body">
