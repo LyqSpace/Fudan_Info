@@ -41,7 +41,11 @@ mysql_query("set names 'utf8'");
 mysql_select_db("fudan_info");
 
 if ($update_next_week) {
-    $query = sprintf("delete from published_event where date='%s';", $week_st);
+    $query = sprintf("delete from published_event where published_date='%s';", $week_st);
+    mysql_query($query, $mysql);
+    $query = sprintf("delete from review_read where published_date='%s';", $week_st);
+    mysql_query($query, $mysql);
+    $query = sprintf("insert into review_read value ('%s', 0);", $week_st);
     mysql_query($query, $mysql);
 }
 

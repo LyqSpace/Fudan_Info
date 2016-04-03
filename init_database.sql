@@ -52,4 +52,9 @@ create table published_event (
 	primary key (event_id, published_date)
 );
 
+create table review_read (
+	published_date datetime not null primary key,
+	count integer not null default 0
+);
+
 insert into users value ('admin', 'admin', 'root@lyq.me', '73a694ee2938d0d0f12531e2de0643ea', 2, 2);

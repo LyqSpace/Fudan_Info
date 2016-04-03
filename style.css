@@ -13,6 +13,21 @@ h1 {
     font-weight: bold;
 }
 
+.logo_img {
+    background-image: url('logo_small.jpg');
+    text-align: center;
+    width: 100px;
+    height: 101px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+
+.review_item {
+    margin-bottom: 10px;
+    border-radius: 6px;
+    line-height: 2;
+}
+
 .page_header {
     padding: 2em 0;
 }

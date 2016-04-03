@@ -201,11 +201,10 @@ if (isset($_COOKIE['login_serial'])) {
     <?php
 
         if (date('N', time()) != 7) {
-            $last_week_st = date('y-m-d 00:00:00', strtotime('this week', time()));
+            $last_week_st = date('Y-m-d 00:00:00', strtotime('this week', time()));
         } else {
-            $last_week_st = date('y-m-d 00:00:00', strtotime('last week', time()));
+            $last_week_st = date('Y-m-d 00:00:00', strtotime('last week', time()));
         }
-
         $html = '<section><ol style="list-style-type: decimal; padding-left: 35px;">';
 
         $query = sprintf('select * from published_event natural join event_info natural join users where published_date="%s" and username="%s" and review_url is not null order by order_id;',
