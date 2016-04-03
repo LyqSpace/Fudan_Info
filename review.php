@@ -44,7 +44,7 @@ if (!$forbid) {
     <div class="logo_img"></div>
     <?php
         $intro_names = array('朱迪', '尼克', '朱迪', '尼克', '朱迪', '尼克', '博戈局长', '本杰明警官', '大先生', '闪电');
-        $intro_cities = array('冰川镇', '动物城撒哈拉广场', '动物城火车站', '布雷德利', '恩格林', '怀特曼', '罗拉多泉', '小石城');
+        $intro_cities = array('冰川镇', '撒哈拉广场', '火车站', '雨林区', '兔窝区', '草原中心', '小型啮齿动物镇', '警察局');
         for ($i = 0; $i < 4; $i++) $intro_num .= rand(0, 9) . '';
     ?>
     <p class="page_desc">我是复旦乌托邦的<?php $rand_id = rand(0, count($intro_names)-1); echo $intro_names[$rand_id];?></p>
