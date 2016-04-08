@@ -89,7 +89,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" id="speaker" placeholder="此处可作主讲人姓名、职位的简单介绍" name="speaker" rows="2"
+                    <textarea class="weui_textarea" id="speaker" placeholder="选填，此处可作主讲人姓名、职位的简单介绍" name="speaker" rows="2"
                               onkeyup="count('speaker', speaker_cnt, 50);"><?php echo $row['speaker'];?></textarea>
                         <div class="weui_textarea_counter">
                             <span id="speaker_cnt"><?php echo count_str($row['speaker']);?></span>/50
@@ -232,9 +232,19 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 <div class="weui_cells weui_cells_form">
                     <div class="weui_cell">
                         <div class="weui_cell_bd weui_cell_primary">
-                        <textarea class="weui_textarea" id="details_text" placeholder="请输入取票/报名方式、主讲人介绍或活动介绍等，主办方不必填写，将自动补上。如果勾选“有详细描述”，则此栏不可为空"
+                        <textarea class="weui_textarea" id="details_text" placeholder="请输入取票/报名方式、主讲人介绍或活动介绍等，如果勾选“有详细描述”，则此栏或软文网址不可为空"
                                   name="details" rows="7" onkeyup="count('details_text', details_cnt, 300);"><?php echo $row['details'];?></textarea>
                             <div class="weui_textarea_counter"><span id="details_cnt"><?php echo count_str($row['details']);?></span>/300</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui_cells_title">软文网址</div>
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                        <textarea class="weui_textarea" id="propa_url" placeholder="选填，如果自己的公众号有宣传此活动的软文，可以把软文网址复制在此处"
+                                  name="propa_url" rows="7" onkeyup="count('propa_url', propa_url_cnt, 300);"><?php echo $row['propa_url'];?></textarea>
+                            <div class="weui_textarea_counter"><span id="propa_url_cnt"><?php echo count_str($row['propa_url']);?></span>/300</div>
                         </div>
                     </div>
                 </div>
@@ -302,7 +312,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" id="speaker" placeholder="此处可作主讲人姓名、职位的简单介绍"
+                    <textarea class="weui_textarea" id="speaker" placeholder="选填，此处可作主讲人姓名、职位的简单介绍"
                               name="speaker" rows="2" onkeyup="count('speaker', speaker_cnt, 50);"></textarea>
                     <div class="weui_textarea_counter"><span id="speaker_cnt">0</span>/50</div>
                 </div>
@@ -396,6 +406,16 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                         <textarea class="weui_textarea" id="details_text" placeholder="请输入取票/报名方式、主讲人介绍或活动介绍等，主办方和报名时间不必填写，将自动补上。如果勾选“有详细描述”，则此栏不可为空"
                                   name="details" rows="7" onkeyup="count('details_text', details_cnt, 300);"></textarea>
                         <div class="weui_textarea_counter"><span id="details_cnt">0</span>/300</div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui_cells_title">软文网址</div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <textarea class="weui_textarea" id="propa_url" placeholder="选填，如果自己的公众号有宣传此活动的软文，可以把软文网址复制在此处"
+                                  name="propa_url" rows="7" onkeyup="count('propa_url', propa_url_cnt, 300);"></textarea>
+                        <div class="weui_textarea_counter"><span id="propa_url_cnt">0</span>/300</div>
                     </div>
                 </div>
             </div>

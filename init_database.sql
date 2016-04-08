@@ -32,6 +32,8 @@ create table event_info (
 	notification boolean default false,
 	publish boolean default false,
 	details varchar(300),
+	short_url varchar(5),
+	propa_url varchar(300),
 	review_url varchar(300),
 	publish_date datetime,
 	edit_time timestamp default current_timestamp

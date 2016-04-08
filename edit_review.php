@@ -37,7 +37,7 @@ if (isset($_COOKIE['login_serial'])) {
 <div class="page_header">
     <h1 class="page_title">编辑一则回顾</h1>
     <p class="page_desc">一个英文占一个字符，一个中文占两个字符</p>
-    <p class="page_desc">当周讲座回顾将放入下周活动图文的阅读原文中</p>
+    <p class="page_desc">阅读原文中将收录最近二十次活动的回顾</p>
 </div>
 <div class="page_body">
     <?php
@@ -62,7 +62,7 @@ if (isset($_COOKIE['login_serial'])) {
                 <div class="weui_cells weui_cells_form">
                     <div class="weui_cell">
                         <div class="weui_cell_bd weui_cell_primary">
-                            <textarea class="weui_textarea" id="review_url" placeholder="在各自公众号发布该活动的回顾图文，此处粘贴回顾图文的网址，请不要在此处填写其它内容；若没有，则清空此栏"
+                            <textarea class="weui_textarea" id="review_url" placeholder="各自公众号发布该活动的回顾图文后，在此处粘贴回顾图文的网址，请不要在此处填写其它内容；若没有，则清空此栏"
                               name="review_url" rows="7" onkeyup="count('review_url', review_url_cnt, 300);"><?php echo $row['review_url'];?></textarea>
                             <div class="weui_textarea_counter"><span id="review_url_cnt"><?php echo strlen($row['review_url']);?></span>/300</div>
                         </div>

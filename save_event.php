@@ -45,6 +45,15 @@ function mysql_date_format($input_date) {
     return $date;
 }
 
+function generate_short_url($length) {
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $serial = '';
+    for ($i = 0; $i < $length; $i++) {
+        $serial .= $chars[mt_rand(0, strlen($chars) - 1)];
+    }
+    return $serial;
+}
+
 if (isset($_POST['title']) && $_POST['title'] != "" &&
     isset($_POST['location']) && $_POST['location'] != "" &&
     isset($_POST['date']) && $_POST['date'] != "" &&
@@ -78,8 +87,13 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
     if (isset($_POST['details']) && $_POST['details'] != "") {
         $details = "'" . mysql_real_escape_string($_POST['details']) . "'";
     }
+    $propa_url = 'null';
+    if (isset($_POST['propa_url']) && $_POST['propa_url'] != "") {
+        $propa_url = "'" . mysql_real_escape_string($_POST['propa_url']) . "'";
+    }
 
     $forbid = false;
+    $res = null;
 
     if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
 
@@ -90,7 +104,7 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
         if ($row['username'] == $username) {
             $query = sprintf("update event_info set title='%s', speaker=%s, date_type='%s', date='%s',
                 location='%s', category='%s', register=%s, register_date_type='%s', register_date='%s',
-                notification=%s, publish=%s, details=%s, edit_time=null where event_id=%s;",
+                notification=%s, publish=%s, details=%s, propa_url=%s, edit_time=null where event_id=%s;",
                 mysql_real_escape_string($_POST['title']),
                 $speaker,
                 mysql_real_escape_string($_POST['date_type']),
@@ -103,13 +117,25 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
                 $notification,
                 $publish,
                 $details,
+                $propa_url,
                 $_POST['event_id']);
+
         } else {
             $forbid = true;
         }
 
     } else {
-        $query = sprintf("insert into event_info value (null,'%s', '%s', %s, '%s', '%s', '%s', '%s', %s, '%s', '%s', %s, %s, %s, null, null, null);",
+
+        $res_tmp = true;
+        $short_url = null;
+        while ($res_tmp) {
+            $short_url = generate_short_url(4);
+            $query = sprintf("select * from event_info where short_url='%s' limit 1;", $short_url);
+            $res_tmp = mysql_query($query, $mysql);
+            $res_tmp = mysql_num_rows($res_tmp) == 0 ? false : true;
+        }
+
+        $query = sprintf("insert into event_info value (null,'%s', '%s', %s, '%s', '%s', '%s', '%s', %s, '%s', '%s', %s, %s, %s, '%s', %s, null, null, null);",
             mysql_real_escape_string($_POST['title']),
             $username,
             $speaker,
@@ -122,8 +148,12 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
             $register_date,
             $notification,
             $publish,
-            $details);
+            $details,
+            $short_url,
+            $propa_url);
     }
+
+    echo $query;
     if (!$forbid) $res = mysql_query($query, $mysql);
 
     ?>

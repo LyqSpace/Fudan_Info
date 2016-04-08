@@ -20,9 +20,6 @@ if (isset($_COOKIE['login_serial'])) {
 } else {
     header('Location: login.html');
 }
-?>
-
-<?php
 
 $update_next_week = check_update();
 if (date('N', time()) != 7) {
@@ -39,6 +36,31 @@ $order_id = 1;
 $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
 mysql_query("set names 'utf8'");
 mysql_select_db("fudan_info");
+
+function generate_short_url($length) {
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $serial = '';
+    for ($i = 0; $i < $length; $i++) {
+        $serial .= $chars[mt_rand(0, strlen($chars) - 1)];
+    }
+    return $serial;
+}
+
+$query = "select * from event_info;";
+$res = mysql_query($query, $mysql);
+while ($row = mysql_fetch_assoc($res)) {
+    $res_tmp = true;
+    $short_url = null;
+    while ($res_tmp) {
+        $short_url = generate_short_url(4);
+        echo $short_url . ' ';
+        $query = sprintf("select * from event_info where short_url='%s' limit 1;", $short_url);
+        $res_tmp = mysql_query($query, $mysql);
+        $res_tmp = mysql_num_rows($res_tmp) == 0 ? false : true;
+    }
+    $query = sprintf('update event_info set short_url="%s" where event_id=%s;', $short_url, $row['event_id']);
+    mysql_query($query, $mysql);
+}
 
 if (date('N', time()) != 7) {
     $last_week_st = date('Y-m-d', strtotime('this week', time()));

@@ -157,18 +157,31 @@ function check_event(btn) {
     if (register_check.checked == false && register_date != "") error_message += "报名时间不为空，请勾选需要提前报名<br>";
 
     var str = document.getElementById("details_text").value;
-    var len = 0;
+    var detail_len = 0;
     for (var i = 0; i < str.length; i++) {
         if (str.charCodeAt(i) > 255) {
-            len += 2;
+            detail_len += 2;
         } else {
-            len += 1;
+            detail_len += 1;
         }
     }
-    if (len > 300) error_message += "详细描述超过字数限制<br>";
+    if (detail_len > 300) error_message += "详细描述超过字数限制<br>";
+
+    var str = document.getElementById("propa_url").value;
+    var propa_url_len = 0;
+    for (var i = 0; i < str.length; i++) {
+        if (str.charCodeAt(i) > 255) {
+            error_message += "软文网址只粘贴软文链接，请不要写入其它汉字内容<br>";
+            break;
+        } else {
+            propa_url_len++;
+        }
+    }
+    if (propa_url_len > 300) error_message += "软文网址超过字数限制<br>";
+
     var check_ele = document.getElementsByName("notification");
-    if (check_ele[0].checked == true && len == 0) error_message += "详细描述不可为空<br>";
-    if (check_ele[0].checked == false && len > 0) error_message += "详细描述不为空，请勾选有详细描述<br>";
+    if (check_ele[0].checked == true && detail_len == 0 && propa_url_len == 0) error_message += "详细描述或软文网址不可为空<br>";
+    if (check_ele[0].checked == false && (len > 0 || propa_url_len > 0)) error_message += "详细描述或软文网址不为空，请勾选有详细描述<br>";
 
     if (error_message === "") {
         return true;
@@ -409,7 +422,7 @@ function check_review() {
     var error_message = "";
     for (var i = 0; i < str.length; i++) {
         if (str.charCodeAt(i) > 255) {
-            error_message += "只粘贴公众号推送链接，请不要写入其它汉字内容<br>";
+            error_message += "此处只粘贴回顾链接，请不要写入其它汉字内容<br>";
             break;
         }
     }
