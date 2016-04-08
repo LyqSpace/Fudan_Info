@@ -148,7 +148,7 @@ function response_query($post_obj) {
             $content .= $details;
 
             if ($row["propa_url"] != null && $row["propa_url"] != "") {
-                $url = "fdutopia.lyq.me/t.phpl?=" . $row["short_url"];
+                $url = "fdutopia.lyq.me/t.php?t=" . $row["short_url"];
                 $content .= "\n【软文网址】" . $url;
             }
         }

@@ -189,7 +189,7 @@ if (isset($_COOKIE['login_serial'])) {
             $content .= $details;
 
             if ($row['propa_url'] != null && $row['propa_url'] != '') {
-                $url = 'fdutopia.lyq.me/t.phpl?=' . $row['short_url'];
+                $url = 'fdutopia.lyq.me/t.php?t=' . $row['short_url'];
                 $content .= '<br>【软文网址】' . $url;
             }
 

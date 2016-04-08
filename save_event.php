@@ -153,7 +153,6 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
             $propa_url);
     }
 
-    echo $query;
     if (!$forbid) $res = mysql_query($query, $mysql);
 
     ?>
