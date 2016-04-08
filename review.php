@@ -24,10 +24,10 @@
     mysql_query("set names 'utf8'");
     mysql_select_db("fudan_info");
 
-    $query = sprintf("update review_read set count=count+1 where published_date='%s';", $date);
+    $query = "update review_read set count=count+1;";
     mysql_query($query, $mysql);
 
-    $cur_date = strtotime('Y-m-d H:i:s', date());
+    $cur_date = date('Y-m-d H:i:s', time());
     $query = sprintf('select * from event_info natural join users where review_url is not null and date<"%s" order by date desc limit 30;', $cur_date);
     $res = mysql_query($query, $mysql);
 
@@ -45,7 +45,7 @@
             $url = 'http://' . $row['review_url'];
         }
         $html .= sprintf('<div class="review_item" id="review_item%s"><ol style="list-style-type: decimal; padding-left: 35px;" start=%d><li>', $cnt-1, $cnt);
-        $html .= sprintf('<a href="%s" style="font-size: 16px; color: black;"><strong>%s</strong></a>', $url, $row[title]);
+        $html .= sprintf('<a href="%s" style="font-size: 16px; color: black;"><strong>%s</strong></a>', $url, $row['title]');
         if ($row['username'] != 'fdubot') {
             $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['fullname']);
         }
@@ -69,7 +69,7 @@
     <br>
     <p style="font-size: 14px;color: #888;">阅读 <?php
 
-        $query = sprintf("select * from review_read where published_date='%s';", $date);
+        $query = "select * from review_read;";
         $res = mysql_query($query, $mysql);
         $row = mysql_fetch_assoc($res);
         echo $row['count'];

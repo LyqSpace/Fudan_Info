@@ -35,7 +35,6 @@ create table event_info (
 	short_url varchar(5),
 	propa_url varchar(300),
 	review_url varchar(300),
-	publish_date datetime,
 	edit_time timestamp default current_timestamp
 );
 
@@ -48,14 +47,11 @@ create table recruit_info (
 );
 
 create table published_event (
-	order_id integer not null,
-	event_id integer not null,
-	published_date datetime not null,
-	primary key (event_id, published_date)
+	order_id integer not null primary key auto_increment,
+	event_id integer not null
 );
 
 create table review_read (
-	published_date datetime not null primary key,
 	count integer not null default 0
 );
 

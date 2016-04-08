@@ -135,7 +135,7 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
             $res_tmp = mysql_num_rows($res_tmp) == 0 ? false : true;
         }
 
-        $query = sprintf("insert into event_info value (null,'%s', '%s', %s, '%s', '%s', '%s', '%s', %s, '%s', '%s', %s, %s, %s, '%s', %s, null, null, null);",
+        $query = sprintf("insert into event_info value (null,'%s', '%s', %s, '%s', '%s', '%s', '%s', %s, '%s', '%s', %s, %s, %s, '%s', %s, null, null);",
             mysql_real_escape_string($_POST['title']),
             $username,
             $speaker,
