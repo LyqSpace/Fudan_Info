@@ -129,15 +129,15 @@ function response_query($post_obj) {
             $query = sprintf("select * from published_event natural join event_info where order_id=%d;", $query_num);
             $res = mysql_query($query, $mysql);
             $row = mysql_fetch_assoc($res);
-            $content = '【' . $row['title'] . '】';
+            $content = '【' . $row['title'] . '】\n';
             $details = '';
             if ($row['register'] == 1) {
                 if ($row['register_date_type'] == 'date_st') {
                     $details = '报名开始时间是';
-                    $details .= date('n月j日 H:i ', strtotime($row['register_date']));
+                    $details .= date('n月j日 H:i\n', strtotime($row['register_date']));
                 } else if ($row['register_date_type'] == 'date_ed') {
                     $details = '报名截止时间是';
-                    $details .= date('n月j日 H:i ', strtotime($row['register_date']));
+                    $details .= date('n月j日 H:i\n', strtotime($row['register_date']));
                 }
             }
             if ($row['details'] != null && $row['details'] != '') {
@@ -146,6 +146,11 @@ function response_query($post_obj) {
                 $details .= '喵～信息都已经交代完整啦，祝您参加活动愉快哦～';
             }
             $content .= $details;
+
+            if ($row['propa_url'] != null && $row['propa_url'] != '') {
+                $url = 'fdutopia.lyq.me/t.phpl?=' . $row['short_url'];
+                $content .= '\n【软文网址】' . $url;
+            }
         }
 
         response_text($post_obj, $content);

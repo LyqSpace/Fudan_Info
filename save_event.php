@@ -20,20 +20,20 @@ if (isset($_COOKIE['login_serial'])) {
 }
 ?>
 
-    <html lang="en">
-    <!-- Welcome! Contact Me: root@lyq.me -->
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-        <meta name="keywords" content="Fudan, Informations">
-        <meta name="author" content="Liang Yongqing, Liu Xueyue">
-        <link rel="stylesheet" type="text/css" href="weui.min.css" />
-        <link rel="stylesheet" type="text/css" href="style.css" />
-        <script type="text/javascript" src="functions.js"></script>
-        <title>保存一则活动 | FDUTOPIA</title>
-    </head>
+<html lang="en">
+<!-- Welcome! Contact Me: root@lyq.me -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="keywords" content="Fudan, Informations">
+    <meta name="author" content="Liang Yongqing, Liu Xueyue">
+    <link rel="stylesheet" type="text/css" href="weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="text/javascript" src="functions.js"></script>
+    <title>保存一则活动 | FDUTOPIA</title>
+</head>
 
-    <body ontouchstart>
+<body ontouchstart>
 <?php
 
 function mysql_date_format($input_date) {

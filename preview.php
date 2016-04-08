@@ -166,7 +166,7 @@ if (isset($_COOKIE['login_serial'])) {
 
         for ($i = 0; $i < count($event_arr); $i++) {
 
-            $query = sprintf('select * from event_info where event_id=%s;', $event_arr[$i]);
+            $query = sprintf('select * from event_info where event_id="%s";', $event_arr[$i]);
             $res = mysql_query($query, $mysql);
             $row = mysql_fetch_assoc($res);
 
@@ -189,7 +189,7 @@ if (isset($_COOKIE['login_serial'])) {
             $content .= $details;
 
             if ($row['propa_url'] != null && $row['propa_url'] != '') {
-                $url = 'fdutopia.lyq.me/t?=' . $row['short_url'];
+                $url = 'fdutopia.lyq.me/t.phpl?=' . $row['short_url'];
                 $content .= '<br>【软文网址】' . $url;
             }
 
