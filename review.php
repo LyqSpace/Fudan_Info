@@ -8,83 +8,56 @@
     <link rel="stylesheet" type="text/css" href="weui.min.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script type="text/javascript" src="functions.js"></script>
-<?php
-
-$forbid = false;
-$res = null;
-$mysql = null;
-
-if (!isset($_GET['datestamp']) || $_GET['datestamp'] == "") {
-    $forbid = true;
-} else {
-    $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
-    mysql_query("set names 'utf8'");
-    mysql_select_db("fudan_info");
-
-    $date = $_GET['datestamp'] . ' 00:00:00';
-
-    $query = sprintf("update review_read set count=count+1 where published_date='%s';", $date);
-    mysql_query($query, $mysql);
-
-    $query = sprintf('select * from published_event natural join event_info natural join users where published_date="%s";', $date);
-    $res = mysql_query($query, $mysql);
-    if (!mysql_num_rows($res)) {
-        $forbid = true;
-        mysql_close($mysql);
-    }
-}
-if (!$forbid) {
-    $date_st = date('n月j日', strtotime($date));
-    $date_ed = date('n月j日', strtotime("+6 days", strtotime($date)));
-?>
-    <title><?php echo $date_st . '-' . $date_ed;?>活动回顾 | FDUTOPIA</title>
+    <title>活动回顾 | FDUTOPIA</title>
 </head>
 <body ontouchstart onload="random_item_color()">
 <div class="page_header">
     <div class="logo_img"></div>
-    <?php
-        $intro_names = array('朱迪', '尼克', '朱迪', '尼克', '朱迪', '尼克', '博戈局长', '本杰明警官', '闪电');
-        $intro_cities = array('冰川镇', '撒哈拉广场', '火车站', '雨林区', '兔窝区', '草原中心', '小型啮齿动物镇', '警察局');
-        for ($i = 0; $i < 4; $i++) $intro_num .= rand(0, 9) . '';
-    ?>
-<!--    <p class="page_desc">我是复旦乌托邦的--><?php //$rand_id = rand(0, count($intro_names)-1); echo $intro_names[$rand_id];?><!--</p>-->
-<!--    <p class="page_desc">欢迎来到动物城的--><?php //$rand_id = rand(0, count($intro_cities)-1); echo $intro_cities[$rand_id];?><!--</p>-->
-<!--    <p class="page_desc">下面的爪爪棒冰，戳标题即可享用</p>-->
-<!--    <p class="page_desc">生产日期--><?php //echo $date_st . '-' . $date_ed;?><!--</p>-->
     <p class="page_desc">恭喜发现彩蛋～</p>
     <p class="page_desc">这里是复旦乌托邦的雨林区</p>
     <p class="page_desc">下面的爪爪冰棍儿，点击标题即刻享用</p>
 </div>
 
-<div class="page_body">
-    <?php
-        $html = '';
-        $cnt = 1;
-        while ($row = mysql_fetch_assoc($res)) {
+<div class="page_body"><?php
 
-            if ($row['review_url'] == null || $row['review_url'] == '') continue;
+    $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+    mysql_query("set names 'utf8'");
+    mysql_select_db("fudan_info");
 
-            $url = '';
-            if (strtolower(substr($row['review_url'], 0, 8)) == 'https://' or
-                strtolower(substr($row['review_url'], 0, 7)) == 'http://') {
-                $url = $row['review_url'];
-            } else {
-                $url = 'http://' . $row['review_url'];
-            }
-            $html .= sprintf('<div class="review_item" id="review_item%s"><ol style="list-style-type: decimal; padding-left: 35px;" start=%d><li>', $cnt-1, $cnt);
-            $html .= sprintf('<a href="%s" style="font-size: 16px; color: black;"><strong>%s</strong></a>', $url, $row[title]);
-            if ($row['username'] != 'fdubot') {
-                $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['fullname']);
-            }
-            $html .= '</li></ol></div>';
-            $cnt++;
-        }
+    $query = sprintf("update review_read set count=count+1 where published_date='%s';", $date);
+    mysql_query($query, $mysql);
 
-        if ($cnt == 1) {
-            echo '<p class="page_desc">爪爪冰棒还没做出来，过两天再来看看吧～</p>';
+    $cur_date = strtotime('Y-m-d H:i:s', date());
+    $query = sprintf('select * from event_info natural join users where review_url is not null and date<"%s" order by date desc limit 30;', $cur_date);
+    $res = mysql_query($query, $mysql);
+
+    $html = '';
+    $cnt = 1;
+    while ($row = mysql_fetch_assoc($res)) {
+
+        if ($row['review_url'] == null || $row['review_url'] == '') continue;
+
+        $url = '';
+        if (strtolower(substr($row['review_url'], 0, 8)) == 'https://' or
+            strtolower(substr($row['review_url'], 0, 7)) == 'http://') {
+            $url = $row['review_url'];
         } else {
-            echo $html;
+            $url = 'http://' . $row['review_url'];
         }
+        $html .= sprintf('<div class="review_item" id="review_item%s"><ol style="list-style-type: decimal; padding-left: 35px;" start=%d><li>', $cnt-1, $cnt);
+        $html .= sprintf('<a href="%s" style="font-size: 16px; color: black;"><strong>%s</strong></a>', $url, $row[title]);
+        if ($row['username'] != 'fdubot') {
+            $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['fullname']);
+        }
+        $html .= '</li></ol></div>';
+        $cnt++;
+    }
+
+    if ($cnt == 1) {
+        echo '<p class="page_desc">爪爪冰棒还没做出来，过两天再来看看吧～</p>';
+    } else {
+        echo $html;
+    }
 
     ?>
     <br>
@@ -106,21 +79,3 @@ if (!$forbid) {
 <br>
 </body>
 </html>
-<?php
-} else {
-    ?>
-    <div class="weui_mask"></div>
-    <div class="weui_dialog">
-        <div class="weui_dialog_hd">
-            <strong class="weui_dialog_title">错误的打开方式</strong>
-        </div>
-        <div class="weui_dialog_bd">
-            请从公众号FDUTOPIA进入动物城～
-        </div>
-        <div class="weui_dialog_ft">
-            <a href="javascript:history.back();" class="weui_btn_dialog primary">确定</a>
-        </div>
-    </div>
-    <?php
-}
-?>

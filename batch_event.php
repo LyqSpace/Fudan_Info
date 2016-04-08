@@ -23,11 +23,11 @@ if (isset($_COOKIE['login_serial'])) {
 
 $update_next_week = check_update();
 if (date('N', time()) != 7) {
-    $week_st = date('y-m-d 00:00:00', strtotime('next week', time()));
-    $week_ed = date('y-m-d 00:00:00', strtotime('next week + 8 day', time()));
+    $week_st = date('Y-m-d 00:00:00', strtotime('next week', time()));
+    $week_ed = date('Y-m-d 00:00:00', strtotime('next week + 8 day', time()));
 } else {
-    $week_st = date('y-m-d 00:00:00', strtotime('this week', time()));
-    $week_ed = date('y-m-d 00:00:00', strtotime('this week + 8 day', time()));
+    $week_st = date('Y-m-d 00:00:00', strtotime('this week', time()));
+    $week_ed = date('Y-m-d 00:00:00', strtotime('this week + 8 day', time()));
 }
 $category_name_cn = array('人文与社科', '理科与工程', '艺术', '金融', '体育','娱乐', '其它');
 $category_name_en = array('culture', 'science', 'art', 'finance', 'sport', 'entertainment', 'others');
@@ -37,31 +37,6 @@ $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
 mysql_query("set names 'utf8'");
 mysql_select_db("fudan_info");
 
-function generate_short_url($length) {
-    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    $serial = '';
-    for ($i = 0; $i < $length; $i++) {
-        $serial .= $chars[mt_rand(0, strlen($chars) - 1)];
-    }
-    return $serial;
-}
-
-$query = "select * from event_info;";
-$res = mysql_query($query, $mysql);
-while ($row = mysql_fetch_assoc($res)) {
-    $res_tmp = true;
-    $short_url = null;
-    while ($res_tmp) {
-        $short_url = generate_short_url(4);
-        echo $short_url . ' ';
-        $query = sprintf("select * from event_info where short_url='%s' limit 1;", $short_url);
-        $res_tmp = mysql_query($query, $mysql);
-        $res_tmp = mysql_num_rows($res_tmp) == 0 ? false : true;
-    }
-    $query = sprintf('update event_info set short_url="%s" where event_id=%s;', $short_url, $row['event_id']);
-    mysql_query($query, $mysql);
-}
-
 if (date('N', time()) != 7) {
     $last_week_st = date('Y-m-d', strtotime('this week', time()));
 } else {
@@ -69,11 +44,7 @@ if (date('N', time()) != 7) {
 }
 
 if ($update_next_week) {
-    $query = sprintf("delete from published_event where published_date='%s';", $week_st);
-    mysql_query($query, $mysql);
-    $query = sprintf("delete from review_read where published_date='%s';", $last_week_st);
-    mysql_query($query, $mysql);
-    $query = sprintf("insert into review_read value ('%s', 0);", $last_week_st);
+    $query = "delete from published_event;";
     mysql_query($query, $mysql);
 }
 
@@ -83,16 +54,11 @@ for ($i = 0; $i < $category_cnt; $i++) {
     print_article($order_id, $i);
 }
 
-if ($update_next_week) {
-    $query = sprintf("update event_info set publish_date='%s' where event_id in published_event;",
-        mysql_real_escape_string($week_st));
-    mysql_query($query, $mysql);
-}
 mysql_close($mysql);
 
 print_footer();
 
-echo 'http://fdutopia.lyq.me/review.php?datestamp=' . $last_week_st;
+echo 'http://fdutopia.lyq.me/review.php';
 
 function check_update() {
     $cur_time_week = date('N', time());
@@ -184,8 +150,7 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
         $html .= '</li><br>';
 
         if ($update_next_week) {
-            $query = sprintf('insert into published_event value (%d, %d, "%s");',
-                $order_id, $row['event_id'], $week_st);
+            $query = sprintf('insert into published_event value (null, %d);', $row['event_id']);
             mysql_query($query);
         }
 

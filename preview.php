@@ -170,15 +170,15 @@ if (isset($_COOKIE['login_serial'])) {
             $res = mysql_query($query, $mysql);
             $row = mysql_fetch_assoc($res);
 
-            $content = '【' . $row['title'] . '】';
+            $content = '【' . $row['title'] . '】<br>';
             $details = '';
             if ($row['register'] == 1) {
                 if ($row['register_date_type'] == 'date_st') {
-                    $details = '报名开始时间是';
-                    $details .= date('n月j日 H:i ', strtotime($row['register_date']));
+                    $details = '【报名开始时间】';
+                    $details .= date('n月j日 H:i<br>', strtotime($row['register_date']));
                 } else if ($row['register_date_type'] == 'date_ed') {
-                    $details = '报名截止时间是';
-                    $details .= date('n月j日 H:i ', strtotime($row['register_date']));
+                    $details = '【报名截止时间】';
+                    $details .= date('n月j日 H:i<br>', strtotime($row['register_date']));
                 }
             }
             if ($row['details'] != null && $row['details'] != '') {
@@ -187,6 +187,11 @@ if (isset($_COOKIE['login_serial'])) {
                 $details .= '喵～信息都已经交代完整啦，祝您参加活动愉快哦～';
             }
             $content .= $details;
+
+            if ($row['propa_url'] != null && $row['propa_url'] != '') {
+                $url = 'fdutopia.lyq.me/t?=' . $row['short_url'];
+                $content .= '<br>【软文网址】' . $url;
+            }
 
             $html .= '<li><p style="font-size: 13.5px;">' . $content . '</p></li>';
         }

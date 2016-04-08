@@ -118,7 +118,7 @@ function response_query($post_obj) {
             }
         }
 
-        $query = sprintf("select count(*) as cnt from published_event where published_date='%s';", $published_date);
+        $query = "select count(*) as cnt from published_event;";
         $res = mysql_query($query, $mysql);
         $row = mysql_fetch_assoc($res);
         $query_num = intval($post_obj->Content);
@@ -126,7 +126,7 @@ function response_query($post_obj) {
         $content = $query_msg[$query_msg_id] . "本期只有" . $row['cnt'] . "个活动呢～";
         if ($query_num <= $row['cnt'] && $query_num > 0) {
 
-            $query = sprintf("select * from published_event natural join event_info where order_id=%d and published_date='%s';", $query_num, $published_date);
+            $query = sprintf("select * from published_event natural join event_info where order_id=%d;", $query_num);
             $res = mysql_query($query, $mysql);
             $row = mysql_fetch_assoc($res);
             $content = '【' . $row['title'] . '】';
