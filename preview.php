@@ -46,7 +46,7 @@ if (isset($_COOKIE['login_serial'])) {
     mysql_close($mysql);
     ?>
     <p class="page_desc">每个大类下按“时间”先后排序</p>
-    <p class="page_desc">推送生成后，除了“详细信息”之外编辑无效</p>
+    <p class="page_desc">“详细信息”和“软文网址”不受推送影响</p>
     <p class="page_desc">如对排版有疑问请速联系管理员</p>
 </div>
 <div class="page_body">
