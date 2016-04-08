@@ -22,10 +22,17 @@ if (isset($_GET['t']) && $_GET['t'] != "") {
     $query = sprintf('select * from event_info where short_url="%s";', $_GET['t']);
     $res = mysql_query($query);
     if ($res) {
-        $row = mysql_fetch_assoc($res);
-        $url = "Location:" . $row['propa_url'];
 
+        $row = mysql_fetch_assoc($res);
         mysql_close($mysql);
+
+        $url = "Location: ";
+        if (strtolower(substr($row['review_url'], 0, 8)) == 'https://' or
+            strtolower(substr($row['review_url'], 0, 7)) == 'http://') {
+            $url .= $row['review_url'];
+        } else {
+            $url .= 'http://' . $row['review_url'];
+        }
 
         header($url);
 
