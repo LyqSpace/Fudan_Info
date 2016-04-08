@@ -23,7 +23,8 @@ if (isset($_GET['t']) && $_GET['t'] != "") {
     $res = mysql_query($query);
     if ($res) {
         $row = mysql_fetch_assoc($res);
-        $url = "Location : " . $row['propa_url'];
+        $url = "Location:" . $row['propa_url'];
+
         mysql_close($mysql);
 
         header($url);
