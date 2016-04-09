@@ -27,8 +27,8 @@ if (isset($_GET['t']) && $_GET['t'] != "") {
         mysql_close($mysql);
 
         $url = "Location: ";
-        if (strtolower(substr($row['review_url'], 0, 8)) == 'https://' or
-            strtolower(substr($row['review_url'], 0, 7)) == 'http://') {
+        if (strtolower(substr($row['propa_url'], 0, 8)) == 'https://' or
+            strtolower(substr($row['propa_url'], 0, 7)) == 'http://') {
             $url .= $row['propa_url'];
         } else {
             $url .= 'http://' . $row['propa_url'];
