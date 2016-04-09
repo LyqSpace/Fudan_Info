@@ -29,7 +29,7 @@ if (date('N', time()) != 7) {
     $week_st = date('Y-m-d 00:00:00', strtotime('this week', time()));
     $week_ed = date('Y-m-d 00:00:00', strtotime('this week + 8 day', time()));
 }
-$category_name_cn = array('人文与社科', '理科与工程', '艺术', '金融', '体育','娱乐', '其它');
+$category_name_cn = array('人文与社科', '科学', '艺术', '金融', '体育','娱乐', '其它');
 $category_name_en = array('culture', 'science', 'art', 'finance', 'sport', 'entertainment', 'others');
 $category_cnt = 7;
 $order_id = 1;

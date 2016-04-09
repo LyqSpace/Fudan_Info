@@ -147,7 +147,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                             <?php
                                 $options =
                                     '<option value="culture">人文与社科</option>' .
-                                    '<option value="science">理科与工程</option>' .
+                                    '<option value="science">科学</option>' .
                                     '<option value="art">艺术</option>' .
                                     '<option value="finance">金融</option>' .
                                     '<option value="sport">体育</option>' .
@@ -352,7 +352,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     <select class="weui_select" name="category">
                         <option selected value=""></option>
                         <option value="culture">人文与社科</option>
-                        <option value="science">理科与工程</option>
+                        <option value="science">科学</option>
                         <option value="art">艺术</option>
                         <option value="finance">金融</option>
                         <option value="sport">体育</option>
