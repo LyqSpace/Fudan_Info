@@ -18,7 +18,7 @@ if (isset($_GET['t']) && $_GET['t'] != "") {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_query("set names 'utf8'");
     mysql_select_db("fudan_info");
-    
+
     $query = sprintf('select * from event_info where short_url="%s";', $_GET['t']);
     $res = mysql_query($query);
     if (mysql_num_rows($res)) {
