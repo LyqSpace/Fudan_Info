@@ -18,7 +18,7 @@ if (isset($_GET['t']) && $_GET['t'] != "") {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_query("set names 'utf8'");
     mysql_select_db("fudan_info");
-    
+
     $query = sprintf('select * from event_info where short_url="%s";', $_GET['t']);
     $res = mysql_query($query);
     if (mysql_num_rows($res)) {
@@ -29,9 +29,9 @@ if (isset($_GET['t']) && $_GET['t'] != "") {
         $url = "Location: ";
         if (strtolower(substr($row['review_url'], 0, 8)) == 'https://' or
             strtolower(substr($row['review_url'], 0, 7)) == 'http://') {
-            $url .= $row['review_url'];
+            $url .= $row['propa_url'];
         } else {
-            $url .= 'http://' . $row['review_url'];
+            $url .= 'http://' . $row['propa_url'];
         }
 
         header($url);
