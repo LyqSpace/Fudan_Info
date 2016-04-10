@@ -180,7 +180,7 @@ function check_event(btn) {
 
     var check_ele = document.getElementsByName("notification");
     if (check_ele[0].checked == true && detail_len == 0 && propa_url_len == 0) error_message += "详细描述或软文网址不可为空<br>";
-    if (check_ele[0].checked == false && (len > 0 || propa_url_len > 0)) error_message += "详细描述或软文网址不为空，请勾选有详细描述<br>";
+    if (check_ele[0].checked == false && (detail_len > 0 || propa_url_len > 0)) error_message += "详细描述或软文网址不为空，请勾选有详细描述<br>";
 
     if (error_message === "") {
         return true;
