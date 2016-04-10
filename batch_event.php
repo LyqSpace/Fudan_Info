@@ -150,7 +150,7 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
         $html .= '</li><br>';
 
         if ($update_next_week) {
-            $query = sprintf('insert into published_event value (null, %d);', $row['event_id']);
+            $query = sprintf('insert into published_event value (%s, %d);', $order_id, $row['event_id']);
             mysql_query($query);
         }
 
