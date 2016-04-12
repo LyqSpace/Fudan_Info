@@ -6,9 +6,9 @@ function logout() {
 }
 
 function show_details() {
-    details_form = document.getElementById('details_form');
-    notification_check = document.getElementsByName('notification')[0];
-    if (notification_check == null) return;
+    var details_form = document.getElementById('details_form');
+    var notification_check = document.getElementsByName('notification')[0];
+    if (notification_check == null || details_form == null) return;
     if (notification_check.checked) {
         details_form.style.display = "block";
     } else {
@@ -19,7 +19,7 @@ function show_details() {
 function show_register_form() {
     var register_form = document.getElementById("register_form");
     var date_type = document.getElementsByName("date_type")[0];
-    if (date_type == null) return;
+    if (date_type == null || register_form == null) return;
     if (date_type.value == "date_st") {
         register_form.style.display = "block";
     } else {
@@ -30,9 +30,9 @@ function show_register_form() {
 }
 
 function show_register_date() {
-    register_form = document.getElementById('register_date_form');
-    register_check = document.getElementsByName('register')[0];
-    if (register_check == null) return;
+    var register_form = document.getElementById('register_date_form');
+    var register_check = document.getElementsByName('register')[0];
+    if (register_check == null || register_form == null) return;
     if (register_check.checked) {
         register_form.style.display = "block";
     } else {

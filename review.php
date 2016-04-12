@@ -77,5 +77,7 @@
         ?></p>
 </div>
 <br>
+<canvas id="canvas_effect"></canvas>
+<script type="text/javascript" src="effects.js"></script>
 </body>
 </html>
