@@ -1,9 +1,7 @@
 document.addEventListener('touchmove', function (e) {
     e.preventDefault();
 });
-document.addEventListener('touchstart', function (e) {
-    e.preventDefault();
-});
+
 var c = document.getElementById('canvas_effect');
     x = c.getContext('2d'),
     pr = window.devicePixelRatio || 1,
