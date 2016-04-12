@@ -1,5 +1,8 @@
 document.addEventListener('touchmove', function (e) {
-    e.preventDefault()
+    e.preventDefault();
+});
+document.addEventListener('touchstart', function (e) {
+    e.preventDefault();
 });
 var c = document.getElementById('canvas_effect');
     x = c.getContext('2d'),
@@ -44,5 +47,5 @@ function y(p) {
 }
 
 document.onclick = i;
-//document.ontouchstart = i;
+document.ontouchstart = i;
 i();
