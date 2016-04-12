@@ -44,5 +44,5 @@ function y(p) {
 }
 
 document.onclick = i;
-document.ontouchstart = i;
+//document.ontouchstart = i;
 i();
