@@ -242,8 +242,8 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     <div class="weui_cell">
                         <div class="weui_cell_bd weui_cell_primary">
                         <textarea class="weui_textarea" id="propa_url" placeholder="选填，如果自己的公众号有宣传此活动的软文，可以把软文网址复制在此处"
-                                  name="propa_url" rows="7" onkeyup="count('propa_url', propa_url_cnt, 300);"><?php echo $row['propa_url'];?></textarea>
-                            <div class="weui_textarea_counter"><span id="propa_url_cnt"><?php echo count_str($row['propa_url']);?></span>/300</div>
+                                  name="propa_url" rows="7" onkeyup="count('propa_url', propa_url_cnt, 600);"><?php echo $row['propa_url'];?></textarea>
+                            <div class="weui_textarea_counter"><span id="propa_url_cnt"><?php echo count_str($row['propa_url']);?></span>/600</div>
                         </div>
                     </div>
                 </div>
@@ -412,8 +412,8 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
                         <textarea class="weui_textarea" id="propa_url" placeholder="选填，如果自己的公众号有宣传此活动的软文，可以把软文网址复制在此处"
-                                  name="propa_url" rows="7" onkeyup="count('propa_url', propa_url_cnt, 300);"></textarea>
-                        <div class="weui_textarea_counter"><span id="propa_url_cnt">0</span>/300</div>
+                                  name="propa_url" rows="7" onkeyup="count('propa_url', propa_url_cnt, 600);"></textarea>
+                        <div class="weui_textarea_counter"><span id="propa_url_cnt">0</span>/600</div>
                     </div>
                 </div>
             </div>
