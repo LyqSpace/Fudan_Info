@@ -146,12 +146,11 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                         <select class="weui_select" name="category">
                             <?php
                                 $options =
-                                    '<option value="culture">人文与社科</option>' .
+                                    '<option value="culture">人文</option>' .
                                     '<option value="science">科学</option>' .
                                     '<option value="art">艺术</option>' .
-                                    '<option value="finance">金融</option>' .
-                                    '<option value="sport">体育</option>' .
-                                    '<option value="entertainment">娱乐</option>' .
+                                    '<option value="finance">社科与金融</option>' .
+                                    '<option value="activity">比赛与活动</option>' .
                                     '<option value="others">其它</option>';
 
                                 $pos = strpos($options, $row['category']);
@@ -351,12 +350,11 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 <div class="weui_cell_bd weui_cell_primary">
                     <select class="weui_select" name="category">
                         <option selected value=""></option>
-                        <option value="culture">人文与社科</option>
+                        <option value="culture">人文</option>
                         <option value="science">科学</option>
                         <option value="art">艺术</option>
-                        <option value="finance">金融</option>
-                        <option value="sport">体育</option>
-                        <option value="entertainment">娱乐</option>
+                        <option value="finance">社科与金融</option>
+                        <option value="activity">比赛与活动</option>
                         <option value="others">其它</option>
                     </select>
                 </div>

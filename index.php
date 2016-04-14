@@ -42,7 +42,7 @@ if (isset($_COOKIE['login_serial'])) {
 <body ontouchstart>
 <div class="page_header">
     <h1 class="page_title">FDUTOPIA</h1>
-    <p class="page_desc">活动信息将在<span class="text_warn">每周日晚八点</span>被推送</p>
+    <p class="page_desc">活动信息将在<span class="text_warn">每周日晚六点</span>被推送</p>
     <p class="page_desc">招新信息只在<span class="text_warn">每学期前四周</span>被推送</p>
     <p class="page_desc">已入驻的主办方数 : <?php
         $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
