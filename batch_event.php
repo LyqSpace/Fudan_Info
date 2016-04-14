@@ -185,7 +185,7 @@ function print_article(&$order_id, $category_id) {
 }
 
 function print_footer() {
-    $html = '<br><section><p style="text-align: center;"><span style="font-size: 15px;">新的彩蛋：戳<span style="color: rgb(92, 137, 183);">阅读原文</span>可看上周讲座活动的回顾呦～错过的就补上吧！</span></p><br>';
+    $html = '<br><section><p style="text-align: center;"><span style="font-size: 15px;">彩蛋：戳<span style="color: rgb(92, 137, 183);">阅读原文</span>可看往期讲座活动的回顾呦～错过的就补上吧！</span></p><br>';
     $html .= '<p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p><br>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">FDUTOPIA致力于打造高效的复旦信息分享平台</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">如果喜欢我们，欢迎分享给小伙伴～</span></p>';

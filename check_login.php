@@ -26,7 +26,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             mysql_real_escape_string($serial));
         $res = mysql_query($query);
         mysql_close($mysql);
-        setcookie('login_serial', $serial, time()+60*60*24*5);
+        setcookie('login_serial', $serial, time()+60*60*24*20);
         if ($_POST['username'] == 'admin') {
             header('Location: admin.php');
         } else {
