@@ -34,6 +34,10 @@ if (isset($_COOKIE['login_serial'])) {
     </head>
 
     <body ontouchstart>
+
+    <div id="error_message"></div>
+    <script type="text/javascript" src="check_html5.js"></script>
+
     <div class="page_header">
         <h1 class="page_title">编辑一则活动</h1>
         <p class="page_desc">一个英文占一个字符，一个中文占两个字符</p>

@@ -33,8 +33,8 @@ create table event_info (
 	publish boolean default false,
 	details varchar(300),
 	short_url varchar(5),
-	propa_url varchar(300),
-	review_url varchar(300),
+	propa_url varchar(600),
+	review_url varchar(600),
 	edit_time timestamp default current_timestamp
 );
 

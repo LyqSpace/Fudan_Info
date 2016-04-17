@@ -63,6 +63,10 @@ if (isset($_COOKIE['login_serial'])) {
         ?></p>
 </div>
 <div class="page_body">
+
+    <div id="error_message"></div>
+    <script type="text/javascript" src="check_html5.js"></script>
+
     <div class="weui_btn_area">
         <a class="weui_btn weui_btn_plain_primary" href="edit_event.php">发布一则活动信息</a>
         <a class="weui_btn weui_btn_plain_primary" href="edit_recruit.php">发布一则招新信息</a>
