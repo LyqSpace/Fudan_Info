@@ -63,7 +63,7 @@ echo 'http://fdutopia.lyq.me/review.php';
 function check_update() {
     $cur_time_week = date('N', time());
     $cur_time_hour = date('H', time());
-    if ($cur_time_week == 7 && (24 - $cur_time_hour) <= 4) {
+    if ($cur_time_week == 7 && (24 - $cur_time_hour) <= 6) {
         return true;
     }
     return false;
