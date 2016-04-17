@@ -35,8 +35,8 @@ if (isset($_COOKIE['login_serial'])) {
 
     <body ontouchstart>
 
-    <div id="error_message"></div>
-    <script type="text/javascript" src="check_html5.js"></script>
+<!--    <div id="error_message"></div>-->
+<!--    <script type="text/javascript" src="check_html5.js"></script>-->
 
     <div class="page_header">
         <h1 class="page_title">编辑一则活动</h1>
@@ -340,7 +340,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     </select>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" name="date" type="datetime-local"/>
+                    <input class="weui_input" name="date" type="datetime-local" value="0000-00-00T00:00"/>
                 </div>
             </div>
         </div>
