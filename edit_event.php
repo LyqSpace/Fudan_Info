@@ -207,7 +207,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                             </div>
                         </div>
                     </div>
-                    <div class="weui_cells_tips">"报名开始时间" 表示从该时间起，先到先得</div>
+                    <div class="weui_cells_tips">"报名开始时间" 不填表示即可起，先到先得</div>
                     <div class="weui_cells_tips">"报名截止时间" 表示报名持续到该时间为止</div>
                     <div class="weui_cells_tips">【报名时间】和【详细信息】将一起回复给用户</div>
                 </div>
@@ -300,7 +300,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
 
 } else {
     ?>
-    <form name="edit_event" method="post" onsubmit="return check_event();" action="save_event.php">
+    <form name="edit_event" method="post" onsubmit="return reedit_event(this.submited);" action="save_event.php">
         <div class="weui_cells_title">标题</div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
@@ -387,7 +387,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                         </div>
                     </div>
                 </div>
-                <div class="weui_cells_tips">"报名开始时间" 表示从该时间起，先到先得</div>
+                <div class="weui_cells_tips">"报名开始时间" 不填表示即可起，先到先得</div>
                 <div class="weui_cells_tips">"报名截止时间" 表示报名持续到该时间为止</div>
                 <div class="weui_cells_tips">【报名时间】和【详细信息】将一起回复给用户</div>
             </div>
@@ -431,7 +431,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             </div>
         </div>
         <div class="weui_btn_area">
-            <input class="weui_btn weui_btn_plain_primary" name="save" type="submit" value="保存" />
+            <input class="weui_btn weui_btn_plain_primary" name="save" type="submit" onclick="this.form.submited=this.name" value="保存" />
         </div>
     </form>
     <div class="weui_btn_area">

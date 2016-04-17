@@ -35,6 +35,7 @@ function show_register_date() {
     if (register_check == null || register_form == null) return;
     if (register_check.checked) {
         register_form.style.display = "block";
+        document.getElementsByName('register_date_type')[0].value = 'date_st';
     } else {
         register_form.style.display = "none";
         document.getElementsByName('register_date')[0].value = null;
@@ -151,8 +152,9 @@ function check_event(btn) {
     }
     var register_check = document.getElementsByName("register")[0];
     var date_type = document.getElementsByName("date_type")[0].value;
+    var register_type = document.getElementsByName("register_date_type")[0].value;
     if (date_type == "date_ed" && register_check.checked == true) error_message += "选了截止时间不可再填报名时间<br>";
-    if (register_check.checked == true && register_date == "") error_message += "报名时间不可为空<br>";
+    if (register_check.checked == true && register_date == "" && register_type == "date_ed") error_message += "报名截止时间不可为空<br>";
     if (register_check.checked == false && register_date != "") error_message += "报名时间不为空，请勾选需要提前报名<br>";
 
     var str = document.getElementById("details_text").value;

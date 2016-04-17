@@ -88,15 +88,6 @@ function response_text($post_obj, $content) {
     echo $echo_str;
 }
 
-function check_update() {
-    $cur_time_week = date('N', time());
-    $cur_time_hour = date('H', time());
-    if ($cur_time_week == 7 && (24 - $cur_time_hour) <= 4) {
-        return true;
-    }
-    return false;
-}
-
 function response_query($post_obj) {
 
     global $default_msg, $default_msg_id, $query_msg, $query_msg_id;
@@ -106,17 +97,6 @@ function response_query($post_obj) {
         $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
         mysql_query("set names 'utf8'");
         mysql_select_db("fudan_info");
-
-        $updated = check_update();
-        if ($updated) {
-            $published_date = date('y-m-d 00:00:00', strtotime('this week', time()));
-        } else {
-            if (date('N', time()) != 7) {
-                $published_date = date('y-m-d 00:00:00', strtotime('this week', time()));
-            } else {
-                $published_date = date('y-m-d 00:00:00', strtotime('last week', time()));
-            }
-        }
 
         $query = "select count(*) as cnt from published_event;";
         $res = mysql_query($query, $mysql);
@@ -133,8 +113,13 @@ function response_query($post_obj) {
             $details = "";
             if ($row["register"] == 1) {
                 if ($row["register_date_type"] == "date_st") {
-                    $details = "报名开始时间是";
-                    $details .= date("n月j日 H:i\n", strtotime($row["register_date"]));
+                    $cur_date = date('Y-m-d H:i:s', time());
+                    if ($row["register_date"] < $cur_date) {
+                        $details = "报名即可起，先到先得";
+                    } else {
+                        $details = "报名开始时间是";
+                        $details .= date("n月j日 H:i\n", strtotime($row["register_date"]));
+                    }
                 } else if ($row["register_date_type"] == "date_ed") {
                     $details = "报名截止时间是";
                     $details .= date("n月j日 H:i\n", strtotime($row["register_date"]));
