@@ -176,10 +176,10 @@ if (isset($_COOKIE['login_serial'])) {
                 if ($row['register_date_type'] == 'date_st') {
                     $cur_date = date('Y-m-d H:i:s', time());
                     if ($row["register_date"] < $cur_date) {
-                        $details = "报名即可起，先到先得";
+                        $details = "【报名】即可起，先到先得<br>";
                     } else {
-                        $details = "报名开始时间是";
-                        $details .= date("n月j日 H:i\n", strtotime($row["register_date"]));
+                        $details = "【报名开始时间】";
+                        $details .= date("n月j日 H:i<br>", strtotime($row["register_date"]));
                     }
                 } else if ($row['register_date_type'] == 'date_ed') {
                     $details = '【报名截止时间】';
