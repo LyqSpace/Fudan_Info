@@ -176,7 +176,7 @@ if (isset($_COOKIE['login_serial'])) {
                 if ($row['register_date_type'] == 'date_st') {
                     $cur_date = date('Y-m-d H:i:s', time());
                     if ($row["register_date"] < $cur_date) {
-                        $details = "【报名】即可起，先到先得<br>";
+                        $details = "【报名】即刻起，先到先得<br>";
                     } else {
                         $details = "【报名开始时间】";
                         $details .= date("n月j日 H:i<br>", strtotime($row["register_date"]));
