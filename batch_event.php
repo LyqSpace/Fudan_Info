@@ -31,17 +31,11 @@ if (date('N', time()) != 7) {
 }
 $category_name_cn = array('人文', '科学', '艺术', '社科与金融', '比赛与活动', '其它');
 $category_name_en = array('culture', 'science', 'art', 'finance', 'activity', 'others');
-$category_cnt = 7;
+$category_cnt = 6;
 $order_id = 1;
 $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
 mysql_query("set names 'utf8'");
 mysql_select_db("fudan_info");
-
-if (date('N', time()) != 7) {
-    $last_week_st = date('Y-m-d', strtotime('this week', time()));
-} else {
-    $last_week_st = date('Y-m-d', strtotime('last week', time()));
-}
 
 if ($update_next_week) {
     $query = "delete from published_event;";
