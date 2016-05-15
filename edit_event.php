@@ -1,6 +1,7 @@
 <?php
 
 $username = '';
+$fullname = '';
 
 if (isset($_COOKIE['login_serial'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
@@ -14,6 +15,7 @@ if (isset($_COOKIE['login_serial'])) {
     } else {
         $row = mysql_fetch_assoc($res);
         $username = $row['username'];
+        $fullname = $row['fullname'];
     }
 } else {
     header('Location: login.html');
@@ -109,6 +111,26 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                               onkeyup="count('location', location_cnt, 40);" required="required"><?php echo $row['location'];?></textarea>
                         <div class="weui_textarea_counter">
                             <span id="location_cnt"><?php echo count_str($row['location']);?></span>/40
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui_cells_title">主办方</div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                    <textarea class="weui_textarea" id="hostname" placeholder="请输入活动的主办方名称，默认值为该用户的全称" name="hostname" rows="2"
+                              onkeyup="count('hostname', hostname_cnt, 40);" required="required"><?php
+                        if ($row['hostname']=='') {
+                            if ($username != 'fdubot') {
+                                echo $fullname;
+                            }
+                        } else {
+                            echo $row['hostname'];
+                        }
+                        ?></textarea>
+                        <div class="weui_textarea_counter">
+                            <span id="hostname_cnt"><?php echo count_str($row['hostname']);?></span>/40
                         </div>
                     </div>
                 </div>
@@ -328,6 +350,37 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     <textarea class="weui_textarea" id="location" placeholder="请输入活动地点"
                               name="location" rows="2" onkeyup="count('location', location_cnt, 40);" required="required"></textarea>
                     <div class="weui_textarea_counter"><span id="location_cnt">0</span>/40</div>
+                </div>
+            </div>
+        </div>
+        <div class="weui_cells_title">主办方</div>
+        <div class="weui_cells weui_cells_form">
+            <div class="weui_cell">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <textarea class="weui_textarea" id="hostname" placeholder="请输入活动的主办方名称，默认值为该用户的全称" name="hostname" rows="2"
+                              onkeyup="count('hostname', hostname_cnt, 40);" required="required"><?php
+                        if ($row['hostname']=='') {
+                            if ($username != 'fdubot') {
+                                echo $fullname;
+                            }
+                        } else {
+                            echo $row['hostname'];
+                        }
+                        ?></textarea>
+                    <div class="weui_textarea_counter">
+                        <span id="hostname_cnt"><?php echo count_str($row['hostname']);?></span>/40
+                    </div>
+                </div>
+            </div>
+        </div><div class="weui_cells_title">主办方</div>
+        <div class="weui_cells weui_cells_form">
+            <div class="weui_cell">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <textarea class="weui_textarea" id="hostname" placeholder="请输入活动的主办方名称，默认值为该用户的全称" name="hostname" rows="2"
+                              onkeyup="count('hostname', hostname_cnt, 40);" required="required"><?php if ($username != 'fdubot') echo $fullname;?></textarea>
+                    <div class="weui_textarea_counter">
+                        <span id="hostname_cnt"><?php echo count_str($row['hostname']);?></span>/40
+                    </div>
                 </div>
             </div>
         </div>

@@ -119,8 +119,12 @@ if (isset($_COOKIE['login_serial'])) {
 
                 $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【时间】%s</p>', $date);
                 $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【地点】%s</p>', $row['location']);
-                if ($row['username'] != 'fdubot') {
-                    $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s', $row['fullname']);
+                if ($row['hostname'] != '') {
+                    $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['hostname']);
+                } else {
+                    if ($row['username'] != 'fdubot') {
+                        $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['fullname']);
+                    }
                 }
                 $html .= '</p></li><br>';
 
