@@ -22,9 +22,12 @@ if (isset($_COOKIE['login_serial'])) {
 }
 
 $update_next_week = check_update();
+//$update_next_week = true;
 if (date('N', time()) != 7) {
     $week_st = date('Y-m-d 00:00:00', strtotime('next week', time()));
+    //$week_st = date('Y-m-d 00:00:00', strtotime('next week - 7 day', time()));
     $week_ed = date('Y-m-d 00:00:00', strtotime('next week + 8 day', time()));
+    //$week_ed = date('Y-m-d 00:00:00', strtotime('next week + 1 day', time()));
 } else {
     $week_st = date('Y-m-d 00:00:00', strtotime('this week', time()));
     $week_ed = date('Y-m-d 00:00:00', strtotime('this week + 8 day', time()));
