@@ -141,9 +141,14 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
 
         $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【时间】%s</p>', $date);
         $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【地点】%s</p>', $row['location']);
-        if ($row['username'] != 'fdubot') {
-            $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['fullname']);
+        if ($row['hostname'] != '') {
+            $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['hostname']);
+        } else {
+            if ($row['username'] != 'fdubot') {
+                $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['fullname']);
+            }
         }
+
         $html .= '</li><br>';
 
         if ($update_next_week) {
