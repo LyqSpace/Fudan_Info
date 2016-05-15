@@ -5,8 +5,9 @@ $fullname = '';
 
 if (isset($_COOKIE['login_serial'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+    mysql_query("set names 'utf8'");
     mysql_select_db("fudan_info");
-    $query = sprintf("select username from login_serial where serial='%s';",
+    $query = sprintf("select username,fullname from login_serial natural join users where serial='%s';",
         mysql_real_escape_string($_COOKIE['login_serial']));
     $res = mysql_query($query, $mysql);
     mysql_close($mysql);
@@ -358,28 +359,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
                     <textarea class="weui_textarea" id="hostname" placeholder="请输入活动的主办方名称，默认值为该用户的全称" name="hostname" rows="2"
-                              onkeyup="count('hostname', hostname_cnt, 40);" required="required"><?php
-                        if ($row['hostname']=='') {
-                            if ($username != 'fdubot') {
-                                echo $fullname;
-                            }
-                        } else {
-                            echo $row['hostname'];
-                        }
-                        ?></textarea>
-                    <div class="weui_textarea_counter">
-                        <span id="hostname_cnt"><?php echo count_str($row['hostname']);?></span>/40
-                    </div>
-                </div>
-            </div>
-        </div><div class="weui_cells_title">主办方</div>
-        <div class="weui_cells weui_cells_form">
-            <div class="weui_cell">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" id="hostname" placeholder="请输入活动的主办方名称，默认值为该用户的全称" name="hostname" rows="2"
                               onkeyup="count('hostname', hostname_cnt, 40);" required="required"><?php if ($username != 'fdubot') echo $fullname;?></textarea>
                     <div class="weui_textarea_counter">
-                        <span id="hostname_cnt"><?php echo count_str($row['hostname']);?></span>/40
+                        <span id="hostname_cnt"><?php if ($username != 'fdubot') echo count_str($fullname); else echo '0';?></span>/40
                     </div>
                 </div>
             </div>

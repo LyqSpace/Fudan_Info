@@ -107,7 +107,7 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
         $row = mysql_fetch_assoc($res);
         if ($row['username'] == $username) {
             $query = sprintf("update event_info set title='%s', speaker=%s, date_type='%s', date='%s',
-                location='%s', hostname=%s category='%s', register=%s, register_date_type='%s', register_date='%s',
+                location='%s', hostname=%s, category='%s', register=%s, register_date_type='%s', register_date='%s',
                 notification=%s, publish=%s, details=%s, propa_url=%s, edit_time=null where event_id=%s;",
                 mysql_real_escape_string($_POST['title']),
                 $speaker,
