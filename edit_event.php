@@ -85,9 +85,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
                     <textarea class="weui_textarea" id="title" placeholder="请输入活动标题" name="title" rows="3"
-                              onkeyup="count('title', title_cnt, 70);" required="required"><?php echo $row['title'];?></textarea>
+                              onkeyup="count('title', title_cnt, 100);" required="required"><?php echo $row['title'];?></textarea>
                         <div class="weui_textarea_counter">
-                            <span id="title_cnt"><?php echo count_str($row['title']);?></span>/70
+                            <span id="title_cnt"><?php echo count_str($row['title']);?></span>/100
                         </div>
                     </div>
                 </div>
@@ -329,8 +329,8 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
                     <textarea class="weui_textarea" id="title" placeholder="请输入活动标题"
-                              name="title" rows="3" onkeyup="count('title', title_cnt, 70);" required="required"></textarea>
-                    <div class="weui_textarea_counter"><span id="title_cnt">0</span>/70</div>
+                              name="title" rows="3" onkeyup="count('title', title_cnt, 100);" required="required"></textarea>
+                    <div class="weui_textarea_counter"><span id="title_cnt">0</span>/100</div>
                 </div>
             </div>
         </div>

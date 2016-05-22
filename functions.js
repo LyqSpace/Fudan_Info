@@ -134,7 +134,7 @@ function check_event(btn) {
             len += 1;
         }
     }
-    if (len > 70) error_message += "标题超过字数限制<br>";
+    if (len > 100) error_message += "标题超过字数限制<br>";
     if (len == 0) error_message += "标题不可为空<br>";
 
     var str = document.getElementById("speaker").value;
@@ -198,7 +198,7 @@ function check_event(btn) {
             propa_url_len++;
         }
     }
-    if (propa_url_len > 300) error_message += "软文网址超过字数限制<br>";
+    if (propa_url_len > 600) error_message += "软文网址超过字数限制<br>";
 
     var check_ele = document.getElementsByName("notification");
     if (check_ele[0].checked == true && detail_len == 0 && propa_url_len == 0) error_message += "详细描述或软文网址不可为空<br>";
