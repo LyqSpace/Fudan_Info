@@ -96,7 +96,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" id="speaker" placeholder="选填，此处可作主讲人姓名、职位的简单介绍" name="speaker" rows="2"
+                    <textarea class="weui_textarea" id="speaker" placeholder="选填，此处可作主讲人姓名、职位的简单介绍" name="speaker" rows="3"
                               onkeyup="count('speaker', speaker_cnt, 100);"><?php echo $row['speaker'];?></textarea>
                         <div class="weui_textarea_counter">
                             <span id="speaker_cnt"><?php echo count_str($row['speaker']);?></span>/100
@@ -339,7 +339,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
                     <textarea class="weui_textarea" id="speaker" placeholder="选填，此处可作主讲人姓名、职位的简单介绍"
-                              name="speaker" rows="2" onkeyup="count('speaker', speaker_cnt, 100);"></textarea>
+                              name="speaker" rows="3" onkeyup="count('speaker', speaker_cnt, 100);"></textarea>
                     <div class="weui_textarea_counter"><span id="speaker_cnt">0</span>/100</div>
                 </div>
             </div>
