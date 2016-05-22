@@ -97,9 +97,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
                     <textarea class="weui_textarea" id="speaker" placeholder="选填，此处可作主讲人姓名、职位的简单介绍" name="speaker" rows="2"
-                              onkeyup="count('speaker', speaker_cnt, 50);"><?php echo $row['speaker'];?></textarea>
+                              onkeyup="count('speaker', speaker_cnt, 70);"><?php echo $row['speaker'];?></textarea>
                         <div class="weui_textarea_counter">
-                            <span id="speaker_cnt"><?php echo count_str($row['speaker']);?></span>/50
+                            <span id="speaker_cnt"><?php echo count_str($row['speaker']);?></span>/70
                         </div>
                     </div>
                 </div>
@@ -339,8 +339,8 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
                     <textarea class="weui_textarea" id="speaker" placeholder="选填，此处可作主讲人姓名、职位的简单介绍"
-                              name="speaker" rows="2" onkeyup="count('speaker', speaker_cnt, 50);"></textarea>
-                    <div class="weui_textarea_counter"><span id="speaker_cnt">0</span>/50</div>
+                              name="speaker" rows="2" onkeyup="count('speaker', speaker_cnt, 70);"></textarea>
+                    <div class="weui_textarea_counter"><span id="speaker_cnt">0</span>/70</div>
                 </div>
             </div>
         </div>
