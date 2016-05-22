@@ -42,11 +42,31 @@ function show_register_date() {
     }
 }
 
+function add_default_time(date_form_name) {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (day >= 0 && day <= 9) {
+        day = "0" + day;
+    }
+    var date_form = document.getElementsByName(date_form_name)[0];
+    if (date_form == null || date_form.value != "") return;
+    date_form.value = year + "-" + month + "-" + day + "T18:30";
+}
+
 window.onload = function () {
     show_details();
     show_register_form();
     show_register_date();
+
+    //add_default_time();
 }
+
 
 function random_item_color() {
     var color_arr = [
@@ -126,7 +146,7 @@ function check_event(btn) {
             len += 1;
         }
     }
-    if (len > 50) error_message += "主讲人介绍超过字数限制<br>";
+    if (len > 100) error_message += "主讲人介绍超过字数限制<br>";
 
     var str = document.getElementById("location").value;
     var len = 0;
