@@ -51,6 +51,15 @@ if (isset($_COOKIE['login_serial'])) {
     <p class="page_desc">如果想使用旧的信息，编辑后请选择【另存为】</p>
 </div>
 <div class="page_body">
+    <div class="weui_btn_area">
+        <a class="weui_btn weui_btn_plain_primary" href="edit_event.php">发布一则活动信息</a>
+    </div>
+    <div class="weui_btn_area">
+        <a class="weui_btn weui_btn_plain_primary" href="preview.php">预览本周日的活动推送</a>
+    </div>
+    <div class="weui_btn_area">
+        <a class="weui_btn weui_btn_plain_default" href="index.php">返回主菜单</a>
+    </div>
     <article class="weui_article">
         <div class="section_box">
             <div class="section_header">
@@ -127,12 +136,6 @@ if (isset($_COOKIE['login_serial'])) {
             ?>
         </section>
     </article>
-    <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_plain_primary" href="preview.php">预览本周日的活动推送</a>
-    </div>
-    <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_plain_default" href="index.php">返回主菜单</a>
-    </div>
 </div>
 <br>
 </body>
