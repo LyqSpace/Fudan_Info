@@ -16,19 +16,6 @@ function show_details() {
     }
 }
 
-function show_register_form() {
-    var register_form = document.getElementById("register_form");
-    var date_type = document.getElementsByName("date_type")[0];
-    if (date_type == null || register_form == null) return;
-    if (date_type.value == "date_st") {
-        register_form.style.display = "block";
-    } else {
-        document.getElementsByName('register')[0].checked = null;
-        show_register_date();
-        register_form.style.display = "none";
-    }
-}
-
 function show_register_date() {
     var register_form = document.getElementById('register_date_form');
     var register_check = document.getElementsByName('register')[0];
@@ -61,11 +48,8 @@ function add_default_time(date_form_name) {
 
 window.onload = function () {
     show_details();
-    show_register_form();
     show_register_date();
-
-    //add_default_time();
-}
+};
 
 
 function random_item_color() {
@@ -117,6 +101,10 @@ function count(text_id, cnt_id, cnt_limit) {
 function dialog_disappear() {
     var dialog = document.getElementById('dialog');
     dialog.style.display = "none";
+}
+
+function check_register() {
+    return true;
 }
 
 function check_event(btn) {
@@ -171,9 +159,8 @@ function check_event(btn) {
         if (date <= register_date) error_message += "报名时间不可晚于活动时间<br>";
     }
     var register_check = document.getElementsByName("register")[0];
-    var date_type = document.getElementsByName("date_type")[0].value;
     var register_type = document.getElementsByName("register_date_type")[0].value;
-    if (date_type == "date_ed" && register_check.checked == true) error_message += "选了截止时间不可再填报名时间<br>";
+
     if (register_check.checked == true && register_date == "" && register_type == "date_ed") error_message += "报名截止时间不可为空<br>";
     if (register_check.checked == false && register_date != "") error_message += "报名时间不为空，请勾选需要提前报名<br>";
 

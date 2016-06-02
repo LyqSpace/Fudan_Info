@@ -51,11 +51,12 @@ if (isset($_COOKIE['login_serial'])) {
     <p class="page_desc">如果想使用旧的信息，编辑后请选择【另存为】</p>
 </div>
 <div class="page_body">
-    <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_plain_primary" href="edit_event.php">发布一则活动信息</a>
-    </div>
+
     <div class="weui_btn_area">
         <a class="weui_btn weui_btn_plain_primary" href="preview.php">预览本周日的活动推送</a>
+    </div>
+    <div class="weui_btn_area">
+        <a class="weui_btn weui_btn_plain_primary" href="edit_event.php">发布一则活动信息</a>
     </div>
     <div class="weui_btn_area">
         <a class="weui_btn weui_btn_plain_default" href="index.php">返回主菜单</a>
@@ -82,16 +83,17 @@ if (isset($_COOKIE['login_serial'])) {
                 ?>
                 <h3 class="info_title"><?php echo $event_cnt . ". " . $row['title'];?></h3>
                 <div class="info_box">
-                    <p class="info_time">最后编辑于<?php
-                        echo substr($row['edit_time'], 0, 10);
+                    <p class="info_time">
+                        <?php
                         if ($row['publish'] == 1) {
                             echo ' <span class="info_publish">已发布</span>';
                         } else {
                             echo ' <span class="text_warn">未发布</span>';
                         }
                         ?></p>
-                    <a class="weui_btn weui_btn_mini info_review" href="edit_review.php?event_id=<?php echo $row['event_id'];?>">回顾</a>
-                    <a class="weui_btn weui_btn_mini info_edit" href="edit_event.php?event_id=<?php echo $row['event_id'];?>">编辑</a>
+                    <a class="weui_btn weui_btn_mini info_left" href="edit_review.php?event_id=<?php echo $row['event_id'];?>">回顾</a>
+                    <a class="weui_btn weui_btn_mini info_midright" href="edit_registration.php?event_id=<?php echo $row['event_id'];?>">报名表</a>
+                    <a class="weui_btn weui_btn_mini info_midright" href="edit_event.php?event_id=<?php echo $row['event_id'];?>">编辑</a>
                 </div>
                 <?php
             }

@@ -39,6 +39,35 @@ create table event_info (
 	edit_time timestamp default current_timestamp
 );
 
+create table event_registration (
+	event_id integer not null,
+	registration_id boolean not null default false,
+  registration_name boolean not null default false,
+  registration_major boolean not null default false,
+  registration_phone boolean not null default false,
+	ticket_per_person integer not null
+);
+
+create table event_date (
+	registration_serial integer not null auto_increment primary key,
+	event_id integer not null,
+	event_date datetime not null,
+	ticket_count integer not null,
+	register_count integer not null default 0
+);
+
+create table event_register_list (
+	register_serial varchar(10) not null primary key,
+	registration_serial integer not null,
+	register_id integer,
+	register_name varchar(20),
+	register_major varchar(40),
+	register_phone varchar(20),
+	ticket_num integer not null,
+	message varchar(200),
+	register_time timestamp default current_timestamp
+);
+
 create table recruit_info (
 	recruit_id integer not null auto_increment primary key,
 	username varchar(40) not null,

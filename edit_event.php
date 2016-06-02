@@ -79,7 +79,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
         <form name="edit_event" method="post" onsubmit="return reedit_event(this.submited);" action="">
 
             <input style="display: none" name="event_id" value="<?php echo $_GET['event_id'];?>" />
-
+<!--
+ 标题
+-->
             <div class="weui_cells_title">标题</div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
@@ -92,6 +94,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     </div>
                 </div>
             </div>
+<!--
+ 嘉宾
+-->
             <div class="weui_cells_title">嘉宾</div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
@@ -104,6 +109,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     </div>
                 </div>
             </div>
+<!--
+ 地点
+-->
             <div class="weui_cells_title">地点</div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
@@ -116,6 +124,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     </div>
                 </div>
             </div>
+<!--
+ 主办方
+-->
             <div class="weui_cells_title">主办方</div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
@@ -136,10 +147,13 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     </div>
                 </div>
             </div>
+<!--
+ 时间
+-->
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
-                    <div class="weui_cell_hd cell_hd_date_type">
-                        <select class="weui_select select_date_type" name="date_type" onchange="show_register_form();">
+                    <div class="weui_cell_hd ">
+                        <select class="weui_select select_date_type" name="date_type">
                             <?php
                             $options =
                                 '<option value="date_st">开始时间</option>' .
@@ -164,6 +178,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             </div>
             <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动</div>
             <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览</div>
+<!--
+ 类别
+-->
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell weui_cell_select weui_select_after">
                     <div class="weui_cell_hd">
@@ -190,51 +207,59 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     </div>
                 </div>
             </div>
-            <div id="register_form">
-                <div class="weui_cells weui_cells_form">
-                    <div class="weui_cell weui_cell_switch">
-                        <div class="weui_cell_hd weui_cell_primary">是否需要提前取票/报名</div>
-                        <div class="weui_cell_ft">
-                            <input class="weui_switch" name="register" type="checkbox" onclick="show_register_date()" <?php
-                            if ($row['register'] == 1) {
-                                echo 'checked="checked"';
-                            }
-                            ?>/>
-                        </div>
+<!--
+ 是否报名
+-->
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell weui_cell_switch">
+                    <div class="weui_cell_hd weui_cell_primary">是否需要提前取票/报名</div>
+                    <div class="weui_cell_ft">
+                        <input class="weui_switch" name="register" type="checkbox" onclick="show_register_date()" <?php
+                        if ($row['register'] == 1) {
+                            echo 'checked="checked"';
+                        }
+                        ?>/>
                     </div>
-                </div>
-                <div id="register_date_form" style="display:none">
-                    <div class="weui_cells weui_cells_form">
-                        <div class="weui_cell">
-                            <div class="weui_cell_hd cell_hd_date_type">
-                                <select class="weui_select select_date_type" name="register_date_type">
-                                    <?php
-                                    $options =
-                                        '<option value="date_st">报名开始时间</option>' .
-                                        '<option value="date_ed">报名截止时间</option>';
-                                    $register_date_type = strlen($row['register_date_type']) > 0 ? $row['register_date_type'] : 'date_st';
-                                    $pos = strpos($options, $register_date_type);
-                                    $part1 = substr($options, 0, $pos-7);
-                                    $part2 = substr($options, $pos-7, strlen($options) - $pos + 7);
-                                    $options = $part1 . 'selected ' . $part2;
-                                    echo $options;
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <input class="weui_input" name="register_date" type="datetime-local" value="<?php
-                                $pos = strpos($row['register_date'], " ");
-                                $date = substr($row['register_date'], 0, $pos) . "T" . substr($row['register_date'], $pos+1, strlen($row['register_date'])-$pos-4);
-                                echo $date;
-                                ?>"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="weui_cells_tips">"报名开始时间" 不填表示即可起，先到先得</div>
-                    <div class="weui_cells_tips">"报名截止时间" 表示报名持续到该时间为止</div>
-                    <div class="weui_cells_tips">【报名时间】和【详细信息】将一起回复给用户</div>
                 </div>
             </div>
+<!--
+ 报名时间
+-->
+            <div id="register_date_form" style="display:none">
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd ">
+                            <select class="weui_select select_date_type" name="register_date_type">
+                                <?php
+                                $options =
+                                    '<option value="date_st">报名开始时间</option>' .
+                                    '<option value="date_ed">报名截止时间</option>';
+                                $register_date_type = strlen($row['register_date_type']) > 0 ? $row['register_date_type'] : 'date_st';
+                                $pos = strpos($options, $register_date_type);
+                                $part1 = substr($options, 0, $pos-7);
+                                $part2 = substr($options, $pos-7, strlen($options) - $pos + 7);
+                                $options = $part1 . 'selected ' . $part2;
+                                echo $options;
+                                ?>
+                            </select>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" name="register_date" type="datetime-local" value="<?php
+                            $pos = strpos($row['register_date'], " ");
+                            $date = substr($row['register_date'], 0, $pos) . "T" . substr($row['register_date'], $pos+1, strlen($row['register_date'])-$pos-4);
+                            echo $date;
+                            ?>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui_cells_tips">"报名开始时间" 不填表示即可起，先到先得</div>
+                <div class="weui_cells_tips">"报名截止时间" 表示报名持续到该时间为止</div>
+                <div class="weui_cells_tips">【报名时间】和【详细信息】将一起回复给用户</div>
+
+            </div>
+<!--
+ 是否有详细描述
+-->
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell weui_cell_switch">
                     <div class="weui_cell_hd weui_cell_primary">是否有详细描述</div>
@@ -254,6 +279,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     echo 'none';
                 }
             ?>">
+<!--
+ 详细描述
+-->
                 <div class="weui_cells_title">详细描述</div>
                 <div class="weui_cells weui_cells_form">
                     <div class="weui_cell">
@@ -264,6 +292,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                         </div>
                     </div>
                 </div>
+<!--
+ 软文网址
+-->
                 <div class="weui_cells_title">软文网址</div>
                 <div class="weui_cells weui_cells_form">
                     <div class="weui_cell">
@@ -324,6 +355,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
 } else {
     ?>
     <form name="edit_event" method="post" onsubmit="return reedit_event(this.submited);" action="save_event.php">
+<!--
+ 标题
+-->
         <div class="weui_cells_title">标题</div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
@@ -334,6 +368,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 </div>
             </div>
         </div>
+<!--
+ 嘉宾
+-->
         <div class="weui_cells_title">嘉宾</div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
@@ -344,6 +381,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 </div>
             </div>
         </div>
+<!--
+ 地点
+-->
         <div class="weui_cells_title">地点</div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
@@ -354,6 +394,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 </div>
             </div>
         </div>
+<!--
+ 主办方
+-->
         <div class="weui_cells_title">主办方</div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
@@ -366,10 +409,13 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 </div>
             </div>
         </div>
+<!--
+ 时间
+-->
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
-                <div class="weui_cell_hd cell_hd_date_type">
-                    <select class="weui_select select_date_type" name="date_type" onchange="show_register_form();">
+                <div class="weui_cell_hd ">
+                    <select class="weui_select select_date_type" name="date_type">
                         <option selected value="date_st">开始时间</option>
                         <option value="date_ed">截止时间</option>
                     </select>
@@ -384,6 +430,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
         </div>
         <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动</div>
         <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览</div>
+<!--
+ 类别
+-->
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell weui_cell_select weui_select_after">
                 <div class="weui_cell_hd">
@@ -402,34 +451,38 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 </div>
             </div>
         </div>
-        <div id="register_form">
-            <div class="weui_cells weui_cells_form">
-                <div class="weui_cell weui_cell_switch">
-                    <div class="weui_cell_hd weui_cell_primary">是否需要提前取票/报名</div>
-                    <div class="weui_cell_ft">
-                        <input class="weui_switch" name="register" type="checkbox" onclick="show_register_date()">
-                    </div>
+<!--
+ 是否报名
+-->
+        <div class="weui_cells weui_cells_form">
+            <div class="weui_cell weui_cell_switch">
+                <div class="weui_cell_hd weui_cell_primary">是否需要提前取票/报名</div>
+                <div class="weui_cell_ft">
+                    <input class="weui_switch" name="register" type="checkbox" onclick="show_register_date()">
                 </div>
-            </div>
-            <div id="register_date_form" style="display:none">
-                <div class="weui_cells weui_cells_form">
-                    <div class="weui_cell">
-                        <div class="weui_cell_hd cell_hd_date_type">
-                            <select class="weui_select select_date_type" name="register_date_type">
-                                <option selected value="date_st">报名开始时间</option>
-                                <option value="date_ed">报名截止时间</option>
-                            </select>
-                        </div>
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" name="register_date" type="datetime-local" />
-                        </div>
-                    </div>
-                </div>
-                <div class="weui_cells_tips">"报名开始时间" 不填表示即可起，先到先得</div>
-                <div class="weui_cells_tips">"报名截止时间" 表示报名持续到该时间为止</div>
-                <div class="weui_cells_tips">【报名时间】和【详细信息】将一起回复给用户</div>
             </div>
         </div>
+        <div id="register_date_form" style="display:none">
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd ">
+                        <select class="weui_select select_date_type" name="register_date_type">
+                            <option selected value="date_st">报名开始时间</option>
+                            <option value="date_ed">报名截止时间</option>
+                        </select>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" name="register_date" type="datetime-local" />
+                    </div>
+                </div>
+            </div>
+            <div class="weui_cells_tips">"报名开始时间" 不填表示即可起，先到先得</div>
+            <div class="weui_cells_tips">"报名截止时间" 表示报名持续到该时间为止</div>
+            <div class="weui_cells_tips">【报名时间】和【详细信息】将一起回复给用户</div>
+        </div>
+<!--
+ 是否有详细描述
+-->
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell weui_cell_switch">
                 <div class="weui_cell_hd weui_cell_primary">是否有详细描述</div>
@@ -438,6 +491,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 </div>
             </div>
         </div>
+<!--
+ 详细描述
+-->
         <div id="details_form" style="display: none">
             <div class="weui_cells_title">详细描述</div>
             <div class="weui_cells weui_cells_form">
@@ -449,6 +505,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                     </div>
                 </div>
             </div>
+<!--
+ 软文网址
+-->
             <div class="weui_cells_title">软文网址</div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
