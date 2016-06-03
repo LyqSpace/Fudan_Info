@@ -54,7 +54,7 @@ if (isset($_COOKIE['login_serial'])) {
         $row = mysql_fetch_assoc($res);
         if ($row['username'] == $username) {
             ?>
-            <form name="edit_registration" method="post" onsubmit="return check_registration();" action="save_registration.php">
+            <form name="edit_registration" method="post" onsubmit="return reedit_registration(this.submited);" action="">
 
                 <input style="display: none" name="event_id" value="<?php echo $_GET['event_id'];?>" />
 <!--
@@ -210,13 +210,17 @@ if (isset($_COOKIE['login_serial'])) {
                 </div>
 
                 <div class="weui_btn_area">
-                    <input class="weui_btn weui_btn_plain_primary" name="save" type="submit" value="保存" />
+                    <input class="weui_btn weui_btn_plain_primary" name="save" type="submit" onclick="this.form.submited=this.name" value="保存并发布报名表" />
+                </div>
+                <div class="weui_btn_area">
+                    <input class="weui_btn weui_btn_plain_primary" id="btn_info_red" name="delete" type="submit" onclick="this.form.submited=this.name" value="删除报名表及报名记录" />
                 </div>
             </form>
             <div class="weui_btn_area">
                 <a class="weui_btn weui_btn_plain_default" href="javascript:history.back();">返回</a>
             </div>
             <div id="error_message"></div>
+            <div id="confirm_message"></div>
 
             <?php
         } else {

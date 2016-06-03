@@ -63,6 +63,13 @@ if (isset($_GET['registration_serial']) && $_GET['registration_serial'] != '') {
             <a class="weui_btn weui_btn_plain_default" href="registeration_list.php">返回我的票务系统</a>
         </div>
         <div class="weui_cells weui_cells_form">
+            <div class="weui_cell">
+            <table class="dataintable">
+                <tbody>
+                    <tr>
+                        <th>入场码</th>
+                        <th>用户信息</th>
+                    </tr>
         <?php
 
         $query = sprintf("select * from event_register_list where registration_serial='%s' order by register_serial;",
@@ -71,22 +78,40 @@ if (isset($_GET['registration_serial']) && $_GET['registration_serial'] != '') {
         $res = mysql_query($query, $mysql);
         while ($row = mysql_fetch_assoc($res)) {
         ?>
-            <div class="weui_cell">
-                <table>
                     <tr>
-                        <th><?php echo $row['register_serial'];?></th>
-                        <td><?php echo "2222"; ?></td>
+                        <td><?php echo $row['register_serial'];?></td>
+                        <td>
+                            <ul>
+                                <?php
+                                if ($row['register_id'] != '') {
+                                    echo "<li>【卡号】". $row['register_id'] ."</li>";
+                                }
+                                if ($row['register_name'] != '') {
+                                    echo "<li>【姓名】". $row['register_name'] ."</li>";
+                                }
+                                if ($row['register_major'] != '') {
+                                    echo "<li>【专业】". $row['register_major'] ."</li>";
+                                }
+                                if ($row['register_phone'] != '') {
+                                    echo "<li>【手机】". $row['register_phone'] ."</li>";
+                                }
+                                if ($row['ticket_num'] != '') {
+                                    echo "<li>【票数】". $row['ticket_num'] ."</li>";
+                                }
+                                if ($row['message'] != '') {
+                                    echo "<li>【留言】". $row['message'] ."</li>";
+                                }
+                                ?>
+                            </ul>
+                        </td>
                     </tr>
-                    <tr>
-                        <th>&nbsp;</th>
-                        <td>222</td>
-                    </tr>
-                </table>
-
-            </div>
         <?php
         }
         ?>
+
+                </tbody>
+            </table>
+        </div>
         </div>
     </div>
         <?php
@@ -123,5 +148,6 @@ if (isset($_GET['registration_serial']) && $_GET['registration_serial'] != '') {
     <?php
 }
 ?>
+<br>
 </body>
 </html>

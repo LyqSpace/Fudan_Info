@@ -103,10 +103,6 @@ function dialog_disappear() {
     dialog.style.display = "none";
 }
 
-function check_register() {
-    return true;
-}
-
 function check_event(btn) {
 
     btn.setAttribute("disabled", true);
@@ -258,8 +254,8 @@ function delete_event() {
         '       </div>' +
         '       <div class="weui_dialog_bd">警告!删除操作不可逆!请再次确认是否删除该则活动!</div>' +
         '       <div class="weui_dialog_ft">' +
-        '           <a onclick="dialog_disappear();" class="weui_btn_dialog default">取消</a>' +
-        '           <a onclick="confirm_delete_event();" class="weui_btn_dialog primary">确定</a>' +
+        '           <a onclick="dialog_disappear();" class="weui_btn_dialog primary">取消</a>' +
+        '           <a onclick="confirm_delete_event();" class="weui_btn_dialog default">确定</a>' +
         '       </div>' +
         '   </div>' +
         '</div>';

@@ -37,4 +37,46 @@ function change_date() {
 window.onload = function() {
     change_event();
     change_date();
+};
+
+function check_register() {
+
+    var tmp_obj, tmp, info_list, i;
+    tmp_obj = document.getElementsByName("registration_id_tmp")[0];
+    if (tmp_obj != null) {
+        tmp = tmp_obj.value;
+        info_list = document.getElementsByName("registration_id");
+        for (i = 0; i < info_list.length; i++) {
+            info_list[i].value = tmp;
+        }
+    }
+
+    tmp_obj = document.getElementsByName("registration_name_tmp")[0];
+    if (tmp_obj != null) {
+        tmp = tmp_obj.value;
+        info_list = document.getElementsByName("registration_name");
+        for (i = 0; i < info_list.length; i++) {
+            info_list[i].value = tmp;
+        }
+    }
+
+    tmp_obj = document.getElementsByName("registration_major_tmp")[0];
+    if (tmp_obj != null) {
+        tmp = tmp_obj.value;
+        info_list = document.getElementsByName("registration_major");
+        for (i = 0; i < info_list.length; i++) {
+            info_list[i].value = tmp;
+        }
+    }
+
+    tmp_obj = document.getElementsByName("registration_phone_tmp")[0];
+    if (tmp_obj != null) {
+        tmp = tmp_obj.value;
+        info_list = document.getElementsByName("registration_phone");
+        for (i = 0; i < info_list.length; i++) {
+            info_list[i].value = tmp;
+        }
+    }
+
+    return true;
 }

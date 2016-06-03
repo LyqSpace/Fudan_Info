@@ -55,12 +55,12 @@ function generate_register_serial($length) {
             <?php
 
         } else {
-            $register_serial = generate_register_serial(6);
+            $register_serial = generate_register_serial(4);
             while (true) {
                 $query = sprintf("select * from event_register_list where register_serial=%s;", $register_serial);
                 $res = mysql_query($query, $mysql);
                 if (!mysql_num_rows($res)) break;
-                $register_serial = generate_register_serial(6);
+                $register_serial = generate_register_serial(4);
             }
             $query = sprintf("insert into event_register_list value('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', null);",
                 $register_serial,
@@ -86,6 +86,7 @@ function generate_register_serial($length) {
             <p class="page_desc">快快截图保存下来吧</p>
             <br>
             <hr>
+            <br>
             <p class="page_desc">素心无用，自由分享</p>
             <p class="page_desc">分享复旦内有生命力的讲座活动</p>
             <p class="page_desc">守望复旦人澎湃不息的赤子之心</p>

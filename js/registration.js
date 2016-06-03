@@ -1,3 +1,50 @@
+function reedit_registration(submited) {
+
+    var form = document.getElementsByName("edit_registration")[0];
+    if (submited == "save") {
+        form.action = "save_registration.php";
+        return check_registration();
+    } else if (submited == "delete") {
+        delete_registration();
+        return false;
+    }
+    return false;
+}
+
+function confirm_delete_registration() {
+    var form = document.getElementsByName("edit_registration")[0];
+    form.action = "delete_registration.php";
+    form.submit();
+}
+
+function delete_registration() {
+
+    var btn = document.getElementsByName("delete")[0];
+    btn.setAttribute("disabled", true);
+    btn.className += " disabled";
+
+    var confirm_box = document.getElementById("confirm_message");
+    confirm_box.innerHTML =
+        '<div id="dialog">' +
+        '   <div class="weui_mask"></div>' +
+        '   <div class="weui_dialog">' +
+        '       <div class="weui_dialog_hd">' +
+        '           <strong class="weui_dialog_title">删除确认</strong>' +
+        '       </div>' +
+        '       <div class="weui_dialog_bd">警告!删除操作不可逆!同时被删去的还有用户的报名记录。<br>请再次确认是否删除该报名表。</div>' +
+        '       <div class="weui_dialog_ft">' +
+        '           <a onclick="dialog_disappear();" class="weui_btn_dialog primary">取消</a>' +
+        '           <a onclick="confirm_delete_registration();" class="weui_btn_dialog default">确定</a>' +
+        '       </div>' +
+        '   </div>' +
+        '</div>';
+
+    btn.className = btn.className.replace("disabled", "");
+    btn.removeAttribute("disabled");
+
+    return false;
+}
+
 function check_registration() {
 
     var btn = document.getElementsByName("save")[0];
@@ -11,7 +58,7 @@ function check_registration() {
     var registration_major = document.getElementById("registration_major");
     var registration_phone = document.getElementById("registration_phone");
 
-    if (registration_id.checked== "" && registration_name.checked=="" && registration_major=="" && registration_phone=="") {
+    if (registration_id.checked== "" && registration_name.checked=="" && registration_major.checked=="" && registration_phone.checked=="") {
         error_message += "至少选择一个用户信息";
     }
 

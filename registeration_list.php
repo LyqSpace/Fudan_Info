@@ -35,6 +35,7 @@ if (isset($_COOKIE['login_serial'])) {
 <body ontouchstart>
 <div class="page_header">
     <h1 class="page_title">我的票务系统</h1>
+    <p class="page_desc">在“我的历史发布”里编辑报名表</p>
 </div>
 <div class="page_body">
 
