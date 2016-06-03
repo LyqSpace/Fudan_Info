@@ -52,7 +52,9 @@
 
     <br>
     <?php
-        if (isset($_POST['registration_id']) || isset($_POST['registration_name']) || isset($_POST['registration_phone'])) {
+        if ((isset($_POST['registration_id']) && $_POST['registration_id'] != '') ||
+            (isset($_POST['registration_name']) && $_POST['registration_name'] != '') ||
+            (isset($_POST['registration_phone']) && $_POST['registration_phone'] != '')) {
 
             $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
             mysql_query("set names 'utf8'");
@@ -71,14 +73,14 @@
     <br>
     <p class="page_desc">查询结果</p>
     <?php
-            if (isset($_POST['registration_id'])) {
-                echo '<p class="page_desc>【卡号】' . $_POST['registration_id'] . '</p>';
+            if (isset($_POST['registration_id']) && $_POST['registration_id'] != '') {
+                echo '<p class="page_desc">【卡号】' . $_POST['registration_id'] . '</p>';
             }
-            if (isset($_POST['registration_name'])) {
-                echo '<p class="page_desc>【姓名】' . $_POST['registration_name'] . '</p>';
+            if (isset($_POST['registration_name']) && $_POST['registration_name'] != '') {
+                echo '<p class="page_desc">【姓名】' . $_POST['registration_name'] . '</p>';
             }
-            if (isset($_POST['registration_phone'])) {
-                echo '<p class="page_desc>【手机】' . $_POST['registration_phone'] . '</p>';
+            if (isset($_POST['registration_phone']) && $_POST['registration_phone'] != '') {
+                echo '<p class="page_desc">【手机】' . $_POST['registration_phone'] . '</p>';
             }
     ?>
     <div class="weui_cells weui_cells_form">
