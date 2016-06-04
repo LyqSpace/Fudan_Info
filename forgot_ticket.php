@@ -12,7 +12,6 @@
 </head>
 <body ontouchstart>
 <div class="page_header">
-    <!--    <div class="logo_img"></div>-->
     <h1 class="page_title">找回入场码</h1>
     <p class="page_desc">填上以下任意基本信息查询</p>
 </div>
@@ -101,7 +100,7 @@
                     <td>
                         <ul>
                             <?php
-                            echo "<li>【活动】". $row['title'] ."</li>";
+                            echo "<li>【名称】". $row['title'] ."</li>";
                             echo "<li>【地点】". $row['location'] ."</li>";
                             echo "<li>【场次】". $event_date ."</li>";
                             echo "<li>【票数】". $row['ticket_num'] ."</li>";
@@ -138,7 +137,9 @@
     <p class="page_desc">守望复旦人澎湃不息的赤子之心</p>
     <br>
     <p class="page_desc">如果你喜欢我们，欢迎关注公众号FDUTOPIA</p>
-    <div class="qrcode_img"></div>
+    <div class="median_img">
+        <img src="qrcode_median.jpg" alt="qrcode"/>
+    </div>
     <br>
 
 </div>

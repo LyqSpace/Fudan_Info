@@ -12,7 +12,9 @@
 </head>
 <body ontouchstart onload="random_item_color()">
 <div class="page_header">
-    <div class="logo_img"></div>
+    <div class="median_img">
+        <img src="logo_median.jpg" alt="qrcode"/>
+    </div>
     <p class="page_desc">恭喜发现彩蛋～</p>
     <p class="page_desc">这里是复旦乌托邦的雨林区</p>
     <p class="page_desc">下面的爪爪冰棍儿，点击标题即刻享用</p>
@@ -66,6 +68,9 @@
     <p class="page_desc">守望复旦人澎湃不息的赤子之心</p>
     <br>
     <p class="page_desc">如果你喜欢我们，欢迎关注公众号FDUTOPIA</p>
+    <div class="median_img">
+        <img src="qrcode_median.jpg" alt="qrcode"/>
+    </div>
     <br>
     <p style="font-size: 14px;color: #888;">阅读 <?php
 

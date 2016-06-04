@@ -13,22 +13,15 @@ h1 {
     font-weight: bold;
 }
 
-.logo_img {
-    background-image: url('logo_small.jpg');
+div.median_img {
     text-align: center;
-    width: 100px;
-    height: 101px;
     margin: 0 auto;
     margin-bottom: 15px;
 }
 
-.qrcode_img {
-    background-image: url('qrcode_median.jpg');
-    text-align: center;
+div.median_img img {
     width: 200px;
     height: 200px;
-    margin: 0 auto;
-    margin-bottom: 15px;
 }
 
 .review_item {

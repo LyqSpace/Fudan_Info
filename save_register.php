@@ -12,7 +12,7 @@
 </head>
 <body ontouchstart>
 <div class="page_header">
-<!--    <div class="logo_img"></div>-->
+    <h1 class="page_title">抢票成功</h1>
 </div>
 
 <div class="page_body">
@@ -80,7 +80,6 @@ function generate_register_serial($length) {
             //echo $query;
             $res = mysql_query($query, $mysql);
             ?>
-            <p class="page_title">抢票成功</p>
             <p class="page_title">入场验证码</p>
             <p class="page_title"><?php echo $register_serial;?></p>
             <p class="page_desc">快快截图保存下来吧</p>
@@ -92,7 +91,9 @@ function generate_register_serial($length) {
             <p class="page_desc">守望复旦人澎湃不息的赤子之心</p>
             <br>
             <p class="page_desc">如果你喜欢我们，欢迎关注公众号FDUTOPIA</p>
-            <div class="qrcode_img"></div>
+            <div class="median_img">
+                <img src="qrcode_median.jpg" alt="qrcode"/>
+            </div>
             <br>
             <?php
         }

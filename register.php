@@ -13,7 +13,6 @@
 </head>
 <body ontouchstart>
 <div class="page_header">
-<!--    <div class="logo_img"></div>-->
     <h1 class="page_title">报名/取票表</h1>
     <p class="page_desc">填上基本信息就可以报名啦</p>
 </div>
@@ -261,7 +260,9 @@
     <p class="page_desc">守望复旦人澎湃不息的赤子之心</p>
     <br>
     <p class="page_desc">如果你喜欢我们，欢迎关注公众号FDUTOPIA</p>
-    <div class="qrcode_img"></div>
+    <div class="median_img">
+        <img src="qrcode_median.jpg" alt="qrcode"/>
+    </div>
     <br>
 </div>
 <br>
