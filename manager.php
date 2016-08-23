@@ -48,17 +48,6 @@ if (isset($_COOKIE['login_serial'])) {
                 <div class="slide" data-anchor="page_events">
                     <div class="page_header">
                         <h1 class="page_title">活动管理</h1>
-                        <?php
-                        $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
-                        mysql_query("set names 'utf8'");
-                        mysql_select_db("fudan_info");
-
-                        $query = sprintf("select * from users where username='%s';", $username);
-                        $res = mysql_query($query, $mysql);
-                        $row = mysql_fetch_assoc($res);
-                        mysql_close($mysql);
-                        ?>
-                        <p class="page_desc">显示在推送中的全称 : <?php echo $row['fullname'];?></p>
                         <p class="page_desc"><span class="info_publish">已发布</span>表示已经或将在推送中公开发布</p>
                         <p class="page_desc">如果想使用旧的信息，编辑后请选择【另存为】</p>
                         <p class="page_desc" id="info_red">报名表将被放在推送的“阅读原文”中</p>
@@ -125,41 +114,21 @@ if (isset($_COOKIE['login_serial'])) {
                 <div class="slide" data-anchor="page_recruits">
                     <div class="page_header">
                         <h1 class="page_title">招新管理</h1>
-                        <?php
-                        $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
-                        mysql_query("set names 'utf8'");
-                        mysql_select_db("fudan_info");
-
-                        $query = sprintf("select * from users where username='%s';", $username);
-                        $res = mysql_query($query, $mysql);
-                        $row = mysql_fetch_assoc($res);
-                        mysql_close($mysql);
-                        ?>
-                        <p class="page_desc">显示在推送中的全称 : <?php echo $row['fullname'];?></p>
-                        <p class="page_desc"><span class="info_publish">已发布</span>表示已经或将在推送中公开发布</p>
-                        <p class="page_desc">如果想使用旧的信息，编辑后请选择【另存为】</p>
-                        <p class="page_desc" id="info_red">报名表将被放在推送的“阅读原文”中</p>
+                        <p class="page_desc">招新信息只在每学期前四周被推送</p>
+                        <p class="page_desc" id="info_red">招新表将被放在推送的“阅读原文”中</p>
 
                     </div>
                     <div class="page_body">
 
                         <div class="weui_btn_area">
-                            <a class="weui_btn weui_btn_plain_primary" href="edit_event.php">发布一则活动信息</a>
-                            <a class="weui_btn weui_btn_plain_primary" href="registeration_list.php">查看我的票务系统</a>
-                            <a class="weui_btn weui_btn_plain_primary" href="preview.php">预览本周日的活动推送</a>
+                            <a class="weui_btn weui_btn_plain_primary" href="edit_recruit.php">编辑我的招新信息</a>
+                            <a class="weui_btn weui_btn_plain_primary" href="registeration_list.php">查看我的招新系统</a>
                         </div>
 
                         <article class="weui_article">
                             <div class="section_box">
                                 <div class="section_header">
-                                    <span class="section_num">1</span>
-                                    <span class="section_body">活动信息</span>
-                                </div>
-                            </div>
-
-                            <div class="section_box">
-                                <div class="section_header">
-                                    <span class="section_num">1</span>
+<!--                                    <span class="section_num">1</span>-->
                                     <span class="section_body">招新信息</span>
                                 </div>
                             </div>
