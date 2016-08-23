@@ -59,7 +59,7 @@
             mysql_query("set names 'utf8'");
             mysql_select_db("fudan_info");
 
-            $query = sprintf("select * from event_register_list natural join event_date natural join event_info natural join users
+            $query = sprintf("select * from event_register_list natural join event_registration_date natural join event_info natural join users
                 where register_id='%s' or register_name='%s' or register_phone='%s';",
                 mysql_real_escape_string($_POST['registration_id']),
                 mysql_real_escape_string($_POST['registration_name']),

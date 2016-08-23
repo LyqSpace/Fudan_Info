@@ -57,7 +57,7 @@
         $event_cnt = 0;
         while ($event_info = mysql_fetch_assoc($event_list)) {
             //echo $event_info['event_id'];
-            $query = sprintf("select * from users natural join event_info natural join event_registration as r right join event_date as d on r.event_id=d.event_id where r.event_id=%s;",
+            $query = sprintf("select * from users natural join event_info natural join event_registration as r right join event_registration_date as d on r.event_id=d.event_id where r.event_id=%s;",
                 $event_info['event_id']);
             //echo $query;
             $registration_list = mysql_query($query, $mysql);
@@ -184,7 +184,7 @@
             </div>
             <div id="date_list">
             <?php
-            $query = sprintf("select * from event_registration as r left join event_date as d on r.event_id=d.event_id where r.event_id=%s;",
+            $query = sprintf("select * from event_registration as r left join event_registration_date as d on r.event_id=d.event_id where r.event_id=%s;",
                 $event_info['event_id']);
             $registration_list = mysql_query($query, $mysql);
             $date_cnt = 0;

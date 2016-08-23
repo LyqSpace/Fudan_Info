@@ -43,7 +43,7 @@ if (isset($_GET['registration_serial']) && $_GET['registration_serial'] != '') {
     mysql_query("set names 'utf8'");
     mysql_select_db("fudan_info");
 
-    $query = sprintf("select * from event_info natural join event_date where registration_serial='%s';",
+    $query = sprintf("select * from event_info natural join event_registration_date where registration_serial='%s';",
         mysql_real_escape_string($_GET['registration_serial']));
     //echo $query;
     $res = mysql_query($query, $mysql);

@@ -63,7 +63,7 @@ if (isset($_COOKIE['login_serial'])) {
         ?></div>
         <div class="weui_cells weui_cells_access">
         <?php
-            $query = sprintf("select * from event_registration natural join event_date where event_id='%s';", $event_info['event_id']);
+            $query = sprintf("select * from event_registration natural join event_registration_date where event_id='%s';", $event_info['event_id']);
             //echo $query;
             $registration_list = mysql_query($query, $mysql);
             $registration_cnt = 0;
