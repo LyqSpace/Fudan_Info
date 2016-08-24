@@ -24,11 +24,14 @@ if (isset($_COOKIE['login_serial'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="keywords" content="Fudan, Informations">
+    <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
-    <link rel="stylesheet" type="text/css" href="weui.min.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="functions.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+    <script type="text/javascript" src="js/registration.js"></script>
+
     <title>我的票务系统 | FDUTOPIA</title>
 </head>
 
@@ -40,14 +43,14 @@ if (isset($_COOKIE['login_serial'])) {
 <div class="page_body">
 
     <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_plain_default" href="index.php">返回主菜单</a>
+        <a class="weui_btn weui_btn_plain_default" href="manager.php">返回活动管理</a>
     </div>
     <?php
         $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
         mysql_query("set names 'utf8'");
         mysql_select_db("fudan_info");
 
-        $query = sprintf("select * from event_info natural join event_registration where register=true and username='%s' order by event_id desc;",
+        $query = sprintf("select * from event_info natural join event_registration_common where register=true and confirm=true and username='%s' order by event_id desc;",
             $username);
         //echo $query;
         $event_list = mysql_query($query, $mysql);
@@ -63,7 +66,7 @@ if (isset($_COOKIE['login_serial'])) {
         ?></div>
         <div class="weui_cells weui_cells_access">
         <?php
-            $query = sprintf("select * from event_registration natural join event_registration_date where event_id='%s';", $event_info['event_id']);
+            $query = sprintf("select * from event_registration_common natural join event_registration_date where event_id='%s';", $event_info['event_id']);
             //echo $query;
             $registration_list = mysql_query($query, $mysql);
             $registration_cnt = 0;

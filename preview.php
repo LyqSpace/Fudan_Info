@@ -140,7 +140,7 @@ if (isset($_COOKIE['login_serial'])) {
         function print_article(&$order_id, $category_id) {
 
             global $category_id_bias, $category_name_cn, $category_name_en, $week_st, $week_ed, $mysql, $update_next_week, $username;
-            $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and username='%s' and
+            $query = sprintf("select * from event_info natural join users where category='%s' and username='%s' and
                 ((date_type='date_st' and date>='%s' and date<'%s') or
                  (date_type='date_ed' and date>='%s') or
                  (register_date_type='date_st' and register_date>='%s' and register_date<'%s') or
@@ -211,46 +211,12 @@ if (isset($_COOKIE['login_serial'])) {
         $html .= '</ol></section>';
         echo $html;
 
-    ?>
-    <br>
-    <p class="page_desc">阅读原文中显示的上周回顾</p>
-    <br>
-    <?php
+    mysql_close($mysql);
 
-        if (date('N', time()) != 7) {
-            $last_week_st = date('Y-m-d 00:00:00', strtotime('this week', time()));
-        } else {
-            $last_week_st = date('Y-m-d 00:00:00', strtotime('last week', time()));
-        }
-        $html = '<section><ol style="list-style-type: decimal; padding-left: 35px;">';
-
-        $query = sprintf('select * from published_event natural join event_info natural join users where published_date="%s" and username="%s" and review_url is not null order by order_id;',
-            $last_week_st, $username);
-        $res = mysql_query($query, $mysql);
-        while ($row = mysql_fetch_assoc($res)) {
-            if ($row['review_url'] != null && $row['review_url'] != '') {
-                $url = '';
-                if (strtolower(substr($row['review_url'], 0, 8)) == 'https://' or
-                    strtolower(substr($row['review_url'], 0, 7) == 'http://')) {
-                    $url = $row['review_url'];
-                } else {
-                    $url = 'http://' . $row['review_url'];
-                }
-                $html .= sprintf('<li><a href="%s" style="font-size: 16px; color: black;"><strong>%s</strong></a>', $url, $row[title]);
-                if ($row['username'] != 'fdubot') {
-                    $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['fullname']);
-                }
-                $html .= '</li>';
-            }
-        }
-
-        $html .= '</ol></section>';
-        echo $html;
-        mysql_close($mysql);
     ?>
     <br>
     <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_plain_default" href="manager.php#m/0">返回我的活动管理</a>
+        <a class="weui_btn weui_btn_plain_default" href="manager.php#m/0">返回活动管理</a>
     </div>
 </div>
 <br>

@@ -242,6 +242,11 @@ table.dataintable li {
     border: 1px solid #EF4F4F;
 }
 
+#btn_info_default {
+    color: #999999;
+    border: 1px solid #999999;
+}
+
 #btn_info_green {
     color: #09BB07;
     border: 1px solid #09BB07;

@@ -201,7 +201,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                             </select>
                         </div>
                         <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" name="register_date" required="required" type="datetime-local" value="<?php
+                            <input class="weui_input" name="register_date" type="datetime-local" value="<?php
                             $pos = strpos($row['register_date'], " ");
                             $date = substr($row['register_date'], 0, $pos) . "T" . substr($row['register_date'], $pos+1, strlen($row['register_date'])-$pos-4);
                             echo $date;
@@ -261,7 +261,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
             </div>
         </form>
         <div class="weui_btn_area">
-            <a class="weui_btn weui_btn_plain_default" href="javascript:history.back();">返回</a>
+            <a class="weui_btn weui_btn_plain_default" href="manager.php">返回活动管理</a>
         </div>
         <div id="error_message"></div>
         <div id="confirm_message"></div>
@@ -407,7 +407,7 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
         </div>
     </form>
     <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_plain_default" href="manager.php#m/0">返回</a>
+        <a class="weui_btn weui_btn_plain_default" href="manager.php#m/0">返回活动管理</a>
     </div>
     <div id="error_message"></div>
     <?php

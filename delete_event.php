@@ -62,7 +62,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
             <div class="weui_dialog_bd">
                 <?php
                 if ($res) {
-                    echo "活动删除成功! 点击“确定”跳转到我的历史发布";
+                    echo "活动删除成功! 点击“确定”跳转到活动管理";
                 } else {
                     echo "活动删除失败! 点击“确定”返回编辑界面<br>错误代码<br>" . mysql_error() . "<br>请发送错误代码联系管理员fdutopia@lyq.me";
                 }

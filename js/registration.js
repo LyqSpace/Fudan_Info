@@ -1,9 +1,13 @@
+function dialog_disappear() {
+    var dialog = document.getElementById('dialog');
+    dialog.style.display = "none";
+}
+
 function reedit_registration(submited) {
 
     var form = document.getElementsByName("edit_registration")[0];
     if (submited == "save") {
-        form.action = "save_registration.php";
-        return check_registration();
+        check_registration();
     } else if (submited == "delete") {
         delete_registration();
         return false;
@@ -14,6 +18,12 @@ function reedit_registration(submited) {
 function confirm_delete_registration() {
     var form = document.getElementsByName("edit_registration")[0];
     form.action = "delete_registration.php";
+    form.submit();
+}
+
+function confirm_save_registration() {
+    var form = document.getElementsByName("edit_registration")[0];
+    form.action = "save_registration.php";
     form.submit();
 }
 
@@ -31,7 +41,7 @@ function delete_registration() {
         '       <div class="weui_dialog_hd">' +
         '           <strong class="weui_dialog_title">删除确认</strong>' +
         '       </div>' +
-        '       <div class="weui_dialog_bd">警告!删除操作不可逆!同时被删去的还有用户的报名记录。<br>请再次确认是否删除该报名表。</div>' +
+        '       <div class="weui_dialog_bd"><span id="info_red">删除操作不可逆</span>!<br>同时被删去的还有用户的报名记录。<br>请再次确认是否删除该报名表。</div>' +
         '       <div class="weui_dialog_ft">' +
         '           <a onclick="dialog_disappear();" class="weui_btn_dialog primary">取消</a>' +
         '           <a onclick="confirm_delete_registration();" class="weui_btn_dialog default">确定</a>' +
@@ -51,58 +61,41 @@ function check_registration() {
     btn.setAttribute("disabled", true);
     btn.className += " disabled";
 
-    var error_message = "";
-
-    var registration_id = document.getElementById("registration_id");
-    var registration_name = document.getElementById("registration_name");
-    var registration_major = document.getElementById("registration_major");
-    var registration_phone = document.getElementById("registration_phone");
-
-    if (registration_id.checked== "" && registration_name.checked=="" && registration_major.checked=="" && registration_phone.checked=="") {
-        error_message += "至少选择一个用户信息";
-    }
-
-    var ticket_count = document.getElementsByName("ticket_count")[0];
-    if (ticket_count <= 0) {
-        error_message += "总票数应大于零";
-    }
-    var ticket_per_person = document.getElementsByName("ticket_per_person")[0];
-    if (ticket_count <= 0) {
-        error_message += "每位用户最多能取的票数应大于零";
-    }
-
-    if (error_message === "") {
-        return true;
-    } else {
-        var msg_box = document.getElementById("error_message");
-        msg_box.innerHTML =
-            '<div id="dialog">' +
-            '   <div class="weui_mask"></div>' +
-            '   <div class="weui_dialog">' +
-            '       <div class="weui_dialog_hd">' +
-            '           <strong class="weui_dialog_title">保存结果</strong>' +
-            '      </div>' +
-            '       <div class="weui_dialog_bd">' +
-            error_message +
-            '       </div>' +
-            '       <div class="weui_dialog_ft">' +
-            '           <a onclick="dialog_disappear();" class="weui_btn_dialog primary">确定</a>' +
-            '       </div>' +
-            '   </div>' +
-            '</div>';
+    var confirm = document.getElementsByName("confirm")[0];
+    if (confirm.checked == "") {
 
         btn.className = btn.className.replace("disabled", "");
         btn.removeAttribute("disabled");
 
-        return false;
+        confirm_save_registration();
+
+    } else {
+        var confirm_box = document.getElementById("confirm_message");
+        confirm_box.innerHTML =
+            '<div id="dialog">' +
+            '   <div class="weui_mask"></div>' +
+            '   <div class="weui_dialog">' +
+            '       <div class="weui_dialog_hd">' +
+            '           <strong class="weui_dialog_title">发布确认</strong>' +
+            '       </div>' +
+            '       <div class="weui_dialog_bd"><span id="info_red">发布操作不可逆</span>!<br>所有信息将永久保存并对外发布。<br>请再次确认是否发布该报名表。</div>' +
+            '       <div class="weui_dialog_ft">' +
+            '           <a onclick="dialog_disappear();" class="weui_btn_dialog primary">取消</a>' +
+            '           <a onclick="confirm_save_registration();" class="weui_btn_dialog default">确定</a>' +
+            '       </div>' +
+            '   </div>' +
+            '</div>';
     }
+
+    btn.className = btn.className.replace("disabled", "");
+    btn.removeAttribute("disabled");
+
 }
 
 function add_date() {
     var date_list = document.getElementById("date_list");
     var date_cnt = date_list.childElementCount + 1;
     var x = document.createElement("div");
-    x.setAttribute("class", "weui_cells weui_cells_form");
     x.setAttribute("id", "date_" + date_cnt);
     x.innerHTML =
         '<div class="weui_cell">' +

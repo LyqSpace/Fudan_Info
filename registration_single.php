@@ -25,11 +25,14 @@ if (isset($_COOKIE['login_serial'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="keywords" content="Fudan, Informations">
+    <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
-    <link rel="stylesheet" type="text/css" href="weui.min.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="functions.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+    <script type="text/javascript" src="js/registration.js"></script>
+
     <title>报名名单 | FDUTOPIA</title>
 </head>
 
@@ -72,32 +75,22 @@ if (isset($_GET['registration_serial']) && $_GET['registration_serial'] != '') {
                     </tr>
         <?php
 
-        $query = sprintf("select * from event_register_list where registration_serial='%s' order by register_serial;",
+        $query = sprintf("select * from event_registration_list where registration_serial='%s' order by registration_user_serial;",
             mysql_real_escape_string($_GET['registration_serial']));
         //echo $query;
         $res = mysql_query($query, $mysql);
         while ($row = mysql_fetch_assoc($res)) {
         ?>
                     <tr>
-                        <td><?php echo $row['register_serial'];?></td>
+                        <td><?php echo $row['registration_user_serial'];?></td>
                         <td>
                             <ul>
                                 <?php
-                                if ($row['register_id'] != '') {
                                     echo "<li>【卡号】". $row['register_id'] ."</li>";
-                                }
-                                if ($row['register_name'] != '') {
                                     echo "<li>【姓名】". $row['register_name'] ."</li>";
-                                }
-                                if ($row['register_major'] != '') {
                                     echo "<li>【专业】". $row['register_major'] ."</li>";
-                                }
-                                if ($row['register_phone'] != '') {
                                     echo "<li>【手机】". $row['register_phone'] ."</li>";
-                                }
-                                if ($row['ticket_num'] != '') {
                                     echo "<li>【票数】". $row['ticket_num'] ."</li>";
-                                }
                                 if ($row['message'] != '') {
                                     echo "<li>【留言】". $row['message'] ."</li>";
                                 }
@@ -126,7 +119,7 @@ if (isset($_GET['registration_serial']) && $_GET['registration_serial'] != '') {
                 禁止查看不是自己的票务系统!
             </div>
             <div class="weui_dialog_ft">
-                <a href="index.php" class="weui_btn_dialog primary">确定</a>
+                <a href="javascript:history.back()" class="weui_btn_dialog primary">确定</a>
             </div>
         </div>
         <?php
@@ -142,7 +135,7 @@ if (isset($_GET['registration_serial']) && $_GET['registration_serial'] != '') {
             本页面禁止违规访问!
         </div>
         <div class="weui_dialog_ft">
-            <a href="index.php" class="weui_btn_dialog primary">确定</a>
+            <a href="javascript:history.back()" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php

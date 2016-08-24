@@ -25,11 +25,14 @@ if (isset($_COOKIE['login_serial'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="keywords" content="Fudan, Informations">
+    <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
-    <link rel="stylesheet" type="text/css" href="weui.min.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="functions.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+    <script type="text/javascript" src="js/registration.js"></script>
+
     <title>删除一则招新 | FDUTOPIA</title>
 </head>
 
@@ -49,19 +52,19 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
 
     if ($row['username'] == $username) {
 
-        $query = sprintf("delete from event_registration where event_id='%s';",
+        $query = sprintf("delete from event_registration_common where event_id='%s';",
             mysql_real_escape_string($_POST['event_id']));
         mysql_query($query, $mysql);
 
-        $query = sprintf("select * from event_date where event_id='%s';",
+        $query = sprintf("select * from event_registration_date where event_id='%s';",
             mysql_real_escape_string($_POST['event_id']));
         $res = mysql_query($query, $mysql);
         while ($row = mysql_fetch_assoc($res)) {
-            $query = sprintf("delete from event_register_list where registration_serial='%s';",
+            $query = sprintf("delete from event_registration_list where registration_serial='%s';",
                 mysql_real_escape_string($row['registration_serial']));
             mysql_query($query, $mysql);
         }
-        $query = sprintf("delete from event_date where event_id='%s';",
+        $query = sprintf("delete from event_registration_date where event_id='%s';",
             mysql_real_escape_string($_POST['event_id']));
         mysql_query($query, $mysql);
 
@@ -74,7 +77,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
             <div class="weui_dialog_bd">
                 <?php
                 if ($res) {
-                    echo "报名表删除成功! 点击“确定”跳转到我的历史发布";
+                    echo "报名表删除成功! 点击“确定”跳转到活动管理";
                 } else {
                     echo "报名表删除失败! 点击“确定”返回编辑界面<br>错误代码<br>" . mysql_error() . "<br>请发送错误代码联系管理员fdutopia@lyq.me";
                 }
@@ -84,7 +87,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
                 <a href="
             <?php
                 if ($res) {
-                    echo "client_history.php";
+                    echo "manager.php";
                 } else {
                     echo "javascript:history.back();";
                 }
@@ -104,7 +107,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
                 只能删除自己的报名表!
             </div>
             <div class="weui_dialog_ft">
-                <a href="index.php" weui_btn_dialog primary">确定</a>
+                <a href="javascript:history.back();" weui_btn_dialog primary">确定</a>
             </div>
         </div>
         <?php
@@ -123,7 +126,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
             本页面禁止违规访问!
         </div>
         <div class="weui_dialog_ft">
-            <a href="index.php" class="weui_btn_dialog primary">确定</a>
+            <a href="javascript:history.back()" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php

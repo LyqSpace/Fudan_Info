@@ -112,6 +112,10 @@ function check_event(btn) {
     if (error_message === "") {
         return true;
     } else {
+
+        btn.className = btn.className.replace("disabled", "");
+        btn.removeAttribute("disabled");
+
         var msg_box = document.getElementById("error_message");
         msg_box.innerHTML =
             '<div id="dialog">' +
@@ -128,9 +132,6 @@ function check_event(btn) {
             '       </div>' +
             '   </div>' +
             '</div>';
-
-        btn.className = btn.className.replace("disabled", "");
-        btn.removeAttribute("disabled");
 
         return false;
     }
