@@ -1,4 +1,7 @@
-
+function dialog_disappear() {
+    var dialog = document.getElementById('dialog');
+    dialog.style.display = "none";
+}
 
 function check_recruit() {
 

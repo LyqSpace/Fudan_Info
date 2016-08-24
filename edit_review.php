@@ -25,11 +25,14 @@ if (isset($_COOKIE['login_serial'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="keywords" content="Fudan, Informations">
+    <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
-    <link rel="stylesheet" type="text/css" href="weui.min.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="functions.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+    <script type="text/javascript" src="js/event.js"></script>
+
     <title>编辑一则回顾 | FDUTOPIA</title>
 </head>
 
@@ -89,7 +92,7 @@ if (isset($_COOKIE['login_serial'])) {
                     只能编辑自己活动的回顾！
                 </div>
                 <div class="weui_dialog_ft">
-                    <a href="index.php" weui_btn_dialog primary">确定</a>
+                    <a href="javascript:history.back();" weui_btn_dialog primary">确定</a>
                 </div>
             </div>
             <?php
@@ -106,7 +109,7 @@ if (isset($_COOKIE['login_serial'])) {
                 必须选择一则活动！
             </div>
             <div class="weui_dialog_ft">
-                <a href="index.php" weui_btn_dialog primary">确定</a>
+                <a href="javascript:history.back();" weui_btn_dialog primary">确定</a>
             </div>
         </div>
         <?php

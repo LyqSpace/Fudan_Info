@@ -25,11 +25,14 @@ if (isset($_COOKIE['login_serial'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="keywords" content="Fudan, Informations">
+    <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
-    <link rel="stylesheet" type="text/css" href="weui.min.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="functions.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+    <script type="text/javascript" src="js/event.js"></script>
+
     <title>保存一则活动 | FDUTOPIA</title>
 </head>
 
@@ -79,10 +82,6 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
     if (isset($_POST['register']) && $_POST['register'] == "on") {
         $register = 'true';
     }
-    $publish = 'false';
-    if (isset($_POST['publish']) && $_POST['publish'] == "on") {
-        $publish = 'true';
-    }
     $details = 'null';
     if (isset($_POST['details']) && $_POST['details'] != "") {
         $details = "'" . mysql_real_escape_string($_POST['details']) . "'";
@@ -108,7 +107,7 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
         if ($row['username'] == $username) {
             $query = sprintf("update event_info set title='%s', speaker=%s, date_type='%s', date='%s',
                 location='%s', hostname=%s, category='%s', register=%s, register_date_type='%s', register_date='%s',
-                notification=%s, publish=%s, details=%s, propa_url=%s, edit_time=null where event_id=%s;",
+                notification=%s, details=%s, propa_url=%s, edit_time=null where event_id=%s;",
                 mysql_real_escape_string($_POST['title']),
                 $speaker,
                 mysql_real_escape_string($_POST['date_type']),
@@ -120,7 +119,6 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
                 mysql_real_escape_string($_POST['register_date_type']),
                 $register_date,
                 $notification,
-                $publish,
                 $details,
                 $propa_url,
                 $_POST['event_id']);
@@ -140,7 +138,7 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
             $res_tmp = mysql_num_rows($res_tmp) == 0 ? false : true;
         }
 
-        $query = sprintf("insert into event_info value (null,'%s', '%s', %s, '%s', %s, '%s', '%s', '%s', %s, '%s', '%s', %s, %s, %s, '%s', %s, null, null);",
+        $query = sprintf("insert into event_info value (null,'%s', '%s', %s, '%s', %s, '%s', '%s', '%s', %s, '%s', '%s', %s, %s, '%s', %s, null, null);",
             mysql_real_escape_string($_POST['title']),
             $username,
             $speaker,
@@ -153,7 +151,6 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
             mysql_real_escape_string($_POST['register_date_type']),
             $register_date,
             $notification,
-            $publish,
             $details,
             $short_url,
             $propa_url);
@@ -173,7 +170,7 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
                 echo "禁止保存不是自己的活动!";
             } else {
                 if ($res) {
-                    echo "活动保存成功! 点击“确定”跳转到我的历史发布";
+                    echo "活动保存成功! 点击“确定”跳转到活动管理";
                 } else {
                     echo "活动保存失败! 点击“确定”返回编辑界面<br>错误代码<br>" . mysql_error() . "<br>请发送错误代码联系管理员fdutopia@lyq.me";
                 }
@@ -184,10 +181,10 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
             <a href="
             <?php
                 if ($forbid) {
-                    echo "index.php";
+                    echo "javascript:history.back();";
                 } else {
                     if ($res) {
-                        echo "client_history.php";
+                        echo "manager.php#m/0";
                     } else {
                         echo "javascript:history.back();";
                     }
@@ -211,7 +208,7 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
             本页面禁止违规访问!
         </div>
         <div class="weui_dialog_ft">
-            <a href="index.php" class="weui_btn_dialog primary">确定</a>
+            <a href="javascript:history.back()" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php

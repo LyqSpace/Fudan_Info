@@ -28,12 +28,9 @@ if (isset($_COOKIE['login_serial'])) {
     <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
 
-    <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css"/>
     <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
     <script type="text/javascript" src="js/event.js"></script>
 
     <title>删除一则活动 | FDUTOPIA</title>
@@ -75,7 +72,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
                 <a href="
             <?php
                 if ($res) {
-                    echo "client_history.php";
+                    echo "manager.php#m/0.php";
                 } else {
                     echo "javascript:history.back();";
                 }
@@ -95,7 +92,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
                 只能删除自己的活动!
             </div>
             <div class="weui_dialog_ft">
-                <a href="index.php" weui_btn_dialog primary">确定</a>
+                <a href="javascript:history.back();" weui_btn_dialog primary">确定</a>
             </div>
         </div>
         <?php
@@ -114,7 +111,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
             本页面禁止违规访问!
         </div>
         <div class="weui_dialog_ft">
-            <a href="index.php" class="weui_btn_dialog primary">确定</a>
+            <a href="javascript:history.back();" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php

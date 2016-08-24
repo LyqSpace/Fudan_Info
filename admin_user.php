@@ -27,11 +27,12 @@ if (isset($_COOKIE['login_serial'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="keywords" content="Fudan, Informations">
+    <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
-    <link rel="stylesheet" type="text/css" href="weui.min.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="functions.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
     <title>维护用户数据 | FDUTOPIA</title>
 </head>
 
@@ -79,13 +80,14 @@ if (isset($_COOKIE['login_serial'])) {
 
         } else if (isset($_POST['insert'])) {
 
-            $query = sprintf("insert into users value ('%s', '%s', '%s', '%s', %s, %s);",
+            $query = sprintf("insert into users value ('%s', '%s', '%s', '%s', '%s', '%s', '%s');",
                 mysql_real_escape_string($_POST['username']),
                 mysql_real_escape_string($_POST['fullname']),
                 mysql_real_escape_string($_POST['email']),
                 mysql_real_escape_string(md5($_POST['password'])),
                 mysql_real_escape_string($_POST['event_limit']),
-                mysql_real_escape_string($_POST['recruit_limit']));
+                mysql_real_escape_string($_POST['recruit_limit']),
+                mysql_real_escape_string($_POST['category']));
             $res = mysql_query($query, $mysql);
 
             ?>
@@ -173,6 +175,17 @@ if (isset($_COOKIE['login_serial'])) {
                     $update_res .= '更新招新可用次数失败<br>';
                 }
             }
+            if (isset($_POST['category']) && $_POST['category'] != '') {
+                $query = sprintf("update users set category='%s' where username='%s';",
+                    mysql_real_escape_string($_POST['category']),
+                    mysql_real_escape_string($_POST['username']));
+                $res = mysql_query($query, $mysql);
+                if ($res) {
+                    $update_res .= '更新大类成功<br>';
+                } else {
+                    $update_res .= '更新大类失败<br>';
+                }
+            }
 
             ?>
             <div id="dialog">
@@ -248,6 +261,31 @@ if (isset($_COOKIE['login_serial'])) {
                     <input class="weui_input" name="recruit_limit" type="number" placeholder="请输入数字，一周发布招新的次数" />
                 </div>
             </div>
+            <div class="weui_cell weui_cell_select weui_select_after">
+                <div class="weui_cell_hd">
+                    <label class="weui_label">大类</label>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <select class="weui_select" style="padding-left: 0;" name="category">
+                        <option value="书院团学联">书院/团学联</option>
+                        <option value="人文历史">人文历史</option>
+                        <option value="社会科学">社会科学</option>
+                        <option value="公益">公益</option>
+                        <option value="国际交流">国际交流</option>
+                        <option value="户外">户外</option>
+                        <option value="健身运动">健身</option>
+                        <option value="经管">经管</option>
+                        <option value="兴趣拓展">兴趣拓展</option>
+                        <option value="棋牌">棋牌</option>
+                        <option value="音乐舞蹈">音乐舞蹈</option>
+                        <option value="枫林社团">枫林社团</option>
+                        <option value="江湾社团">江湾社团</option>
+                        <option value="张江社团">张江社团</option>
+                        <option selected value="其它">其它</option>
+                    </select>
+                </div>
+            </div>
+
         </div>
         <div class="weui_btn_area">
             <input class="weui_btn weui_btn_plain_primary" name="search" type="submit" value="查询一个用户" />

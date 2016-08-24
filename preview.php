@@ -24,11 +24,14 @@ if (isset($_COOKIE['login_serial'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="keywords" content="Fudan, Informations">
+    <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
-    <link rel="stylesheet" type="text/css" href="weui.min.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="functions.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+    <script type="text/javascript" src="js/event.js"></script>
+
     <title>预览我的排版 | FDUTOPIA</title>
 </head>
 
@@ -152,7 +155,7 @@ if (isset($_COOKIE['login_serial'])) {
                 $index = $category_id-$category_id_bias+1;
                 print_title($index, $category_name_cn[$category_id]);
             }
-            $html = sprintf('<ol style="list-style-type: decimal; padding-left: 35px;" start="%d">', $order_id);
+            $html = sprintf('<ol start="%d">', $order_id);
 
             print_events($html, $res, $order_id, $update_next_week);
 
@@ -247,7 +250,7 @@ if (isset($_COOKIE['login_serial'])) {
     ?>
     <br>
     <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_plain_default" href="client_history.php">返回我的历史发布</a>
+        <a class="weui_btn weui_btn_plain_default" href="manager.php#m/0">返回我的活动管理</a>
     </div>
 </div>
 <br>

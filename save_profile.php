@@ -25,11 +25,12 @@ if (isset($_COOKIE['login_serial'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="keywords" content="Fudan, Informations">
+    <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
-    <link rel="stylesheet" type="text/css" href="weui.min.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="functions.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
     <title>保存个人信息 | FDUTOPIA</title>
 </head>
 
@@ -44,15 +45,17 @@ if (isset($_POST['fullname']) && $_POST['fullname'] != "" &&
     mysql_select_db("fudan_info");
 
     if (isset($_POST['password']) && $_POST['password'] != '') {
-        $query = sprintf("update users set fullname='%s', email='%s', password='%s' where username='%s';",
+        $query = sprintf("update users set fullname='%s', email='%s', password='%s', category='%s' where username='%s';",
             mysql_real_escape_string($_POST['fullname']),
             mysql_real_escape_string($_POST['email']),
             md5($_POST['password']),
+            mysql_real_escape_string($_POST['category']),
             $username);
     } else {
-        $query = sprintf("update users set fullname='%s', email='%s' where username='%s';",
+        $query = sprintf("update users set fullname='%s', email='%s', category='%s' where username='%s';",
             mysql_real_escape_string($_POST['fullname']),
             mysql_real_escape_string($_POST['email']),
+            mysql_real_escape_string($_POST['category']),
             $username);
     }
 
@@ -67,9 +70,9 @@ if (isset($_POST['fullname']) && $_POST['fullname'] != "" &&
         <div class="weui_dialog_bd">
             <?php
             if ($res) {
-                echo "个人信息保存成功! 点击“确定”跳转到我的主页";
+                echo "信息保存成功! 点击“确定”跳转到我的主页";
             } else {
-                echo "个人信息保存失败! 点击“确定”返回编辑界面<br>错误代码<br>" . mysql_error() . "<br>请发送错误代码联系管理员fdutopia@lyq.me";
+                echo "信息保存失败! 点击“确定”返回编辑界面<br>错误代码<br>" . mysql_error() . "<br>请发送错误代码联系管理员fdutopia@lyq.me";
             }
             ?>
         </div>
@@ -77,7 +80,7 @@ if (isset($_POST['fullname']) && $_POST['fullname'] != "" &&
             <a href="
             <?php
             if ($res) {
-                echo "index.php";
+                echo "manager.php#m/2";
             } else {
                 echo "javascript:history.back();";
             }
@@ -99,7 +102,7 @@ if (isset($_POST['fullname']) && $_POST['fullname'] != "" &&
             本页面禁止违规访问!
         </div>
         <div class="weui_dialog_ft">
-            <a href="index.php" class="weui_btn_dialog primary">确定</a>
+            <a href="javascript:history.back();" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php

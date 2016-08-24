@@ -75,8 +75,8 @@ if (isset($_COOKIE['login_serial'])) {
                                 mysql_query("set names 'utf8'");
                                 mysql_select_db("fudan_info");
 
-                                $query = sprintf("select * from event_info natural join event_registration_common
-                                    where username='%s' order by event_id desc;", $username);
+                                $query = sprintf("select title, i.event_id as event_id, confirm from event_info as i left join event_registration_common as c on i.event_id=c.event_id
+                                    where username='%s' order by i.event_id desc;", $username);
                                 $res = mysql_query($query, $mysql);
                                 $event_cnt = 0;
                                 while ($row = mysql_fetch_assoc($res)) {
@@ -86,11 +86,6 @@ if (isset($_COOKIE['login_serial'])) {
                                     <div class="info_box">
                                         <p class="info_time">
                                             <?php
-                                            if ($row['publish'] == 1) {
-                                                echo ' <span class="info_publish">已发布</span> ';
-                                            } else {
-                                                echo ' <span class="text_warn">未发布</span> ';
-                                            }
                                             if ($row['confirm'] == 1) {
                                                 echo '<span class="info_publish">报名表已发布</span>';
                                             } else {
@@ -139,38 +134,69 @@ if (isset($_COOKIE['login_serial'])) {
                                 mysql_query("set names 'utf8'");
                                 mysql_select_db("fudan_info");
 
-                                $query = sprintf("select * from recruit_info where username='%s' order by recruit_id desc;", $username);
+                                $query = sprintf("select * from recruit_info_common where username='%s';", $username);
                                 $res = mysql_query($query, $mysql);
-                                $recruit_cnt = 0;
-                                while ($row = mysql_fetch_assoc($res)) {
-                                    $recruit_cnt++;
+                                if ($row = mysql_fetch_assoc($res)) {
                                     ?>
-                                    <h3 class="info_title"><?php echo $recruit_cnt . ". " . $row['details'];?></h3>
-                                    <div class="info_box">
-                                        <p class="info_time">最后编辑于<?php
-                                            echo substr($row['edit_time'], 0, 10);
-                                            if ($row['publish'] == 1) {
-                                                echo ' <span class="info_publish">已发布</span>';
-                                            } else {
-                                                echo ' <span>未发布</span>';
-                                            }
-                                            ?></p>
-                                        <a class="weui_btn weui_btn_mini info_edit_single" href="edit_recruit.php?recruit_id=<?php echo $row['recruit_id'];?>">编辑</a>
-                                    </div>
+                                    <h3 class="info_title"><?php echo $row['details'];?></h3>
+                                    <ol>
                                     <?php
+
+                                    $query = sprintf("select * from recruit_info_departments where username='%s';", $username);
+                                    $res = mysql_query($query, $mysql);
+                                    while ($row = mysql_fetch_assoc($res)) {
+                                        $department_info = '【' . $row['department'] . '】' . $row['info'];
+                                        ?>
+                                        <li><p><?php echo $department_info;?></p></li>
+                                        <?php
+                                    }
                                 }
                                 mysql_close($mysql);
                                 ?>
+                                    </ol>
                             </section>
                         </article>
                     </div>
                 </div>
 
-                <div class="slide" data-anchor="page_settings" style="background-color: yellow"> 333 </div>
+                <div class="slide" data-anchor="page_settings">
+                    <div class="page_header">
+                        <h1 class="page_title">我的信息</h1>
+                        <p class="page_desc">社团/主办方的全称将显示在推送中</p>
+                        <p class="page_desc">联系邮箱不可为空</p>
+                    </div>
+                    <div class="page_body">
+                        <article class="weui_article">
+                                <?php
+                                $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+                                mysql_query("set names 'utf8'");
+                                mysql_select_db("fudan_info");
+
+                                $query = sprintf("select * from users where username='%s';", $username);
+                                $res = mysql_query($query, $mysql);
+                                if ($row = mysql_fetch_assoc($res)) {
+                                    ?>
+                                <ul>
+                                    <li><?php echo '【账号】' . $row['username'];?></li>
+                                    <li><?php echo '【全称】' . $row['fullname'];?></li>
+                                    <li><?php echo '【邮箱】' . $row['email'];?></li>
+                                    <li><?php echo '【大类】' . $row['category'];?></li>
+                                </ul>
+                                <?php
+                                }
+                                ?>
+                        </article>
+                        <div class="weui_btn_area">
+                            <a class="weui_btn weui_btn_plain_primary" href="edit_profile.php">修改我的基本信息</a>
+                            <a class="weui_btn weui_btn_plain_default" onclick="logout()">退出</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
         <div class="weui_tabbar">
-            <a href="#" class="weui_tabbar_item" id="btn_events">
+            <a href="#" class="weui_tabbar_item weui_bar_item_on" id="btn_events">
                 <div class="weui_tabbar_icon">
                     <img src="./images/icon_nav_button.png">
                 </div>

@@ -31,12 +31,9 @@ if (isset($_COOKIE['login_serial'])) {
         <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
         <meta name="author" content="Liang Yongqing, Liu Xueyue">
 
-        <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css" />
         <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
         <script type="text/javascript" src="js/event.js"></script>
 
         <title>编辑一则活动 | FDUTOPIA</title>
@@ -85,60 +82,33 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
         <form name="edit_event" method="post" onsubmit="return reedit_event(this.submited);" action="">
 
             <input style="display: none" name="event_id" value="<?php echo $_GET['event_id'];?>" />
-<!--
- 标题
--->
-            <div class="weui_cells_title">标题</div>
             <div class="weui_cells weui_cells_form">
+<!--标题-->
                 <div class="weui_cell">
+                    <div class="weui_cell_hd"><label class="weui_label">标题</label></div>
                     <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" id="title" placeholder="请输入活动标题" name="title" rows="3"
-                              onkeyup="count('title', title_cnt, 100);" required="required"><?php echo $row['title'];?></textarea>
-                        <div class="weui_textarea_counter">
-                            <span id="title_cnt"><?php echo count_str($row['title']);?></span>/100
-                        </div>
+                        <input class="weui_input" type="text" required="required" maxlength="100" name="title" placeholder="请输入活动标题" value="<?php echo $row['title'];?>">
                     </div>
                 </div>
-            </div>
-<!--
- 嘉宾
--->
-            <div class="weui_cells_title">嘉宾</div>
-            <div class="weui_cells weui_cells_form">
+<!--嘉宾-->
                 <div class="weui_cell">
+                    <div class="weui_cell_hd"><label class="weui_label">嘉宾</label></div>
                     <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" id="speaker" placeholder="选填，此处可作主讲人姓名、职位的简单介绍" name="speaker" rows="3"
-                              onkeyup="count('speaker', speaker_cnt, 100);"><?php echo $row['speaker'];?></textarea>
-                        <div class="weui_textarea_counter">
-                            <span id="speaker_cnt"><?php echo count_str($row['speaker']);?></span>/100
-                        </div>
+                        <input class="weui_input" type="text" maxlength="100" name="speaker" placeholder="选填，主讲人的简单介绍" value="<?php echo $row['speaker'];?>">
                     </div>
                 </div>
-            </div>
-<!--
- 地点
--->
-            <div class="weui_cells_title">地点</div>
-            <div class="weui_cells weui_cells_form">
+<!--地点-->
                 <div class="weui_cell">
+                    <div class="weui_cell_hd"><label class="weui_label">地点</label></div>
                     <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" id="location" placeholder="请输入活动地点" name="location" rows="2"
-                              onkeyup="count('location', location_cnt, 40);" required="required"><?php echo $row['location'];?></textarea>
-                        <div class="weui_textarea_counter">
-                            <span id="location_cnt"><?php echo count_str($row['location']);?></span>/40
-                        </div>
+                        <input class="weui_input" type="text" required="required" maxlength="40" name="location" placeholder="请输入活动地点" value="<?php echo $row['location'];?>">
                     </div>
                 </div>
-            </div>
-<!--
- 主办方
--->
-            <div class="weui_cells_title">主办方</div>
-            <div class="weui_cells weui_cells_form">
+<!--主办方-->
                 <div class="weui_cell">
+                    <div class="weui_cell_hd"><label class="weui_label">主办方</label></div>
                     <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" id="hostname" placeholder="请输入活动的主办方名称，默认值为该用户的全称" name="hostname" rows="2"
-                              onkeyup="count('hostname', hostname_cnt, 40);"><?php
+                        <input class="weui_input" type="text" maxlength="40" name="hostname" placeholder="选填，缺省值为我的全称" value="<?php
                         if ($row['hostname']=='') {
                             if ($username != 'fdubot') {
                                 echo $fullname;
@@ -146,20 +116,38 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                         } else {
                             echo $row['hostname'];
                         }
-                        ?></textarea>
-                        <div class="weui_textarea_counter">
-                            <span id="hostname_cnt"><?php echo count_str($row['hostname']);?></span>/40
-                        </div>
+                        ?>">
                     </div>
                 </div>
-            </div>
-<!--
- 时间
--->
-            <div class="weui_cells weui_cells_form">
+<!--类别-->
+                <div class="weui_cell weui_cell_select weui_select_after">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">类别</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <select class="weui_select select_no_padding" name="category">
+                            <?php
+                            $options =
+                                '<option value="culture">人文</option>' .
+                                '<option value="science">科学</option>' .
+                                '<option value="art">艺术</option>' .
+                                '<option value="finance">社科与金融</option>' .
+                                '<option value="activity">比赛与活动</option>' .
+                                '<option value="others">其它</option>';
+
+                            $pos = strpos($options, $row['category']);
+                            $part1 = substr($options, 0, $pos-7);
+                            $part2 = substr($options, $pos-7, strlen($options) - $pos + 7);
+                            $options = $part1 . 'selected ' . $part2;
+                            echo $options;
+                            ?>
+                        </select>
+                    </div>
+                </div>
+<!--时间-->
                 <div class="weui_cell">
                     <div class="weui_cell_hd ">
-                        <select class="weui_select select_date_type" name="date_type">
+                        <select class="weui_select select_no_padding" name="date_type">
                             <?php
                             $options =
                                 '<option value="date_st">开始时间</option>' .
@@ -181,42 +169,9 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                         ?>"/>
                     </div>
                 </div>
-            </div>
-            <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动</div>
-            <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览</div>
-<!--
- 类别
--->
-            <div class="weui_cells weui_cells_form">
-                <div class="weui_cell weui_cell_select weui_select_after">
-                    <div class="weui_cell_hd">
-                        <label class="weui_label">类别</label>
-                    </div>
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <select class="weui_select" name="category">
-                            <?php
-                                $options =
-                                    '<option value="culture">人文</option>' .
-                                    '<option value="science">科学</option>' .
-                                    '<option value="art">艺术</option>' .
-                                    '<option value="finance">社科与金融</option>' .
-                                    '<option value="activity">比赛与活动</option>' .
-                                    '<option value="others">其它</option>';
-
-                                $pos = strpos($options, $row['category']);
-                                $part1 = substr($options, 0, $pos-7);
-                                $part2 = substr($options, $pos-7, strlen($options) - $pos + 7);
-                                $options = $part1 . 'selected ' . $part2;
-                                echo $options;
-                            ?>
-                        </select>
-                    </div>
-                </div>
-            </div>
-<!--
- 是否报名
--->
-            <div class="weui_cells weui_cells_form">
+              <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动</div>
+              <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览</div>
+<!--提前报名-->
                 <div class="weui_cell weui_cell_switch">
                     <div class="weui_cell_hd weui_cell_primary">是否需要提前取票/报名</div>
                     <div class="weui_cell_ft">
@@ -227,15 +182,11 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                         ?>/>
                     </div>
                 </div>
-            </div>
-<!--
- 报名时间
--->
-            <div id="register_date_form" style="display:none">
-                <div class="weui_cells weui_cells_form">
+<!--报名时间-->
+                <div id="register_date_form" style="display:none">
                     <div class="weui_cell">
                         <div class="weui_cell_hd ">
-                            <select class="weui_select select_date_type" name="register_date_type">
+                            <select class="weui_select select_no_padding" name="register_date_type">
                                 <?php
                                 $options =
                                     '<option value="date_st">报名开始时间</option>' .
@@ -250,23 +201,18 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                             </select>
                         </div>
                         <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" name="register_date" type="datetime-local" value="<?php
+                            <input class="weui_input" name="register_date" required="required" type="datetime-local" value="<?php
                             $pos = strpos($row['register_date'], " ");
                             $date = substr($row['register_date'], 0, $pos) . "T" . substr($row['register_date'], $pos+1, strlen($row['register_date'])-$pos-4);
                             echo $date;
                             ?>"/>
                         </div>
                     </div>
+                    <div class="weui_cells_tips">"报名开始时间" 不填表示即可起，先到先得</div>
+                    <div class="weui_cells_tips">"报名截止时间" 表示报名持续到该时间为止</div>
+                    <div class="weui_cells_tips">【报名时间】和【详细信息】将一起回复给用户</div>
                 </div>
-                <div class="weui_cells_tips">"报名开始时间" 不填表示即可起，先到先得</div>
-                <div class="weui_cells_tips">"报名截止时间" 表示报名持续到该时间为止</div>
-                <div class="weui_cells_tips">【报名时间】和【详细信息】将一起回复给用户</div>
-
-            </div>
-<!--
- 是否有详细描述
--->
-            <div class="weui_cells weui_cells_form">
+<!--是否有详细描述-->
                 <div class="weui_cell weui_cell_switch">
                     <div class="weui_cell_hd weui_cell_primary">是否有详细描述</div>
                     <div class="weui_cell_ft">
@@ -277,50 +223,30 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                         ?>>
                     </div>
                 </div>
-            </div>
-            <div id="details_form" style="display:<?php
+                <div id="details_form" style="display:<?php
                 if ($row['notification'] == 1) {
                     echo 'display';
                 } else {
                     echo 'none';
                 }
             ?>">
-<!--
- 详细描述
--->
-                <div class="weui_cells_title">详细描述</div>
-                <div class="weui_cells weui_cells_form">
+<!--详细描述-->
+                    <div class="weui_cells_title">详细描述</div>
                     <div class="weui_cell">
                         <div class="weui_cell_bd weui_cell_primary">
-                        <textarea class="weui_textarea" id="details_text" placeholder="请输入取票/报名方式、主讲人介绍或活动介绍等，如果勾选“有详细描述”，则此栏或软文网址不可为空"
+                        <textarea class="weui_textarea" id="details_text" placeholder="请输入主讲人介绍或活动介绍等信息，如果勾选“有详细描述”，则此栏或软文网址不可为空"
                                   name="details" rows="7" onkeyup="count('details_text', details_cnt, 300);"><?php echo $row['details'];?></textarea>
                             <div class="weui_textarea_counter"><span id="details_cnt"><?php echo count_str($row['details']);?></span>/300</div>
                         </div>
                     </div>
-                </div>
-<!--
- 软文网址
--->
-                <div class="weui_cells_title">软文网址</div>
-                <div class="weui_cells weui_cells_form">
+<!--软文网址-->
+                    <div class="weui_cells_title">软文网址</div>
                     <div class="weui_cell">
                         <div class="weui_cell_bd weui_cell_primary">
                         <textarea class="weui_textarea" id="propa_url" placeholder="选填，如果自己的公众号有宣传此活动的软文，可以把软文网址复制在此处"
                                   name="propa_url" rows="7" onkeyup="count('propa_url', propa_url_cnt, 600);"><?php echo $row['propa_url'];?></textarea>
                             <div class="weui_textarea_counter"><span id="propa_url_cnt"><?php echo count_str($row['propa_url']);?></span>/600</div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="weui_cells weui_cells_form">
-                <div class="weui_cell weui_cell_switch">
-                    <div class="weui_cell_hd weui_cell_primary">是否发布在活动推送中</div>
-                    <div class="weui_cell_ft">
-                        <input class="weui_switch" name="publish" type="checkbox" <?php
-                            if ($row['publish'] == 1) {
-                                echo 'checked="checked"';
-                            }
-                        ?>>
                     </div>
                 </div>
             </div>
@@ -361,118 +287,81 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
 } else {
     ?>
     <form name="edit_event" method="post" onsubmit="return reedit_event(this.submited);" action="save_event.php">
-<!--
- 标题
--->
-        <div class="weui_cells_title">标题</div>
         <div class="weui_cells weui_cells_form">
+<!--标题-->
             <div class="weui_cell">
+                <div class="weui_cell_hd"><label class="weui_label">标题</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" id="title" placeholder="请输入活动标题"
-                              name="title" rows="3" onkeyup="count('title', title_cnt, 100);" required="required"></textarea>
-                    <div class="weui_textarea_counter"><span id="title_cnt">0</span>/100</div>
+                    <input class="weui_input" type="text" required="required" maxlength="100" name="title" placeholder="请输入活动标题">
                 </div>
             </div>
-        </div>
-<!--
- 嘉宾
--->
-        <div class="weui_cells_title">嘉宾</div>
-        <div class="weui_cells weui_cells_form">
+<!--嘉宾-->
             <div class="weui_cell">
+                <div class="weui_cell_hd"><label class="weui_label">嘉宾</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" id="speaker" placeholder="选填，此处可作主讲人姓名、职位的简单介绍"
-                              name="speaker" rows="3" onkeyup="count('speaker', speaker_cnt, 100);"></textarea>
-                    <div class="weui_textarea_counter"><span id="speaker_cnt">0</span>/100</div>
+                    <input class="weui_input" type="text" maxlength="100" name="speaker" placeholder="选填，主讲人的简单介绍">
                 </div>
             </div>
-        </div>
-<!--
- 地点
--->
-        <div class="weui_cells_title">地点</div>
-        <div class="weui_cells weui_cells_form">
+<!--地点-->
             <div class="weui_cell">
+                <div class="weui_cell_hd"><label class="weui_label">地点</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" id="location" placeholder="请输入活动地点"
-                              name="location" rows="2" onkeyup="count('location', location_cnt, 40);" required="required"></textarea>
-                    <div class="weui_textarea_counter"><span id="location_cnt">0</span>/40</div>
+                    <input class="weui_input" type="text" required="required" maxlength="40" name="location" placeholder="请输入活动地点">
                 </div>
             </div>
-        </div>
-<!--
- 主办方
--->
-        <div class="weui_cells_title">主办方</div>
-        <div class="weui_cells weui_cells_form">
+<!--主办方-->
             <div class="weui_cell">
+                <div class="weui_cell_hd"><label class="weui_label">主办方</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" id="hostname" placeholder="请输入活动的主办方名称，默认值为该用户的全称" name="hostname" rows="2"
-                              onkeyup="count('hostname', hostname_cnt, 40);"><?php if ($username != 'fdubot') echo $fullname;?></textarea>
-                    <div class="weui_textarea_counter">
-                        <span id="hostname_cnt"><?php if ($username != 'fdubot') echo count_str($fullname); else echo '0';?></span>/40
-                    </div>
+                    <input class="weui_input" type="text" maxlength="40" name="hostname" placeholder="选填，缺省值为我的全称" value="<?php
+                        if ($username != 'fdubot') {
+                            echo $fullname;
+                        }
+                    ?>">
                 </div>
             </div>
-        </div>
-<!--
- 时间
--->
-        <div class="weui_cells weui_cells_form">
-            <div class="weui_cell">
-                <div class="weui_cell_hd ">
-                    <select class="weui_select select_date_type" name="date_type">
-                        <option selected value="date_st">开始时间</option>
-                        <option value="date_ed">截止时间</option>
-                    </select>
-                </div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" name="date" type="datetime-local"/>
-                    <script type="text/javascript">
-                        add_default_time('date');
-                    </script>
-                </div>
-            </div>
-        </div>
-        <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动</div>
-        <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览</div>
-<!--
- 类别
--->
-        <div class="weui_cells weui_cells_form">
+<!--类别-->
             <div class="weui_cell weui_cell_select weui_select_after">
                 <div class="weui_cell_hd">
                     <label class="weui_label">类别</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <select class="weui_select" name="category">
-                        <option selected value=""></option>
-                        <option value="culture">人文</option>
-                        <option value="science">科学</option>
-                        <option value="art">艺术</option>
-                        <option value="finance">社科与金融</option>
-                        <option value="activity">比赛与活动</option>
-                        <option value="others">其它</option>
+                    <select class="weui_select select_no_padding" name="category">
+                         <option value="culture">人文</option>
+                         <option value="science">科学</option>
+                         <option value="art">艺术</option>
+                         <option value="finance">社科与金融</option>
+                         <option value="activity">比赛与活动</option>
+                         <option selected value="others">其它</option>
                     </select>
                 </div>
             </div>
-        </div>
-<!--
- 是否报名
--->
-        <div class="weui_cells weui_cells_form">
+<!--时间-->
+            <div class="weui_cell">
+                <div class="weui_cell_hd ">
+                    <select class="weui_select select_no_padding" name="date_type">
+                        <option selected value="date_st">开始时间</option>
+                        <option value="date_ed">截止时间</option>
+                    </select>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input class="weui_input" name="date" required type="datetime-local" />
+                </div>
+            </div>
+            <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动</div>
+            <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览</div>
+<!--提前报名-->
             <div class="weui_cell weui_cell_switch">
                 <div class="weui_cell_hd weui_cell_primary">是否需要提前取票/报名</div>
                 <div class="weui_cell_ft">
-                    <input class="weui_switch" name="register" type="checkbox" onclick="show_register_date()">
+                    <input class="weui_switch" name="register" type="checkbox" onclick="show_register_date()" />
                 </div>
             </div>
-        </div>
-        <div id="register_date_form" style="display:none">
-            <div class="weui_cells weui_cells_form">
+<!--报名时间-->
+            <div id="register_date_form" style="display:none">
                 <div class="weui_cell">
                     <div class="weui_cell_hd ">
-                        <select class="weui_select select_date_type" name="register_date_type">
+                        <select class="weui_select select_no_padding" name="register_date_type">
                             <option selected value="date_st">报名开始时间</option>
                             <option value="date_ed">报名截止时间</option>
                         </select>
@@ -481,41 +370,29 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                         <input class="weui_input" name="register_date" type="datetime-local" />
                     </div>
                 </div>
+                <div class="weui_cells_tips">"报名开始时间" 不填表示即可起，先到先得</div>
+                <div class="weui_cells_tips">"报名截止时间" 表示报名持续到该时间为止</div>
+                <div class="weui_cells_tips">【报名时间】和【详细信息】将一起回复给用户</div>
             </div>
-            <div class="weui_cells_tips">"报名开始时间" 不填表示即可起，先到先得</div>
-            <div class="weui_cells_tips">"报名截止时间" 表示报名持续到该时间为止</div>
-            <div class="weui_cells_tips">【报名时间】和【详细信息】将一起回复给用户</div>
-        </div>
-<!--
- 是否有详细描述
--->
-        <div class="weui_cells weui_cells_form">
+<!--是否有详细描述-->
             <div class="weui_cell weui_cell_switch">
                 <div class="weui_cell_hd weui_cell_primary">是否有详细描述</div>
                 <div class="weui_cell_ft">
-                    <input class="weui_switch" name="notification" type="checkbox" onclick="show_details(details_form)" />
+                    <input class="weui_switch" name="notification" type="checkbox" onclick="show_details(details_form)">
                 </div>
             </div>
-        </div>
-<!--
- 详细描述
--->
-        <div id="details_form" style="display: none">
-            <div class="weui_cells_title">详细描述</div>
-            <div class="weui_cells weui_cells_form">
+<!--详细描述-->
+            <div id="details_form" style="display:none;">
+                <div class="weui_cells_title">详细描述</div>
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
-                        <textarea class="weui_textarea" id="details_text" placeholder="请输入取票/报名方式、主讲人介绍或活动介绍等，主办方和报名时间不必填写，将自动补上。如果勾选“有详细描述”，则此栏不可为空"
+                        <textarea class="weui_textarea" id="details_text" placeholder="请输入主讲人介绍或活动介绍等信息，如果勾选“有详细描述”，则此栏或软文网址不可为空"
                                   name="details" rows="7" onkeyup="count('details_text', details_cnt, 300);"></textarea>
                         <div class="weui_textarea_counter"><span id="details_cnt">0</span>/300</div>
                     </div>
                 </div>
-            </div>
-<!--
- 软文网址
--->
-            <div class="weui_cells_title">软文网址</div>
-            <div class="weui_cells weui_cells_form">
+<!--软文网址-->
+                <div class="weui_cells_title">软文网址</div>
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
                         <textarea class="weui_textarea" id="propa_url" placeholder="选填，如果自己的公众号有宣传此活动的软文，可以把软文网址复制在此处"
@@ -525,20 +402,12 @@ if (isset($_GET['event_id']) && $_GET['event_id'] != '') {
                 </div>
             </div>
         </div>
-        <div class="weui_cells weui_cells_form">
-            <div class="weui_cell weui_cell_switch">
-                <div class="weui_cell_hd weui_cell_primary">是否发布在活动推送中</div>
-                <div class="weui_cell_ft">
-                    <input class="weui_switch" name="publish" type="checkbox" checked="checked" />
-                </div>
-            </div>
-        </div>
         <div class="weui_btn_area">
             <input class="weui_btn weui_btn_plain_primary" name="save" type="submit" onclick="this.form.submited=this.name" value="保存" />
         </div>
     </form>
     <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_plain_default" href="javascript:history.back();">返回</a>
+        <a class="weui_btn weui_btn_plain_default" href="manager.php#m/0">返回</a>
     </div>
     <div id="error_message"></div>
     <?php

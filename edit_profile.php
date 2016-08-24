@@ -25,11 +25,14 @@ if (isset($_COOKIE['login_serial'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="keywords" content="Fudan, Informations">
+    <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
-    <link rel="stylesheet" type="text/css" href="weui.min.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="functions.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+    <script type="text/javascript" src="js/settings.js"></script>
+
     <title>编辑个人信息 | FDUTOPIA</title>
 </head>
 
@@ -83,13 +86,46 @@ if (isset($_COOKIE['login_serial'])) {
                         <input class="weui_input" name="email" id="email" type="text" placeholder="联系邮箱用于找回密码" value="<?php if ($row['email'] != 'null') echo $row['email'];?>"/>
                     </div>
                 </div>
+                <div class="weui_cell weui_cell_select weui_select_after">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">大类</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <select class="weui_select" style="padding-left: 0;" name="category">
+                            <?php
+                            $options =
+                                '<option value="书院团学联">书院/团学联</option>' .
+                                '<option value="人文历史">人文历史</option>' .
+                                '<option value="社会科学">社会科学</option>' .
+                                '<option value="公益">公益</option>' .
+                                '<option value="国际交流">国际交流</option>' .
+                                '<option value="户外">户外</option>' .
+                                '<option value="健身运动">健身</option>' .
+                                '<option value="经管">经管</option>' .
+                                '<option value="兴趣拓展">兴趣拓展</option>' .
+                                '<option value="棋牌">棋牌</option>' .
+                                '<option value="音乐舞蹈">音乐舞蹈</option>' .
+                                '<option value="枫林社团">枫林社团</option>' .
+                                '<option value="江湾社团">江湾社团</option>' .
+                                '<option value="张江社团">张江社团</option>' .
+                                '<option value="其它">其它</option>';
+
+                            $pos = strpos($options, $row['category']);
+                            $part1 = substr($options, 0, $pos-7);
+                            $part2 = substr($options, $pos-7, strlen($options) - $pos + 7);
+                            $options = $part1 . 'selected ' . $part2;
+                            echo $options;
+                            ?>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="weui_btn_area">
                 <input class="weui_btn weui_btn_plain_primary" name="save" type="submit" value="保存" />
             </div>
         </form>
         <div class="weui_btn_area">
-            <a class="weui_btn weui_btn_plain_default" href="index.php">返回</a>
+            <a class="weui_btn weui_btn_plain_default" href="manager.php#m/2">返回</a>
         </div>
         <div id="error_message"></div>
     </div>

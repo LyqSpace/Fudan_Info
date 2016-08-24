@@ -24,6 +24,15 @@ div.median_img img {
     height: 200px;
 }
 
+ol {
+    list-style-type: decimal;
+    padding-left: 35px;
+}
+
+ul {
+    list-style: none;
+}
+
 .review_item {
     margin-bottom: 10px;
     border-radius: 6px;
@@ -56,7 +65,7 @@ div.median_img img {
     margin-left: -5px; !important;
 }
 
-.select_date_type {
+.select_no_padding {
     padding-left: 0; !important;
 }
 

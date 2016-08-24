@@ -44,28 +44,6 @@ window.onload = function () {
     show_register_date();
 };
 
-
-function random_item_color() {
-    var color_arr = [
-        "rgb(240, 227, 249)", "rgb(240, 227, 249)", "rgb(227, 255, 164)", "rgb(202, 244, 217)",
-        "rgb(226, 237, 209)", "rgb(255, 234, 223)", "rgb(199, 220, 167)", "rgb(254, 177, 134)",
-        "rgb(254, 214, 191)", "rgb(250, 198, 203)", "rgb(254, 197, 165)", "rgb(229, 187, 204)"];
-    var last_color_id_0 = -1;
-    var last_color_id_1 = -1;
-    for (var i = 0; i < 10000; i++) {
-        var item_id = "review_item" + String(i);
-        var item_obj = document.getElementById(item_id);
-        if (item_obj == null) break;
-        var color_id = Math.floor(Math.random() * color_arr.length);
-        while (color_id == last_color_id_0 || color_id == last_color_id_1) {
-            var color_id = Math.floor(Math.random() * color_arr.length);
-        }
-        last_color_id_0 = last_color_id_1;
-        last_color_id_1 = color_id;
-        item_obj.style.background = color_arr[color_id];
-    }
-}
-
 function count(text_id, cnt_id, cnt_limit) {
     var textarea = document.getElementById(text_id);
     var str = textarea.value;
@@ -102,47 +80,8 @@ function check_event(btn) {
     btn.className += " disabled";
 
     var error_message = "";
-    var str = document.getElementById("title").value;
-    var len = 0;
-    for (var i = 0; i < str.length; i++) {
-        if (str.charCodeAt(i) > 255) {
-            len += 2;
-        } else {
-            len += 1;
-        }
-    }
-    if (len > 100) error_message += "标题超过字数限制<br>";
-    if (len == 0) error_message += "标题不可为空<br>";
-
-    var str = document.getElementById("speaker").value;
-    var len = 0;
-    for (var i = 0; i < str.length; i++) {
-        if (str.charCodeAt(i) > 255) {
-            len += 2;
-        } else {
-            len += 1;
-        }
-    }
-    if (len > 100) error_message += "主讲人介绍超过字数限制<br>";
-
-    var str = document.getElementById("location").value;
-    var len = 0;
-    for (var i = 0; i < str.length; i++) {
-        if (str.charCodeAt(i) > 255) {
-            len += 2;
-        } else {
-            len += 1;
-        }
-    }
-    if (len > 40) error_message += "地点超过字数限制<br>";
-    if (len == 0) error_message += "地点不可为空<br>";
 
     var date = document.getElementsByName("date")[0].value;
-    if (date == "") error_message += "活动时间不可为空<br>";
-
-    var check_ele = document.getElementsByName("category");
-    if (check_ele[0].value == "") error_message += "类别不可为空<br>";
-
     var register_date = document.getElementsByName("register_date")[0].value;
     if (date != "" && register_date != "") {
         if (date <= register_date) error_message += "报名时间不可晚于活动时间<br>";
@@ -152,17 +91,6 @@ function check_event(btn) {
 
     if (register_check.checked == true && register_date == "" && register_type == "date_ed") error_message += "报名截止时间不可为空<br>";
     if (register_check.checked == false && register_date != "") error_message += "报名时间不为空，请勾选需要提前报名<br>";
-
-    var str = document.getElementById("details_text").value;
-    var detail_len = 0;
-    for (var i = 0; i < str.length; i++) {
-        if (str.charCodeAt(i) > 255) {
-            detail_len += 2;
-        } else {
-            detail_len += 1;
-        }
-    }
-    if (detail_len > 300) error_message += "详细描述超过字数限制<br>";
 
     var str = document.getElementById("propa_url").value;
     var propa_url_len = 0;
@@ -176,6 +104,7 @@ function check_event(btn) {
     }
     if (propa_url_len > 600) error_message += "软文网址超过字数限制<br>";
 
+    var detail_len = document.getElementsByName("details")[0].value.length;
     var check_ele = document.getElementsByName("notification");
     if (check_ele[0].checked == true && detail_len == 0 && propa_url_len == 0) error_message += "详细描述或软文网址不可为空<br>";
     if (check_ele[0].checked == false && (detail_len > 0 || propa_url_len > 0)) error_message += "详细描述或软文网址不为空，请勾选有详细描述<br>";

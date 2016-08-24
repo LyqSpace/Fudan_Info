@@ -30,7 +30,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         if ($_POST['username'] == 'admin') {
             header('Location: admin.php');
         } else {
-            header('Location: index.php');
+            header('Location: manager.php');
         }
     } else {
         ?>
@@ -39,10 +39,12 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-            <meta name="keywords" content="Fudan, Informations">
+            <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
             <meta name="author" content="Liang Yongqing, Liu Xueyue">
-            <link rel="stylesheet" type="text/css" href="weui.min.css" />
-            <link rel="stylesheet" type="text/css" href="style.css" />
+
+            <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+            <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
             <title>FDUTOPIA</title>
         </head>
 
