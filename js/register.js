@@ -3,7 +3,9 @@ function change_event() {
     var select_obj = document.getElementById("select_event");
     if (select_obj == null) return;
     var select_idx = select_obj.selectedIndex;
-    var event_id = select_obj.options[select_idx].value;
+    var event_obj = select_obj.options[select_idx];
+    if (event_obj == null) return;
+    var event_id = event_obj.value;
 
     var event_list = document.getElementById("event_list");
     var event_children = event_list.children;
@@ -21,7 +23,9 @@ function change_date() {
     var select_obj = document.getElementById("select_date");
     if (select_obj == null) return;
     var select_idx = select_obj.selectedIndex;
-    var date_id = select_obj.options[select_idx].value;
+    var date_obj = select_obj.options[select_idx];
+    if (date_obj == null) return;
+    var date_id = date_obj.value;
 
     var date_list = document.getElementById("date_list");
     var date_children = date_list.children;

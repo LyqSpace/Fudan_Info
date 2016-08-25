@@ -9,6 +9,19 @@ function show_details() {
     }
 }
 
+function show_register_form() {
+    var register_form = document.getElementById("register_form");
+    var date_type = document.getElementsByName("date_type")[0];
+    if (date_type == null || register_form == null) return;
+    if (date_type.value == "date_st") {
+        register_form.style.display = "block";
+    } else {
+        document.getElementsByName('register')[0].checked = null;
+        show_register_date();
+        register_form.style.display = "none";
+    }
+}
+
 function show_register_date() {
     var register_form = document.getElementById('register_date_form');
     var register_check = document.getElementsByName('register')[0];
@@ -41,6 +54,7 @@ function add_default_time(date_form_name) {
 
 window.onload = function () {
     show_details();
+    show_register_form();
     show_register_date();
 };
 
