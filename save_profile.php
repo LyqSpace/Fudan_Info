@@ -45,17 +45,17 @@ if (isset($_POST['fullname']) && $_POST['fullname'] != "" &&
     mysql_select_db("fudan_info");
 
     if (isset($_POST['password']) && $_POST['password'] != '') {
-        $query = sprintf("update users set fullname='%s', email='%s', password='%s', category='%s' where username='%s';",
+        $query = sprintf("update users set fullname='%s', email='%s', password='%s', user_category='%s' where username='%s';",
             mysql_real_escape_string($_POST['fullname']),
             mysql_real_escape_string($_POST['email']),
             md5($_POST['password']),
-            mysql_real_escape_string($_POST['category']),
+            mysql_real_escape_string($_POST['user_category']),
             $username);
     } else {
-        $query = sprintf("update users set fullname='%s', email='%s', category='%s' where username='%s';",
+        $query = sprintf("update users set fullname='%s', email='%s', user_category='%s' where username='%s';",
             mysql_real_escape_string($_POST['fullname']),
             mysql_real_escape_string($_POST['email']),
-            mysql_real_escape_string($_POST['category']),
+            mysql_real_escape_string($_POST['user_category']),
             $username);
     }
 
@@ -80,7 +80,7 @@ if (isset($_POST['fullname']) && $_POST['fullname'] != "" &&
             <a href="
             <?php
             if ($res) {
-                echo "manager.php#m/2";
+                echo "manager.php#m/page_settings";
             } else {
                 echo "javascript:history.back();";
             }

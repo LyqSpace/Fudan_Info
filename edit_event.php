@@ -1,5 +1,8 @@
 <?php
 
+//header('Cache-Control:no-cache,must-revalidate');
+//header('Pragma:no-cache');
+
 $username = '';
 $fullname = '';
 
@@ -201,7 +204,7 @@ if (isset($_COOKIE['login_serial'])) {
                         <div id="register_date_form" style="display:none">
                             <div class="weui_cell">
                                 <div class="weui_cell_hd ">
-                                    <select class="weui_select select_no_padding" name="register_date_type">
+                                    <select class="weui_select select_no_padding" name="register_date_type" onchange="show_register_type(this)">
                                         <?php
                                         $options =
                                             '<option value="date_st">报名开始时间</option>' .
@@ -216,16 +219,20 @@ if (isset($_COOKIE['login_serial'])) {
                                     </select>
                                 </div>
                                 <div class="weui_cell_bd weui_cell_primary">
-                                    <input class="weui_input" name="register_date" type="datetime-local" value="<?php
-                                    $pos = strpos($row['register_date'], " ");
-                                    $date = substr($row['register_date'], 0, $pos) . "T" . substr($row['register_date'], $pos + 1, strlen($row['register_date']) - $pos - 4);
-                                    echo $date;
-                                    ?>"/>
+                                    <div id="register_date_type_st" style="height: 21px;">
+                                        <p>即刻起</p>
+                                    </div>
+                                    <div id="register_date_type_ed" style="display: none;">
+                                        <input class="weui_input" name="register_date" type="datetime-local" value="<?php
+                                        $pos = strpos($row['register_date'], " ");
+                                        $date = substr($row['register_date'], 0, $pos) . "T" . substr($row['register_date'], $pos + 1, strlen($row['register_date']) - $pos - 4);
+                                        echo $date;
+                                        ?>"/>
+                                    </div>
+
                                 </div>
                             </div>
-                            <div class="weui_cells_tips">"报名开始时间" 不填表示即可起，先到先得</div>
-                            <div class="weui_cells_tips">"报名截止时间" 表示报名持续到该时间为止</div>
-                            <div class="weui_cells_tips">【报名时间】和【详细信息】将一起回复给用户</div>
+                            <div class="weui_cells_tips">"报名开始时间" 可点击切换成截止时间</div>
                         </div>
                     </div>
                     <!--是否有详细描述-->
@@ -251,10 +258,10 @@ if (isset($_COOKIE['login_serial'])) {
                         <div class="weui_cells_title">详细描述</div>
                         <div class="weui_cell">
                             <div class="weui_cell_bd weui_cell_primary">
-                        <textarea class="weui_textarea" id="details_text"
-                                  placeholder="请输入主讲人介绍或活动介绍等信息，如果勾选“有详细描述”，则此栏或软文网址不可为空"
-                                  name="details" rows="7"
-                                  onkeyup="count('details_text', details_cnt, 300);"><?php echo $row['details']; ?></textarea>
+                                <textarea class="weui_textarea" id="details_text"
+                                    placeholder="请输入主讲人介绍或活动介绍等信息，如果勾选“有详细描述”，则此栏或软文网址不可为空"
+                                    name="details" rows="7"
+                                    onkeyup="count('details_text', details_cnt, 300);"><?php echo $row['details']; ?></textarea>
 
                                 <div class="weui_textarea_counter"><span
                                         id="details_cnt"><?php echo count_str($row['details']); ?></span>/300
@@ -290,7 +297,7 @@ if (isset($_COOKIE['login_serial'])) {
                 </div>
             </form>
             <div class="weui_btn_area">
-                <a class="weui_btn weui_btn_plain_default" href="manager.php">返回活动管理</a>
+                <a class="weui_btn weui_btn_plain_default" href="manager.php#m/page_events">返回活动管理</a>
             </div>
             <div id="error_message"></div>
             <div id="confirm_message"></div>
@@ -394,18 +401,21 @@ if (isset($_COOKIE['login_serial'])) {
                     <div id="register_date_form" style="display:none">
                         <div class="weui_cell">
                             <div class="weui_cell_hd ">
-                                <select class="weui_select select_no_padding" name="register_date_type">
+                                <select class="weui_select select_no_padding" name="register_date_type" onchange="show_register_type()">
                                     <option selected value="date_st">报名开始时间</option>
                                     <option value="date_ed">报名截止时间</option>
                                 </select>
                             </div>
                             <div class="weui_cell_bd weui_cell_primary">
-                                <input class="weui_input" name="register_date" type="datetime-local"/>
+                                <div id="register_date_type_st" style="height: 21px;">
+                                    <p>即刻起</p>
+                                </div>
+                                <div id="register_date_type_ed" style="display: none;">
+                                    <input class="weui_input" name="register_date" type="datetime-local"/>
+                                </div>
                             </div>
                         </div>
-                        <div class="weui_cells_tips">"报名开始时间" 不填表示即可起，先到先得</div>
-                        <div class="weui_cells_tips">"报名截止时间" 表示报名持续到该时间为止</div>
-                        <div class="weui_cells_tips">【报名时间】和【详细信息】将一起回复给用户</div>
+                        <div class="weui_cells_tips">"报名开始时间" 可点击切换成截止时间</div>
                     </div>
                 </div>
                 <!--是否有详细描述-->
@@ -447,7 +457,7 @@ if (isset($_COOKIE['login_serial'])) {
             </div>
         </form>
         <div class="weui_btn_area">
-            <a class="weui_btn weui_btn_plain_default" href="manager.php#m/0">返回活动管理</a>
+            <a class="weui_btn weui_btn_plain_default" href="manager.php#m/page_events">返回活动管理</a>
         </div>
         <div id="error_message"></div>
         <?php

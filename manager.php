@@ -57,7 +57,7 @@ if (isset($_COOKIE['login_serial'])) {
 
                         <div class="weui_btn_area">
                             <a class="weui_btn weui_btn_plain_primary" href="edit_event.php">发布一则活动信息</a>
-                            <a class="weui_btn weui_btn_plain_primary" href="registeration_list.php">查看我的票务系统</a>
+                            <a class="weui_btn weui_btn_plain_primary" href="registration_list.php">查看我的票务系统</a>
                             <a class="weui_btn weui_btn_plain_primary" href="preview.php">预览本周日的活动推送</a>
                         </div>
 
@@ -117,7 +117,7 @@ if (isset($_COOKIE['login_serial'])) {
 
                         <div class="weui_btn_area">
                             <a class="weui_btn weui_btn_plain_primary" href="edit_recruit.php">编辑我的招新信息</a>
-                            <a class="weui_btn weui_btn_plain_primary" href="registeration_list.php">查看我的招新系统</a>
+                            <a class="weui_btn weui_btn_plain_primary" href="registration_list.php">查看我的招新系统</a>
                         </div>
 
                         <article class="weui_article">
@@ -180,7 +180,7 @@ if (isset($_COOKIE['login_serial'])) {
                                     <li><?php echo '【账号】' . $row['username'];?></li>
                                     <li><?php echo '【全称】' . $row['fullname'];?></li>
                                     <li><?php echo '【邮箱】' . $row['email'];?></li>
-                                    <li><?php echo '【大类】' . $row['category'];?></li>
+                                    <li><?php echo '【大类】' . $row['user_category'];?></li>
                                 </ul>
                                 <?php
                                 }

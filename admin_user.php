@@ -176,7 +176,7 @@ if (isset($_COOKIE['login_serial'])) {
                 }
             }
             if (isset($_POST['category']) && $_POST['category'] != '') {
-                $query = sprintf("update users set category='%s' where username='%s';",
+                $query = sprintf("update users set user_category='%s' where username='%s';",
                     mysql_real_escape_string($_POST['category']),
                     mysql_real_escape_string($_POST['username']));
                 $res = mysql_query($query, $mysql);

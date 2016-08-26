@@ -87,7 +87,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
                 <a href="
             <?php
                 if ($res) {
-                    echo "manager.php";
+                    echo "manager.php#m/page_events";
                 } else {
                     echo "javascript:history.back();";
                 }

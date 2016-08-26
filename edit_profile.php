@@ -91,7 +91,7 @@ if (isset($_COOKIE['login_serial'])) {
                         <label class="weui_label">大类</label>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <select class="weui_select" style="padding-left: 0;" name="category">
+                        <select class="weui_select" style="padding-left: 0;" name="user_category">
                             <?php
                             $options =
                                 '<option value="书院团学联">书院/团学联</option>' .
@@ -110,7 +110,7 @@ if (isset($_COOKIE['login_serial'])) {
                                 '<option value="张江社团">张江社团</option>' .
                                 '<option value="其它">其它</option>';
 
-                            $pos = strpos($options, $row['category']);
+                            $pos = strpos($options, $row['user_category']);
                             $part1 = substr($options, 0, $pos-7);
                             $part2 = substr($options, $pos-7, strlen($options) - $pos + 7);
                             $options = $part1 . 'selected ' . $part2;
@@ -125,7 +125,7 @@ if (isset($_COOKIE['login_serial'])) {
             </div>
         </form>
         <div class="weui_btn_area">
-            <a class="weui_btn weui_btn_plain_default" href="manager.php#m/2">返回</a>
+            <a class="weui_btn weui_btn_plain_default" href="manager.php#m/page_settings">返回</a>
         </div>
         <div id="error_message"></div>
     </div>

@@ -63,7 +63,7 @@ if (isset($_GET['registration_serial']) && $_GET['registration_serial'] != '') {
     </div>
     <div class="page_body">
         <div class="weui_btn_area">
-            <a class="weui_btn weui_btn_plain_default" href="registeration_list.php">返回我的票务系统</a>
+            <a class="weui_btn weui_btn_plain_default" href="registration_list.php">返回我的票务系统</a>
         </div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
@@ -86,13 +86,13 @@ if (isset($_GET['registration_serial']) && $_GET['registration_serial'] != '') {
                         <td>
                             <ul>
                                 <?php
-                                    echo "<li>【卡号】". $row['register_id'] ."</li>";
-                                    echo "<li>【姓名】". $row['register_name'] ."</li>";
-                                    echo "<li>【专业】". $row['register_major'] ."</li>";
-                                    echo "<li>【手机】". $row['register_phone'] ."</li>";
+                                    echo "<li>【学号】". $row['registration_id'] ."</li>";
+                                    echo "<li>【姓名】". $row['registration_name'] ."</li>";
+                                    echo "<li>【专业】". $row['registration_major'] ."</li>";
+                                    echo "<li>【手机】". $row['registration_phone'] ."</li>";
                                     echo "<li>【票数】". $row['ticket_num'] ."</li>";
-                                if ($row['message'] != '') {
-                                    echo "<li>【留言】". $row['message'] ."</li>";
+                                if ($row['registration_message'] != '') {
+                                    echo "<li>【留言】". $row['registration_message'] ."</li>";
                                 }
                                 ?>
                             </ul>

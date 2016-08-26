@@ -17,9 +17,11 @@ function show_register_form() {
         register_form.style.display = "block";
     } else {
         document.getElementsByName('register')[0].checked = null;
-        show_register_date();
         register_form.style.display = "none";
     }
+    var register_check = document.getElementsByName('register')[0];
+    if (register_check != null) register_check.checked = "";
+    show_register_date();
 }
 
 function show_register_date() {
@@ -32,6 +34,37 @@ function show_register_date() {
     } else {
         register_form.style.display = "none";
         document.getElementsByName('register_date')[0].value = null;
+    }
+    var register_type_obj = document.getElementsByName('register_date_type')[0];
+    if (register_type_obj == null) return;
+    register_type_obj.selectedIndex = 0;
+    show_register_type();
+}
+
+function show_register_type() {
+
+    var this_obj = document.getElementsByName('register_date_type')[0];
+    if (this_obj == null) return;
+    var date_type = this_obj.selectedOptions[0].value;
+
+    if (date_type == 'date_st') {
+        var date_type_st = document.getElementById('register_date_type_st');
+        if (date_type_st != null) {
+            date_type_st.style.display = 'block';
+        }
+        var date_type_ed = document.getElementById('register_date_type_ed');
+        if (date_type_ed != null) {
+            date_type_ed.style.display = 'none';
+        }
+    } else {
+        var date_type_st = document.getElementById('register_date_type_st');
+        if (date_type_st != null) {
+            date_type_st.style.display = 'none';
+        }
+        var date_type_ed = document.getElementById('register_date_type_ed');
+        if (date_type_ed != null) {
+            date_type_ed.style.display = 'block';
+        }
     }
 }
 
@@ -56,6 +89,7 @@ window.onload = function () {
     show_details();
     show_register_form();
     show_register_date();
+    show_register_type();
 };
 
 function count(text_id, cnt_id, cnt_limit) {
@@ -123,7 +157,7 @@ function check_event(btn) {
     if (check_ele[0].checked == true && detail_len == 0 && propa_url_len == 0) error_message += "详细描述或软文网址不可为空<br>";
     if (check_ele[0].checked == false && (detail_len > 0 || propa_url_len > 0)) error_message += "详细描述或软文网址不为空，请勾选有详细描述<br>";
 
-    if (error_message === "") {
+    if (error_message == "") {
         return true;
     } else {
 

@@ -3,40 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="keywords" content="Fudan, Informations">
+    <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
-    <link rel="stylesheet" type="text/css" href="weui.min.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="js/forgot_ticket.js"></script>
-    <title>找回入场码 | FDUTOPIA</title>
+
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+    <script type="text/javascript" src="js/register_events.js"></script>
+
+    <title>找回活动入场码 | FDUTOPIA</title>
 </head>
 <body ontouchstart>
 <div class="page_header">
-    <h1 class="page_title">找回入场码</h1>
-    <p class="page_desc">填上以下任意基本信息查询</p>
+    <h1 class="page_title">找回活动入场码</h1>
+    <p class="page_desc">填写以下基本信息查询</p>
 </div>
 
 <div class="page_body">
 
-    <form name="forgot_ticket" method="post" onsubmit="return check_forgot_ticket();" action="forgot_ticket.php">
+    <form name="forgot_ticket" method="post" onsubmit="return check_register_forgotten();" action="register_events_forgotten.php">
 
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">学号</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="number" pattern="[0-9]*" name="registration_id" placeholder="请输入学号或工号">
+                    <input class="weui_input" type="number" required="required" pattern="[0-9]*" name="registration_id" placeholder="请输入学号或工号">
                 </div>
             </div>
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">姓名</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="text" name="registration_name" placeholder="请输入姓名">
+                    <input class="weui_input" type="text" required="required" name="registration_name" placeholder="请输入姓名">
                 </div>
             </div>
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="number" pattern="[0-9]*" name="registration_phone" placeholder="请输入手机号码">
+                    <input class="weui_input" type="number" required="required" pattern="[0-9]*" name="registration_phone" placeholder="请输入手机号码">
                 </div>
             </div>
         </div>
@@ -44,7 +47,7 @@
             <input name="search" type="submit" value="查询" class="weui_btn weui_btn_plain_primary" />
         </div>
         <div class="weui_btn_area">
-            <a class="weui_btn weui_btn_plain_default" href="register.php">返回报名表</a>
+            <a class="weui_btn weui_btn_plain_default" href="index.php">返回报名系统</a>
         </div>
 
     </form>
@@ -59,8 +62,8 @@
             mysql_query("set names 'utf8'");
             mysql_select_db("fudan_info");
 
-            $query = sprintf("select * from event_register_list natural join event_registration_date natural join event_info natural join users
-                where register_id='%s' or register_name='%s' or register_phone='%s';",
+            $query = sprintf("select * from event_registration_list natural join event_registration_date natural join event_info natural join users
+                where registration_id='%s' or registration_name='%s' or registration_phone='%s';",
                 mysql_real_escape_string($_POST['registration_id']),
                 mysql_real_escape_string($_POST['registration_name']),
                 mysql_real_escape_string($_POST['registration_phone']));
@@ -72,15 +75,9 @@
     <br>
     <p class="page_desc">查询结果</p>
     <?php
-            if (isset($_POST['registration_id']) && $_POST['registration_id'] != '') {
-                echo '<p class="page_desc">【卡号】' . $_POST['registration_id'] . '</p>';
-            }
-            if (isset($_POST['registration_name']) && $_POST['registration_name'] != '') {
-                echo '<p class="page_desc">【姓名】' . $_POST['registration_name'] . '</p>';
-            }
-            if (isset($_POST['registration_phone']) && $_POST['registration_phone'] != '') {
-                echo '<p class="page_desc">【手机】' . $_POST['registration_phone'] . '</p>';
-            }
+        echo '<p class="page_desc">【学号】' . $_POST['registration_id'] . '</p>';
+        echo '<p class="page_desc">【姓名】' . $_POST['registration_name'] . '</p>';
+        echo '<p class="page_desc">【手机】' . $_POST['registration_phone'] . '</p>';
     ?>
     <div class="weui_cells weui_cells_form">
         <div class="weui_cell">
@@ -96,7 +93,7 @@
                 $event_date = date('n月j日 H:i', strtotime($row['event_date']));
     ?>
                 <tr>
-                    <td><?php echo $row['register_serial'];?></td>
+                    <td><?php echo $row['registration_user_serial'];?></td>
                     <td>
                         <ul>
                             <?php
@@ -128,18 +125,7 @@
     <?php
         }
     ?>
-
     <br>
-    <hr>
-    <br>
-    <p class="page_desc">素心无用，自由分享</p>
-    <p class="page_desc">分享复旦内有生命力的讲座活动</p>
-    <p class="page_desc">守望复旦人澎湃不息的赤子之心</p>
-    <br>
-    <p class="page_desc">如果你喜欢我们，欢迎关注公众号FDUTOPIA</p>
-    <div class="median_img">
-        <img src="qrcode_median.jpg" alt="qrcode"/>
-    </div>
     <br>
 
 </div>

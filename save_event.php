@@ -184,7 +184,7 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
                 echo "javascript:history.back();";
             } else {
                 if ($res) {
-                    echo "manager.php#m/0";
+                    echo "manager.php#m/page_events";
                 } else {
                     echo "javascript:history.back();";
                 }

@@ -157,7 +157,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
                 echo "index.php";
             } else {
                 if ($error_msg == "") {
-                    echo "manager.php";
+                    echo "manager.php#m/page_events";
                 } else {
                     echo "javascript:history.back();";
                 }

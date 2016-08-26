@@ -36,7 +36,6 @@ if (isset($_COOKIE['login_serial'])) {
 
     <title>编辑报名表 | FDUTOPIA</title>
 </head>
-
 <body ontouchstart>
 <div class="page_header">
     <h1 class="page_title">报名表</h1>
@@ -92,7 +91,13 @@ if (isset($_COOKIE['login_serial'])) {
                             }
 
                             ?>
-
+                            <li><?php echo '【标题】' . $row['title'];?></li>
+                            <?php
+                            if ($row['speaker'] != '') {
+                                echo '<li>【嘉宾】' . $row['speaker'] . '</li>';
+                            }
+                            ?>
+                            <li><?php echo '【地点】' . $row['location'];?></li>
                             <li><?php echo $register_date; ?></li>
                             <li><?php echo '【票/人】' . $row['ticket_per_person']; ?></li>
                         </ul>

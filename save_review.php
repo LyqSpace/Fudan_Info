@@ -95,7 +95,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
                 echo "javascript:history.back();";
             } else {
                 if ($res) {
-                    echo "manager.php";
+                    echo "manager.php#m/page_events";
                 } else {
                     echo "javascript:history.back();";
                 }
