@@ -63,7 +63,7 @@
             mysql_select_db("fudan_info");
 
             $query = sprintf("select * from event_registration_list natural join event_registration_date natural join event_info natural join users
-                where registration_id='%s' or registration_name='%s' or registration_phone='%s';",
+                where registration_id='%s' or registration_name='%s' or registration_phone='%s' order by register_time desc;",
                 mysql_real_escape_string($_POST['registration_id']),
                 mysql_real_escape_string($_POST['registration_name']),
                 mysql_real_escape_string($_POST['registration_phone']));

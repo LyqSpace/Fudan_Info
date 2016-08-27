@@ -1,0 +1,4 @@
+.fp-slidesContainer {
+    overflow-y: scroll;
+    will-change: transform;
+}

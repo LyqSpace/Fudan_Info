@@ -20,7 +20,7 @@ if (isset($_COOKIE['login_serial'])) {
 }
 ?>
 
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <!-- Welcome! Contact Me: root@lyq.me -->
 <head>
     <meta charset="UTF-8">
@@ -28,9 +28,10 @@ if (isset($_COOKIE['login_serial'])) {
     <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
 
-    <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css" />
+    <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css"/>
     <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/fullpage.css"/>
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
@@ -48,8 +49,11 @@ if (isset($_COOKIE['login_serial'])) {
                 <div class="slide" data-anchor="page_events">
                     <div class="page_header">
                         <h1 class="page_title">活动管理</h1>
+
                         <p class="page_desc"><span class="info_publish">已发布</span>表示已经或将在推送中公开发布</p>
+
                         <p class="page_desc">如果想使用旧的信息，编辑后请选择【另存为】</p>
+
                         <p class="page_desc" id="info_red">报名表将被放在推送的“阅读原文”中</p>
 
                     </div>
@@ -64,7 +68,7 @@ if (isset($_COOKIE['login_serial'])) {
                         <article class="weui_article">
                             <div class="section_box">
                                 <div class="section_header">
-<!--                                    <span class="section_num">1</span>-->
+                                    <!--                                    <span class="section_num">1</span>-->
                                     <span class="section_body">历史活动信息</span>
                                 </div>
                             </div>
@@ -75,14 +79,14 @@ if (isset($_COOKIE['login_serial'])) {
                                 mysql_query("set names 'utf8'");
                                 mysql_select_db("fudan_info");
 
-                                $query = sprintf("select title, i.event_id as event_id, confirm from event_info as i left join event_registration_common as c on i.event_id=c.event_id
-                                    where username='%s' order by i.event_id desc;", $username);
+                                $query = sprintf("SELECT title, i.event_id AS event_id, confirm FROM event_info AS i LEFT JOIN event_registration_common AS c ON i.event_id=c.event_id
+                                    WHERE username='%s' ORDER BY i.event_id DESC;", $username);
                                 $res = mysql_query($query, $mysql);
                                 $event_cnt = 0;
                                 while ($row = mysql_fetch_assoc($res)) {
                                     $event_cnt++;
                                     ?>
-                                    <h3 class="info_title"><?php echo $event_cnt . ". " . $row['title'];?></h3>
+                                    <h3 class="info_title"><?php echo $event_cnt . ". " . $row['title']; ?></h3>
                                     <div class="info_box">
                                         <p class="info_time">
                                             <?php
@@ -93,9 +97,12 @@ if (isset($_COOKIE['login_serial'])) {
                                             }
 
                                             ?></p>
-                                        <a class="weui_btn weui_btn_mini info_left" href="edit_review.php?event_id=<?php echo $row['event_id'];?>">回顾</a>
-                                        <a class="weui_btn weui_btn_mini info_midright" href="edit_registration.php?event_id=<?php echo $row['event_id'];?>">报名表</a>
-                                        <a class="weui_btn weui_btn_mini info_midright" href="edit_event.php?event_id=<?php echo $row['event_id'];?>">编辑</a>
+                                        <a class="weui_btn weui_btn_mini info_left"
+                                           href="edit_review.php?event_id=<?php echo $row['event_id']; ?>">回顾</a>
+                                        <a class="weui_btn weui_btn_mini info_midright"
+                                           href="edit_registration.php?event_id=<?php echo $row['event_id']; ?>">报名表</a>
+                                        <a class="weui_btn weui_btn_mini info_midright"
+                                           href="edit_event.php?event_id=<?php echo $row['event_id']; ?>">编辑</a>
                                     </div>
                                     <?php
                                 }
@@ -109,7 +116,9 @@ if (isset($_COOKIE['login_serial'])) {
                 <div class="slide" data-anchor="page_recruits">
                     <div class="page_header">
                         <h1 class="page_title">招新管理</h1>
+
                         <p class="page_desc">招新信息只在每学期前四周被推送</p>
+
                         <p class="page_desc" id="info_red">招新表将被放在推送的“阅读原文”中</p>
 
                     </div>
@@ -120,40 +129,56 @@ if (isset($_COOKIE['login_serial'])) {
                             <a class="weui_btn weui_btn_plain_primary" href="registration_list.php">查看我的招新系统</a>
                         </div>
 
+
+                        <?php
+                        $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+                        mysql_query("set names 'utf8'");
+                        mysql_select_db("fudan_info");
+
+                        $query = sprintf("SELECT * FROM recruit_info_common WHERE username='%s';", $username);
+                        $res = mysql_query($query, $mysql);
+                        if ($row = mysql_fetch_assoc($res)) {
+                        ?>
                         <article class="weui_article">
                             <div class="section_box">
                                 <div class="section_header">
-<!--                                    <span class="section_num">1</span>-->
                                     <span class="section_body">招新信息</span>
                                 </div>
                             </div>
 
                             <section>
+                                <h3 class="info_title"><?php echo $row['details'] .'1111'; ?></h3>
                                 <?php
-                                $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
-                                mysql_query("set names 'utf8'");
-                                mysql_select_db("fudan_info");
-
-                                $query = sprintf("select * from recruit_info_common where username='%s';", $username);
+                                ?>
+                            </section>
+                            <div class="section_box">
+                                <div class="section_header">
+                                    <span class="section_body">活动介绍</span>
+                                </div>
+                            </div>
+                            </section>
+                            <ol>
+                                <?php
+                                $query = sprintf("SELECT * FROM recruit_info_activities WHERE username='%s';", $username);
+                                echo $query;
                                 $res = mysql_query($query, $mysql);
-                                if ($row = mysql_fetch_assoc($res)) {
+                                while ($row = mysql_fetch_assoc($res)) {
                                     ?>
-                                    <h3 class="info_title"><?php echo $row['details'];?></h3>
-                                    <ol>
-                                    <?php
+                                    <li>
+                                        <p><?php echo '【名称】' . $row['activity_name']; ?></p>
 
-                                    $query = sprintf("select * from recruit_info_departments where username='%s';", $username);
-                                    $res = mysql_query($query, $mysql);
-                                    while ($row = mysql_fetch_assoc($res)) {
-                                        $department_info = '【' . $row['department'] . '】' . $row['info'];
-                                        ?>
-                                        <li><p><?php echo $department_info;?></p></li>
-                                        <?php
-                                    }
+                                        <p><?php echo '【时间】' . $row['activity_date']; ?></p>
+
+                                        <p><?php echo '【地点】' . $row['activity_location']; ?></p>
+
+                                        <p><?php echo '【详细】' . $row['activity_detials']; ?></p>
+                                    </li>
+                                    <?php
+                                }
                                 }
                                 mysql_close($mysql);
                                 ?>
-                                    </ol>
+                            </ol>
                             </section>
                         </article>
                     </div>
@@ -162,29 +187,31 @@ if (isset($_COOKIE['login_serial'])) {
                 <div class="slide" data-anchor="page_settings">
                     <div class="page_header">
                         <h1 class="page_title">我的信息</h1>
+
                         <p class="page_desc">社团/主办方的全称将显示在推送中</p>
+
                         <p class="page_desc">联系邮箱不可为空</p>
                     </div>
                     <div class="page_body">
                         <article class="weui_article">
-                                <?php
-                                $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
-                                mysql_query("set names 'utf8'");
-                                mysql_select_db("fudan_info");
+                            <?php
+                            $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+                            mysql_query("set names 'utf8'");
+                            mysql_select_db("fudan_info");
 
-                                $query = sprintf("select * from users where username='%s';", $username);
-                                $res = mysql_query($query, $mysql);
-                                if ($row = mysql_fetch_assoc($res)) {
-                                    ?>
+                            $query = sprintf("SELECT * FROM users WHERE username='%s';", $username);
+                            $res = mysql_query($query, $mysql);
+                            if ($row = mysql_fetch_assoc($res)) {
+                                ?>
                                 <ul>
-                                    <li><?php echo '【账号】' . $row['username'];?></li>
-                                    <li><?php echo '【全称】' . $row['fullname'];?></li>
-                                    <li><?php echo '【邮箱】' . $row['email'];?></li>
-                                    <li><?php echo '【大类】' . $row['user_category'];?></li>
+                                    <li><?php echo '【账号】' . $row['username']; ?></li>
+                                    <li><?php echo '【全称】' . $row['fullname']; ?></li>
+                                    <li><?php echo '【邮箱】' . $row['email']; ?></li>
+                                    <li><?php echo '【大类】' . $row['user_category']; ?></li>
                                 </ul>
                                 <?php
-                                }
-                                ?>
+                            }
+                            ?>
                         </article>
                         <div class="weui_btn_area">
                             <a class="weui_btn weui_btn_plain_primary" href="edit_profile.php">修改我的基本信息</a>

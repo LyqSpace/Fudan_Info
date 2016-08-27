@@ -82,7 +82,7 @@ function check_register() {
         for (i = 0; i < info_list.length; i++) {
             info_list[i].value = tmp;
         }
-    }
+    } else error_message += "学号不可为空<br>";
 
     tmp_obj = document.getElementsByName("registration_name_tmp")[0];
     if (tmp_obj != null) {
@@ -92,7 +92,7 @@ function check_register() {
         for (i = 0; i < info_list.length; i++) {
             info_list[i].value = tmp;
         }
-    }
+    } else error_message += "姓名不可为空<br>";
 
     tmp_obj = document.getElementsByName("registration_major_tmp")[0];
     if (tmp_obj != null) {
@@ -102,7 +102,7 @@ function check_register() {
         for (i = 0; i < info_list.length; i++) {
             info_list[i].value = tmp;
         }
-    }
+    } else error_message += "专业不可为空<br>";
 
     tmp_obj = document.getElementsByName("registration_phone_tmp")[0];
     if (tmp_obj != null) {
@@ -112,7 +112,7 @@ function check_register() {
         for (i = 0; i < info_list.length; i++) {
             info_list[i].value = tmp;
         }
-    }
+    } else error_message += "电话不可为空<br>";
 
     tmp_obj = document.getElementsByName("registration_message_tmp")[0];
     if (tmp_obj != null) {
@@ -124,6 +124,11 @@ function check_register() {
     }
 
     if (error_message == "") {
+        setCookie("guest_id", document.getElementsByName("registration_id_tmp")[0].value, "d360");
+        setCookie("guest_name", document.getElementsByName("registration_name_tmp")[0].value, "d360");
+        setCookie("guest_phone", document.getElementsByName("registration_phone_tmp")[0].value, "d360");
+        setCookie("guest_major", document.getElementsByName("registration_major_tmp")[0].value, "d360");
+        setCookie("guest_event_message", document.getElementsByName("registration_message_tmp")[0].value, "d360");
         return true;
     } else {
 
@@ -152,5 +157,8 @@ function check_register() {
 }
 
 function check_register_forgotten() {
+    setCookie("guest_id", document.getElementsByName("registration_id")[0].value, "d360");
+    setCookie("guest_name", document.getElementsByName("registration_name")[0].value, "d360");
+    setCookie("guest_phone", document.getElementsByName("registration_phone")[0].value, "d360");
     return true;
 }

@@ -25,11 +25,14 @@ if (isset($_COOKIE['login_serial'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="keywords" content="Fudan, Informations">
+    <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
-    <link rel="stylesheet" type="text/css" href="weui.min.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="functions.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+    <script type="text/javascript" src="js/recruit.js"></script>
+
     <title>保存一则招新 | FDUTOPIA</title>
 </head>
 
@@ -38,45 +41,46 @@ if (isset($_COOKIE['login_serial'])) {
 
 if (isset($_POST['details']) && $_POST['details'] != "") {
 
+    $error_msg = "";
+
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_query("set names 'utf8'");
     mysql_select_db("fudan_info");
 
-    $publish = 'false';
-    if (isset($_POST['publish']) && $_POST['publish'] == "on") {
-        $publish = 'true';
-    }
-    $details = 'null';
-    if (isset($_POST['details']) && $_POST['details'] != "") {
-        $details = "'" . mysql_real_escape_string($_POST['details']) . "'";
-    }
-
-    $forbid = false;
-
-    if (isset($_POST['recruit_id']) && $_POST['recruit_id'] != '') {
-
-        $query = sprintf("select * from recruit_info where recruit_id='%s';",
-            mysql_real_escape_string($_POST['recruit_id']));
-        $res = mysql_query($query, $mysql);
-        $row = mysql_fetch_assoc($res);
-        if ($row['username'] == $username) {
-            $query = sprintf("update recruit_info set publish=%s, details=%s, edit_time=null where recruit_id=%s;",
-                $publish,
-                $details,
-                $_POST['recruit_id']);
-        } else {
-            $forbid = true;
-        }
-
-    } else {
-        $query = sprintf("insert into recruit_info value (null, '%s', %s, %s, null);",
-            $username,
-            $publish,
-            $details);
-    }
-
+    $query = sprintf("delete from recruit_info_common where username='%s';", $username);
     $res = mysql_query($query, $mysql);
 
+    $query = sprintf("insert into recruit_info_common value ('%s', '%s', null);",
+            $username,
+            mysql_real_escape_string($_POST['details']));
+    $res = mysql_query($query, $mysql);
+    if (!$res) $error_msg .= "保存“招新概况”失败!<br>";
+
+    $query = sprintf("delete from recruit_info_activities where username='%s';", $username);
+    $res = mysql_query($query, $mysql);
+
+    $activity_cnt = 1;
+
+    while (true) {
+
+        $activity_name = "activity_name_" . $activity_cnt;
+        $activity_date = "activity_date_" . $activity_cnt;
+        $activity_location = "activity_location_" .$activity_cnt;
+        $activity_details = "activity_details_" . $activity_cnt;
+
+        if (!isset($_POST[$activity_name])) break;
+
+        $query = sprintf("insert into recruit_info_activities value (null, '%s', '%s', '%s', '%s', '%s');",
+            $username,
+            mysql_real_escape_string($_POST[$activity_name]),
+            mysql_real_escape_string($_POST[$activity_date]),
+            mysql_real_escape_string($_POST[$activity_location]),
+            mysql_real_escape_string($_POST[$activity_details]));
+        //echo $query;
+        mysql_query($query, $mysql);
+
+        $activity_cnt++;
+    }
     ?>
     <div class="weui_mask"></div>
     <div class="weui_dialog">
@@ -84,32 +88,10 @@ if (isset($_POST['details']) && $_POST['details'] != "") {
             <strong class="weui_dialog_title">保存结果</strong>
         </div>
         <div class="weui_dialog_bd">
-            <?php
-            if ($forbid) {
-                echo "禁止保存不是自己的招新!";
-            } else {
-                if ($res) {
-                    echo "招新保存成功! 点击“确定”跳转到我的历史发布";
-                } else {
-                    echo "招新保存失败! 点击“确定”返回编辑界面<br>错误代码<br>" . mysql_error() . "<br>请发送错误代码联系管理员fdutopia@lyq.me";
-                }
-            }
-            ?>
+            <p>招新保存成功! 点击“确定”跳转到我的招新管理</p>
         </div>
         <div class="weui_dialog_ft">
-            <a href="
-            <?php
-            if ($forbid) {
-                echo "index.php";
-            } else {
-                if ($res) {
-                    echo "client_history.php";
-                } else {
-                    echo "javascript:history.back();";
-                }
-            }
-
-            ?>" class="weui_btn_dialog primary">确定</a>
+            <a href="manager.php#m/page_recruits" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php
@@ -127,7 +109,7 @@ if (isset($_POST['details']) && $_POST['details'] != "") {
             本页面禁止违规访问!
         </div>
         <div class="weui_dialog_ft">
-            <a href="index.php" class="weui_btn_dialog primary">确定</a>
+            <a href="manager.php" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php

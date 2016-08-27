@@ -1,7 +1,4 @@
-<?php
-header('Cache-Control:no-cache,must-revalidate');
-header('Pragma:no-cache');
-?>
+
 
 <html lang="en">
 <!-- Welcome! Contact Me: root@lyq.me -->

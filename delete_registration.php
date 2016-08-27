@@ -107,7 +107,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
                 只能删除自己的报名表!
             </div>
             <div class="weui_dialog_ft">
-                <a href="javascript:history.back();" weui_btn_dialog primary">确定</a>
+                <a href="manager.php#m/page_events" weui_btn_dialog primary">确定</a>
             </div>
         </div>
         <?php
@@ -126,7 +126,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
             本页面禁止违规访问!
         </div>
         <div class="weui_dialog_ft">
-            <a href="javascript:history.back()" class="weui_btn_dialog primary">确定</a>
+            <a href="manager.php#m/page_events" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php

@@ -161,8 +161,8 @@ if (isset($_COOKIE['login_serial'])) {
                         <div id="register_date_form" style="display:none">
                             <!--报名时间-->
                             <div class="weui_cell">
-                                <div class="weui_cell_hd cell_hd_date_type">
-                                    <select class="weui_select select_no_padding" name="register_date_type">
+                                <div class="weui_cell_hd ">
+                                    <select class="weui_select select_no_padding" name="register_date_type" onchange="show_register_type(this)">
                                         <?php
                                         $options =
                                             '<option value="date_st">报名开始时间</option>' .
@@ -177,11 +177,17 @@ if (isset($_COOKIE['login_serial'])) {
                                     </select>
                                 </div>
                                 <div class="weui_cell_bd weui_cell_primary">
-                                    <input class="weui_input" name="register_date" type="datetime-local" value="<?php
-                                    $pos = strpos($row['register_date'], " ");
-                                    $date = substr($row['register_date'], 0, $pos) . "T" . substr($row['register_date'], $pos + 1, strlen($row['register_date']) - $pos - 4);
-                                    echo $date;
-                                    ?>"/>
+                                    <div id="register_date_type_st" style="height: 21px;">
+                                        <p>即刻起</p>
+                                    </div>
+                                    <div id="register_date_type_ed" style="display: none;">
+                                        <input class="weui_input" name="register_date" type="datetime-local" value="<?php
+                                        $pos = strpos($row['register_date'], " ");
+                                        $date = substr($row['register_date'], 0, $pos) . "T" . substr($row['register_date'], $pos + 1, strlen($row['register_date']) - $pos - 4);
+                                        echo $date;
+                                        ?>"/>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="weui_cells_tips">"报名开始时间" 不填表示即可起，先到先得</div>
@@ -277,7 +283,7 @@ if (isset($_COOKIE['login_serial'])) {
             }
             ?>
             <div class="weui_btn_area">
-                <a class="weui_btn weui_btn_plain_default" href="javascript:history.back();">返回</a>
+                <a class="weui_btn weui_btn_plain_default" href="manager.php#m/page_events">返回</a>
             </div>
             <div id="error_message"></div>
             <div id="confirm_message"></div>
