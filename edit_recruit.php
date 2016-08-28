@@ -76,8 +76,8 @@ if (isset($_COOKIE['login_serial'])) {
 
         <input style="display: none" name="username" value="<?php echo $username; ?>"/>
 
+        <div class="weui_cells_title">社团概况</div>
         <div class="weui_cells weui_cells_form">
-            <div class="weui_cells_title">社团概况</div>
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
                         <textarea class="weui_textarea" id="details_text" placeholder="请输入社团介绍和招新信息，社团名无需填写。此栏不可为空。"
@@ -101,15 +101,15 @@ if (isset($_COOKIE['login_serial'])) {
                 $cnt++;
                 ?>
                 <div id="<?php echo "activity_" . $cnt; ?>">
+                    <?php
+                        if ($cnt == 1) {
+                    ?>
+                        <div class="weui_cells_title">常规/大型活动介绍</div>
+                    <?php
+                        }
+                    ?>
                     <div class="weui_cells weui_cells_form">
-                        <?php
-                            if ($cnt == 1) {
-                        ?>
-                            <div class="weui_cells_title">常规/大型活动介绍</div>
-                        <?php
-                            }
-                        ?>
-                        <div class="weui_cell">
+                    <div class="weui_cell">
                             <div class="weui_cell_hd">
                                 <label class="weui_label">活动<?php echo $cnt; ?></label>
                             </div>
@@ -171,7 +171,7 @@ if (isset($_COOKIE['login_serial'])) {
         </div>
     </form>
     <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_plain_default" href="manager.php#m/page_recruit;">返回招新管理</a>
+        <a class="weui_btn weui_btn_plain_default" href="manager.php#m/page_recruit">返回招新管理</a>
     </div>
     <div id="error_message"></div>
     <div id="confirm_message"></div>

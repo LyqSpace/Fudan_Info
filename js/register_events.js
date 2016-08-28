@@ -41,30 +41,6 @@ window.onload = function() {
     change_date();
 };
 
-function count(text_id, cnt_id, cnt_limit) {
-    var textarea = document.getElementById(text_id);
-    var str = textarea.value;
-    var len = 0;
-    var new_str = "";
-    for (var i = 0; i < str.length; i++) {
-        if (str.charCodeAt(i) > 255) {
-            len += 2;
-        } else {
-            len += 1;
-        }
-        if (len > cnt_limit) {
-            if (str.charCodeAt(i) > 255) {
-                len -= 2;
-            } else {
-                len -= 1;
-            }
-            break;
-        }
-        new_str += str.charAt(i);
-    }
-    textarea.value = new_str;
-    cnt_id.innerHTML = len;
-}
 
 function check_register() {
 
@@ -74,6 +50,16 @@ function check_register() {
 
     var error_message = "";
     var tmp_obj, tmp, info_list, i;
+
+    var select_event_obj = document.getElementById('select_event');
+    var select_event_id = select_event_obj.selectedOptions[0].value;
+    var select_registration = document.getElementById('select_registration_' + select_event_id);
+    var registration_serial = select_registration.selectedOptions[0].value;
+    var registration_serial_list = document.getElementsByName('registration_serial');
+    for (i = 0; i < registration_serial_list.length; i++){
+        registration_serial_list[i].value = registration_serial;
+    }
+
     tmp_obj = document.getElementsByName("registration_id_tmp")[0];
     if (tmp_obj != null) {
         tmp = tmp_obj.value;
@@ -124,11 +110,20 @@ function check_register() {
     }
 
     if (error_message == "") {
-        setCookie("guest_id", document.getElementsByName("registration_id_tmp")[0].value, "d360");
-        setCookie("guest_name", document.getElementsByName("registration_name_tmp")[0].value, "d360");
-        setCookie("guest_phone", document.getElementsByName("registration_phone_tmp")[0].value, "d360");
-        setCookie("guest_major", document.getElementsByName("registration_major_tmp")[0].value, "d360");
-        setCookie("guest_event_message", document.getElementsByName("registration_message_tmp")[0].value, "d360");
+        var remember_obj = document.getElementById("remember_register_event_" + registration_serial);
+        if (remember_obj.checked == true) {
+            setCookie("guest_id", document.getElementsByName("registration_id_tmp")[0].value, "d360");
+            setCookie("guest_name", document.getElementsByName("registration_name_tmp")[0].value, "d360");
+            setCookie("guest_phone", document.getElementsByName("registration_phone_tmp")[0].value, "d360");
+            setCookie("guest_major", document.getElementsByName("registration_major_tmp")[0].value, "d360");
+            setCookie("guest_event_message", document.getElementsByName("registration_message_tmp")[0].value, "d360");
+        } else {
+            setCookie("guest_id", "", "s0");
+            setCookie("guest_name", "", "s0");
+            setCookie("guest_phone", "", "s0");
+            setCookie("guest_major", "", "s0");
+            setCookie("guest_event_message", "", "s0");
+        }
         return true;
     } else {
 
@@ -157,8 +152,16 @@ function check_register() {
 }
 
 function check_register_forgotten() {
-    setCookie("guest_id", document.getElementsByName("registration_id")[0].value, "d360");
-    setCookie("guest_name", document.getElementsByName("registration_name")[0].value, "d360");
-    setCookie("guest_phone", document.getElementsByName("registration_phone")[0].value, "d360");
+    var remember_obj = document.getElementById("remember");
+    if (remember_obj.checked == true) {
+        setCookie("guest_id", document.getElementsByName("registration_id")[0].value, "d360");
+        setCookie("guest_name", document.getElementsByName("registration_name")[0].value, "d360");
+        setCookie("guest_phone", document.getElementsByName("registration_phone")[0].value, "d360");
+    } else {
+        setCookie("guest_id", "", "s0");
+        setCookie("guest_name", "", "s0");
+        setCookie("guest_phone", "", "s0");
+    }
     return true;
 }
+

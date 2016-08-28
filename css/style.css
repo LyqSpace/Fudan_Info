@@ -73,6 +73,11 @@ ul {
     color: #EF4F4F;
 }
 
+.club_recruit_article {
+    padding-left: 1em;
+    font-size: 15px;
+}
+
 .section_box {
     border: 0px;
     margin: 0.8em 0px 0.5em;

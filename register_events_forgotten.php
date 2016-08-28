@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
     <script type="text/javascript" src="js/register_events.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 
     <title>找回活动入场码 | FDUTOPIA</title>
 </head>
@@ -42,6 +43,12 @@
                     <input class="weui_input" type="number" required="required" pattern="[0-9]*" name="registration_phone" placeholder="请输入手机号码">
                 </div>
             </div>
+            <div class="weui_cell weui_cell_switch">
+                <div class="weui_cell_hd weui_cell_primary">在此设备上记住我</div>
+                <div class="weui_cell_ft">
+                    <input class="weui_switch" name="remember" id="remember" type="checkbox" checked="checked"/>
+                </div>
+            </div>
         </div>
         <div class="weui_btn_area">
             <input name="search" type="submit" value="查询" class="weui_btn weui_btn_plain_primary" />
@@ -63,7 +70,7 @@
             mysql_select_db("fudan_info");
 
             $query = sprintf("select * from event_registration_list natural join event_registration_date natural join event_info natural join users
-                where registration_id='%s' or registration_name='%s' or registration_phone='%s' order by register_time desc;",
+                where registration_id='%s' and registration_name='%s' and registration_phone='%s' order by register_time desc;",
                 mysql_real_escape_string($_POST['registration_id']),
                 mysql_real_escape_string($_POST['registration_name']),
                 mysql_real_escape_string($_POST['registration_phone']));

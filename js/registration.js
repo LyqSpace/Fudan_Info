@@ -103,20 +103,22 @@ function add_date() {
     var x = document.createElement("div");
     x.setAttribute("id", "date_" + date_cnt);
     x.innerHTML =
-        '<div class="weui_cell">' +
-        '<div class="weui_cell_hd">' +
-        '   <label class="weui_label">场次' + date_cnt + '</label>' +
-        '</div>' +
-        '<div class="weui_cell_bd weui_cell_primary">' +
-        '   <input class="weui_input" name="date_' + date_cnt + '" type="datetime-local" required="required"/>' +
-        '</div>' +
-        '</div>' +
-        '<div class="weui_cell">' +
-        '   <div class="weui_cell_hd"><label class="weui_label">总票数</label></div>' +
-        '   <div class="weui_cell_bd weui_cell_primary">' +
-        '       <input class="weui_input" type="number" required="required" name="ticket_count_' + date_cnt + '" pattern="[0-9]*" placeholder="请输入可以通过此方式取票/报名的总票数">' +
-        '</div>' +
-        '</div></div>';
+        '<div class="weui_cells weui_cells_form">' +
+        '   <div class="weui_cell">' +
+        '       <div class="weui_cell_hd">' +
+        '           <label class="weui_label">场次' + date_cnt + '</label>' +
+        '       </div>' +
+        '       <div class="weui_cell_bd weui_cell_primary">' +
+        '           <input class="weui_input" name="date_' + date_cnt + '" type="datetime-local" required="required"/>' +
+        '       </div>' +
+        '   </div>' +
+        '   <div class="weui_cell">' +
+        '       <div class="weui_cell_hd"><label class="weui_label">总票数</label></div>' +
+        '       <div class="weui_cell_bd weui_cell_primary">' +
+        '           <input class="weui_input" type="number" required="required" name="ticket_count_' + date_cnt + '" pattern="[0-9]*" placeholder="请输入可以通过此方式取票/报名的总票数">' +
+        '       </div>' +
+        '   </div>' +
+        '</div>';
     date_list.appendChild(x);
 }
 

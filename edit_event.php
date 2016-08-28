@@ -185,10 +185,12 @@ if (isset($_COOKIE['login_serial'])) {
                             ?>"/>
                         </div>
                     </div>
-                    <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动</div>
-                    <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览</div>
-                    <!--提前报名-->
-                    <div id="register_form">
+                </div>
+                <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动</div>
+                <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览</div>
+                <!--提前报名-->
+                <div id="register_form">
+                    <div class="weui_cells weui_cells_form">
                         <div class="weui_cell weui_cell_switch">
                             <div class="weui_cell_hd weui_cell_primary">是否需要提前取票/报名</div>
                             <div class="weui_cell_ft">
@@ -200,8 +202,10 @@ if (isset($_COOKIE['login_serial'])) {
                                 ?>/>
                             </div>
                         </div>
-                        <!--报名时间-->
-                        <div id="register_date_form" style="display:none">
+                    </div>
+                    <!--报名时间-->
+                    <div id="register_date_form" style="display:none">
+                        <div class="weui_cells weui_cells_form">
                             <div class="weui_cell">
                                 <div class="weui_cell_hd ">
                                     <select class="weui_select select_no_padding" name="register_date_type" onchange="show_register_type(this)">
@@ -232,10 +236,12 @@ if (isset($_COOKIE['login_serial'])) {
 
                                 </div>
                             </div>
-                            <div class="weui_cells_tips">"报名开始时间" 可点击切换成截止时间</div>
                         </div>
+                        <div class="weui_cells_tips">"报名开始时间" 可点击切换成截止时间</div>
                     </div>
-                    <!--是否有详细描述-->
+                </div>
+                <!--是否有详细描述-->
+                <div class="weui_cells weui_cells_form">
                     <div class="weui_cell weui_cell_switch">
                         <div class="weui_cell_hd weui_cell_primary">是否有详细描述</div>
                         <div class="weui_cell_ft">
@@ -247,15 +253,17 @@ if (isset($_COOKIE['login_serial'])) {
                             ?>>
                         </div>
                     </div>
-                    <div id="details_form" style="display:<?php
+                </div>
+                <div id="details_form" style="display:<?php
                     if ($row['notification'] == 1) {
                         echo 'display';
                     } else {
                         echo 'none';
                     }
                     ?>">
-                        <!--详细描述-->
-                        <div class="weui_cells_title">详细描述</div>
+                    <!--详细描述-->
+                    <div class="weui_cells_title">详细描述</div>
+                    <div class="weui_cells weui_cells_form">
                         <div class="weui_cell">
                             <div class="weui_cell_bd weui_cell_primary">
                                 <textarea class="weui_textarea" id="details_text"
@@ -268,14 +276,15 @@ if (isset($_COOKIE['login_serial'])) {
                                 </div>
                             </div>
                         </div>
-                        <!--软文网址-->
-                        <div class="weui_cells_title">软文网址</div>
+                    </div>
+                    <!--软文网址-->
+                    <div class="weui_cells_title">软文网址</div>
+                    <div class="weui_cells weui_cells_form">
                         <div class="weui_cell">
                             <div class="weui_cell_bd weui_cell_primary">
-                        <textarea class="weui_textarea" id="propa_url" placeholder="选填，如果自己的公众号有宣传此活动的软文，可以把软文网址复制在此处"
+                                <textarea class="weui_textarea" id="propa_url" placeholder="选填，如果自己的公众号有宣传此活动的软文，可以把软文网址复制在此处"
                                   name="propa_url" rows="7"
                                   onkeyup="count('propa_url', propa_url_cnt, 600);"><?php echo $row['propa_url']; ?></textarea>
-
                                 <div class="weui_textarea_counter"><span
                                         id="propa_url_cnt"><?php echo count_str($row['propa_url']); ?></span>/600
                                 </div>
@@ -387,18 +396,22 @@ if (isset($_COOKIE['login_serial'])) {
                         <input class="weui_input" name="date" required type="datetime-local"/>
                     </div>
                 </div>
-                <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动</div>
-                <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览</div>
-                <!--提前报名-->
-                <div id="register_form">
+            </div>
+            <div class="weui_cells_tips">"开始时间" 提供给一般的讲座和活动</div>
+            <div class="weui_cells_tips">"截止时间" 提供给长时间比赛和展览</div>
+            <!--提前报名-->
+            <div id="register_form">
+                <div class="weui_cells weui_cells_form">
                     <div class="weui_cell weui_cell_switch">
                         <div class="weui_cell_hd weui_cell_primary">是否需要提前取票/报名</div>
                         <div class="weui_cell_ft">
                             <input class="weui_switch" name="register" type="checkbox" onclick="show_register_date()"/>
                         </div>
                     </div>
-                    <!--报名时间-->
-                    <div id="register_date_form" style="display:none">
+                </div>
+                <!--报名时间-->
+                <div id="register_date_form" style="display:none">
+                    <div class="weui_cells weui_cells_form">
                         <div class="weui_cell">
                             <div class="weui_cell_hd ">
                                 <select class="weui_select select_no_padding" name="register_date_type" onchange="show_register_type()">
@@ -415,10 +428,12 @@ if (isset($_COOKIE['login_serial'])) {
                                 </div>
                             </div>
                         </div>
-                        <div class="weui_cells_tips">"报名开始时间" 可点击切换成截止时间</div>
                     </div>
+                    <div class="weui_cells_tips">"报名开始时间" 可点击切换成截止时间</div>
                 </div>
-                <!--是否有详细描述-->
+            </div>
+            <!--是否有详细描述-->
+            <div class="weui_cells weui_cells_form">
                 <div class="weui_cell weui_cell_switch">
                     <div class="weui_cell_hd weui_cell_primary">是否有详细描述</div>
                     <div class="weui_cell_ft">
@@ -426,9 +441,11 @@ if (isset($_COOKIE['login_serial'])) {
                                onclick="show_details(details_form)">
                     </div>
                 </div>
-                <!--详细描述-->
-                <div id="details_form" style="display:none;">
-                    <div class="weui_cells_title">详细描述</div>
+            </div>
+            <!--详细描述-->
+            <div id="details_form" style="display:none;">
+                <div class="weui_cells_title">详细描述</div>
+                <div class="weui_cells weui_cells_form">
                     <div class="weui_cell">
                         <div class="weui_cell_bd weui_cell_primary">
                         <textarea class="weui_textarea" id="details_text"
@@ -438,8 +455,10 @@ if (isset($_COOKIE['login_serial'])) {
                             <div class="weui_textarea_counter"><span id="details_cnt">0</span>/300</div>
                         </div>
                     </div>
-                    <!--软文网址-->
-                    <div class="weui_cells_title">软文网址</div>
+                </div>
+                <!--软文网址-->
+                <div class="weui_cells_title">软文网址</div>
+                <div class="weui_cells weui_cells_form">
                     <div class="weui_cell">
                         <div class="weui_cell_bd weui_cell_primary">
                         <textarea class="weui_textarea" id="propa_url" placeholder="选填，如果自己的公众号有宣传此活动的软文，可以把软文网址复制在此处"

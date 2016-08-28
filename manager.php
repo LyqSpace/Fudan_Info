@@ -20,7 +20,7 @@ if (isset($_COOKIE['login_serial'])) {
 }
 ?>
 
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <!-- Welcome! Contact Me: root@lyq.me -->
 <head>
     <meta charset="UTF-8">
@@ -157,10 +157,9 @@ if (isset($_COOKIE['login_serial'])) {
                                 </div>
                             </div>
                             </section>
-                            <ol>
+                            <ol style="padding-left: 8px;">
                                 <?php
                                 $query = sprintf("SELECT * FROM recruit_info_activities WHERE username='%s';", $username);
-                                echo $query;
                                 $res = mysql_query($query, $mysql);
                                 while ($row = mysql_fetch_assoc($res)) {
                                     ?>
@@ -171,7 +170,7 @@ if (isset($_COOKIE['login_serial'])) {
 
                                         <p><?php echo '【地点】' . $row['activity_location']; ?></p>
 
-                                        <p><?php echo '【详细】' . $row['activity_detials']; ?></p>
+                                        <p><?php echo '【详细】' . $row['activity_details']; ?></p>
                                     </li>
                                     <?php
                                 }

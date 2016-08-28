@@ -157,9 +157,11 @@ if (isset($_COOKIE['login_serial'])) {
                                 ?>/>
                             </div>
                         </div>
+                    </div>
 
-                        <div id="register_date_form" style="display:none">
-                            <!--报名时间-->
+                    <div id="register_date_form" style="display:none">
+                        <!--报名时间-->
+                        <div class="weui_cells weui_cells_form">
                             <div class="weui_cell">
                                 <div class="weui_cell_hd ">
                                     <select class="weui_select select_no_padding" name="register_date_type" onchange="show_register_type(this)">
@@ -190,18 +192,18 @@ if (isset($_COOKIE['login_serial'])) {
 
                                 </div>
                             </div>
-                            <div class="weui_cells_tips">"报名开始时间" 不填表示即可起，先到先得</div>
-                            <div class="weui_cells_tips">"报名截止时间" 表示报名持续到该时间为止</div>
+                        </div>
+                        <div class="weui_cells_tips">"报名开始时间" 可点击切换成截止时间</div>
 
+                        <?php
+                        $query = sprintf("SELECT * FROM event_registration_common WHERE event_id='%s';",
+                            mysql_real_escape_string($_GET['event_id']));
+                        $res = mysql_query($query, $mysql);
+                        $row = mysql_fetch_assoc($res);
+                        ?>
 
-                            <?php
-                            $query = sprintf("SELECT * FROM event_registration_common WHERE event_id='%s';",
-                                mysql_real_escape_string($_GET['event_id']));
-                            $res = mysql_query($query, $mysql);
-                            $row = mysql_fetch_assoc($res);
-                            ?>
-                            <!--报名表-->
-
+                        <!--报名表-->
+                        <div class="weui_cells weui_cells_form">
                             <div class="weui_cell">
                                 <div class="weui_cell_hd"><label class="weui_label">票/人</label></div>
                                 <div class="weui_cell_bd weui_cell_primary">
@@ -211,17 +213,19 @@ if (isset($_COOKIE['login_serial'])) {
                                     ?>">
                                 </div>
                             </div>
-                            <div id="date_list">
-                                <?php
-                                $query = sprintf("SELECT * FROM event_registration_date WHERE event_id='%s';",
-                                    mysql_real_escape_string($_GET['event_id']));
-                                $res = mysql_query($query, $mysql);
-                                $row = mysql_fetch_assoc($res);
-                                $cnt = 0;
-                                while (true) {
-                                    $cnt++;
-                                    ?>
-                                    <div id="<?php echo "date_" . $cnt; ?>">
+                        </div>
+                        <div id="date_list">
+                            <?php
+                            $query = sprintf("SELECT * FROM event_registration_date WHERE event_id='%s';",
+                                mysql_real_escape_string($_GET['event_id']));
+                            $res = mysql_query($query, $mysql);
+                            $row = mysql_fetch_assoc($res);
+                            $cnt = 0;
+                            while (true) {
+                                $cnt++;
+                                ?>
+                                <div id="<?php echo "date_" . $cnt; ?>">
+                                    <div class="weui_cells weui_cells_form">
                                         <div class="weui_cell">
                                             <div class="weui_cell_hd">
                                                 <label class="weui_label">场次<?php echo $cnt; ?></label>
@@ -246,19 +250,21 @@ if (isset($_COOKIE['login_serial'])) {
                                             </div>
                                         </div>
                                     </div>
-                                    <?php
-                                    $row = mysql_fetch_assoc($res);
-                                    if ($row == null) break;
-                                }
-                                ?>
-                            </div>
-                            <div class="info_box" style="margin-top: 10px">
-                                <a class="weui_btn weui_btn_mini info_left" id="btn_info_red"
-                                   onclick="del_date();">减少场次</a>
-                                <a class="weui_btn weui_btn_mini info_midright" id="btn_info_green"
-                                   onclick="add_date();">增加场次</a>
-                            </div>
-                            <!--是否发布-->
+                                </div>
+                                <?php
+                                $row = mysql_fetch_assoc($res);
+                                if ($row == null) break;
+                            }
+                            ?>
+                        </div>
+                        <div class="info_box" style="margin-top: 10px">
+                            <a class="weui_btn weui_btn_mini info_left" id="btn_info_red"
+                               onclick="del_date();">减少场次</a>
+                            <a class="weui_btn weui_btn_mini info_midright" id="btn_info_green"
+                               onclick="add_date();">增加场次</a>
+                        </div>
+                        <!--是否发布-->
+                        <div class="weui_cells weui_cells_form">
                             <div class="weui_cell weui_cell_switch">
                                 <div class="weui_cell_hd weui_cell_primary">是否发布，发布后不可修改</div>
                                 <div class="weui_cell_ft">

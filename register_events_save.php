@@ -30,7 +30,11 @@ function generate_registration_user_serial($length) {
     return $serial;
 }
 
-    if (isset($_POST['registration_serial'])) {
+    if (isset($_POST['registration_serial']) &&
+        isset($_POST['registration_id']) &&
+        isset($_POST['registration_name']) &&
+        isset($_POST['registration_phone']) &&
+        isset($_POST['registration_major'])) {
 
         $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
         mysql_query("set names 'utf8'");

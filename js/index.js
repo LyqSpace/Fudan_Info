@@ -37,6 +37,14 @@ $(document).ready(function() {
     $('#btn_settings').click(function() {
         $('#fullpage').fullpage.moveTo(1, 2);
     });
+    $('#btn_clear_cookie_events').click(function() {
+        setCookie("guest_id", "", "s0");
+        setCookie("guest_name", "", "s0");
+        setCookie("guest_phone", "", "s0");
+        setCookie("guest_major", "", "s0");
+        setCookie("guest_event_message", "", "s0");
+        window.location.reload();
+    });
 });
 
 function getsec(str) {
@@ -56,4 +64,30 @@ function setCookie(name,value,time) {
     var exp = new Date();
     exp.setTime(exp.getTime() + strsec*1);
     document.cookie = name + "=" + value + ";expires=" + exp.toGMTString();
+}
+
+
+function count(text_id, cnt_id, cnt_limit) {
+    var textarea = document.getElementById(text_id);
+    var str = textarea.value;
+    var len = 0;
+    var new_str = "";
+    for (var i = 0; i < str.length; i++) {
+        if (str.charCodeAt(i) > 255) {
+            len += 2;
+        } else {
+            len += 1;
+        }
+        if (len > cnt_limit) {
+            if (str.charCodeAt(i) > 255) {
+                len -= 2;
+            } else {
+                len -= 1;
+            }
+            break;
+        }
+        new_str += str.charAt(i);
+    }
+    textarea.value = new_str;
+    cnt_id.innerHTML = len;
 }
