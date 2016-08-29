@@ -2,6 +2,7 @@ $(document).ready(function() {
     $('#fullpage').fullpage({
         loopHorizontal: false,
         controlArrows: false,
+        scrollingSpeed: 300,
         anchors: ['m'],
         onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){
             switch (slideIndex) {

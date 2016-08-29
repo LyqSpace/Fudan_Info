@@ -9,35 +9,35 @@
     <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
-    <script type="text/javascript" src="js/register_events.js"></script>
+    <script type="text/javascript" src="js/register_recruit.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
 
-    <title>找回活动入场码 | FDUTOPIA</title>
+    <title>查询社团报名记录 | FDUTOPIA</title>
 </head>
 <body ontouchstart>
 <div class="page_header">
-    <h1 class="page_title">找回活动入场码</h1>
+    <h1 class="page_title">查询社团报名记录</h1>
 
     <p class="page_desc">填写以下基本信息查询</p>
 </div>
 
 <div class="page_body">
 
-    <form name="forgot_ticket" method="post" onsubmit="return check_register_forgotten();"
-          action="register_events_forgotten.php">
+    <form name="forgot_ticket" method="post" onsubmit="return check_recruit_history();"
+          action="register_recruit_history.php">
 
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">学号</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="number" required="required" pattern="[0-9]*" name="registration_id"
-                           placeholder="请输入学号或工号">
+                    <input class="weui_input" type="number" required="required" pattern="[0-9]*"
+                           name="register_recruit_id" placeholder="请输入学号或工号">
                 </div>
             </div>
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">姓名</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="text" required="required" name="registration_name"
+                    <input class="weui_input" type="text" required="required" name="register_recruit_name"
                            placeholder="请输入姓名">
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
                     <input class="weui_input" type="number" required="required" pattern="[0-9]*"
-                           name="registration_phone" placeholder="请输入手机号码">
+                           name="register_recruit_phone" placeholder="请输入手机号码">
                 </div>
             </div>
             <div class="weui_cell weui_cell_switch">
@@ -59,27 +59,27 @@
             <input name="search" type="submit" value="查询" class="weui_btn weui_btn_plain_primary"/>
         </div>
         <div class="weui_btn_area">
-            <a class="weui_btn weui_btn_plain_default" href="index.php#m/page_guest_events">返回活动报名系统</a>
+            <a class="weui_btn weui_btn_plain_default" href="index.php#m/page_guest_recruits">返回招新报名系统</a>
         </div>
 
     </form>
 
     <br>
     <?php
-    if ((isset($_POST['registration_id']) && $_POST['registration_id'] != '') ||
-        (isset($_POST['registration_name']) && $_POST['registration_name'] != '') ||
-        (isset($_POST['registration_phone']) && $_POST['registration_phone'] != '')
+    if ((isset($_POST['register_recruit_id']) && $_POST['register_recruit_id'] != '') ||
+        (isset($_POST['register_recruit_name']) && $_POST['register_recruit_name'] != '') ||
+        (isset($_POST['register_recruit_phone']) && $_POST['register_recruit_phone'] != '')
     ) {
 
         $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
         mysql_query("set names 'utf8'");
         mysql_select_db("fudan_info");
 
-        $query = sprintf("SELECT * FROM event_registration_list NATURAL JOIN event_registration_date NATURAL JOIN event_info NATURAL JOIN users
-                WHERE registration_id='%s' AND registration_name='%s' AND registration_phone='%s' ORDER BY register_time DESC;",
-            mysql_real_escape_string($_POST['registration_id']),
-            mysql_real_escape_string($_POST['registration_name']),
-            mysql_real_escape_string($_POST['registration_phone']));
+        $query = sprintf("SELECT * FROM recruit_list NATURAL JOIN users
+                WHERE guest_id='%s' AND guest_name='%s' AND guest_phone='%s' ORDER BY recruit_register_time DESC;",
+            mysql_real_escape_string($_POST['recruit_register_id']),
+            mysql_real_escape_string($_POST['recruit_register_name']),
+            mysql_real_escape_string($_POST['recruit_register_phone']));
         //echo $query;
         $res = mysql_query($query, $mysql);
         $exist = mysql_num_rows($res);
@@ -88,7 +88,7 @@
         <article class="weui_article">
             <div class="section_box">
                 <div class="section_header">
-                    <span class="section_body">活动报名历史</span>
+                    <span class="section_body">招新报名历史</span>
                 </div>
             </div>
             <div class="weui_cells_title">
@@ -103,27 +103,30 @@
                     <table class="dataintable">
                         <tbody>
                         <tr>
-                            <th>入场码</th>
-                            <th>活动信息</th>
+                            <th>社团名</th>
+                            <th>报名信息</th>
                         </tr>
                         <?php
 
                         while ($row = mysql_fetch_assoc($res)) {
-                            $event_date = date('n月j日 H:i', strtotime($row['event_date']));
                             ?>
                             <tr>
-                                <td><?php echo $row['registration_user_serial']; ?></td>
+                                <td><?php echo $row['fullname']; ?></td>
                                 <td>
                                     <ul>
                                         <?php
-                                        echo "<li>【名称】" . $row['title'] . "</li>";
-                                        echo "<li>【地点】" . $row['location'] . "</li>";
-                                        echo "<li>【场次】" . $event_date . "</li>";
-                                        echo "<li>【票数】" . $row['ticket_num'] . "</li>";
-                                        if ($row['hostname'] != '') {
-                                            echo "<li>【主办方】" . $row['hostname'] . "</li>";
-                                        } else if ($row['username'] != 'fdubot') {
-                                            echo "<li>【主办方】" . $row['fullname'] . "</li>";
+                                        if ($row['email'] != '') {
+                                            echo "<li>【官方邮箱】" . $row['email'] . "</li>";
+                                        } else {
+                                            echo "<li>【官方邮箱】暂无</li>";
+                                        }
+                                        echo "<li>【报名活动】" . $row['recruit_items'] . "</li>";
+                                        $register_date = date('n月j日 H:i', strtotime($row['recruit_register_time']));
+                                        echo "<li>【报名时间】" . $register_date . "</li>";
+                                        if ($row['join_management']) {
+                                            echo "<li>愿意加入管理层</li>";
+                                        } else {
+                                            echo "<li>暂不愿意加入管理层</li>";
                                         }
                                         ?>
                                     </ul>
@@ -137,7 +140,7 @@
                 </div>
                 <?php
                 if (!$exist) {
-                    echo "<p class='page_desc'>查询不到您的报名记录，请换个信息重试或重新报名</p>";
+                    echo "<p class='page_desc'>查询不到您的社团报名记录，请换个信息重试或重新报名</p>";
                 }
                 ?>
             </div>

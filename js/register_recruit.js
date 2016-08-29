@@ -111,13 +111,13 @@ function check_regsiter_recruit() {
             setCookie("guest_name", document.getElementsByName("register_recruit_name_tmp")[0].value, "d360");
             setCookie("guest_phone", document.getElementsByName("register_recruit_phone_tmp")[0].value, "d360");
             setCookie("guest_major", document.getElementsByName("register_recruit_major_tmp")[0].value, "d360");
-            setCookie("guest_event_message", document.getElementsByName("register_recruit_message_tmp")[0].value, "d360");
+            setCookie("guest_recruit_message", document.getElementsByName("register_recruit_message_tmp")[0].value, "d360");
         } else {
             setCookie("guest_id", "", "s0");
             setCookie("guest_name", "", "s0");
             setCookie("guest_phone", "", "s0");
             setCookie("guest_major", "", "s0");
-            setCookie("guest_event_message", "", "s0");
+            setCookie("guest_recruit_message", "", "s0");
         }
         return true;
 
@@ -145,4 +145,18 @@ function check_regsiter_recruit() {
 
         return false;
     }
+}
+
+function check_recruit_history() {
+    var remember_obj = document.getElementById("remember");
+    if (remember_obj.checked == true) {
+        setCookie("guest_id", document.getElementsByName("register_recruit_id")[0].value, "d360");
+        setCookie("guest_name", document.getElementsByName("register_recruit_name")[0].value, "d360");
+        setCookie("guest_phone", document.getElementsByName("register_recruit_phone")[0].value, "d360");
+    } else {
+        setCookie("guest_id", "", "s0");
+        setCookie("guest_name", "", "s0");
+        setCookie("guest_phone", "", "s0");
+    }
+    return true;
 }

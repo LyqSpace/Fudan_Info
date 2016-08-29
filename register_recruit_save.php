@@ -62,20 +62,41 @@ $recruit_register_timestamp = "2016-08-01 00:00:00";
             </div>
             <?php
         } else {
-            $query = sprintf("INSERT INTO recruit_list VALUE(NULL, '%s', '%s', '%s', '%s', '%s', '%s', NULL);",
+
+            $query = sprintf("SELECT * FROM recruit_info_activities WHERE username='%s';", mysql_real_escape_string($_POST['username']));
+            $res = mysql_query($query, $mysql);
+
+            $activity_cnt = 1;
+            $activity_item = 'activity_' . $activity_cnt;
+            $recruit_items = '';
+            while (isset($_POST[$activity_item])) {
+                $row = mysql_fetch_assoc($res);
+                if ($_POST[$activity_item] == "on") {
+                    $recruit_items .= $activity_item . ' ';
+                }
+            }
+            if ($recruit_items == '') $recruit_items = '无勾选任何活动';
+
+            $join_management = 'false';
+            if ($_POST['join_management'] == "on") {
+                $join_management = 'true';
+            }
+            $query = sprintf("INSERT INTO recruit_list VALUE(NULL, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %s, TRUE, NULL);",
                 mysql_real_escape_string($_POST['username']),
                 mysql_real_escape_string($_POST['register_recruit_id']),
                 mysql_real_escape_string($_POST['register_recruit_name']),
                 mysql_real_escape_string($_POST['register_recruit_phone']),
                 mysql_real_escape_string($_POST['registration_major']),
-                mysql_real_escape_string($_POST['registration_message']));
+                mysql_real_escape_string($_POST['registration_message']),
+                $recruit_items,
+                $join_management);
             //echo $query;
             $res = mysql_query($query, $mysql);
             ?>
             <p class="page_title">报名成功</p>
             <br>
             <div class="weui_btn_area">
-                <a class="weui_btn weui_btn_plain_default" href="index.php#m/page_guest_recruits">返回报名系统</a>
+                <a class="weui_btn weui_btn_plain_default" href="index.php#m/page_guest_recruits">返回招新报名系统</a>
             </div>
             <br>
             <hr>
@@ -99,7 +120,7 @@ $recruit_register_timestamp = "2016-08-01 00:00:00";
                 本页面禁止违规访问!
             </div>
             <div class="weui_dialog_ft">
-                <a href="manager.php#m/page_events" class="weui_btn_dialog primary">确定</a>
+                <a href="index.php#m/page_guest_recruits" class="weui_btn_dialog primary">确定</a>
             </div>
         </div>
         <?php

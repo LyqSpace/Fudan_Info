@@ -33,6 +33,7 @@ function count_str($str)
     <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/register_events.js"></script>
+    <script type="text/javascript" src="js/register_recruit.js"></script>
 
     <title>FDUTOPIA</title>
 </head>
@@ -350,9 +351,364 @@ function count_str($str)
                         ?>
                     </div>
                 </div>
+
                 <div class="slide" data-anchor="page_guest_recruits">
+                    <div class="page_header">
+                        <h1 class="page_title">社团招新表</h1>
+
+                        <p class="page_desc">填上基本信息就可以报名啦</p>
+                    </div>
+
+                    <div class="page_body">
+
+                        <div class="weui_cells weui_cells_form">
+                            <div class="weui_cell">
+                                <div class="weui_cell_hd"><label class="weui_label">学号</label></div>
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <input class="weui_input" type="number" pattern="[0-9]*" name="register_recruit_id_tmp"
+                                           required="required" placeholder="请输入学号或工号" value="<?php echo $_COOKIE['guest_id']; ?>">
+                                </div>
+                            </div>
+                            <div class="weui_cell">
+                                <div class="weui_cell_hd"><label class="weui_label">姓名</label></div>
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <input class="weui_input" type="text" required="required" name="register_recruit_name_tmp"
+                                           placeholder="请输入姓名" value="<?php echo $_COOKIE['guest_name']; ?>">
+                                </div>
+                            </div>
+                            <div class="weui_cell">
+                                <div class="weui_cell_hd"><label class="weui_label">专业</label></div>
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <input class="weui_input" type="text" required="required" name="register_recruit_major_tmp"
+                                           placeholder="请输入专业" value="<?php echo $_COOKIE['guest_major']; ?>">
+                                </div>
+                            </div>
+                            <div class="weui_cell">
+                                <div class="weui_cell_hd"><label class="weui_label">手机</label></div>
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <input class="weui_input" type="number" pattern="[0-9]*" required="required"
+                                           name="register_recruit_phone_tmp"
+                                           placeholder="请输入手机号码" value="<?php echo $_COOKIE['guest_phone']; ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui_cells_title">写给社团的话（选填）</div>
+                        <div class="weui_cells weui_cells_form">
+                            <div class="weui_cell">
+                                <div class="weui_cell_bd weui_cell_primary">
+                <textarea class="weui_textarea" placeholder="这里可以写下简短自我介绍，对社团的期待等内容"
+                          name="register_recruit_message_tmp" rows="2"
+                          id="recruit_message"
+                          onkeyup="count('recruit_message', recruit_message_cnt, 200);"></textarea>
+
+                                    <div class="weui_textarea_counter"><span id="recruit_message_cnt">0</span>/200</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php
+                        $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+                        mysql_query("set names 'utf8'");
+                        mysql_select_db("fudan_info");
+
+                        $query = "select * from users WHERE username not in ('admin', 'fdubot') group by user_category";
+                        $res = mysql_query($query, $mysql);
+
+                        ?>
+                        <div class="weui_cells weui_cells_form">
+                            <div class="weui_cell weui_cell_select weui_select_after">
+                                <div class="weui_cell_hd">
+                                    <label class="weui_label">大类</label>
+                                </div>
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <select class="weui_select select_no_padding" name="select_clubs_category"
+                                            id="select_clubs_category" onchange="change_clubs_category();">
+                                        <?php
+                                        $options = '';
+                                        $clubs_category_cnt = 0;
+                                        while ($row = mysql_fetch_assoc($res)) {
+                                            $options .= '<option value="' . $clubs_category_cnt . '">' . $row['user_category'] . '</option>';
+                                            $clubs_category_cnt++;
+                                        }
+                                        echo $options;
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="clubs_category_list">
+
+                            <?php
+                            $clubs_category_list = mysql_query($query, $mysql);
+                            $clubs_category_cnt = 0;
+
+                            while ($clubs_category = mysql_fetch_assoc($clubs_category_list)) {
+
+                                $query = sprintf("SELECT * FROM users natural join recruit_info_common WHERE user_category='%s' AND
+                username not in ('admin', 'fdubot') ;",
+                                    $clubs_category['user_category']);
+                                //echo $query;
+                                $clubs_list = mysql_query($query, $mysql);
+
+                                ?>
+                                <div id="<?php echo 'clubs_category_' . $clubs_category_cnt ?>" <?php
+                                if ($clubs_category_cnt > 0) {
+                                    echo 'style="display: none"';
+                                }
+                                $clubs_category_cnt++;
+                                ?>>
+                                    <div class="weui_cells weui_cells_form">
+                                        <div class="weui_cell weui_cell_select weui_select_after">
+                                            <div class="weui_cell_hd">
+                                                <label for="" class="weui_label">社团</label>
+                                            </div>
+                                            <div class="weui_cell_bd weui_cell_primary">
+                                                <select class="weui_select select_no_padding" id="select_club_<?php echo $clubs_category_cnt;?>"
+                                                        name="select_club"
+                                                        onchange="change_club(this, <?php echo $clubs_category_cnt; ?>);">
+                                                    <?php
+                                                    $options = '';
+                                                    while ($club_info = mysql_fetch_assoc($clubs_list)) {
+                                                        $options .= '<option value="' . $club_info['username'] . '">' . $club_info['fullname'] . '</option>';
+                                                    }
+                                                    echo $options;
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <?php
+
+                                    $clubs_list = mysql_query($query, $mysql);
+                                    $club_cnt = 0;
+
+                                    while ($club_info = mysql_fetch_assoc($clubs_list)) {
+                                        ?>
+                                        <div id="<?php echo 'club_' . $club_cnt; ?>" <?php
+                                        if ($date_cnt > 0) {
+                                            echo 'style="display: none"';
+                                        }
+                                        $club_cnt++;
+                                        ?>>
+                                            <div class="weui_cells_title">社团概况</div>
+                                            <article class="club_recruit_article">
+                                                <p><?php echo $club_info['details'];?></p>
+                                            </article>
+                                            <form name="edit_register_recruit" method="post" onsubmit="return check_regsiter_recruit();"
+                                                  action="register_events_save.php">
+
+                                                <input name="username" style="display: none;" />
+                                                <input name="register_recruit_id" style="display: none;"/>
+                                                <input name="register_recruit_name" style="display: none;"/>
+                                                <input name="register_recruit_major" style="display: none;"/>
+                                                <input name="register_recruit_phone" style="display: none;"/>
+                                                <textarea name="register_recruit_message" style="display:none;"></textarea>
+
+                                                <div class="weui_cells_title">勾选想参加的活动</div>
+                                                <div class="weui_cells weui_cells_checkbox">
+                                                    <?php
+                                                    $query = sprintf("SELECT * FROM recruit_info_activities WHERE username='%s';", $club_info['username']);
+                                                    //echo $query;
+                                                    $activity_list = mysql_query($query, $mysql);
+                                                    $activity_cnt = 0;
+                                                    while ($activity_info = mysql_fetch_assoc($activity_list)) {
+                                                        $activity_cnt++;
+                                                        ?>
+                                                        <label class="weui_cell weui_check_label">
+                                                            <div class="weui_cell_hd">
+                                                                <input type="checkbox" class="weui_check" name="activity_<?php echo $activity_cnt; ?>">
+                                                                <i class="weui_icon_checked"></i>
+                                                            </div>
+                                                            <div class="weui_cell_bd weui_cell_primary">
+                                                                <p>【名称】<?php echo $activity_info['activity_name']; ?></p>
+                                                                <p>【时间】<?php echo $activity_info['activity_date']; ?></p>
+                                                                <p>【地点】<?php echo $activity_info['activity_location']; ?></p>
+                                                                <p>【简介】<?php echo $activity_info['activity_details']; ?></p>
+                                                            </div>
+                                                        </label>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </div>
+
+                                                <div class="weui_cells weui_cells_form">
+                                                    <div class="weui_cell weui_cell_switch">
+                                                        <div class="weui_cell_hd weui_cell_primary">是否愿意加入管理层</div>
+                                                        <div class="weui_cell_ft">
+                                                            <input class="weui_switch" name="join_management" id="join_management" type="checkbox"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="weui_cell weui_cell_switch">
+                                                        <div class="weui_cell_hd weui_cell_primary">在此设备上记住我</div>
+                                                        <div class="weui_cell_ft">
+                                                            <input class="weui_switch" name="remember" id="remember_register_recruit_<?php echo $club_info['username'];?>"
+                                                                   type="checkbox" checked="checked"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="weui_btn_area">
+                                                    <input name="save" type="submit" value="报名" class="weui_btn weui_btn_plain_primary"/>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+
+                        <div class="weui_btn_area">
+                            <a class="weui_btn weui_btn_plain_default" href="register_recruit_history.php">查询社团报名记录</a>
+                        </div>
+                        <div id="error_message"></div>
+
+                        <br>
+                        <hr>
+                        <?php
+                        if (isset($_COOKIE['guest_id']) && isset($_COOKIE['guest_name']) && isset($_COOKIE['guest_phone'])) {
+                            $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+                            mysql_query("set names 'utf8'");
+                            mysql_select_db("fudan_info");
+
+                            $query = sprintf("select * from recruit_list natural join users
+                where guest_id='%s' and guest_name='%s' and guest_phone='%s' order by recruit_register_time desc;",
+                                $_COOKIE['guest_id'], $_COOKIE['guest_name'], $_COOKIE['guest_phone']);
+                            //echo $query;
+                            $res = mysql_query($query, $mysql);
+
+                            if (mysql_num_rows($res)) {
+                                ?>
+                                <article class="weui_article">
+                                    <div class="section_box">
+                                        <div class="section_header">
+                                            <span class="section_body">招新报名历史</span>
+                                        </div>
+                                    </div>
+                                    <div class="weui_cells_title">
+                                        <p>【学号】 <?php echo $_COOKIE['guest_id']; ?></p>
+
+                                        <p>【姓名】 <?php echo $_COOKIE['guest_name']; ?></p>
+
+                                        <p>【手机】 <?php echo $_COOKIE['guest_phone']; ?></p>
+                                    </div>
+                                    <div class="weui_cells weui_cells_form">
+                                        <div class="weui_cell">
+                                            <table class="dataintable">
+                                                <tbody>
+                                                <tr>
+                                                    <th>社团名</th>
+                                                    <th>报名信息</th>
+                                                </tr>
+                                                <?php
+
+                                                while ($row = mysql_fetch_assoc($res)) {
+                                                    ?>
+                                                    <tr>
+                                                        <td><?php echo $row['fullname']; ?></td>
+                                                        <td>
+                                                            <ul>
+                                                                <?php
+                                                                if ($row['email'] != '') {
+                                                                    echo "<li>【官方邮箱】" . $row['email'] . "</li>";
+                                                                } else {
+                                                                    echo "<li>【官方邮箱】暂无</li>";
+                                                                }
+                                                                echo "<li>【报名活动】" . $row['recruit_items'] . "</li>";
+                                                                $register_date = date('n月j日 H:i', strtotime($row['recruit_register_time']));
+                                                                echo "<li>【报名时间】" . $register_date . "</li>";
+                                                                if ($row['join_management']) {
+                                                                    echo "<li>愿意加入管理层</li>";
+                                                                } else {
+                                                                    echo "<li>暂不愿意加入管理层</li>";
+                                                                }
+                                                                ?>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                    <?php
+                                                }
+                                                ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="weui_btn_area">
+                                        <a class="weui_btn weui_btn_plain_default" href="#/page_guest_recruits" id="btn_clear_cookie_events">清除本地记录</a>
+                                    </div>
+                                </article>
+                                <?php
+                            }
+                            mysql_close($mysql);
+                        }
+                        ?>
+                    </div>
                 </div>
+
                 <div class="slide" data-anchor="page_guest_review">
+                    <div class="page_header">
+                        <h1 class="page_title">往期活动精彩回顾</h1>
+
+                        <p class="page_desc">下面的爪爪冰棍儿，点击标题即刻享用</p>
+                    </div>
+                    <div class="page_body"><?php
+
+                        $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+                        mysql_query("set names 'utf8'");
+                        mysql_select_db("fudan_info");
+
+                        $query = "update review_read set count=count+1;";
+                        mysql_query($query, $mysql);
+
+                        $cur_date = date('Y-m-d H:i:s', time());
+                        $query = sprintf('select * from event_info natural join users where review_url is not null and date<"%s" order by date desc limit 30;', $cur_date);
+                        $res = mysql_query($query, $mysql);
+
+                        $html = '';
+                        $cnt = 1;
+                        while ($row = mysql_fetch_assoc($res)) {
+
+                            if ($row['review_url'] == null || $row['review_url'] == '') continue;
+
+                            $url = '';
+                            if (strtolower(substr($row['review_url'], 0, 8)) == 'https://' or
+                                strtolower(substr($row['review_url'], 0, 7)) == 'http://') {
+                                $url = $row['review_url'];
+                            } else {
+                                $url = 'http://' . $row['review_url'];
+                            }
+                            $html .= sprintf('<div class="review_item" id="review_item%s"><ol style="list-style-type: decimal; padding-left: 35px;" start=%d><li>', $cnt-1, $cnt);
+                            $html .= sprintf('<a href="%s" style="font-size: 16px; color: black;"><strong>%s</strong></a>', $url, $row['title']);
+                            if ($row['username'] != 'fdubot') {
+                                $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['fullname']);
+                            }
+                            $html .= '</li></ol></div>';
+                            $cnt++;
+                        }
+
+                        if ($cnt == 1) {
+                            echo '<p class="page_desc">爪爪冰棒还没做出来，过两天再来看看吧～</p>';
+                        } else {
+                            echo $html;
+                        }
+
+                        ?>
+                        <br>
+
+                        <p style="font-size: 14px;color: #888;">阅读 <?php
+
+                            $query = "select * from review_read;";
+                            $res = mysql_query($query, $mysql);
+                            $row = mysql_fetch_assoc($res);
+                            echo $row['count'];
+                            mysql_close($mysql);
+                            ?></p>
+                    </div>
                 </div>
             </div>
         </div>

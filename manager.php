@@ -61,7 +61,16 @@ if (isset($_COOKIE['login_serial'])) {
 
                         <div class="weui_btn_area">
                             <a class="weui_btn weui_btn_plain_primary" href="edit_event.php">发布一则活动信息</a>
-                            <a class="weui_btn weui_btn_plain_primary" href="registration_list.php">查看我的票务系统</a>
+                            <a class="weui_btn weui_btn_plain_primary" href="registration_list.php">查看我的票务系统（<?php
+                                $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+                                mysql_query("set names 'utf8'");
+                                mysql_select_db("fudan_info");
+
+                                $query = sprintf("select count(*) as cnt from event_registration_list NATURAL join event_registration_common NATURAL join event_info where new_increament=TRUE and username='%s';", $username);
+                                $res = mysql_query($query, $mysql);
+                                $row = mysql_fetch_assoc($res);
+                                echo $row['cnt'];
+                                ?>）</a>
                             <a class="weui_btn weui_btn_plain_primary" href="preview.php">预览本周日的活动推送</a>
                         </div>
 
@@ -75,10 +84,6 @@ if (isset($_COOKIE['login_serial'])) {
 
                             <section>
                                 <?php
-                                $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
-                                mysql_query("set names 'utf8'");
-                                mysql_select_db("fudan_info");
-
                                 $query = sprintf("SELECT title, i.event_id AS event_id, confirm FROM event_info AS i LEFT JOIN event_registration_common AS c ON i.event_id=c.event_id
                                     WHERE username='%s' ORDER BY i.event_id DESC;", $username);
                                 $res = mysql_query($query, $mysql);
@@ -125,15 +130,21 @@ if (isset($_COOKIE['login_serial'])) {
                     <div class="page_body">
 
                         <div class="weui_btn_area">
-                            <a class="weui_btn weui_btn_plain_primary" href="edit_recruit.php">编辑我的招新信息</a>
-                            <a class="weui_btn weui_btn_plain_primary" href="registration_list.php">查看我的招新系统</a>
+                            <a class="weui_btn weui_btn_plain_primary" href="edit_recruit.php">编辑我的招新信息（</a>
+                            <a class="weui_btn weui_btn_plain_primary" href="manage_recruit_list.php">查看我的招新系统<?php
+                                $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
+                                mysql_query("set names 'utf8'");
+                                mysql_select_db("fudan_info");
+
+                                $query = sprintf("select count(*) as cnt from recruit_list where new_increament=TRUE and username='%s';", $username);
+                                $res = mysql_query($query, $mysql);
+                                $row = mysql_fetch_assoc($res);
+                                echo $row['cnt'];
+                                ?>）</a>
                         </div>
 
 
                         <?php
-                        $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
-                        mysql_query("set names 'utf8'");
-                        mysql_select_db("fudan_info");
 
                         $query = sprintf("SELECT * FROM recruit_info_common WHERE username='%s';", $username);
                         $res = mysql_query($query, $mysql);

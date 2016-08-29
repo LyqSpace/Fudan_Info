@@ -38,7 +38,7 @@ if (isset($_COOKIE['login_serial'])) {
 <body ontouchstart>
 <div class="page_header">
     <h1 class="page_title">我的票务系统</h1>
-    <p class="page_desc">在“我的历史发布”里编辑报名表</p>
+    <p class="page_desc">点击“场次”查看具体报名列表</p>
 </div>
 <div class="page_body">
 
@@ -72,12 +72,18 @@ if (isset($_COOKIE['login_serial'])) {
             $registration_cnt = 0;
             while ($registration_info = mysql_fetch_assoc($registration_list)) {
                 $event_date = date('Y年n月j日 H:i', strtotime($registration_info['event_date']));
+
+                $query = sprintf("select count(*) as cnt from event_registration_list where new_increament=TRUE and registration_serial='%s';", $registration_info['registration_serial']);
+                $new_increment_res = mysql_query($query, $mysql);
+                $new_increment_row = mysql_fetch_assoc($res);
+                $new_increment_num = '（' . $new_increment_row["cnt"] . '）';
+                ?>）
         ?>
             <a class="weui_cell" href="registration_single.php?registration_serial=<?php echo $registration_info['registration_serial'];?>">
                 <div class="weui_cell_bd weui_cell_primary">
                     <p>【场次<?php
                         $registration_cnt++;
-                        echo $registration_cnt . '】' . $event_date;
+                        echo $registration_cnt . '】' . $event_date . $new_increment_num;
                     ?></p>
                 </div>
                 <div class="weui_cell_ft">查看报名名单</div>

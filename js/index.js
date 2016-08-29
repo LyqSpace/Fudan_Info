@@ -2,6 +2,7 @@ $(document).ready(function() {
     $('#fullpage').fullpage({
         loopHorizontal: false,
         controlArrows: false,
+        scrollingSpeed: 300,
         anchors: ['m'],
         onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){
             switch (slideIndex) {
@@ -43,6 +44,7 @@ $(document).ready(function() {
         setCookie("guest_phone", "", "s0");
         setCookie("guest_major", "", "s0");
         setCookie("guest_event_message", "", "s0");
+        setCookie("guest_recruit_message", "", "s0");
         window.location.reload();
     });
 });
