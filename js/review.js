@@ -18,3 +18,7 @@ function random_item_color() {
         item_obj.style.background = color_arr[color_id];
     }
 }
+
+window.onload = function() {
+    random_item_color();
+};

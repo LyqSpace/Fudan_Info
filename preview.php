@@ -117,6 +117,9 @@ if (isset($_COOKIE['login_serial'])) {
 
             $html .= '<li>';
             $html .= sprintf('<p style="font-size: 16px;"><strong>%s', $row['title']);
+            if ($row['confirm']) {
+                $html .= '<span style="color: #0099CC">（文末报名）</span>';
+            }
             if ($row['notification'] == 1) {
                 $html .= '&nbsp;<span style="text-align: center; padding: 0px;line-height: 16px; margin: 0px;width: 16px; display: inline-block; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;height: 16px;background-color: #0099CC; color: rgb(255, 255, 255);">i</span>';
             }
@@ -146,12 +149,13 @@ if (isset($_COOKIE['login_serial'])) {
     {
 
         global $category_id_bias, $category_name_cn, $category_name_en, $week_st, $week_ed, $mysql, $update_next_week, $username;
-        $query = sprintf("SELECT * FROM event_info NATURAL JOIN users WHERE category='%s' AND username='%s' AND
+        $query = sprintf("SELECT * FROM event_info as i NATURAL JOIN users left join event_registration_common as c on i.event_id=c.event_id
+                WHERE category='%s' AND username='%s' AND
                 ((date_type='date_st' AND date>='%s' AND date<'%s') OR
                  (date_type='date_ed' AND date>='%s') OR
-                 (register_date_type='date_st' AND register_date>='%s' AND register_date<'%s') OR
+                 (register_date_type='date_st' AND date>='%s') OR
                  (register_date_type='date_ed' AND register_date>='%s')) ORDER BY date;",
-            $category_name_en[$category_id], $username, $week_st, $week_ed, $week_st, $week_st, $week_ed, $week_st);
+            $category_name_en[$category_id], $username, $week_st, $week_ed, $week_st, $week_st, $week_st);
 
         $res = mysql_query($query, $mysql);
         if (!mysql_num_rows($res)) {

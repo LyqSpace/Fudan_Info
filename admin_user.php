@@ -266,18 +266,18 @@ if (isset($_COOKIE['login_serial'])) {
                     <label class="weui_label">大类</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <select class="weui_select" style="padding-left: 0;" name="category">
-                        <option value="书院团学联">书院/团学联</option>
-                        <option value="人文历史">人文历史</option>
-                        <option value="社会科学">社会科学</option>
-                        <option value="公益">公益</option>
-                        <option value="国际交流">国际交流</option>
-                        <option value="户外">户外</option>
-                        <option value="健身运动">健身</option>
-                        <option value="经管">经管</option>
-                        <option value="兴趣拓展">兴趣拓展</option>
-                        <option value="棋牌">棋牌</option>
-                        <option value="音乐舞蹈">音乐舞蹈</option>
+                    <select class="weui_select select_no_padding"  name="category">
+                        <option value="书院团学联">书院团学联</option>
+                        <option value="人文历史类">人文历史类</option>
+                        <option value="社会经管类">科学技术类</option>
+                        <option value="社会经管类">社会经管类</option>
+                        <option value="歌舞戏剧类">歌舞戏剧类</option>
+                        <option value="体育运动类">体育运动类</option>
+                        <option value="国际交流类">国际交流类</option>
+                        <option value="能力拓展类">能力拓展类</option>
+                        <option value="公益类">公益类</option>
+                        <option value="棋牌类">棋牌类</option>
+                        <option value="兴趣类">兴趣类</option>
                         <option value="枫林社团">枫林社团</option>
                         <option value="江湾社团">江湾社团</option>
                         <option value="张江社团">张江社团</option>

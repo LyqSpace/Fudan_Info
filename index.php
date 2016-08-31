@@ -694,7 +694,9 @@ function count_str($str)
                             }
                             $html .= sprintf('<div class="review_item" id="review_item%s"><ol style="list-style-type: decimal; padding-left: 35px;" start=%d><li>', $cnt-1, $cnt);
                             $html .= sprintf('<a href="%s" style="font-size: 16px; color: black;"><strong>%s</strong></a>', $url, $row['title']);
-                            if ($row['username'] != 'fdubot') {
+                            if ($row['hostname'] != '') {
+                                $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['hostname']);
+                            } else if ($row['username'] != 'fdubot') {
                                 $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['fullname']);
                             }
                             $html .= '</li></ol></div>';

@@ -131,6 +131,9 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
 
         $html .= '<li>';
         $html .= sprintf('<p style="font-size: 16px;"><strong>%s', $row['title']);
+        if ($row['confirm']) {
+            $html .= '<span style="color: #0099CC">（文末报名）</span>';
+        }
         if ($row['notification'] == 1) {
             $html .= '&nbsp;<span style="text-align: center; padding: 0px;line-height: 16px; margin: 0px;width: 16px; display: inline-block; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;height: 16px;background-color: #0099CC; color: rgb(255, 255, 255);">i</span>';
         }
@@ -163,12 +166,13 @@ function print_events(&$html, &$res, &$order_id, $update_next_week) {
 function print_article(&$order_id, $category_id) {
 
     global $category_id_bias, $category_name_cn, $category_name_en, $week_st, $week_ed, $mysql, $update_next_week;
-    $query = sprintf("select * from event_info natural join users where publish=1 and category='%s' and
+    $query = sprintf("select * from event_info as i natural join users left join event_registration_common as c on i.event_id=c.event_id
+        where category='%s' and
         ((date_type='date_st' and date>='%s' and date<'%s') or
          (date_type='date_ed' and date>='%s') or
-         (register_date_type='date_st' and register_date>='%s' and register_date<'%s') or
+         (register_date_type='date_st' and date>='%s') or
          (register_date_type='date_ed' and register_date>='%s')) order by date;",
-        $category_name_en[$category_id], $week_st, $week_ed, $week_st, $week_st, $week_ed, $week_st);
+        $category_name_en[$category_id], $week_st, $week_ed, $week_st, $week_st, $week_st);
 
     $res = mysql_query($query, $mysql);
     if (!mysql_num_rows($res)) {
@@ -187,7 +191,7 @@ function print_article(&$order_id, $category_id) {
 }
 
 function print_footer() {
-    $html = '<br><section><p style="text-align: center;"><span style="font-size: 15px;">彩蛋：戳<span style="color: rgb(92, 137, 183);">阅读原文</span>可看往期讲座活动的回顾呦～</span></p><br>';
+    $html = '<br><section><p style="text-align: center;"><span style="font-size: 15px;">戳<span style="color: rgb(92, 137, 183);">阅读原文</span>可报名活动招新和查看往期回顾</span></p><br>';
     $html .= '<p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p><br>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">FDUTOPIA致力于打造高效的复旦信息分享平台</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">如果喜欢我们，欢迎分享给小伙伴～</span></p>';
