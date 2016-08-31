@@ -45,13 +45,16 @@ function print_title($index, $category_name_cn) {
 }
 
 
-function print_article($mysql, $category_name, $category_idx) {
+function print_article($mysql, $category_name) {
+
+    global $user_category_point;
 
     $query = sprintf("select * from recruit_info_common natural join users where user_category='%s' order by edit_time;", $category_name);
     $res = mysql_query($query, $mysql);
     if (!mysql_num_rows($res)) return;
 
-    print_title($category_idx+1, $category_name);
+    $user_category_point++;
+    print_title($user_category_point, $category_name);
     $html = '<ol style="list-style-type: decimal;" class=" list-paddingleft-2">';
     while ($row = mysql_fetch_assoc($res)) {
 
@@ -66,12 +69,12 @@ function print_article($mysql, $category_name, $category_idx) {
     echo $html;
 }
 
+
 function print_footer() {
-    $html = '<section><p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p><br>';
+    $html = '<br><section><p style="text-align: center;"><span style="font-size: 15px;">戳<span style="color: rgb(92, 137, 183);">阅读原文</span>可报名社团招新</span></p><br>';
+    $html .= '<p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p><br>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">FDUTOPIA致力于打造高效的复旦信息分享平台</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">如果你是社长或主办方</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">请联系fdutopia@lyq.me说明负责人身份</span></p>';
-    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">获得邀请后即可发布招新</span></p>';
+    $html .= '<p style="text-align: center;"><span style="font-size: 14px;">如果喜欢我们，欢迎分享给小伙伴～</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">©2016 FDUTOPIA. All rights reserved.</span></p>';
     $html .= '<br></section>';
     echo $html;
@@ -86,8 +89,9 @@ print_header();
 $user_category = array('书院团学联', '人文历史类', '科学技术类', '社科经管类', '歌舞戏剧类', '体育运动类', '国际交流类', '能力拓展类',
     '公益类', '棋牌类', '兴趣类', '枫林社团', '江湾社团', '张江社团', '其它');
 $user_category_cnt = 15;
+$user_category_point = 0;
 for ($i = 0; $i < $user_category_cnt; $i++) {
-    print_article($mysql, $user_category[$i], $i);
+    print_article($mysql, $user_category[$i]);
 }
 
 mysql_close($mysql);

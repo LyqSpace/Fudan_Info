@@ -55,7 +55,7 @@ mysql_close($mysql);
 
 print_footer();
 
-echo 'http://fdutopia.lyq.me/review.php';
+echo 'http://fdutopia.lyq.me/index.php';
 
 function check_update() {
     $cur_time_week = date('N', time());
