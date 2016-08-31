@@ -32,6 +32,7 @@ if (isset($_COOKIE['login_serial'])) {
 
     <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <script type="text/javascript" src="js/admin.js"></script>
 
     <title>控制面板</title>
 </head>

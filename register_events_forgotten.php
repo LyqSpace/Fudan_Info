@@ -9,8 +9,9 @@
     <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/register_events.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/guest_cookie.js"></script>
 
     <title>找回活动入场码 | FDUTOPIA</title>
 </head>
@@ -92,11 +93,11 @@
                 </div>
             </div>
             <div class="weui_cells_title">
-                <p>【学号】 <?php echo $_COOKIE['guest_id']; ?></p>
+                <p>【学号】 <?php echo $_COOKIE['registration_id']; ?></p>
 
-                <p>【姓名】 <?php echo $_COOKIE['guest_name']; ?></p>
+                <p>【姓名】 <?php echo $_COOKIE['registration_name']; ?></p>
 
-                <p>【手机】 <?php echo $_COOKIE['guest_phone']; ?></p>
+                <p>【手机】 <?php echo $_COOKIE['registration_phone']; ?></p>
             </div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">

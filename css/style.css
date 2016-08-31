@@ -3,6 +3,11 @@ body {
     margin:auto;
 }
 
+p {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
 h1 {
     display: block;
     font-size: 2em;

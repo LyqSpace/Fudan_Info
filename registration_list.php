@@ -75,9 +75,11 @@ if (isset($_COOKIE['login_serial'])) {
 
                 $query = sprintf("select count(*) as cnt from event_registration_list where new_increament=TRUE and registration_serial='%s';", $registration_info['registration_serial']);
                 $new_increment_res = mysql_query($query, $mysql);
-                $new_increment_row = mysql_fetch_assoc($res);
-                $new_increment_num = '（' . $new_increment_row["cnt"] . '）';
-                ?>）
+                $new_increment_row = mysql_fetch_assoc($new_increment_res);
+                $new_increment_num = '';
+                if ($new_increment_row['cnt'] > 0) {
+                    $new_increment_num = '(' . $new_increment_row["cnt"] . ')';
+                }
         ?>
             <a class="weui_cell" href="registration_single.php?registration_serial=<?php echo $registration_info['registration_serial'];?>">
                 <div class="weui_cell_bd weui_cell_primary">

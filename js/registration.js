@@ -3,11 +3,6 @@ function dialog_disappear() {
     dialog.style.display = "none";
 }
 
-window.onload =function () {
-    show_register_date();
-    show_register_type();
-};
-
 function reedit_registration(submited) {
 
     var form = document.getElementsByName("edit_registration")[0];

@@ -23,7 +23,7 @@ function change_club(this_obj, clubs_category_id) {
     if (this_obj == null) return;
     var club_id = this_obj.selectedOptions[0].value;
 
-    var club_list = document.getElementsByName("club_"+event_id);
+    var club_list = document.getElementsByName("club_category_"+clubs_category_id);
     for (var i = 0; i < club_list.length; i++) {
         club_list[i].style.display = "none";
     }
@@ -47,7 +47,7 @@ function check_regsiter_recruit() {
     var tmp_obj, tmp, info_list, i;
 
     var select_category_obj = document.getElementById('select_clubs_category');
-    var select_category_id = select_event_obj.selectedOptions[0].value;
+    var select_category_id = select_category_obj.selectedOptions[0].value;
     var select_club_obj = document.getElementById('select_club_' + select_category_id);
     var club_name = select_club_obj.selectedOptions[0].value;
     var input_club_list = document.getElementsByName('username');

@@ -39,9 +39,10 @@ $recruit_register_timestamp = "2016-08-01 00:00:00";
                 (guest_id='%s' OR guest_name='%s' OR guest_phone='%s');",
             mysql_real_escape_string($_POST['username']),
             $recruit_register_timestamp,
-            mysql_real_escape_string($_POST['registration_id']),
-            mysql_real_escape_string($_POST['registration_name']),
-            mysql_real_escape_string($_POST['registration_phone']));
+            mysql_real_escape_string($_POST['register_recruit_id']),
+            mysql_real_escape_string($_POST['register_recruit_name']),
+            mysql_real_escape_string($_POST['register_recruit_phone']));
+        echo $query;
         $res = mysql_query($query, $mysql);
         $row = mysql_fetch_assoc($res);
         if (mysql_num_rows($res)) {
@@ -64,16 +65,19 @@ $recruit_register_timestamp = "2016-08-01 00:00:00";
         } else {
 
             $query = sprintf("SELECT * FROM recruit_info_activities WHERE username='%s';", mysql_real_escape_string($_POST['username']));
+            //echo $query;
             $res = mysql_query($query, $mysql);
 
-            $activity_cnt = 1;
+            $activity_cnt = 0;
             $activity_item = 'activity_' . $activity_cnt;
             $recruit_items = '';
             while (isset($_POST[$activity_item])) {
                 $row = mysql_fetch_assoc($res);
                 if ($_POST[$activity_item] == "on") {
-                    $recruit_items .= $activity_item . ' ';
+                    $recruit_items .= $row['activity_name'] . ' ';
                 }
+                $activity_cnt++;
+                $activity_item = 'activity_' . $activity_cnt;
             }
             if ($recruit_items == '') $recruit_items = '无勾选任何活动';
 
@@ -86,14 +90,14 @@ $recruit_register_timestamp = "2016-08-01 00:00:00";
                 mysql_real_escape_string($_POST['register_recruit_id']),
                 mysql_real_escape_string($_POST['register_recruit_name']),
                 mysql_real_escape_string($_POST['register_recruit_phone']),
-                mysql_real_escape_string($_POST['registration_major']),
-                mysql_real_escape_string($_POST['registration_message']),
+                mysql_real_escape_string($_POST['register_recruit_major']),
+                mysql_real_escape_string($_POST['register_recruit_message']),
                 $recruit_items,
                 $join_management);
             //echo $query;
             $res = mysql_query($query, $mysql);
             ?>
-            <p class="page_title">报名成功</p>
+            <p class="page_title">成功</p>
             <br>
             <div class="weui_btn_area">
                 <a class="weui_btn weui_btn_plain_default" href="index.php#m/page_guest_recruits">返回招新报名系统</a>

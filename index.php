@@ -32,6 +32,7 @@ function count_str($str)
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/guest_cookie.js"></script>
     <script type="text/javascript" src="js/register_events.js"></script>
     <script type="text/javascript" src="js/register_recruit.js"></script>
 
@@ -156,7 +157,6 @@ function count_str($str)
                                 if ($event_cnt > 0) {
                                     echo 'style="display: none"';
                                 }
-                                $event_cnt++;
                                 ?>>
                                     <div class="weui_cells weui_cells_form">
                                         <div class="weui_cell weui_cell_select weui_select_after">
@@ -205,6 +205,12 @@ function count_str($str)
                                                 【主办方】<?php echo $event_info['fullname']; ?></div>
                                             <?php
                                         }
+                                    }
+                                    if ($event_info['details'] != '') {
+                                        ?>
+                                        <div class="weui_cells_tips">
+                                            【介绍】<?php echo $event_info['details']; ?></div>
+                                        <?php
                                     }
 
                                     $query = sprintf("SELECT * FROM event_registration_date NATURAL JOIN event_registration_common WHERE event_id='%s';",
@@ -268,6 +274,9 @@ function count_str($str)
                                     ?>
                                 </div>
                                 <?php
+
+                                $event_cnt++;
+
                             }
                             ?>
                         </div>
@@ -456,7 +465,6 @@ function count_str($str)
                                 if ($clubs_category_cnt > 0) {
                                     echo 'style="display: none"';
                                 }
-                                $clubs_category_cnt++;
                                 ?>>
                                     <div class="weui_cells weui_cells_form">
                                         <div class="weui_cell weui_cell_select weui_select_after">
@@ -486,18 +494,17 @@ function count_str($str)
 
                                     while ($club_info = mysql_fetch_assoc($clubs_list)) {
                                         ?>
-                                        <div id="<?php echo 'club_' . $club_cnt; ?>" <?php
-                                        if ($date_cnt > 0) {
+                                        <div id="<?php echo 'club_' . $club_info['username']; ?>" name="club_category_<?php echo $clubs_category_cnt;?>" <?php
+                                        if ($club_cnt > 0) {
                                             echo 'style="display: none"';
                                         }
-                                        $club_cnt++;
                                         ?>>
                                             <div class="weui_cells_title">社团概况</div>
                                             <article class="club_recruit_article">
                                                 <p><?php echo $club_info['details'];?></p>
                                             </article>
                                             <form name="edit_register_recruit" method="post" onsubmit="return check_regsiter_recruit();"
-                                                  action="register_events_save.php">
+                                                  action="register_recruit_save.php">
 
                                                 <input name="username" style="display: none;" />
                                                 <input name="register_recruit_id" style="display: none;"/>
@@ -514,7 +521,6 @@ function count_str($str)
                                                     $activity_list = mysql_query($query, $mysql);
                                                     $activity_cnt = 0;
                                                     while ($activity_info = mysql_fetch_assoc($activity_list)) {
-                                                        $activity_cnt++;
                                                         ?>
                                                         <label class="weui_cell weui_check_label">
                                                             <div class="weui_cell_hd">
@@ -529,6 +535,7 @@ function count_str($str)
                                                             </div>
                                                         </label>
                                                         <?php
+                                                        $activity_cnt++;
                                                     }
                                                     ?>
                                                 </div>
@@ -555,10 +562,12 @@ function count_str($str)
                                             </form>
                                         </div>
                                         <?php
+                                        $club_cnt++;
                                     }
                                     ?>
                                 </div>
                                 <?php
+                                $clubs_category_cnt++;
                             }
                             ?>
                         </div>
@@ -639,7 +648,7 @@ function count_str($str)
                                         </div>
                                     </div>
                                     <div class="weui_btn_area">
-                                        <a class="weui_btn weui_btn_plain_default" href="#/page_guest_recruits" id="btn_clear_cookie_events">清除本地记录</a>
+                                        <a class="weui_btn weui_btn_plain_default" href="#/page_guest_recruits" id="btn_clear_cookie_recruits">清除本地记录</a>
                                     </div>
                                 </article>
                                 <?php

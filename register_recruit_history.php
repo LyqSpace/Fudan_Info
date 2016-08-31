@@ -9,8 +9,9 @@
     <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/register_recruit.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/guest_cookie.js"></script>
 
     <title>查询社团报名记录 | FDUTOPIA</title>
 </head>
@@ -77,9 +78,9 @@
 
         $query = sprintf("SELECT * FROM recruit_list NATURAL JOIN users
                 WHERE guest_id='%s' AND guest_name='%s' AND guest_phone='%s' ORDER BY recruit_register_time DESC;",
-            mysql_real_escape_string($_POST['recruit_register_id']),
-            mysql_real_escape_string($_POST['recruit_register_name']),
-            mysql_real_escape_string($_POST['recruit_register_phone']));
+            mysql_real_escape_string($_POST['register_recruit_id']),
+            mysql_real_escape_string($_POST['register_recruit_name']),
+            mysql_real_escape_string($_POST['register_recruit_phone']));
         //echo $query;
         $res = mysql_query($query, $mysql);
         $exist = mysql_num_rows($res);
@@ -92,11 +93,11 @@
                 </div>
             </div>
             <div class="weui_cells_title">
-                <p>【学号】 <?php echo $_COOKIE['guest_id']; ?></p>
+                <p>【学号】 <?php echo $_COOKIE['register_recruit_id']; ?></p>
 
-                <p>【姓名】 <?php echo $_COOKIE['guest_name']; ?></p>
+                <p>【姓名】 <?php echo $_COOKIE['register_recruit_name']; ?></p>
 
-                <p>【手机】 <?php echo $_COOKIE['guest_phone']; ?></p>
+                <p>【手机】 <?php echo $_COOKIE['register_recruit_phone']; ?></p>
             </div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">

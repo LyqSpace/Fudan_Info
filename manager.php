@@ -61,16 +61,20 @@ if (isset($_COOKIE['login_serial'])) {
 
                         <div class="weui_btn_area">
                             <a class="weui_btn weui_btn_plain_primary" href="edit_event.php">发布一则活动信息</a>
-                            <a class="weui_btn weui_btn_plain_primary" href="registration_list.php">查看我的票务系统（<?php
+                            <a class="weui_btn weui_btn_plain_primary" href="registration_list.php">查看我的票务系统<?php
                                 $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
                                 mysql_query("set names 'utf8'");
                                 mysql_select_db("fudan_info");
 
-                                $query = sprintf("select count(*) as cnt from event_registration_list NATURAL join event_registration_common NATURAL join event_info where new_increament=TRUE and username='%s';", $username);
+                                $query = sprintf("select count(*) as cnt from event_registration_list as l left join event_registration_date as d
+                                    on l.registration_serial=d.registration_serial left join event_info as i
+                                    on d.event_id=i.event_id where l.new_increament=TRUE and i.username='%s';", $username);
                                 $res = mysql_query($query, $mysql);
                                 $row = mysql_fetch_assoc($res);
-                                echo $row['cnt'];
-                                ?>）</a>
+                                if ($row['cnt'] > 0) {
+                                    echo '(' . $row['cnt'] . ')';
+                                }
+                                ?></a>
                             <a class="weui_btn weui_btn_plain_primary" href="preview.php">预览本周日的活动推送</a>
                         </div>
 
@@ -130,7 +134,7 @@ if (isset($_COOKIE['login_serial'])) {
                     <div class="page_body">
 
                         <div class="weui_btn_area">
-                            <a class="weui_btn weui_btn_plain_primary" href="edit_recruit.php">编辑我的招新信息（</a>
+                            <a class="weui_btn weui_btn_plain_primary" href="edit_recruit.php">编辑我的招新信息</a>
                             <a class="weui_btn weui_btn_plain_primary" href="manage_recruit_list.php">查看我的招新系统<?php
                                 $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
                                 mysql_query("set names 'utf8'");
@@ -139,11 +143,11 @@ if (isset($_COOKIE['login_serial'])) {
                                 $query = sprintf("select count(*) as cnt from recruit_list where new_increament=TRUE and username='%s';", $username);
                                 $res = mysql_query($query, $mysql);
                                 $row = mysql_fetch_assoc($res);
-                                echo $row['cnt'];
-                                ?>）</a>
+                                if ($row['cnt'] > 0) {
+                                    echo '(' . $row['cnt'] . ')';
+                                }
+                                ?></a>
                         </div>
-
-
                         <?php
 
                         $query = sprintf("SELECT * FROM recruit_info_common WHERE username='%s';", $username);
@@ -156,18 +160,12 @@ if (isset($_COOKIE['login_serial'])) {
                                     <span class="section_body">招新信息</span>
                                 </div>
                             </div>
-
-                            <section>
-                                <h3 class="info_title"><?php echo $row['details'] .'1111'; ?></h3>
-                                <?php
-                                ?>
-                            </section>
+                            <p><?php echo $row['details']; ?></p>
                             <div class="section_box">
                                 <div class="section_header">
                                     <span class="section_body">活动介绍</span>
                                 </div>
                             </div>
-                            </section>
                             <ol style="padding-left: 8px;">
                                 <?php
                                 $query = sprintf("SELECT * FROM recruit_info_activities WHERE username='%s';", $username);
