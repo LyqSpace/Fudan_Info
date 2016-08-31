@@ -68,7 +68,7 @@ if (isset($_COOKIE['login_serial'])) {
 
                                 $query = sprintf("select count(*) as cnt from event_registration_list as l left join event_registration_date as d
                                     on l.registration_serial=d.registration_serial left join event_info as i
-                                    on d.event_id=i.event_id where l.new_increament=TRUE and i.username='%s';", $username);
+                                    on d.event_id=i.event_id where l.new_increment=TRUE and i.username='%s';", $username);
                                 $res = mysql_query($query, $mysql);
                                 $row = mysql_fetch_assoc($res);
                                 if ($row['cnt'] > 0) {
@@ -140,7 +140,7 @@ if (isset($_COOKIE['login_serial'])) {
                                 mysql_query("set names 'utf8'");
                                 mysql_select_db("fudan_info");
 
-                                $query = sprintf("select count(*) as cnt from recruit_list where new_increament=TRUE and username='%s';", $username);
+                                $query = sprintf("select count(*) as cnt from recruit_list where new_increment=TRUE and username='%s';", $username);
                                 $res = mysql_query($query, $mysql);
                                 $row = mysql_fetch_assoc($res);
                                 if ($row['cnt'] > 0) {

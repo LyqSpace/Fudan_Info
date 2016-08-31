@@ -46,7 +46,7 @@ if (isset($_GET['registration_serial']) && $_GET['registration_serial'] != '') {
     mysql_query("set names 'utf8'");
     mysql_select_db("fudan_info");
 
-    $query = sprintf("update event_registration_list set new_increament=false where registration_serial='%s';", $_GET['registration_serial']);
+    $query = sprintf("update event_registration_list set new_increment=false where registration_serial='%s';", $_GET['registration_serial']);
     $res = mysql_query($query, $mysql);
 
     $query = sprintf("SELECT * FROM event_info NATURAL JOIN event_registration_date WHERE registration_serial='%s';",

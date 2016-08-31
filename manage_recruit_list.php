@@ -60,7 +60,7 @@ if (isset($_COOKIE['login_serial'])) {
                 mysql_query("set names 'utf8'");
                 mysql_select_db("fudan_info");
 
-                $query = sprintf("update recruit_list set new_increament=false where username='%s';", $username);
+                $query = sprintf("update recruit_list set new_increment=false where username='%s';", $username);
                 $res = mysql_query($query, $mysql);
 
                 $query = sprintf("SELECT * FROM recruit_list WHERE username='%s' ORDER BY recruit_register_time DESC;", $username);

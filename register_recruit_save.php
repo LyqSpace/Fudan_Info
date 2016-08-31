@@ -42,7 +42,7 @@ $recruit_register_timestamp = "2016-08-01 00:00:00";
             mysql_real_escape_string($_POST['register_recruit_id']),
             mysql_real_escape_string($_POST['register_recruit_name']),
             mysql_real_escape_string($_POST['register_recruit_phone']));
-        echo $query;
+        //echo $query;
         $res = mysql_query($query, $mysql);
         $row = mysql_fetch_assoc($res);
         if (mysql_num_rows($res)) {
