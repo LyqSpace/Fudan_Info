@@ -19,8 +19,6 @@ function show_register_form() {
         document.getElementsByName('register')[0].checked = null;
         register_form.style.display = "none";
     }
-    var register_check = document.getElementsByName('register')[0];
-    if (register_check != null) register_check.checked = "";
     show_register_date();
 }
 
@@ -30,14 +28,10 @@ function show_register_date() {
     if (register_check == null || register_form == null) return;
     if (register_check.checked) {
         register_form.style.display = "block";
-        document.getElementsByName('register_date_type')[0].value = 'date_st';
     } else {
         register_form.style.display = "none";
         document.getElementsByName('register_date')[0].value = null;
     }
-    var register_type_obj = document.getElementsByName('register_date_type')[0];
-    if (register_type_obj == null) return;
-    register_type_obj.selectedIndex = 0;
     show_register_type();
 }
 

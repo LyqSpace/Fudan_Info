@@ -170,8 +170,8 @@ function print_article(&$order_id, $category_id) {
         where category='%s' and
         ((date_type='date_st' and date>='%s' and date<'%s') or
          (date_type='date_ed' and date>='%s') or
-         (register_date_type='date_st' and date>='%s') or
-         (register_date_type='date_ed' and register_date>='%s')) order by date;",
+         (register=TRUE and register_date_type='date_st' and date>='%s') or
+         (register=true and  register_date_type='date_ed' and register_date>='%s')) order by date;",
         $category_name_en[$category_id], $week_st, $week_ed, $week_st, $week_st, $week_st);
 
     $res = mysql_query($query, $mysql);

@@ -144,6 +144,7 @@ if (isset($_COOKIE['login_serial'])) {
 
                     <input style="display: none" name="event_id" value="<?php echo $_GET['event_id']; ?>"/>
 
+                    <div class="weui_cells_title">若不需要报名，请在活动“编辑”中将其关闭，这里关闭报名表后不可“保存”</div>
                     <div class="weui_cells weui_cells_form">
                         <!--是否需要报名-->
                         <div class="weui_cell weui_cell_switch">
@@ -169,6 +170,7 @@ if (isset($_COOKIE['login_serial'])) {
                                         $options =
                                             '<option value="date_st">报名开始时间</option>' .
                                             '<option value="date_ed">报名截止时间</option>';
+
                                         $register_date_type = strlen($row['register_date_type']) > 0 ? $row['register_date_type'] : 'date_st';
                                         $pos = strpos($options, $register_date_type);
                                         $part1 = substr($options, 0, $pos - 7);

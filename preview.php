@@ -153,8 +153,8 @@ if (isset($_COOKIE['login_serial'])) {
                 WHERE category='%s' AND username='%s' AND
                 ((date_type='date_st' AND date>='%s' AND date<'%s') OR
                  (date_type='date_ed' AND date>='%s') OR
-                 (register_date_type='date_st' AND date>='%s') OR
-                 (register_date_type='date_ed' AND register_date>='%s')) ORDER BY date;",
+                 (register=true and register_date_type='date_st' AND date>='%s') OR
+                 (register=true and register_date_type='date_ed' AND register_date>='%s')) ORDER BY date;",
             $category_name_en[$category_id], $username, $week_st, $week_ed, $week_st, $week_st, $week_st);
 
         $res = mysql_query($query, $mysql);

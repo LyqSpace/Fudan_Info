@@ -113,7 +113,7 @@ function count_str($str)
                         mysql_select_db("fudan_info");
 
                         $query = sprintf("SELECT * FROM event_info NATURAL JOIN event_registration_date NATURAL JOIN event_registration_common WHERE
-                                          confirm=TRUE AND ((register_date_type='date_st' AND '%s' < event_date) OR (register_date_type='date_ed' AND '%s' < register_date))
+                                          confirm=TRUE AND register=TRUE AND ((register_date_type='date_st' AND '%s' < event_date) OR (register_date_type='date_ed' AND '%s' < register_date))
                                           GROUP BY event_id ORDER BY event_date;",
                             $now_time, $now_time);
                         //echo $query;
