@@ -35,6 +35,7 @@ function count_str($str)
     <script type="text/javascript" src="js/guest_cookie.js"></script>
     <script type="text/javascript" src="js/register_events.js"></script>
     <script type="text/javascript" src="js/register_recruit.js"></script>
+    <script type="text/javascript" src="js/review.js"></script>
 
     <title>FDUTOPIA</title>
 </head>
