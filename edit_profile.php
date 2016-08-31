@@ -96,8 +96,8 @@ if (isset($_COOKIE['login_serial'])) {
                             $options =
                                 '<option value="书院团学联">书院团学联</option>' .
                                 '<option value="人文历史类">人文历史类</option>' .
-                                '<option value="社会经管类">科学技术类</option>' .
-                                '<option value="社会经管类">社会经管类</option>' .
+                                '<option value="科学技术类">科学技术类</option>' .
+                                '<option value="社科经管类">社科经管类</option>' .
                                 '<option value="歌舞戏剧类">歌舞戏剧类</option>' .
                                 '<option value="体育运动类">体育运动类</option>' .
                                 '<option value="国际交流类">国际交流类</option>' .
