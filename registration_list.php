@@ -74,7 +74,7 @@ if (isset($_COOKIE['login_serial'])) {
                 $event_date = date('Y年n月j日 H:i', strtotime($registration_info['event_date']));
 
                 $query = sprintf("select count(*) as cnt from event_registration_list where new_increment=TRUE and registration_serial='%s';", $registration_info['registration_serial']);
-                echo $query;
+                //echo $query;
                 $new_increment_res = mysql_query($query, $mysql);
                 $new_increment_row = mysql_fetch_assoc($new_increment_res);
                 $new_increment_num = '';
