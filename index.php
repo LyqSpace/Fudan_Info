@@ -1,6 +1,6 @@
 <?php
-header('Cache-Control:no-cache,must-revalidate');
-header('Pragma:no-cache');
+//header('Cache-Control:no-cache,must-revalidate');
+//header('Pragma:no-cache');
 
 function count_str($str)
 {
@@ -662,7 +662,7 @@ function count_str($str)
 
                 <div class="slide" data-anchor="page_guest_review">
                     <div class="page_header">
-                        <h1 class="page_title">往期活动精彩回顾</h1>
+                        <h1 class="page_title">精彩活动回顾</h1>
 
                         <p class="page_desc">下面的爪爪冰棍儿，点击标题即刻享用</p>
                     </div>
