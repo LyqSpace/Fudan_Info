@@ -83,7 +83,7 @@ if (isset($_COOKIE['login_serial'])) {
                 </div>
             </form>
             <div class="weui_btn_area">
-                <a class="weui_btn weui_btn_plain_default" href="manager.php#m/page_events">返回</a>
+                <a class="weui_btn weui_btn_plain_default" href="manager.php#page_events">返回</a>
             </div>
             <div id="error_message"></div>
 
@@ -99,7 +99,7 @@ if (isset($_COOKIE['login_serial'])) {
                     只能编辑自己活动的回顾！
                 </div>
                 <div class="weui_dialog_ft">
-                    <a href="manager.php#m/page_events" weui_btn_dialog primary">确定</a>
+                    <a href="manager.php#page_events" weui_btn_dialog primary">确定</a>
                 </div>
             </div>
             <?php
@@ -116,7 +116,7 @@ if (isset($_COOKIE['login_serial'])) {
                 必须选择一则活动！
             </div>
             <div class="weui_dialog_ft">
-                <a href="manager.php#m/page_events" weui_btn_dialog primary">确定</a>
+                <a href="manager.php#page_events" weui_btn_dialog primary">确定</a>
             </div>
         </div>
         <?php

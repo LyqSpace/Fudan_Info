@@ -60,7 +60,7 @@
             <input name="search" type="submit" value="查询" class="weui_btn weui_btn_plain_primary"/>
         </div>
         <div class="weui_btn_area">
-            <a class="weui_btn weui_btn_plain_default" href="index.php#m/page_guest_recruits">返回招新报名系统</a>
+            <a class="weui_btn weui_btn_plain_default" href="index.php#page_guest_recruits">返回招新报名系统</a>
         </div>
 
     </form>

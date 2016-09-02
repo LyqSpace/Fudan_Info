@@ -184,7 +184,7 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
                 echo "javascript:history.back();";
             } else {
                 if ($res) {
-                    echo "manager.php#m/page_events";
+                    echo "manager.php#page_events";
                 } else {
                     echo "javascript:history.back();";
                 }
@@ -208,7 +208,7 @@ if (isset($_POST['title']) && $_POST['title'] != "" &&
             本页面禁止违规访问!
         </div>
         <div class="weui_dialog_ft">
-            <a href="manager.php#m/page_events" class="weui_btn_dialog primary">确定</a>
+            <a href="manager.php#page_events" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php

@@ -91,7 +91,7 @@ if (isset($_POST['details']) && $_POST['details'] != "") {
             <p>招新保存成功! 点击“确定”跳转到我的招新管理</p>
         </div>
         <div class="weui_dialog_ft">
-            <a href="manager.php#m/page_recruits" class="weui_btn_dialog primary">确定</a>
+            <a href="manager.php#page_recruits" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php

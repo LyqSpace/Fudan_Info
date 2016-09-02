@@ -122,7 +122,7 @@
                 <p class="page_desc">快快截图保存下来吧</p>
                 <br>
                 <div class="weui_btn_area">
-                    <a class="weui_btn weui_btn_plain_default" href="index.php#m/page_guest_events">返回活动报名系统</a>
+                    <a class="weui_btn weui_btn_plain_default" href="index.php#page_guest_events">返回活动报名系统</a>
                 </div>
                 <br>
                 <hr>
@@ -147,7 +147,7 @@
                 本页面禁止违规访问!
             </div>
             <div class="weui_dialog_ft">
-                <a href="index.php#m/page_guest_events" class="weui_btn_dialog primary">确定</a>
+                <a href="index.php#page_guest_events" class="weui_btn_dialog primary">确定</a>
             </div>
         </div>
         <?php

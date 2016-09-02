@@ -58,7 +58,7 @@ mysql_close($mysql);
     <div class="weui_dialog_bd">
         <p>招新删除成功! 点击“确定”跳转到我的招新管理</p>
     </div>
-    <div class="weui_dialog_ft"><a href="manager.php#m/page_recruits" class="weui_btn_dialog primary">确定</a>
+    <div class="weui_dialog_ft"><a href="manager.php#page_recruits" class="weui_btn_dialog primary">确定</a>
     </div>
 </div>
 </body>

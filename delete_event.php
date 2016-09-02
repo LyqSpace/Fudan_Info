@@ -72,7 +72,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
                 <a href="
             <?php
                 if ($res) {
-                    echo "manager.php#m/page_events";
+                    echo "manager.php#page_events";
                 } else {
                     echo "javascript:history.back();";
                 }
@@ -92,7 +92,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
                 只能删除自己的活动!
             </div>
             <div class="weui_dialog_ft">
-                <a href="manager.php#m/page_events" weui_btn_dialog primary">确定</a>
+                <a href="manager.php#page_events" weui_btn_dialog primary">确定</a>
             </div>
         </div>
         <?php
@@ -111,7 +111,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
             本页面禁止违规访问!
         </div>
         <div class="weui_dialog_ft">
-            <a href="manager.php#m/page_events" class="weui_btn_dialog primary">确定</a>
+            <a href="manager.php#page_events" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php

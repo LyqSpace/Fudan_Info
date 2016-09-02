@@ -222,7 +222,7 @@ if (isset($_COOKIE['login_serial'])) {
     <br>
 
     <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_plain_default" href="manager.php#m/page_events">返回活动管理</a>
+        <a class="weui_btn weui_btn_plain_default" href="manager.php#page_events">返回活动管理</a>
     </div>
 </div>
 <br>

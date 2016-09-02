@@ -77,7 +77,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
             <div class="weui_dialog_bd">
                 <p>报名表删除成功! 点击“确定”跳转到活动管理</p>
             </div>
-            <div class="weui_dialog_ft"><a href="manager.php#m/page_events" class="weui_btn_dialog primary">确定</a>
+            <div class="weui_dialog_ft"><a href="manager.php#page_events" class="weui_btn_dialog primary">确定</a>
             </div>
         </div>
         <?php
@@ -93,7 +93,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
                 只能删除自己的报名表!
             </div>
             <div class="weui_dialog_ft">
-                <a href="manager.php#m/page_events" weui_btn_dialog primary">确定</a>
+                <a href="manager.php#page_events" weui_btn_dialog primary">确定</a>
             </div>
         </div>
         <?php
@@ -112,7 +112,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
             本页面禁止违规访问!
         </div>
         <div class="weui_dialog_ft">
-            <a href="manager.php#m/page_events" class="weui_btn_dialog primary">确定</a>
+            <a href="manager.php#page_events" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php

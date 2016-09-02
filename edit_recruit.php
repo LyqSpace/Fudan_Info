@@ -176,7 +176,7 @@ if (isset($_COOKIE['login_serial'])) {
         </div>
     </form>
     <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_plain_default" href="manager.php#m/page_recruit">返回招新管理</a>
+        <a class="weui_btn weui_btn_plain_default" href="manager.php#page_recruit">返回招新管理</a>
     </div>
     <div id="error_message"></div>
     <div id="confirm_message"></div>

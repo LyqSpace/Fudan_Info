@@ -44,7 +44,7 @@ if (isset($_COOKIE['login_serial'])) {
 <div class="page_body">
 
     <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_plain_default" href="manager.php#m/page_recruits">返回招新管理</a>
+        <a class="weui_btn weui_btn_plain_default" href="manager.php#page_recruits">返回招新管理</a>
     </div>
 
     <div class="weui_cells weui_cells_form">

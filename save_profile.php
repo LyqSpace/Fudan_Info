@@ -81,7 +81,7 @@ if (isset($_POST['fullname']) && $_POST['fullname'] != "" &&
             <a href="
             <?php
             if ($res) {
-                echo "manager.php#m/page_settings";
+                echo "manager.php#page_settings";
             } else {
                 echo "javascript:history.back();";
             }
@@ -103,7 +103,7 @@ if (isset($_POST['fullname']) && $_POST['fullname'] != "" &&
             本页面禁止违规访问!
         </div>
         <div class="weui_dialog_ft">
-            <a href="manager.php#m/page_settings" class="weui_btn_dialog primary">确定</a>
+            <a href="manager.php#page_settings" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php

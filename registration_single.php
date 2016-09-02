@@ -124,7 +124,7 @@ if (isset($_GET['registration_serial']) && $_GET['registration_serial'] != '') {
                 禁止查看不是自己的票务系统!
             </div>
             <div class="weui_dialog_ft">
-                <a href="manager.php#m/page_events" class="weui_btn_dialog primary">确定</a>
+                <a href="manager.php#page_events" class="weui_btn_dialog primary">确定</a>
             </div>
         </div>
         <?php
@@ -140,7 +140,7 @@ if (isset($_GET['registration_serial']) && $_GET['registration_serial'] != '') {
             本页面禁止违规访问!
         </div>
         <div class="weui_dialog_ft">
-            <a href="manager.php#m/page_events" class="weui_btn_dialog primary">确定</a>
+            <a href="manager.php#page_events" class="weui_btn_dialog primary">确定</a>
         </div>
     </div>
     <?php

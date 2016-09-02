@@ -59,7 +59,7 @@ $recruit_register_timestamp = "2016-08-01 00:00:00";
                     <p>同一学号、姓名、手机均算作同一个人</p>
                 </div>
                 <div class="weui_dialog_ft">
-                    <a href="index.php#m/page_guest_recruits" class="weui_btn_dialog primary">确定</a>
+                    <a href="index.php#page_guest_recruits" class="weui_btn_dialog primary">确定</a>
                 </div>
             </div>
             <?php
@@ -83,7 +83,7 @@ $recruit_register_timestamp = "2016-08-01 00:00:00";
             <p class="page_title">成功</p>
             <br>
             <div class="weui_btn_area">
-                <a class="weui_btn weui_btn_plain_default" href="index.php#m/page_guest_recruits">返回招新报名系统</a>
+                <a class="weui_btn weui_btn_plain_default" href="index.php#page_guest_recruits">返回招新报名系统</a>
             </div>
             <br>
             <hr>
@@ -107,7 +107,7 @@ $recruit_register_timestamp = "2016-08-01 00:00:00";
                 本页面禁止违规访问!
             </div>
             <div class="weui_dialog_ft">
-                <a href="index.php#m/page_guest_recruits" class="weui_btn_dialog primary">确定</a>
+                <a href="index.php#page_guest_recruits" class="weui_btn_dialog primary">确定</a>
             </div>
         </div>
         <?php
