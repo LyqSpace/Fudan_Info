@@ -80,12 +80,12 @@ if (isset($_COOKIE['login_serial'])) {
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
-                        <textarea class="weui_textarea" id="details_text" placeholder="请输入社团介绍和招新信息，社团名无需填写。此栏不可为空。"
-                                  name="details" rows="6"
-                                  onkeyup="count('details_text', details_cnt, 300);"><?php echo $row['details']; ?></textarea>
+                        <textarea class="weui_textarea" id="details_text" placeholder="字数有限，请输入社团最与众不同，最吸引人的特色，社团名无需填写。此栏不可为空。"
+                                  name="details" rows="4"
+                                  onkeyup="count('details_text', details_cnt, 100);"><?php echo $row['details']; ?></textarea>
 
                     <div class="weui_textarea_counter"><span
-                            id="details_cnt"><?php echo count_str($row['details']); ?></span>/300
+                            id="details_cnt"><?php echo count_str($row['details']); ?></span>/100
                     </div>
                 </div>
             </div>
