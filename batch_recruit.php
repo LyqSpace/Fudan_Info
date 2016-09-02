@@ -62,8 +62,8 @@ function print_article($mysql, $category_name)
     while ($row = mysql_fetch_assoc($res)) {
 
         $html .= '<li>';
-        $html .= sprintf('<p style="font-size: 14px;"><strong>%s</strong></p>', $row['fullname']);
-        $html .= sprintf('<p style="font-size: 14px;">%s</p>', $row['details']);
+        $html .= sprintf('<p style="font-size: 16px;"><strong>%s</strong></p>', $row['fullname']);
+        $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">%s</p>', $row['details']);
         $html .= '</li><br>';
 
     }
