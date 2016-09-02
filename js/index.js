@@ -1,10 +1,16 @@
 $(document).ready(function() {
-    $('#fullpage').fullpage({
-        loopHorizontal: false,
-        controlArrows: false,
-        scrollingSpeed: 300,
-        anchors: ['m'],
-        onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){
+
+    $('#btn_events').click(function() {
+        mp.moveTo(0);
+    });
+    $('#btn_recruits').click(function() {
+        mp.moveTo(1);
+    });
+    $('#btn_settings').click(function() {
+        mp.moveTo(2);
+    });
+
+    mp.onLeave(function(slideIndex, nextSlideIndex){
             switch (slideIndex) {
                 case 0:
                     $('#btn_events').removeClass('weui_bar_item_on');
@@ -27,17 +33,9 @@ $(document).ready(function() {
                     $('#btn_settings').addClass('weui_bar_item_on');
                     break;
             }
-        }
-    });
-    $('#btn_events').click(function() {
-        $('#fullpage').fullpage.moveTo(1, 0);
-    });
-    $('#btn_recruits').click(function() {
-        $('#fullpage').fullpage.moveTo(1, 1);
-    });
-    $('#btn_settings').click(function() {
-        $('#fullpage').fullpage.moveTo(1, 2);
-    });
+        });
+
+    mp.init();
 });
 
 function count(text_id, cnt_id, cnt_limit) {

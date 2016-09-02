@@ -28,13 +28,12 @@ if (isset($_COOKIE['login_serial'])) {
     <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
 
-    <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css"/>
     <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="css/fullpage.css"/>
+    <link rel="stylesheet" type="text/css" href="css/movePage.css"/>
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
+    <script type="text/javascript" src="js/movePage.js"></script>
     <script type="text/javascript" src="js/manager.js"></script>
 
     <title>主办方 | FDUTOPIA</title>
@@ -45,8 +44,8 @@ if (isset($_COOKIE['login_serial'])) {
 <div class="tabbar">
     <div class="weui_tab">
         <div class="weui_tab_bd" id="fullpage">
-            <div class="section fp-auto-height">
-                <div class="slide" data-anchor="page_events">
+            <div class="mp-section fp-auto-height">
+                <div class="mp-slide" data-anchor="page_events">
                     <div class="page_header">
                         <h1 class="page_title">活动管理</h1>
 
@@ -122,7 +121,7 @@ if (isset($_COOKIE['login_serial'])) {
                     </div>
                 </div>
 
-                <div class="slide" data-anchor="page_recruits">
+                <div class="mp-slide" data-anchor="page_recruits">
                     <div class="page_header">
                         <h1 class="page_title">招新管理</h1>
 
@@ -192,7 +191,7 @@ if (isset($_COOKIE['login_serial'])) {
                     </div>
                 </div>
 
-                <div class="slide" data-anchor="page_settings">
+                <div class="mp-slide" data-anchor="page_settings">
                     <div class="page_header">
                         <h1 class="page_title">我的信息</h1>
 
@@ -231,7 +230,7 @@ if (isset($_COOKIE['login_serial'])) {
         </div>
 
         <div class="weui_tabbar">
-            <a href="#" class="weui_tabbar_item weui_bar_item_on" id="btn_events">
+            <a href="#" class="weui_tabbar_item" id="btn_events">
                 <div class="weui_tabbar_icon">
                     <img src="./images/icon_nav_button.png">
                 </div>

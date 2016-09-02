@@ -24,14 +24,13 @@ function count_str($str)
     <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
 
-    <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css"/>
+    <link rel="stylesheet" type="text/css" href="css/movePage.css"/>
     <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <link rel="stylesheet" type="text/css" href="css/fullpage.css"/>
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/movePage.js"></script>
     <script type="text/javascript" src="js/guest_cookie.js"></script>
     <script type="text/javascript" src="js/register_events.js"></script>
     <script type="text/javascript" src="js/register_recruit.js"></script>
@@ -45,8 +44,8 @@ function count_str($str)
 <div class="tabbar">
     <div class="weui_tab">
         <div class="weui_tab_bd" id="fullpage">
-            <div class="section fp-auto-height">
-                <div class="slide" data-anchor="page_guest_events">
+            <div class="mp-section fp-auto-height">
+                <div class="mp-slide" data-anchor="page_guest_events">
                     <div class="page_header">
                         <h1 class="page_title">报名/取票表</h1>
 
@@ -362,7 +361,7 @@ function count_str($str)
                     </div>
                 </div>
 
-                <div class="slide" data-anchor="page_guest_recruits">
+                <div class="mp-slide" data-anchor="page_guest_recruits">
                     <div class="page_header">
                         <h1 class="page_title">社团招新表</h1>
 
@@ -660,7 +659,7 @@ function count_str($str)
                     </div>
                 </div>
 
-                <div class="slide" data-anchor="page_guest_review">
+                <div class="mp-slide" data-anchor="page_guest_review">
                     <div class="page_header">
                         <h1 class="page_title">精彩活动回顾</h1>
 
@@ -726,7 +725,7 @@ function count_str($str)
         </div>
 
         <div class="weui_tabbar">
-            <a href="#" class="weui_tabbar_item weui_bar_item_on" id="btn_events">
+            <a href="#" class="weui_tabbar_item" id="btn_events">
                 <div class="weui_tabbar_icon">
                     <img src="./images/icon_nav_button.png">
                 </div>
@@ -747,6 +746,8 @@ function count_str($str)
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="js/index.js"></script>
 </body>
 
 </html>
