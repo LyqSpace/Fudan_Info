@@ -68,7 +68,7 @@ function print_article($mysql, $category_name)
 
     }
 
-    $html .= '</ol><br><br>';
+    $html .= '</ol>';
     echo $html;
 }
 
