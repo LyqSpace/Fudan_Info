@@ -73,17 +73,16 @@ if (isset($_COOKIE['login_serial'])) {
                         <td>
                             <ul>
                                 <?php
-                                echo "<li>【学号】" . $row['guest_id'] . "</li>";
                                 echo "<li>【姓名】" . $row['guest_name'] . "</li>";
+                                echo "<li>【学号】" . $row['guest_id'] . "</li>";
                                 echo "<li>【手机】" . $row['guest_phone'] . "</li>";
-                                echo "<li>【专业】" . $row['guest_major'] . "</li>";
                                 ?>
                             </ul>
                         </td>
                         <td>
                             <ul>
                                 <?php
-                                echo "<li>【报名的活动】" . $row['recruit_items'] . "</li>";
+                                echo "<li>【专业】" . $row['guest_major'] . "</li>";
                                 if ($row['guest_message'] != '') {
                                     echo "<li>【留言】" . $row['guest_message'] . "</li>";
                                 }

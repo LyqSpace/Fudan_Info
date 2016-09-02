@@ -27,7 +27,6 @@ function count_str($str)
     <link rel="stylesheet" type="text/css" href="css/movePage.css"/>
     <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="css/fullpage.css"/>
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/movePage.js"></script>
@@ -517,34 +516,20 @@ function count_str($str)
                                             <article class="club_recruit_article">
                                                 <p><?php echo $club_info['details']; ?></p>
                                             </article>
-                                            <form name="edit_register_recruit" method="post"
-                                                  onsubmit="return check_regsiter_recruit();"
-                                                  action="register_recruit_save.php">
+                                            <?php
+                                            $query = sprintf("SELECT * FROM recruit_info_activities WHERE username='%s';", $club_info['username']);
+                                            //echo $query;
+                                            $activity_list = mysql_query($query, $mysql);
+                                            if (mysql_num_rows($activity_list)) {
+                                                ?>
 
-                                                <input name="username" style="display: none;"/>
-                                                <input name="register_recruit_id" style="display: none;"/>
-                                                <input name="register_recruit_name" style="display: none;"/>
-                                                <input name="register_recruit_major" style="display: none;"/>
-                                                <input name="register_recruit_phone" style="display: none;"/>
-                                                <textarea name="register_recruit_message"
-                                                          style="display:none;"></textarea>
-
-                                                <div class="weui_cells_title">勾选想参加的活动</div>
-                                                <div class="weui_cells weui_cells_checkbox">
-                                                    <?php
-                                                    $query = sprintf("SELECT * FROM recruit_info_activities WHERE username='%s';", $club_info['username']);
-                                                    //echo $query;
-                                                    $activity_list = mysql_query($query, $mysql);
-                                                    $activity_cnt = 0;
-                                                    while ($activity_info = mysql_fetch_assoc($activity_list)) {
-                                                        ?>
-                                                        <label class="weui_cell weui_check_label">
-                                                            <div class="weui_cell_hd">
-                                                                <input type="checkbox" class="weui_check"
-                                                                       name="activity_<?php echo $activity_cnt; ?>">
-                                                                <i class="weui_icon_checked"></i>
-                                                            </div>
-                                                            <div class="weui_cell_bd weui_cell_primary">
+                                                <div class="weui_cells_title">常规/大型活动介绍</div>
+                                                <article class="club_recruit_article">
+                                                    <ol style="padding-left: 8px">
+                                                        <?php
+                                                        while ($activity_info = mysql_fetch_assoc($activity_list)) {
+                                                            ?>
+                                                            <li>
                                                                 <p>
                                                                     【名称】<?php echo $activity_info['activity_name']; ?></p>
 
@@ -556,13 +541,27 @@ function count_str($str)
 
                                                                 <p>
                                                                     【简介】<?php echo $activity_info['activity_details']; ?></p>
-                                                            </div>
-                                                        </label>
-                                                        <?php
-                                                        $activity_cnt++;
-                                                    }
-                                                    ?>
-                                                </div>
+                                                            </li>
+                                                            <?php
+                                                        }
+                                                        ?>
+
+                                                    </ol>
+                                                </article>
+                                                <?php
+                                            }
+                                            ?>
+                                            <form name="edit_register_recruit" method="post"
+                                                  onsubmit="return check_regsiter_recruit();"
+                                                  action="register_recruit_save.php">
+
+                                                <input name="username" style="display: none;"/>
+                                                <input name="register_recruit_id" style="display: none;"/>
+                                                <input name="register_recruit_name" style="display: none;"/>
+                                                <input name="register_recruit_major" style="display: none;"/>
+                                                <input name="register_recruit_phone" style="display: none;"/>
+                                                <textarea name="register_recruit_message"
+                                                          style="display:none;"></textarea>
 
                                                 <div class="weui_cells weui_cells_form">
                                                     <div class="weui_cell weui_cell_switch">
@@ -655,7 +654,6 @@ function count_str($str)
                                                                 } else {
                                                                     echo "<li>【官方邮箱】暂无</li>";
                                                                 }
-                                                                echo "<li>【报名活动】" . $row['recruit_items'] . "</li>";
                                                                 $register_date = date('n月j日 H:i', strtotime($row['recruit_register_time']));
                                                                 echo "<li>【报名时间】" . $register_date . "</li>";
                                                                 if ($row['join_management']) {

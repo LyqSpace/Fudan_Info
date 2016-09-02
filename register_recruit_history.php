@@ -121,7 +121,6 @@
                                         } else {
                                             echo "<li>【官方邮箱】暂无</li>";
                                         }
-                                        echo "<li>【报名活动】" . $row['recruit_items'] . "</li>";
                                         $register_date = date('n月j日 H:i', strtotime($row['recruit_register_time']));
                                         echo "<li>【报名时间】" . $register_date . "</li>";
                                         if ($row['join_management']) {

@@ -65,35 +65,17 @@ $recruit_register_timestamp = "2016-08-01 00:00:00";
             <?php
         } else {
 
-            $query = sprintf("SELECT * FROM recruit_info_activities WHERE username='%s';", mysql_real_escape_string($_POST['username']));
-            //echo $query;
-            $res = mysql_query($query, $mysql);
-
-            $activity_cnt = 0;
-            $activity_item = 'activity_' . $activity_cnt;
-            $recruit_items = '';
-            while (isset($_POST[$activity_item])) {
-                $row = mysql_fetch_assoc($res);
-                if ($_POST[$activity_item] == "on") {
-                    $recruit_items .= $row['activity_name'] . ' ';
-                }
-                $activity_cnt++;
-                $activity_item = 'activity_' . $activity_cnt;
-            }
-            if ($recruit_items == '') $recruit_items = '无勾选任何活动';
-
             $join_management = 'false';
             if ($_POST['join_management'] == "on") {
                 $join_management = 'true';
             }
-            $query = sprintf("INSERT INTO recruit_list VALUE(NULL, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %s, TRUE, NULL);",
+            $query = sprintf("INSERT INTO recruit_list VALUE(NULL, '%s', '%s', '%s', '%s', '%s', '%s', %s, TRUE, NULL);",
                 mysql_real_escape_string($_POST['username']),
                 mysql_real_escape_string($_POST['register_recruit_id']),
                 mysql_real_escape_string($_POST['register_recruit_name']),
                 mysql_real_escape_string($_POST['register_recruit_phone']),
                 mysql_real_escape_string($_POST['register_recruit_major']),
                 mysql_real_escape_string($_POST['register_recruit_message']),
-                $recruit_items,
                 $join_management);
             //echo $query;
             $res = mysql_query($query, $mysql);
