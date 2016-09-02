@@ -1,6 +1,6 @@
 body {
     max-width: 480px;
-    margin:auto;
+    margin: auto;
 }
 
 p {
@@ -67,11 +67,13 @@ ul {
 }
 
 .cell_hd_date_type {
-    margin-left: -5px; !important;
+    margin-left: -5px;
+!important;
 }
 
 .select_no_padding {
-    padding-left: 0; !important;
+    padding-left: 0;
+!important;
 }
 
 .text_warn {
@@ -224,6 +226,10 @@ table.dataintable li {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+th.first_th {
+    min-width: 3em;
 }
 
 .tabbar {

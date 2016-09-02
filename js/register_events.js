@@ -16,9 +16,9 @@ function change_event() {
     var event_children = event_list.children;
     for (var i = 0; i < event_children.length; i++) {
         if (event_children[i].id == "event_id_" + event_id) {
-            event_children[i].style.display="block";
+            event_children[i].style.display = "block";
         } else {
-            event_children[i].style.display="none";
+            event_children[i].style.display = "none";
         }
     }
 }
@@ -28,15 +28,15 @@ function change_date(this_obj, event_id) {
     if (this_obj == null) return;
     var date_id = this_obj.selectedOptions[0].value;
 
-    var date_list = document.getElementsByName("registration_date_"+event_id);
+    var date_list = document.getElementsByName("registration_date_" + event_id);
     for (var i = 0; i < date_list.length; i++) {
         date_list[i].style.display = "none";
     }
-    var date_item = document.getElementById("registration_serial_"+date_id);
+    var date_item = document.getElementById("registration_serial_" + date_id);
     date_item.style.display = "block";
 }
 
-window.onload = function() {
+window.onload = function () {
     change_event();
     change_date();
 };
@@ -56,7 +56,7 @@ function check_register() {
     var select_registration = document.getElementById('select_registration_' + select_event_id);
     var registration_serial = select_registration.selectedOptions[0].value;
     var registration_serial_list = document.getElementsByName('registration_serial');
-    for (i = 0; i < registration_serial_list.length; i++){
+    for (i = 0; i < registration_serial_list.length; i++) {
         registration_serial_list[i].value = registration_serial;
     }
 

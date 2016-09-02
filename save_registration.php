@@ -5,7 +5,7 @@ $username = '';
 if (isset($_COOKIE['login_serial'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_select_db("fudan_info");
-    $query = sprintf("select username from login_serial where serial='%s';",
+    $query = sprintf("SELECT username FROM login_serial WHERE serial='%s';",
         mysql_real_escape_string($_COOKIE['login_serial']));
     $res = mysql_query($query, $mysql);
     mysql_close($mysql);
@@ -39,12 +39,13 @@ if (isset($_COOKIE['login_serial'])) {
 <body ontouchstart>
 <?php
 
-function mysql_date_format($input_date) {
+function mysql_date_format($input_date)
+{
 
     $pos = strpos($input_date, "T");
     $date = substr($input_date, 0, $pos);
     $date .= " ";
-    $date .= substr($input_date, $pos+1, strlen($input_date)-$pos-1);
+    $date .= substr($input_date, $pos + 1, strlen($input_date) - $pos - 1);
     return $date;
 }
 
@@ -57,7 +58,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
     mysql_query("set names 'utf8'");
     mysql_select_db("fudan_info");
 
-    $query = sprintf("select * from event_info where event_id='%s';",
+    $query = sprintf("SELECT * FROM event_info WHERE event_id='%s';",
         mysql_real_escape_string($_POST['event_id']));
     $res = mysql_query($query, $mysql);
     $row = mysql_fetch_assoc($res);
@@ -69,7 +70,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
         }
         $register_date = mysql_date_format($_POST['register_date']);
 
-        $query = sprintf("update event_info set register=%s, register_date_type='%s', register_date='%s' where event_id=%s;",
+        $query = sprintf("UPDATE event_info SET register=%s, register_date_type='%s', register_date='%s' WHERE event_id=%s;",
             $register,
             mysql_real_escape_string($_POST['register_date_type']),
             $register_date,
@@ -83,17 +84,17 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
             $confirm = 'true';
         }
 
-        $query = sprintf("select * from event_registration_common where event_id=%s;",
+        $query = sprintf("SELECT * FROM event_registration_common WHERE event_id=%s;",
             mysql_real_escape_string($_POST['event_id']));
         $res = mysql_query($query, $mysql);
         if (mysql_num_rows($res)) {
 
-            $query = sprintf("update event_registration_common set ticket_per_person='%s', confirm=%s where event_id=%s;",
+            $query = sprintf("UPDATE event_registration_common SET ticket_per_person='%s', confirm=%s WHERE event_id=%s;",
                 mysql_real_escape_string($_POST['ticket_per_person']),
                 $confirm,
                 mysql_real_escape_string($_POST['event_id']));
         } else {
-            $query = sprintf("insert into event_registration_common value(%s,'%s',%s);",
+            $query = sprintf("INSERT INTO event_registration_common VALUE(%s,'%s',%s);",
                 mysql_real_escape_string($_POST['event_id']),
                 mysql_real_escape_string($_POST['ticket_per_person']),
                 $confirm);
@@ -101,7 +102,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
         $res = mysql_query($query, $mysql);
         if (!$res) $error_msg .= "保存“报名表基本信息”失败!<br>";
 
-        $query = sprintf("delete from event_registration_date where event_id=%s;",
+        $query = sprintf("DELETE FROM event_registration_date WHERE event_id=%s;",
             mysql_real_escape_string($_POST['event_id']));
         $res = mysql_query($query, $mysql);
 
@@ -114,7 +115,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
         $ticket_id = $ticket_format . $ticket_count;
 
         while (isset($_POST[$date_id])) {
-            $query = sprintf("insert into event_registration_date value (null, %s, '%s', '%s', 0);",
+            $query = sprintf("INSERT INTO event_registration_date VALUE (NULL, %s, '%s', '%s', 0);",
                 mysql_real_escape_string($_POST['event_id']),
                 mysql_date_format($_POST[$date_id]),
                 mysql_real_escape_string($_POST[$ticket_id]));

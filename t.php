@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <meta name="keywords" content="Fudan, Informations">
     <meta name="author" content="Liang Yongqing, Liu Xueyue">
-    <link rel="stylesheet" type="text/css" href="weui.min.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="functions.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <title>跳转到软文 | FDUTOPIA</title>
 </head>
 

@@ -5,7 +5,7 @@ $username = '';
 if (isset($_COOKIE['login_serial'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_select_db("fudan_info");
-    $query = sprintf("select username from login_serial where serial='%s';",
+    $query = sprintf("SELECT username FROM login_serial WHERE serial='%s';",
         mysql_real_escape_string($_COOKIE['login_serial']));
     $res = mysql_query($query, $mysql);
     mysql_close($mysql);
@@ -24,7 +24,8 @@ if (isset($_COOKIE['login_serial'])) {
 
 <?php
 
-function print_header() {
+function print_header()
+{
     $html = '<section><p style="text-align: center;"><span style="font-size: 14px;">这是复旦乌托邦</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">让美好遇见欣赏，让有趣告别雪藏</span></p>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">每周日晚上见～</span></p>';
@@ -33,7 +34,8 @@ function print_header() {
 }
 
 
-function print_title($index, $category_name_cn) {
+function print_title($index, $category_name_cn)
+{
     $html = '<section><section style="border: 0px; margin-top: 0.8em; margin-bottom: 0.5em; box-sizing: border-box;">' .
         '<section style="display: inline-block; padding-right: 2px; padding-bottom: 2px; padding-left: 2px; box-sizing: border-box; border-bottom-width: 2px; border-bottom-style: solid; border-color: #FF6666; line-height: 1; font-size: 1em; font-family: inherit; text-align: center; text-decoration: inherit; color: rgb(255, 255, 255);">' .
         '<section style="display: inline-block; padding: 0.3em 0.4em; min-width: 1.8em; min-height: 1.6em; border-radius: 80% 100% 90% 20%; line-height: 1; font-size: 1em; font-family: inherit; box-sizing: border-box; word-wrap: break-word !important; background-color: #FF6666;">';
@@ -45,11 +47,12 @@ function print_title($index, $category_name_cn) {
 }
 
 
-function print_article($mysql, $category_name) {
+function print_article($mysql, $category_name)
+{
 
     global $user_category_point;
 
-    $query = sprintf("select * from recruit_info_common natural join users where user_category='%s' order by edit_time;", $category_name);
+    $query = sprintf("SELECT * FROM recruit_info_common NATURAL JOIN users WHERE user_category='%s' ORDER BY edit_time;", $category_name);
     $res = mysql_query($query, $mysql);
     if (!mysql_num_rows($res)) return;
 
@@ -70,7 +73,8 @@ function print_article($mysql, $category_name) {
 }
 
 
-function print_footer() {
+function print_footer()
+{
     $html = '<br><section><p style="text-align: center;"><span style="font-size: 15px;">戳<span style="color: rgb(92, 137, 183);">阅读原文</span>可报名社团招新</span></p><br>';
     $html .= '<p style="text-align: center;"><span style="color: #00C12B;">* * *</span></p><br>';
     $html .= '<p style="text-align: center;"><span style="font-size: 14px;">FDUTOPIA致力于打造高效的复旦信息分享平台</span></p>';

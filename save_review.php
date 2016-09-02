@@ -5,7 +5,7 @@ $username = '';
 if (isset($_COOKIE['login_serial'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_select_db("fudan_info");
-    $query = sprintf("select username from login_serial where serial='%s';",
+    $query = sprintf("SELECT username FROM login_serial WHERE serial='%s';",
         mysql_real_escape_string($_COOKIE['login_serial']));
     $res = mysql_query($query, $mysql);
     mysql_close($mysql);
@@ -47,7 +47,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
     mysql_query("set names 'utf8'");
     mysql_select_db("fudan_info");
 
-    $query = sprintf("select * from event_info where event_id='%s';",
+    $query = sprintf("SELECT * FROM event_info WHERE event_id='%s';",
         mysql_real_escape_string($_POST['event_id']));
     $res = mysql_query($query, $mysql);
     $row = mysql_fetch_assoc($res);
@@ -59,7 +59,7 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
                 $review_url = "'" . mysql_real_escape_string($matches[0][0]) . "'";
             }
         }
-        $query = sprintf("update event_info set review_url=%s where event_id=%s;",
+        $query = sprintf("UPDATE event_info SET review_url=%s WHERE event_id=%s;",
             $review_url,
             $_POST['event_id']);
 

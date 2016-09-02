@@ -208,7 +208,8 @@ if (isset($_COOKIE['login_serial'])) {
                         <div class="weui_cells weui_cells_form">
                             <div class="weui_cell">
                                 <div class="weui_cell_hd ">
-                                    <select class="weui_select select_no_padding" name="register_date_type" onchange="show_register_type(this)">
+                                    <select class="weui_select select_no_padding" name="register_date_type"
+                                            onchange="show_register_type(this)">
                                         <?php
                                         $options =
                                             '<option value="date_st">报名开始时间</option>' .
@@ -227,11 +228,12 @@ if (isset($_COOKIE['login_serial'])) {
                                         <p>即刻起</p>
                                     </div>
                                     <div id="register_date_type_ed" style="display: none;">
-                                        <input class="weui_input" name="register_date" type="datetime-local" value="<?php
-                                        $pos = strpos($row['register_date'], " ");
-                                        $date = substr($row['register_date'], 0, $pos) . "T" . substr($row['register_date'], $pos + 1, strlen($row['register_date']) - $pos - 4);
-                                        echo $date;
-                                        ?>"/>
+                                        <input class="weui_input" name="register_date" type="datetime-local"
+                                               value="<?php
+                                               $pos = strpos($row['register_date'], " ");
+                                               $date = substr($row['register_date'], 0, $pos) . "T" . substr($row['register_date'], $pos + 1, strlen($row['register_date']) - $pos - 4);
+                                               echo $date;
+                                               ?>"/>
                                     </div>
 
                                 </div>
@@ -255,21 +257,21 @@ if (isset($_COOKIE['login_serial'])) {
                     </div>
                 </div>
                 <div id="details_form" style="display:<?php
-                    if ($row['notification'] == 1) {
-                        echo 'display';
-                    } else {
-                        echo 'none';
-                    }
-                    ?>">
+                if ($row['notification'] == 1) {
+                    echo 'display';
+                } else {
+                    echo 'none';
+                }
+                ?>">
                     <!--详细描述-->
                     <div class="weui_cells_title">详细描述</div>
                     <div class="weui_cells weui_cells_form">
                         <div class="weui_cell">
                             <div class="weui_cell_bd weui_cell_primary">
                                 <textarea class="weui_textarea" id="details_text"
-                                    placeholder="请输入主讲人介绍或活动介绍等信息，如果勾选“有详细描述”，则此栏或软文网址不可为空"
-                                    name="details" rows="7"
-                                    onkeyup="count('details_text', details_cnt, 300);"><?php echo $row['details']; ?></textarea>
+                                          placeholder="请输入主讲人介绍或活动介绍等信息，如果勾选“有详细描述”，则此栏或软文网址不可为空"
+                                          name="details" rows="7"
+                                          onkeyup="count('details_text', details_cnt, 300);"><?php echo $row['details']; ?></textarea>
 
                                 <div class="weui_textarea_counter"><span
                                         id="details_cnt"><?php echo count_str($row['details']); ?></span>/300
@@ -282,9 +284,11 @@ if (isset($_COOKIE['login_serial'])) {
                     <div class="weui_cells weui_cells_form">
                         <div class="weui_cell">
                             <div class="weui_cell_bd weui_cell_primary">
-                                <textarea class="weui_textarea" id="propa_url" placeholder="选填，如果自己的公众号有宣传此活动的软文，可以把软文网址复制在此处"
-                                  name="propa_url" rows="7"
-                                  onkeyup="count('propa_url', propa_url_cnt, 600);"><?php echo $row['propa_url']; ?></textarea>
+                                <textarea class="weui_textarea" id="propa_url"
+                                          placeholder="选填，如果自己的公众号有宣传此活动的软文，可以把软文网址复制在此处"
+                                          name="propa_url" rows="7"
+                                          onkeyup="count('propa_url', propa_url_cnt, 600);"><?php echo $row['propa_url']; ?></textarea>
+
                                 <div class="weui_textarea_counter"><span
                                         id="propa_url_cnt"><?php echo count_str($row['propa_url']); ?></span>/600
                                 </div>
@@ -414,7 +418,8 @@ if (isset($_COOKIE['login_serial'])) {
                     <div class="weui_cells weui_cells_form">
                         <div class="weui_cell">
                             <div class="weui_cell_hd ">
-                                <select class="weui_select select_no_padding" name="register_date_type" onchange="show_register_type()">
+                                <select class="weui_select select_no_padding" name="register_date_type"
+                                        onchange="show_register_type()">
                                     <option selected value="date_st">报名开始时间</option>
                                     <option value="date_ed">报名截止时间</option>
                                 </select>

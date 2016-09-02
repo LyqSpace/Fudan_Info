@@ -5,7 +5,7 @@ $username = '';
 if (isset($_COOKIE['login_serial'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_select_db("fudan_info");
-    $query = sprintf("select username from login_serial where serial='%s';",
+    $query = sprintf("SELECT username FROM login_serial WHERE serial='%s';",
         mysql_real_escape_string($_COOKIE['login_serial']));
     $res = mysql_query($query, $mysql);
     mysql_close($mysql);
@@ -39,7 +39,9 @@ if (isset($_COOKIE['login_serial'])) {
 <body ontouchstart>
 <div class="page_header">
     <h1 class="page_title">编辑一则回顾</h1>
+
     <p class="page_desc">一个英文占一个字符，一个中文占两个字符</p>
+
     <p class="page_desc">阅读原文中将收录最近二十次活动的回顾</p>
 </div>
 <div class="page_body">
@@ -51,7 +53,7 @@ if (isset($_COOKIE['login_serial'])) {
         mysql_query("set names 'utf8'");
         mysql_select_db("fudan_info");
 
-        $query = sprintf("select * from event_info where event_id='%s';",
+        $query = sprintf("SELECT * FROM event_info WHERE event_id='%s';",
             mysql_real_escape_string($_GET['event_id']));
         $res = mysql_query($query, $mysql);
         $row = mysql_fetch_assoc($res);
@@ -59,20 +61,25 @@ if (isset($_COOKIE['login_serial'])) {
             ?>
             <form name="edit_review" method="post" onsubmit="return check_review();" action="save_review.php">
 
-                <input style="display: none" name="event_id" value="<?php echo $_GET['event_id'];?>" />
+                <input style="display: none" name="event_id" value="<?php echo $_GET['event_id']; ?>"/>
 
                 <div class="weui_cells_title">该活动的回顾图文的网址</div>
                 <div class="weui_cells weui_cells_form">
                     <div class="weui_cell">
                         <div class="weui_cell_bd weui_cell_primary">
-                            <textarea class="weui_textarea" id="review_url" placeholder="各自公众号发布该活动的回顾图文后，在此处粘贴回顾图文的网址，请不要在此处填写其它内容；若没有，则清空此栏"
-                              name="review_url" rows="7" onkeyup="count('review_url', review_url_cnt, 300);"><?php echo $row['review_url'];?></textarea>
-                            <div class="weui_textarea_counter"><span id="review_url_cnt"><?php echo strlen($row['review_url']);?></span>/300</div>
+                            <textarea class="weui_textarea" id="review_url"
+                                      placeholder="各自公众号发布该活动的回顾图文后，在此处粘贴回顾图文的网址，请不要在此处填写其它内容；若没有，则清空此栏"
+                                      name="review_url" rows="7"
+                                      onkeyup="count('review_url', review_url_cnt, 300);"><?php echo $row['review_url']; ?></textarea>
+
+                            <div class="weui_textarea_counter"><span
+                                    id="review_url_cnt"><?php echo strlen($row['review_url']); ?></span>/300
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="weui_btn_area">
-                    <input class="weui_btn weui_btn_plain_primary" name="save" type="submit" value="保存" />
+                    <input class="weui_btn weui_btn_plain_primary" name="save" type="submit" value="保存"/>
                 </div>
             </form>
             <div class="weui_btn_area">

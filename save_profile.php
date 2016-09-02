@@ -5,7 +5,7 @@ $username = '';
 if (isset($_COOKIE['login_serial'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_select_db("fudan_info");
-    $query = sprintf("select username from login_serial where serial='%s';",
+    $query = sprintf("SELECT username FROM login_serial WHERE serial='%s';",
         mysql_real_escape_string($_COOKIE['login_serial']));
     $res = mysql_query($query, $mysql);
     mysql_close($mysql);
@@ -38,21 +38,22 @@ if (isset($_COOKIE['login_serial'])) {
 <?php
 
 if (isset($_POST['fullname']) && $_POST['fullname'] != "" &&
-    isset($_POST['email']) && $_POST['email'] != "") {
+    isset($_POST['email']) && $_POST['email'] != ""
+) {
 
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_query("set names 'utf8'");
     mysql_select_db("fudan_info");
 
     if (isset($_POST['password']) && $_POST['password'] != '') {
-        $query = sprintf("update users set fullname='%s', email='%s', password='%s', user_category='%s' where username='%s';",
+        $query = sprintf("UPDATE users SET fullname='%s', email='%s', password='%s', user_category='%s' WHERE username='%s';",
             mysql_real_escape_string($_POST['fullname']),
             mysql_real_escape_string($_POST['email']),
             md5($_POST['password']),
             mysql_real_escape_string($_POST['user_category']),
             $username);
     } else {
-        $query = sprintf("update users set fullname='%s', email='%s', user_category='%s' where username='%s';",
+        $query = sprintf("UPDATE users SET fullname='%s', email='%s', user_category='%s' WHERE username='%s';",
             mysql_real_escape_string($_POST['fullname']),
             mysql_real_escape_string($_POST['email']),
             mysql_real_escape_string($_POST['user_category']),

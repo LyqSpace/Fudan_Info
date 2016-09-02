@@ -5,7 +5,7 @@ $username = '';
 if (isset($_COOKIE['login_serial'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_select_db("fudan_info");
-    $query = sprintf("select username from login_serial where serial='%s';",
+    $query = sprintf("SELECT username FROM login_serial WHERE serial='%s';",
         mysql_real_escape_string($_COOKIE['login_serial']));
     $res = mysql_query($query, $mysql);
     mysql_close($mysql);
@@ -50,7 +50,7 @@ if (isset($_COOKIE['login_serial'])) {
         mysql_select_db("fudan_info");
 
         if (isset($_POST['search'])) {
-            $query = sprintf("select * from users where username='%s';",
+            $query = sprintf("SELECT * FROM users WHERE username='%s';",
                 mysql_real_escape_string($_POST['username']));
             $res = mysql_query($query, $mysql);
             ?>
@@ -80,7 +80,7 @@ if (isset($_COOKIE['login_serial'])) {
 
         } else if (isset($_POST['insert'])) {
 
-            $query = sprintf("insert into users value ('%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+            $query = sprintf("INSERT INTO users VALUE ('%s', '%s', '%s', '%s', '%s', '%s', '%s');",
                 mysql_real_escape_string($_POST['username']),
                 mysql_real_escape_string($_POST['fullname']),
                 mysql_real_escape_string($_POST['email']),
@@ -118,7 +118,7 @@ if (isset($_COOKIE['login_serial'])) {
             $update_res = '';
 
             if (isset($_POST['fullname']) && $_POST['fullname'] != '') {
-                $query = sprintf("update users set fullname='%s' where username='%s';",
+                $query = sprintf("UPDATE users SET fullname='%s' WHERE username='%s';",
                     mysql_real_escape_string($_POST['fullname']),
                     mysql_real_escape_string($_POST['username']));
                 $res = mysql_query($query, $mysql);
@@ -130,7 +130,7 @@ if (isset($_COOKIE['login_serial'])) {
             }
 
             if (isset($_POST['email']) && $_POST['email'] != '') {
-                $query = sprintf("update users set email='%s' where username='%s';",
+                $query = sprintf("UPDATE users SET email='%s' WHERE username='%s';",
                     mysql_real_escape_string($_POST['email']),
                     mysql_real_escape_string($_POST['username']));
                 $res = mysql_query($query, $mysql);
@@ -142,7 +142,7 @@ if (isset($_COOKIE['login_serial'])) {
             }
 
             if (isset($_POST['password']) && $_POST['password'] != '') {
-                $query = sprintf("update users set password='%s' where username='%s';",
+                $query = sprintf("UPDATE users SET password='%s' WHERE username='%s';",
                     mysql_real_escape_string(md5($_POST['password'])),
                     mysql_real_escape_string($_POST['username']));
                 $res = mysql_query($query, $mysql);
@@ -154,7 +154,7 @@ if (isset($_COOKIE['login_serial'])) {
             }
 
             if (isset($_POST['event_limit']) && $_POST['event_limit'] != '') {
-                $query = sprintf("update users set event_limit='%s' where username='%s';",
+                $query = sprintf("UPDATE users SET event_limit='%s' WHERE username='%s';",
                     mysql_real_escape_string($_POST['event_limit']),
                     mysql_real_escape_string($_POST['username']));
                 $res = mysql_query($query, $mysql);
@@ -165,7 +165,7 @@ if (isset($_COOKIE['login_serial'])) {
                 }
             }
             if (isset($_POST['recruit_limit']) && $_POST['recruit_limit'] != '') {
-                $query = sprintf("update users set recruit_limit='%s' where username='%s';",
+                $query = sprintf("UPDATE users SET recruit_limit='%s' WHERE username='%s';",
                     mysql_real_escape_string($_POST['recruit_limit']),
                     mysql_real_escape_string($_POST['username']));
                 $res = mysql_query($query, $mysql);
@@ -176,7 +176,7 @@ if (isset($_COOKIE['login_serial'])) {
                 }
             }
             if (isset($_POST['category']) && $_POST['category'] != '') {
-                $query = sprintf("update users set user_category='%s' where username='%s';",
+                $query = sprintf("UPDATE users SET user_category='%s' WHERE username='%s';",
                     mysql_real_escape_string($_POST['category']),
                     mysql_real_escape_string($_POST['username']));
                 $res = mysql_query($query, $mysql);
@@ -218,7 +218,7 @@ if (isset($_COOKIE['login_serial'])) {
                     <label class="weui_label">用户名</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" name="username" type="text" placeholder="请输入用户名" />
+                    <input class="weui_input" name="username" type="text" placeholder="请输入用户名"/>
                 </div>
             </div>
             <div class="weui_cell">
@@ -226,7 +226,7 @@ if (isset($_COOKIE['login_serial'])) {
                     <label class="weui_label">全称</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" name="fullname" type="text" placeholder="请输入主办方中文全称" />
+                    <input class="weui_input" name="fullname" type="text" placeholder="请输入主办方中文全称"/>
                 </div>
             </div>
             <div class="weui_cell">
@@ -234,7 +234,7 @@ if (isset($_COOKIE['login_serial'])) {
                     <label class="weui_label">邮箱</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" name="email" type="text" placeholder="请输入联系人的邮箱" />
+                    <input class="weui_input" name="email" type="text" placeholder="请输入联系人的邮箱"/>
                 </div>
             </div>
             <div class="weui_cell">
@@ -242,7 +242,7 @@ if (isset($_COOKIE['login_serial'])) {
                     <label class="weui_label">密码</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" name="password" type="text" placeholder="请输入密码" />
+                    <input class="weui_input" name="password" type="text" placeholder="请输入密码"/>
                 </div>
             </div>
             <div class="weui_cell">
@@ -250,7 +250,7 @@ if (isset($_COOKIE['login_serial'])) {
                     <label class="weui_label">活动</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" name="event_limit" type="number" placeholder="请输入数字，一周发布活动的次数" />
+                    <input class="weui_input" name="event_limit" type="number" placeholder="请输入数字，一周发布活动的次数"/>
                 </div>
             </div>
             <div class="weui_cell">
@@ -258,7 +258,7 @@ if (isset($_COOKIE['login_serial'])) {
                     <label class="weui_label">招新</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" name="recruit_limit" type="number" placeholder="请输入数字，一周发布招新的次数" />
+                    <input class="weui_input" name="recruit_limit" type="number" placeholder="请输入数字，一周发布招新的次数"/>
                 </div>
             </div>
             <div class="weui_cell weui_cell_select weui_select_after">
@@ -266,7 +266,7 @@ if (isset($_COOKIE['login_serial'])) {
                     <label class="weui_label">大类</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <select class="weui_select select_no_padding"  name="category">
+                    <select class="weui_select select_no_padding" name="category">
                         <option value="书院团学联">书院团学联</option>
                         <option value="人文历史类">人文历史类</option>
                         <option value="科学技术类">科学技术类</option>
@@ -288,13 +288,13 @@ if (isset($_COOKIE['login_serial'])) {
 
         </div>
         <div class="weui_btn_area">
-            <input class="weui_btn weui_btn_plain_primary" name="search" type="submit" value="查询一个用户" />
+            <input class="weui_btn weui_btn_plain_primary" name="search" type="submit" value="查询一个用户"/>
         </div>
         <div class="weui_btn_area">
-            <input class="weui_btn weui_btn_plain_primary" name="insert" type="submit" value="新建一个新的用户" />
+            <input class="weui_btn weui_btn_plain_primary" name="insert" type="submit" value="新建一个新的用户"/>
         </div>
         <div class="weui_btn_area">
-            <input class="weui_btn weui_btn_plain_primary" name="update" type="submit" value="更新一个旧的用户" />
+            <input class="weui_btn weui_btn_plain_primary" name="update" type="submit" value="更新一个旧的用户"/>
         </div>
     </form>
     <div class="weui_btn_area">

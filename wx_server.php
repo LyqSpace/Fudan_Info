@@ -1,14 +1,15 @@
 <?php
 
-function checkSignature($signature, $timestamp, $nonce, $echostr) {
+function checkSignature($signature, $timestamp, $nonce, $echostr)
+{
     $token = TOKEN;
     $tmpArr = array($token, $timestamp, $nonce);
     sort($tmpArr, SORT_STRING);
-    $tmpStr = implode( $tmpArr );
-    $tmpStr = sha1( $tmpStr );
-    if( $tmpStr == $signature ) {
+    $tmpStr = implode($tmpArr);
+    $tmpStr = sha1($tmpStr);
+    if ($tmpStr == $signature) {
         echo $echostr;
-    }else{
+    } else {
         echo '';
     }
 }
@@ -33,8 +34,8 @@ $default_msg = array("喵～您的消息我们已收到，将会尽快回复您 
 $welcome_msg = "Welcome to FDUTOPIA (●'◡'●)ノ♥ 素心无用，自由分享。每周日晚都会推送复旦的讲座活动合集，可以戳历史记录看看噢～";
 $query_msg = array("咦？这个数字太大了我还没有学会呢～",
     "好调皮哦，这个数字没有对应的详细信息呢～");
-$default_msg_id = rand(0, count($default_msg)-1);
-$query_msg_id = rand(0, count($query_msg)-1);
+$default_msg_id = rand(0, count($default_msg) - 1);
+$query_msg_id = rand(0, count($query_msg) - 1);
 
 if ($post_str != null) {
 
@@ -63,7 +64,8 @@ if ($post_str != null) {
     exit;
 }
 
-function get_access_token() {
+function get_access_token()
+{
 
     $url = 'https://api.weixin.qq.com/cgi-bin/token';
     $get_data = array(
@@ -76,7 +78,8 @@ function get_access_token() {
     return $access_token_obj->access_token;
 }
 
-function response_text($post_obj, $content) {
+function response_text($post_obj, $content)
+{
     $text_template = '<xml>
                         <ToUserName><![CDATA[%s]]></ToUserName>
                         <FromUserName><![CDATA[%s]]></FromUserName>
@@ -88,7 +91,8 @@ function response_text($post_obj, $content) {
     echo $echo_str;
 }
 
-function response_query($post_obj) {
+function response_query($post_obj)
+{
 
     global $default_msg, $default_msg_id, $query_msg, $query_msg_id;
 
@@ -98,7 +102,7 @@ function response_query($post_obj) {
         mysql_query("set names 'utf8'");
         mysql_select_db("fudan_info");
 
-        $query = "select count(*) as cnt from published_event;";
+        $query = "SELECT count(*) AS cnt FROM published_event;";
         $res = mysql_query($query, $mysql);
         $row = mysql_fetch_assoc($res);
         $query_num = intval($post_obj->Content);
@@ -106,7 +110,7 @@ function response_query($post_obj) {
         $content = $query_msg[$query_msg_id] . "本期只有" . $row['cnt'] . "个活动呢～";
         if ($query_num <= $row['cnt'] && $query_num > 0) {
 
-            $query = sprintf("select * from published_event natural join event_info where order_id=%d;", $query_num);
+            $query = sprintf("SELECT * FROM published_event NATURAL JOIN event_info WHERE order_id=%d;", $query_num);
             $res = mysql_query($query, $mysql);
             $row = mysql_fetch_assoc($res);
             $content = "【" . $row["title"] . "】\n";
@@ -171,4 +175,5 @@ function response_query($post_obj) {
         }
     }
 }
+
 ?>

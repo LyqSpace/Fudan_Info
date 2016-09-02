@@ -5,7 +5,7 @@ $username = '';
 if (isset($_COOKIE['login_serial'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_select_db("fudan_info");
-    $query = sprintf("select username from login_serial where serial='%s';",
+    $query = sprintf("SELECT username FROM login_serial WHERE serial='%s';",
         mysql_real_escape_string($_COOKIE['login_serial']));
     $res = mysql_query($query, $mysql);
     mysql_close($mysql);
@@ -45,26 +45,26 @@ if (isset($_POST['event_id']) && $_POST['event_id'] != '') {
     mysql_query("set names 'utf8'");
     mysql_select_db("fudan_info");
 
-    $query = sprintf("select * from event_info where event_id='%s';",
+    $query = sprintf("SELECT * FROM event_info WHERE event_id='%s';",
         mysql_real_escape_string($_POST['event_id']));
     $res = mysql_query($query, $mysql);
     $row = mysql_fetch_assoc($res);
 
     if ($row['username'] == $username) {
 
-        $query = sprintf("delete from event_registration_common where event_id='%s';",
+        $query = sprintf("DELETE FROM event_registration_common WHERE event_id='%s';",
             mysql_real_escape_string($_POST['event_id']));
         mysql_query($query, $mysql);
 
-        $query = sprintf("select * from event_registration_date where event_id='%s';",
+        $query = sprintf("SELECT * FROM event_registration_date WHERE event_id='%s';",
             mysql_real_escape_string($_POST['event_id']));
         $res = mysql_query($query, $mysql);
         while ($row = mysql_fetch_assoc($res)) {
-            $query = sprintf("delete from event_registration_list where registration_serial='%s';",
+            $query = sprintf("DELETE FROM event_registration_list WHERE registration_serial='%s';",
                 mysql_real_escape_string($row['registration_serial']));
             mysql_query($query, $mysql);
         }
-        $query = sprintf("delete from event_registration_date where event_id='%s';",
+        $query = sprintf("DELETE FROM event_registration_date WHERE event_id='%s';",
             mysql_real_escape_string($_POST['event_id']));
         mysql_query($query, $mysql);
 

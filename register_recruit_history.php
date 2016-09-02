@@ -93,18 +93,18 @@
                 </div>
             </div>
             <div class="weui_cells_title">
-                <p>【学号】 <?php echo $_COOKIE['register_recruit_id']; ?></p>
+                <p>【学号】 <?php echo $_POST['register_recruit_id']; ?></p>
 
-                <p>【姓名】 <?php echo $_COOKIE['register_recruit_name']; ?></p>
+                <p>【姓名】 <?php echo $_POST['register_recruit_name']; ?></p>
 
-                <p>【手机】 <?php echo $_COOKIE['register_recruit_phone']; ?></p>
+                <p>【手机】 <?php echo $_POST['register_recruit_phone']; ?></p>
             </div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
                     <table class="dataintable">
                         <tbody>
                         <tr>
-                            <th>社团名</th>
+                            <th class="first_th">社团名</th>
                             <th>报名信息</th>
                         </tr>
                         <?php

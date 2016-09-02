@@ -28,7 +28,7 @@ function check_profile() {
     var pos = str.search(/@/);
     if (str.length == 0) {
         error_message += "联系邮箱不可为空<br>";
-    } else if (str.length > 0 && !(pos > 0 && pos < str.length-1)) {
+    } else if (str.length > 0 && !(pos > 0 && pos < str.length - 1)) {
         error_message += "联系邮箱不符合规范<br>";
     }
 

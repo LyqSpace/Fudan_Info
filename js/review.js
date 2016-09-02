@@ -19,6 +19,6 @@ function random_item_color() {
     }
 }
 
-window.onload = function() {
+window.onload = function () {
     random_item_color();
 };

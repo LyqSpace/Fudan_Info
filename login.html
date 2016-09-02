@@ -14,36 +14,38 @@
 </head>
 
 <body ontouchstart>
-    <div class="page_header">
-        <h1 class="page_title">LOGIN</h1>
-        <p class="page_desc">发布系统为邀请制，如果您是主办方</p>
-        <p class="page_desc">请联系fdutopia@lyq.me说明身份</p>
+<div class="page_header">
+    <h1 class="page_title">LOGIN</h1>
+
+    <p class="page_desc">发布系统为邀请制，如果您是主办方</p>
+
+    <p class="page_desc">请联系fdutopia@lyq.me说明身份</p>
+</div>
+<form name="login" method="post" action="check_login.php">
+    <div class="weui_cells weui_cells_form">
+        <div class="weui_cell">
+            <div class="weui_cell_hd">
+                <label class="weui_label">用户名</label>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" name="username" type="text" placeholder="请输入用户名"/>
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cells_hd">
+                <label class="weui_label">密码</label>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" name="password" type="password" placeholder="请输入密码"/>
+            </div>
+        </div>
     </div>
-    <form name="login" method="post" action="check_login.php">
-        <div class="weui_cells weui_cells_form">
-            <div class="weui_cell">
-                <div class="weui_cell_hd">
-                    <label class="weui_label">用户名</label>
-                </div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" name="username" type="text" placeholder="请输入用户名" />
-                </div>
-            </div>
-            <div class="weui_cell">
-                <div class="weui_cells_hd">
-                    <label class="weui_label">密码</label>
-                </div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" name="password" type="password" placeholder="请输入密码" />
-                </div>
-            </div>
-        </div>
-        <div class="weui_btn_area">
-            <input class="weui_btn weui_btn_plain_primary" name="submit" type="submit" value="登录" />
-        </div>
-        <div class="weui_cells_tips">
-            遗忘用户名或密码请联系fdutopia@lyq.me
-        </div>
-    </form>
+    <div class="weui_btn_area">
+        <input class="weui_btn weui_btn_plain_primary" name="submit" type="submit" value="登录"/>
+    </div>
+    <div class="weui_cells_tips">
+        遗忘用户名或密码请联系fdutopia@lyq.me
+    </div>
+</form>
 </body>
 </html>

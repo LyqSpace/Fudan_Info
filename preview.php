@@ -149,12 +149,12 @@ if (isset($_COOKIE['login_serial'])) {
     {
 
         global $category_id_bias, $category_name_cn, $category_name_en, $week_st, $week_ed, $mysql, $update_next_week, $username;
-        $query = sprintf("SELECT * FROM event_info as i NATURAL JOIN users left join event_registration_common as c on i.event_id=c.event_id
+        $query = sprintf("SELECT * FROM event_info AS i NATURAL JOIN users LEFT JOIN event_registration_common AS c ON i.event_id=c.event_id
                 WHERE category='%s' AND username='%s' AND
                 ((date_type='date_st' AND date>='%s' AND date<'%s') OR
                  (date_type='date_ed' AND date>='%s') OR
-                 (register=true and register_date_type='date_st' AND date>='%s') OR
-                 (register=true and register_date_type='date_ed' AND register_date>='%s')) ORDER BY date;",
+                 (register=TRUE AND register_date_type='date_st' AND date>='%s') OR
+                 (register=TRUE AND register_date_type='date_ed' AND register_date>='%s')) ORDER BY date;",
             $category_name_en[$category_id], $username, $week_st, $week_ed, $week_st, $week_st, $week_st);
 
         $res = mysql_query($query, $mysql);

@@ -102,14 +102,14 @@ if (isset($_COOKIE['login_serial'])) {
                 ?>
                 <div id="<?php echo "activity_" . $cnt; ?>">
                     <?php
-                        if ($cnt == 1) {
-                    ?>
+                    if ($cnt == 1) {
+                        ?>
                         <div class="weui_cells_title">常规/大型活动介绍</div>
-                    <?php
-                        }
+                        <?php
+                    }
                     ?>
                     <div class="weui_cells weui_cells_form">
-                    <div class="weui_cell">
+                        <div class="weui_cell">
                             <div class="weui_cell_hd">
                                 <label class="weui_label">活动<?php echo $cnt; ?></label>
                             </div>
@@ -133,16 +133,21 @@ if (isset($_COOKIE['login_serial'])) {
                             </div>
                             <div class="weui_cell_bd weui_cell_primary">
                                 <input class="weui_input" name="<?php echo "activity_location_" . $cnt; ?>" type="text"
-                                       maxlength="30" required="required" value="<?php echo $row['activity_location']; ?>"/>
+                                       maxlength="30" required="required"
+                                       value="<?php echo $row['activity_location']; ?>"/>
                             </div>
                         </div>
                         <div class="weui_cell">
                             <div class="weui_cell_bd weui_cell_primary">
-                                    <textarea class="weui_textarea" id=<?php echo "activity_details_" . $cnt; ?> placeholder="请输入该常规/大型活动的介绍。此栏不可为空。"
-                                              name=<?php echo "activity_details_" . $cnt; ?> rows="3" required="required"
+                                    <textarea class="weui_textarea"
+                                              id=<?php echo "activity_details_" . $cnt; ?> placeholder="请输入该常规/大型活动的介绍。此栏不可为空。"
+                                              name=<?php echo "activity_details_" . $cnt; ?> rows="3"
+                                              required="required"
                                               onkeyup="count('<?php echo 'activity_details_' . $cnt; ?>', <?php echo 'activity_details_cnt_' . $cnt; ?>, 200);"><?php echo $row['activity_details']; ?></textarea>
+
                                 <div class="weui_textarea_counter">
-                                    <span id=<?php echo "activity_details_cnt_" . $cnt;?>><?php echo count_str($row['activity_details']); ?></span>/200
+                                    <span
+                                        id=<?php echo "activity_details_cnt_" . $cnt; ?>><?php echo count_str($row['activity_details']); ?></span>/200
                                 </div>
                             </div>
                         </div>

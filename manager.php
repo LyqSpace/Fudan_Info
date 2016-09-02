@@ -65,9 +65,9 @@ if (isset($_COOKIE['login_serial'])) {
                                 mysql_query("set names 'utf8'");
                                 mysql_select_db("fudan_info");
 
-                                $query = sprintf("select count(*) as cnt from event_registration_list as l left join event_registration_date as d
-                                    on l.registration_serial=d.registration_serial left join event_info as i
-                                    on d.event_id=i.event_id where l.new_increment=TRUE and i.username='%s';", $username);
+                                $query = sprintf("SELECT count(*) AS cnt FROM event_registration_list AS l LEFT JOIN event_registration_date AS d
+                                    ON l.registration_serial=d.registration_serial LEFT JOIN event_info AS i
+                                    ON d.event_id=i.event_id WHERE l.new_increment=TRUE AND i.username='%s';", $username);
                                 $res = mysql_query($query, $mysql);
                                 $row = mysql_fetch_assoc($res);
                                 if ($row['cnt'] > 0) {
@@ -139,7 +139,7 @@ if (isset($_COOKIE['login_serial'])) {
                                 mysql_query("set names 'utf8'");
                                 mysql_select_db("fudan_info");
 
-                                $query = sprintf("select count(*) as cnt from recruit_list where new_increment=TRUE and username='%s';", $username);
+                                $query = sprintf("SELECT count(*) AS cnt FROM recruit_list WHERE new_increment=TRUE AND username='%s';", $username);
                                 $res = mysql_query($query, $mysql);
                                 $row = mysql_fetch_assoc($res);
                                 if ($row['cnt'] > 0) {
@@ -160,6 +160,7 @@ if (isset($_COOKIE['login_serial'])) {
                                 </div>
                             </div>
                             <p><?php echo $row['details']; ?></p>
+
                             <div class="section_box">
                                 <div class="section_header">
                                     <span class="section_body">活动介绍</span>
@@ -225,15 +226,21 @@ if (isset($_COOKIE['login_serial'])) {
                             <a class="weui_btn weui_btn_plain_default" onclick="logout()">退出</a>
                         </div>
                         <br>
-                        <hr />
+                        <hr/>
                         <br>
+
                         <div class="page_desc">
                             <p>【致谢】</p>
+
                             <p>所有在这里精心维护和更新信息的主办方们</p>
                             <br>
+
                             <p>【特别致谢】</p>
+
                             <p>我的动力和信仰：悦儿</p>
+
                             <p>最完美的前端支持：戍爷</p>
+
                             <p>超热心的小伙伴：越越</p>
                         </div>
                     </div>

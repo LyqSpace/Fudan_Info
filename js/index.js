@@ -1,39 +1,39 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
-    $('#btn_events').click(function() {
+    $('#btn_events').click(function () {
         mp.moveTo(0);
     });
-    $('#btn_recruits').click(function() {
+    $('#btn_recruits').click(function () {
         mp.moveTo(1);
     });
-    $('#btn_settings').click(function() {
+    $('#btn_settings').click(function () {
         mp.moveTo(2);
     });
 
-    mp.onLeave(function(slideIndex, nextSlideIndex){
-            switch (slideIndex) {
-                case 0:
-                    $('#btn_events').removeClass('weui_bar_item_on');
-                    break;
-                case 1:
-                    $('#btn_recruits').removeClass('weui_bar_item_on');
-                    break;
-                case 2:
-                    $('#btn_settings').removeClass('weui_bar_item_on');
-                    break;
-            }
-            switch (nextSlideIndex) {
-                case 0:
-                    $('#btn_events').addClass('weui_bar_item_on');
-                    break;
-                case 1:
-                    $('#btn_recruits').addClass('weui_bar_item_on');
-                    break;
-                case 2:
-                    $('#btn_settings').addClass('weui_bar_item_on');
-                    break;
-            }
-        });
+    mp.onLeave(function (slideIndex, nextSlideIndex) {
+        switch (slideIndex) {
+            case 0:
+                $('#btn_events').removeClass('weui_bar_item_on');
+                break;
+            case 1:
+                $('#btn_recruits').removeClass('weui_bar_item_on');
+                break;
+            case 2:
+                $('#btn_settings').removeClass('weui_bar_item_on');
+                break;
+        }
+        switch (nextSlideIndex) {
+            case 0:
+                $('#btn_events').addClass('weui_bar_item_on');
+                break;
+            case 1:
+                $('#btn_recruits').addClass('weui_bar_item_on');
+                break;
+            case 2:
+                $('#btn_settings').addClass('weui_bar_item_on');
+                break;
+        }
+    });
 
     mp.init();
 });

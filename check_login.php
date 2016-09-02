@@ -1,6 +1,7 @@
 <?php
 
-function generate_serial($length) {
+function generate_serial($length)
+{
     $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     $serial = '';
     for ($i = 0; $i < $length; $i++) {
@@ -12,21 +13,21 @@ function generate_serial($length) {
 if (isset($_POST['username']) && isset($_POST['password'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_select_db("fudan_info");
-    $query = sprintf("select password from users where username='%s';",
+    $query = sprintf("SELECT password FROM users WHERE username='%s';",
         mysql_real_escape_string($_POST['username']));
     $res = mysql_query($query, $mysql);
     $row = mysql_fetch_assoc($res);
     if ($row['password'] == md5($_POST['password'])) {
-        $query = sprintf("delete from login_serial where username='%s';",
+        $query = sprintf("DELETE FROM login_serial WHERE username='%s';",
             mysql_real_escape_string($_POST['username']));
         $res = mysql_query($query);
         $serial = generate_serial(32);
-        $query = sprintf("insert into login_serial value('%s', '%s');",
+        $query = sprintf("INSERT INTO login_serial VALUE('%s', '%s');",
             mysql_real_escape_string($_POST['username']),
             mysql_real_escape_string($serial));
         $res = mysql_query($query);
         mysql_close($mysql);
-        setcookie('login_serial', $serial, time()+60*60*24*30);
+        setcookie('login_serial', $serial, time() + 60 * 60 * 24 * 30);
         if ($_POST['username'] == 'admin') {
             header('Location: admin.php');
         } else {
@@ -49,18 +50,18 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         </head>
 
         <body ontouchstart>
-            <div class="weui_mask"></div>
-            <div class="weui_dialog">
-                <div class="weui_dialog_hd">
-                    <strong class="weui_dialog_title">登录失败</strong>
-                </div>
-                <div class="weui_dialog_bd">
-                    用户名或密码错误！
-                </div>
-                <div class="weui_dialog_ft">
-                    <a href="login.html" class="weui_btn_dialog primary">确定</a>
-                </div>
+        <div class="weui_mask"></div>
+        <div class="weui_dialog">
+            <div class="weui_dialog_hd">
+                <strong class="weui_dialog_title">登录失败</strong>
             </div>
+            <div class="weui_dialog_bd">
+                用户名或密码错误！
+            </div>
+            <div class="weui_dialog_ft">
+                <a href="login.html" class="weui_btn_dialog primary">确定</a>
+            </div>
+        </div>
         </body>
         </html>
         <?php

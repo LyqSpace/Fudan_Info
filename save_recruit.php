@@ -5,7 +5,7 @@ $username = '';
 if (isset($_COOKIE['login_serial'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_select_db("fudan_info");
-    $query = sprintf("select username from login_serial where serial='%s';",
+    $query = sprintf("SELECT username FROM login_serial WHERE serial='%s';",
         mysql_real_escape_string($_COOKIE['login_serial']));
     $res = mysql_query($query, $mysql);
     mysql_close($mysql);
@@ -47,16 +47,16 @@ if (isset($_POST['details']) && $_POST['details'] != "") {
     mysql_query("set names 'utf8'");
     mysql_select_db("fudan_info");
 
-    $query = sprintf("delete from recruit_info_common where username='%s';", $username);
+    $query = sprintf("DELETE FROM recruit_info_common WHERE username='%s';", $username);
     $res = mysql_query($query, $mysql);
 
-    $query = sprintf("insert into recruit_info_common value ('%s', '%s', null);",
-            $username,
-            mysql_real_escape_string($_POST['details']));
+    $query = sprintf("INSERT INTO recruit_info_common VALUE ('%s', '%s', NULL);",
+        $username,
+        mysql_real_escape_string($_POST['details']));
     $res = mysql_query($query, $mysql);
     if (!$res) $error_msg .= "保存“招新概况”失败!<br>";
 
-    $query = sprintf("delete from recruit_info_activities where username='%s';", $username);
+    $query = sprintf("DELETE FROM recruit_info_activities WHERE username='%s';", $username);
     $res = mysql_query($query, $mysql);
 
     $activity_cnt = 1;
@@ -65,12 +65,12 @@ if (isset($_POST['details']) && $_POST['details'] != "") {
 
         $activity_name = "activity_name_" . $activity_cnt;
         $activity_date = "activity_date_" . $activity_cnt;
-        $activity_location = "activity_location_" .$activity_cnt;
+        $activity_location = "activity_location_" . $activity_cnt;
         $activity_details = "activity_details_" . $activity_cnt;
 
         if (!isset($_POST[$activity_name])) break;
 
-        $query = sprintf("insert into recruit_info_activities value (null, '%s', '%s', '%s', '%s', '%s');",
+        $query = sprintf("INSERT INTO recruit_info_activities VALUE (NULL, '%s', '%s', '%s', '%s', '%s');",
             $username,
             mysql_real_escape_string($_POST[$activity_name]),
             mysql_real_escape_string($_POST[$activity_date]),

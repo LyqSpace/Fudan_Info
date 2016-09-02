@@ -5,7 +5,7 @@ $username = '';
 if (isset($_COOKIE['login_serial'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_select_db("fudan_info");
-    $query = sprintf("select username from login_serial where serial='%s';",
+    $query = sprintf("SELECT username FROM login_serial WHERE serial='%s';",
         mysql_real_escape_string($_COOKIE['login_serial']));
     $res = mysql_query($query, $mysql);
     mysql_close($mysql);
@@ -20,35 +20,37 @@ if (isset($_COOKIE['login_serial'])) {
 }
 ?>
 
-<html lang="en">
-<!-- Welcome! Contact Me: root@lyq.me -->
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
-    <meta name="author" content="Liang Yongqing, Liu Xueyue">
+    <html lang="en">
+    <!-- Welcome! Contact Me: root@lyq.me -->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+        <meta name="keywords" content="FDUTOPIA, FUDAN, INFORMATION, 复旦">
+        <meta name="author" content="Liang Yongqing, Liu Xueyue">
 
-    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
-    <script type="text/javascript" src="js/settings.js"></script>
+        <script type="text/javascript" src="js/settings.js"></script>
 
-    <title>编辑个人信息 | FDUTOPIA</title>
-</head>
+        <title>编辑个人信息 | FDUTOPIA</title>
+    </head>
 
-<?php
+    <?php
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_query("set names 'utf8'");
     mysql_select_db("fudan_info");
-    $query = sprintf("select * from users where username='%s';", $username);
+    $query = sprintf("SELECT * FROM users WHERE username='%s';", $username);
     $res = mysql_query($query, $mysql);
     $row = mysql_fetch_assoc($res);
-?>
+    ?>
 
-<body ontouchstart>
+    <body ontouchstart>
     <div class="page_header">
         <h1 class="page_title">编辑个人信息</h1>
+
         <p class="page_desc">社团/主办方的全称将显示在推送中</p>
+
         <p class="page_desc">联系邮箱不可为空</p>
     </div>
     <div class="page_body">
@@ -59,7 +61,7 @@ if (isset($_COOKIE['login_serial'])) {
                         <label class="weui_label">密码</label>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" name="password" id="password" type="password" placeholder="请输入密码" />
+                        <input class="weui_input" name="password" id="password" type="password" placeholder="请输入密码"/>
                     </div>
                 </div>
                 <div class="weui_cell">
@@ -67,7 +69,8 @@ if (isset($_COOKIE['login_serial'])) {
                         <label class="weui_label">重复</label>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" name="re_password" id="re_password" type="password" placeholder="请再次输入密码" />
+                        <input class="weui_input" name="re_password" id="re_password" type="password"
+                               placeholder="请再次输入密码"/>
                     </div>
                 </div>
                 <div class="weui_cell">
@@ -75,7 +78,8 @@ if (isset($_COOKIE['login_serial'])) {
                         <label class="weui_label">全称</label>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" name="fullname" id="fullname" type="text" placeholder="全称将显示在推送中" value="<?php echo $row['fullname'];?>"/>
+                        <input class="weui_input" name="fullname" id="fullname" type="text" placeholder="全称将显示在推送中"
+                               value="<?php echo $row['fullname']; ?>"/>
                     </div>
                 </div>
                 <div class="weui_cell">
@@ -83,7 +87,8 @@ if (isset($_COOKIE['login_serial'])) {
                         <label class="weui_label">邮箱</label>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" name="email" id="email" type="text" placeholder="联系邮箱用于找回密码" value="<?php if ($row['email'] != 'null') echo $row['email'];?>"/>
+                        <input class="weui_input" name="email" id="email" type="text" placeholder="联系邮箱用于找回密码"
+                               value="<?php if ($row['email'] != 'null') echo $row['email']; ?>"/>
                     </div>
                 </div>
                 <div class="weui_cell weui_cell_select weui_select_after">
@@ -111,8 +116,8 @@ if (isset($_COOKIE['login_serial'])) {
                                 '<option value="其它">其它</option>';
 
                             $pos = strpos($options, $row['user_category']);
-                            $part1 = substr($options, 0, $pos-7);
-                            $part2 = substr($options, $pos-7, strlen($options) - $pos + 7);
+                            $part1 = substr($options, 0, $pos - 7);
+                            $part2 = substr($options, $pos - 7, strlen($options) - $pos + 7);
                             $options = $part1 . 'selected ' . $part2;
                             echo $options;
                             ?>
@@ -121,7 +126,7 @@ if (isset($_COOKIE['login_serial'])) {
                 </div>
             </div>
             <div class="weui_btn_area">
-                <input class="weui_btn weui_btn_plain_primary" name="save" type="submit" value="保存" />
+                <input class="weui_btn weui_btn_plain_primary" name="save" type="submit" value="保存"/>
             </div>
         </form>
         <div class="weui_btn_area">
@@ -129,10 +134,10 @@ if (isset($_COOKIE['login_serial'])) {
         </div>
         <div id="error_message"></div>
     </div>
-<br>
-</body>
-</html>
+    <br>
+    </body>
+    </html>
 
 <?php
-    mysql_close($mysql);
+mysql_close($mysql);
 ?>

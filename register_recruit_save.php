@@ -29,7 +29,8 @@ $recruit_register_timestamp = "2016-08-01 00:00:00";
         isset($_POST['register_recruit_id']) &&
         isset($_POST['register_recruit_name']) &&
         isset($_POST['register_recruit_phone']) &&
-        isset($_POST['register_recruit_major'])) {
+        isset($_POST['register_recruit_major'])
+    ) {
 
         $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
         mysql_query("set names 'utf8'");

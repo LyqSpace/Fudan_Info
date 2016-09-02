@@ -164,7 +164,8 @@ function count_str($str)
                                                 <label for="" class="weui_label">场次</label>
                                             </div>
                                             <div class="weui_cell_bd weui_cell_primary">
-                                                <select class="weui_select select_no_padding" id="select_registration_<?php echo $event_info['event_id'];?>"
+                                                <select class="weui_select select_no_padding"
+                                                        id="select_registration_<?php echo $event_info['event_id']; ?>"
                                                         name="select_registration"
                                                         onchange="change_date(this, <?php echo $event_info['event_id']; ?>);">
                                                     <?php
@@ -232,7 +233,7 @@ function count_str($str)
                                             <form name="edit_register" method="post" onsubmit="return check_register();"
                                                   action="register_events_save.php">
 
-                                                <input name="registration_serial" style="display: none;" />
+                                                <input name="registration_serial" style="display: none;"/>
                                                 <input name="registration_id" style="display: none;"/>
                                                 <input name="registration_name" style="display: none;"/>
                                                 <input name="registration_major" style="display: none;"/>
@@ -246,10 +247,12 @@ function count_str($str)
                                                 </div>
                                                 <div class="weui_cells weui_cells_form">
                                                     <div class="weui_cell">
-                                                        <div class="weui_cell_hd"><label class="weui_label">票数</label></div>
+                                                        <div class="weui_cell_hd"><label class="weui_label">票数</label>
+                                                        </div>
                                                         <div class="weui_cell_bd weui_cell_primary">
                                                             <input class="weui_input" type="number" pattern="[0-9]*"
-                                                                   max="<?php echo $event_info['ticket_per_person']; ?>" min="1"
+                                                                   max="<?php echo $event_info['ticket_per_person']; ?>"
+                                                                   min="1"
                                                                    value="1" required="required" name="ticket_num"
                                                                    placeholder="请输入要预约的票数">
                                                         </div>
@@ -257,15 +260,17 @@ function count_str($str)
                                                     <div class="weui_cell weui_cell_switch">
                                                         <div class="weui_cell_hd weui_cell_primary">在此设备上记住我</div>
                                                         <div class="weui_cell_ft">
-                                                            <input class="weui_switch" name="remember" id="remember_register_event_<?php echo $registration_info['registration_serial'];?>"
+                                                            <input class="weui_switch" name="remember"
+                                                                   id="remember_register_event_<?php echo $registration_info['registration_serial']; ?>"
                                                                    type="checkbox" checked="checked"/>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="weui_btn_area">
-                                                    <input name="save" type="submit" value="报名" <?php if ($ticket_remain==0) echo ' disabled=\"disabled\"' ?>
-                                                           class="weui_btn weui_btn_plain_primary<?php if ($ticket_remain==0) echo ' disabled'; ?>"/>
+                                                    <input name="save" type="submit"
+                                                           value="报名" <?php if ($ticket_remain == 0) echo ' disabled=\"disabled\"' ?>
+                                                           class="weui_btn weui_btn_plain_primary<?php if ($ticket_remain == 0) echo ' disabled'; ?>"/>
                                                 </div>
                                             </form>
                                         </div>
@@ -293,7 +298,7 @@ function count_str($str)
                             mysql_select_db("fudan_info");
 
                             $query = sprintf("SELECT * FROM event_registration_list NATURAL JOIN event_registration_date NATURAL JOIN event_info NATURAL JOIN users
-                                              WHERE registration_id='%s' and registration_name='%s' and registration_phone='%s' ORDER BY register_time DESC;",
+                                              WHERE registration_id='%s' AND registration_name='%s' AND registration_phone='%s' ORDER BY register_time DESC;",
                                 $_COOKIE['guest_id'], $_COOKIE['guest_name'], $_COOKIE['guest_phone']);
                             //echo $query;
                             $res = mysql_query($query, $mysql);
@@ -308,7 +313,9 @@ function count_str($str)
                                     </div>
                                     <div class="weui_cells_title">
                                         <p>【学号】 <?php echo $_COOKIE['guest_id']; ?></p>
+
                                         <p>【姓名】 <?php echo $_COOKIE['guest_name']; ?></p>
+
                                         <p>【手机】 <?php echo $_COOKIE['guest_phone']; ?></p>
                                     </div>
 
@@ -317,7 +324,7 @@ function count_str($str)
                                             <table class="dataintable">
                                                 <tbody>
                                                 <tr>
-                                                    <th>入场码</th>
+                                                    <th class="first_th">入场码</th>
                                                     <th>活动信息</th>
                                                 </tr>
                                                 <?php
@@ -350,7 +357,8 @@ function count_str($str)
                                         </div>
                                     </div>
                                     <div class="weui_btn_area">
-                                        <a class="weui_btn weui_btn_plain_default" href="#/page_guest_events" id="btn_clear_cookie_events">清除本地记录</a>
+                                        <a class="weui_btn weui_btn_plain_default" href="#/page_guest_events"
+                                           id="btn_clear_cookie_events">清除本地记录</a>
                                     </div>
                                 </article>
                                 <?php
@@ -374,21 +382,25 @@ function count_str($str)
                             <div class="weui_cell">
                                 <div class="weui_cell_hd"><label class="weui_label">学号</label></div>
                                 <div class="weui_cell_bd weui_cell_primary">
-                                    <input class="weui_input" type="number" pattern="[0-9]*" name="register_recruit_id_tmp"
-                                           required="required" placeholder="请输入学号或工号" value="<?php echo $_COOKIE['guest_id']; ?>">
+                                    <input class="weui_input" type="number" pattern="[0-9]*"
+                                           name="register_recruit_id_tmp"
+                                           required="required" placeholder="请输入学号或工号"
+                                           value="<?php echo $_COOKIE['guest_id']; ?>">
                                 </div>
                             </div>
                             <div class="weui_cell">
                                 <div class="weui_cell_hd"><label class="weui_label">姓名</label></div>
                                 <div class="weui_cell_bd weui_cell_primary">
-                                    <input class="weui_input" type="text" required="required" name="register_recruit_name_tmp"
+                                    <input class="weui_input" type="text" required="required"
+                                           name="register_recruit_name_tmp"
                                            placeholder="请输入姓名" value="<?php echo $_COOKIE['guest_name']; ?>">
                                 </div>
                             </div>
                             <div class="weui_cell">
                                 <div class="weui_cell_hd"><label class="weui_label">专业</label></div>
                                 <div class="weui_cell_bd weui_cell_primary">
-                                    <input class="weui_input" type="text" required="required" name="register_recruit_major_tmp"
+                                    <input class="weui_input" type="text" required="required"
+                                           name="register_recruit_major_tmp"
                                            placeholder="请输入专业" value="<?php echo $_COOKIE['guest_major']; ?>">
                                 </div>
                             </div>
@@ -420,7 +432,7 @@ function count_str($str)
                         mysql_query("set names 'utf8'");
                         mysql_select_db("fudan_info");
 
-                        $query = "select * from users WHERE username not in ('admin', 'fdubot') group by user_category";
+                        $query = "SELECT * FROM users WHERE username NOT IN ('admin', 'fdubot') GROUP BY user_category";
                         $res = mysql_query($query, $mysql);
 
                         ?>
@@ -454,8 +466,8 @@ function count_str($str)
 
                             while ($clubs_category = mysql_fetch_assoc($clubs_category_list)) {
 
-                                $query = sprintf("SELECT * FROM users natural join recruit_info_common WHERE user_category='%s' AND
-                username not in ('admin', 'fdubot') ;",
+                                $query = sprintf("SELECT * FROM users NATURAL JOIN recruit_info_common WHERE user_category='%s' AND
+                username NOT IN ('admin', 'fdubot') ;",
                                     $clubs_category['user_category']);
                                 //echo $query;
                                 $clubs_list = mysql_query($query, $mysql);
@@ -472,7 +484,8 @@ function count_str($str)
                                                 <label for="" class="weui_label">社团</label>
                                             </div>
                                             <div class="weui_cell_bd weui_cell_primary">
-                                                <select class="weui_select select_no_padding" id="select_club_<?php echo $clubs_category_cnt;?>"
+                                                <select class="weui_select select_no_padding"
+                                                        id="select_club_<?php echo $clubs_category_cnt; ?>"
                                                         name="select_club"
                                                         onchange="change_club(this, <?php echo $clubs_category_cnt; ?>);">
                                                     <?php
@@ -494,24 +507,27 @@ function count_str($str)
 
                                     while ($club_info = mysql_fetch_assoc($clubs_list)) {
                                         ?>
-                                        <div id="<?php echo 'club_' . $club_info['username']; ?>" name="club_category_<?php echo $clubs_category_cnt;?>" <?php
+                                        <div id="<?php echo 'club_' . $club_info['username']; ?>"
+                                             name="club_category_<?php echo $clubs_category_cnt; ?>" <?php
                                         if ($club_cnt > 0) {
                                             echo 'style="display: none"';
                                         }
                                         ?>>
                                             <div class="weui_cells_title">社团概况</div>
                                             <article class="club_recruit_article">
-                                                <p><?php echo $club_info['details'];?></p>
+                                                <p><?php echo $club_info['details']; ?></p>
                                             </article>
-                                            <form name="edit_register_recruit" method="post" onsubmit="return check_regsiter_recruit();"
+                                            <form name="edit_register_recruit" method="post"
+                                                  onsubmit="return check_regsiter_recruit();"
                                                   action="register_recruit_save.php">
 
-                                                <input name="username" style="display: none;" />
+                                                <input name="username" style="display: none;"/>
                                                 <input name="register_recruit_id" style="display: none;"/>
                                                 <input name="register_recruit_name" style="display: none;"/>
                                                 <input name="register_recruit_major" style="display: none;"/>
                                                 <input name="register_recruit_phone" style="display: none;"/>
-                                                <textarea name="register_recruit_message" style="display:none;"></textarea>
+                                                <textarea name="register_recruit_message"
+                                                          style="display:none;"></textarea>
 
                                                 <div class="weui_cells_title">勾选想参加的活动</div>
                                                 <div class="weui_cells weui_cells_checkbox">
@@ -524,14 +540,22 @@ function count_str($str)
                                                         ?>
                                                         <label class="weui_cell weui_check_label">
                                                             <div class="weui_cell_hd">
-                                                                <input type="checkbox" class="weui_check" name="activity_<?php echo $activity_cnt; ?>">
+                                                                <input type="checkbox" class="weui_check"
+                                                                       name="activity_<?php echo $activity_cnt; ?>">
                                                                 <i class="weui_icon_checked"></i>
                                                             </div>
                                                             <div class="weui_cell_bd weui_cell_primary">
-                                                                <p>【名称】<?php echo $activity_info['activity_name']; ?></p>
-                                                                <p>【时间】<?php echo $activity_info['activity_date']; ?></p>
-                                                                <p>【地点】<?php echo $activity_info['activity_location']; ?></p>
-                                                                <p>【简介】<?php echo $activity_info['activity_details']; ?></p>
+                                                                <p>
+                                                                    【名称】<?php echo $activity_info['activity_name']; ?></p>
+
+                                                                <p>
+                                                                    【时间】<?php echo $activity_info['activity_date']; ?></p>
+
+                                                                <p>
+                                                                    【地点】<?php echo $activity_info['activity_location']; ?></p>
+
+                                                                <p>
+                                                                    【简介】<?php echo $activity_info['activity_details']; ?></p>
                                                             </div>
                                                         </label>
                                                         <?php
@@ -544,20 +568,23 @@ function count_str($str)
                                                     <div class="weui_cell weui_cell_switch">
                                                         <div class="weui_cell_hd weui_cell_primary">是否愿意加入管理层</div>
                                                         <div class="weui_cell_ft">
-                                                            <input class="weui_switch" name="join_management" id="join_management" type="checkbox"/>
+                                                            <input class="weui_switch" name="join_management"
+                                                                   id="join_management" type="checkbox"/>
                                                         </div>
                                                     </div>
                                                     <div class="weui_cell weui_cell_switch">
                                                         <div class="weui_cell_hd weui_cell_primary">在此设备上记住我</div>
                                                         <div class="weui_cell_ft">
-                                                            <input class="weui_switch" name="remember" id="remember_register_recruit_<?php echo $club_info['username'];?>"
+                                                            <input class="weui_switch" name="remember"
+                                                                   id="remember_register_recruit_<?php echo $club_info['username']; ?>"
                                                                    type="checkbox" checked="checked"/>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="weui_btn_area">
-                                                    <input name="save" type="submit" value="报名" class="weui_btn weui_btn_plain_primary"/>
+                                                    <input name="save" type="submit" value="报名"
+                                                           class="weui_btn weui_btn_plain_primary"/>
                                                 </div>
                                             </form>
                                         </div>
@@ -585,8 +612,8 @@ function count_str($str)
                             mysql_query("set names 'utf8'");
                             mysql_select_db("fudan_info");
 
-                            $query = sprintf("select * from recruit_list natural join users
-                where guest_id='%s' and guest_name='%s' and guest_phone='%s' order by recruit_register_time desc;",
+                            $query = sprintf("SELECT * FROM recruit_list NATURAL JOIN users
+                WHERE guest_id='%s' AND guest_name='%s' AND guest_phone='%s' ORDER BY recruit_register_time DESC;",
                                 $_COOKIE['guest_id'], $_COOKIE['guest_name'], $_COOKIE['guest_phone']);
                             //echo $query;
                             $res = mysql_query($query, $mysql);
@@ -611,7 +638,7 @@ function count_str($str)
                                             <table class="dataintable">
                                                 <tbody>
                                                 <tr>
-                                                    <th>社团名</th>
+                                                    <th class="first_th">社团名</th>
                                                     <th>报名信息</th>
                                                 </tr>
                                                 <?php
@@ -648,7 +675,8 @@ function count_str($str)
                                         </div>
                                     </div>
                                     <div class="weui_btn_area">
-                                        <a class="weui_btn weui_btn_plain_default" href="#/page_guest_recruits" id="btn_clear_cookie_recruits">清除本地记录</a>
+                                        <a class="weui_btn weui_btn_plain_default" href="#/page_guest_recruits"
+                                           id="btn_clear_cookie_recruits">清除本地记录</a>
                                     </div>
                                 </article>
                                 <?php
@@ -671,11 +699,11 @@ function count_str($str)
                         mysql_query("set names 'utf8'");
                         mysql_select_db("fudan_info");
 
-                        $query = "update review_read set count=count+1;";
+                        $query = "UPDATE review_read SET count=count+1;";
                         mysql_query($query, $mysql);
 
                         $cur_date = date('Y-m-d H:i:s', time());
-                        $query = sprintf('select * from event_info natural join users where review_url is not null and date<"%s" order by date desc limit 30;', $cur_date);
+                        $query = sprintf('SELECT * FROM event_info NATURAL JOIN users WHERE review_url IS NOT NULL AND date<"%s" ORDER BY date DESC LIMIT 30;', $cur_date);
                         $res = mysql_query($query, $mysql);
 
                         $html = '';
@@ -686,12 +714,13 @@ function count_str($str)
 
                             $url = '';
                             if (strtolower(substr($row['review_url'], 0, 8)) == 'https://' or
-                                strtolower(substr($row['review_url'], 0, 7)) == 'http://') {
+                                strtolower(substr($row['review_url'], 0, 7)) == 'http://'
+                            ) {
                                 $url = $row['review_url'];
                             } else {
                                 $url = 'http://' . $row['review_url'];
                             }
-                            $html .= sprintf('<div class="review_item" id="review_item%s"><ol style="list-style-type: decimal; padding-left: 35px;" start=%d><li>', $cnt-1, $cnt);
+                            $html .= sprintf('<div class="review_item" id="review_item%s"><ol style="list-style-type: decimal; padding-left: 35px;" start=%d><li>', $cnt - 1, $cnt);
                             $html .= sprintf('<a href="%s" style="font-size: 16px; color: black;"><strong>%s</strong></a>', $url, $row['title']);
                             if ($row['hostname'] != '') {
                                 $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">【主办方】%s</p>', $row['hostname']);
@@ -710,22 +739,28 @@ function count_str($str)
 
                         ?>
                         <br>
-                        <hr />
+                        <hr/>
                         <br>
+
                         <div class="page_desc">
                             <p>【致谢】</p>
+
                             <p>所有在这里精心维护和更新信息的主办方们</p>
                             <br>
+
                             <p>【特别致谢】</p>
+
                             <p>我的动力和信仰：悦儿</p>
+
                             <p>最完美的前端支持：戍爷</p>
+
                             <p>超热心的小伙伴：越越</p>
                         </div>
                         <br>
 
                         <p style="font-size: 14px;color: #888;">阅读 <?php
 
-                            $query = "select * from review_read;";
+                            $query = "SELECT * FROM review_read;";
                             $res = mysql_query($query, $mysql);
                             $row = mysql_fetch_assoc($res);
                             echo $row['count'];

@@ -4,7 +4,7 @@ $username = '';
 if (isset($_COOKIE['login_serial'])) {
     $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
     mysql_select_db("fudan_info");
-    $query = sprintf("select username from login_serial where serial='%s';",
+    $query = sprintf("SELECT username FROM login_serial WHERE serial='%s';",
         mysql_real_escape_string($_COOKIE['login_serial']));
     $res = mysql_query($query, $mysql);
     mysql_close($mysql);
@@ -38,6 +38,7 @@ if (isset($_COOKIE['login_serial'])) {
 <body ontouchstart>
 <div class="page_header">
     <h1 class="page_title">我的招新系统</h1>
+
     <p class="page_desc">在“招新管理”里编辑招新表</p>
 </div>
 <div class="page_body">
@@ -51,7 +52,7 @@ if (isset($_COOKIE['login_serial'])) {
             <table class="dataintable">
                 <tbody>
                 <tr>
-                    <th>用户信息</th>
+                    <th style="min-width: 4em">用户信息</th>
                     <th>报名信息</th>
                 </tr>
                 <?php
@@ -60,7 +61,7 @@ if (isset($_COOKIE['login_serial'])) {
                 mysql_query("set names 'utf8'");
                 mysql_select_db("fudan_info");
 
-                $query = sprintf("update recruit_list set new_increment=false where username='%s';", $username);
+                $query = sprintf("UPDATE recruit_list SET new_increment=FALSE WHERE username='%s';", $username);
                 $res = mysql_query($query, $mysql);
 
                 $query = sprintf("SELECT * FROM recruit_list WHERE username='%s' ORDER BY recruit_register_time DESC;", $username);
@@ -90,7 +91,7 @@ if (isset($_COOKIE['login_serial'])) {
                                     echo "<li id='info_green'>愿意加入管理层</li>";
                                 }
                                 $register_date = date('n月j日 H:i', strtotime($row['recruit_register_time']));
-                                echo "<li>". $register_date . "</li>";
+                                echo "<li>" . $register_date . "</li>";
                                 ?>
                             </ul>
                         </td>

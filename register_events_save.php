@@ -19,28 +19,30 @@
 </div>
 
 <div class="page_body">
-<?php
+    <?php
 
-function generate_registration_user_serial($length) {
-    $chars = '0123456789';
-    $serial = '';
-    for ($i = 0; $i < $length; $i++) {
-        $serial .= $chars[mt_rand(0, strlen($chars) - 1)];
+    function generate_registration_user_serial($length)
+    {
+        $chars = '0123456789';
+        $serial = '';
+        for ($i = 0; $i < $length; $i++) {
+            $serial .= $chars[mt_rand(0, strlen($chars) - 1)];
+        }
+        return $serial;
     }
-    return $serial;
-}
 
     if (isset($_POST['registration_serial']) &&
         isset($_POST['registration_id']) &&
         isset($_POST['registration_name']) &&
         isset($_POST['registration_phone']) &&
-        isset($_POST['registration_major'])) {
+        isset($_POST['registration_major'])
+    ) {
 
         $mysql = mysql_connect("localhost", "root", "Xmlyqing2016");
         mysql_query("set names 'utf8'");
         mysql_select_db("fudan_info");
 
-        $query = sprintf("select * from event_registration_date where registration_serial='%s';",
+        $query = sprintf("SELECT * FROM event_registration_date WHERE registration_serial='%s';",
             mysql_real_escape_string($_POST['registration_serial']));
         $res = mysql_query($query, $mysql);
         $row = mysql_fetch_assoc($res);
@@ -62,8 +64,8 @@ function generate_registration_user_serial($length) {
 
         } else {
 
-            $query = sprintf("select * from event_registration_list where registration_serial='%s' and
-                (registration_id='%s' or registration_name='%s' or registration_phone='%s');",
+            $query = sprintf("SELECT * FROM event_registration_list WHERE registration_serial='%s' AND
+                (registration_id='%s' OR registration_name='%s' OR registration_phone='%s');",
                 mysql_real_escape_string($_POST['registration_serial']),
                 mysql_real_escape_string($_POST['registration_id']),
                 mysql_real_escape_string($_POST['registration_name']),
@@ -79,6 +81,7 @@ function generate_registration_user_serial($length) {
                     </div>
                     <div class="weui_dialog_bd">
                         <p>抱歉，一个人只能注册一个场次的活动一次</p>
+
                         <p>同一学号、姓名、手机均算作同一个人</p>
                     </div>
                     <div class="weui_dialog_ft">
@@ -134,22 +137,22 @@ function generate_registration_user_serial($length) {
             }
         }
     } else {
-?>
-    <div class="weui_mask"></div>
-    <div class="weui_dialog">
-        <div class="weui_dialog_hd">
-            <strong class="weui_dialog_title">违规访问</strong>
+        ?>
+        <div class="weui_mask"></div>
+        <div class="weui_dialog">
+            <div class="weui_dialog_hd">
+                <strong class="weui_dialog_title">违规访问</strong>
+            </div>
+            <div class="weui_dialog_bd">
+                本页面禁止违规访问!
+            </div>
+            <div class="weui_dialog_ft">
+                <a href="index.php#m/page_guest_events" class="weui_btn_dialog primary">确定</a>
+            </div>
         </div>
-        <div class="weui_dialog_bd">
-            本页面禁止违规访问!
-        </div>
-        <div class="weui_dialog_ft">
-            <a href="index.php#m/page_guest_events" class="weui_btn_dialog primary">确定</a>
-        </div>
-    </div>
-<?php
+        <?php
     }
-?>
-    </div>
+    ?>
+</div>
 </body>
 </html>

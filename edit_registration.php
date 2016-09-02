@@ -41,6 +41,7 @@ if (isset($_COOKIE['login_serial'])) {
     <h1 class="page_title">报名表</h1>
 
     <p class="page_desc">报名表收集的信息有<span id="info_green">学号、姓名、专业、手机</span></p>
+
     <p class="page_desc">报名表将显示在每期推送的阅读原文中</p>
 </div>
 <div class="page_body">
@@ -91,13 +92,13 @@ if (isset($_COOKIE['login_serial'])) {
                             }
 
                             ?>
-                            <li><?php echo '【标题】' . $row['title'];?></li>
+                            <li><?php echo '【标题】' . $row['title']; ?></li>
                             <?php
                             if ($row['speaker'] != '') {
                                 echo '<li>【嘉宾】' . $row['speaker'] . '</li>';
                             }
                             ?>
-                            <li><?php echo '【地点】' . $row['location'];?></li>
+                            <li><?php echo '【地点】' . $row['location']; ?></li>
                             <li><?php echo $register_date; ?></li>
                             <li><?php echo '【票/人】' . $row['ticket_per_person']; ?></li>
                         </ul>
@@ -165,7 +166,8 @@ if (isset($_COOKIE['login_serial'])) {
                         <div class="weui_cells weui_cells_form">
                             <div class="weui_cell">
                                 <div class="weui_cell_hd ">
-                                    <select class="weui_select select_no_padding" name="register_date_type" onchange="show_register_type(this)">
+                                    <select class="weui_select select_no_padding" name="register_date_type"
+                                            onchange="show_register_type(this)">
                                         <?php
                                         $options =
                                             '<option value="date_st">报名开始时间</option>' .
@@ -185,11 +187,12 @@ if (isset($_COOKIE['login_serial'])) {
                                         <p>即刻起</p>
                                     </div>
                                     <div id="register_date_type_ed" style="display: none;">
-                                        <input class="weui_input" name="register_date" type="datetime-local" value="<?php
-                                        $pos = strpos($row['register_date'], " ");
-                                        $date = substr($row['register_date'], 0, $pos) . "T" . substr($row['register_date'], $pos + 1, strlen($row['register_date']) - $pos - 4);
-                                        echo $date;
-                                        ?>"/>
+                                        <input class="weui_input" name="register_date" type="datetime-local"
+                                               value="<?php
+                                               $pos = strpos($row['register_date'], " ");
+                                               $date = substr($row['register_date'], 0, $pos) . "T" . substr($row['register_date'], $pos + 1, strlen($row['register_date']) - $pos - 4);
+                                               echo $date;
+                                               ?>"/>
                                     </div>
 
                                 </div>
