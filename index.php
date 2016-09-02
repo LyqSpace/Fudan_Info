@@ -710,6 +710,18 @@ function count_str($str)
 
                         ?>
                         <br>
+                        <hr />
+                        <br>
+                        <div class="page_desc">
+                            <p>【致谢】</p>
+                            <p>所有在这里精心维护和更新信息的主办方们</p>
+                            <br>
+                            <p>【特别致谢】</p>
+                            <p>我的动力和信仰：悦儿</p>
+                            <p>最完美的前端支持：戍爷</p>
+                            <p>超热心的小伙伴：越越</p>
+                        </div>
+                        <br>
 
                         <p style="font-size: 14px;color: #888;">阅读 <?php
 

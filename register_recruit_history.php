@@ -13,11 +13,11 @@
     <script type="text/javascript" src="js/register_recruit.js"></script>
     <script type="text/javascript" src="js/guest_cookie.js"></script>
 
-    <title>查询社团报名记录 | FDUTOPIA</title>
+    <title>社团报名记录 | FDUTOPIA</title>
 </head>
 <body ontouchstart>
 <div class="page_header">
-    <h1 class="page_title">查询社团报名记录</h1>
+    <h1 class="page_title">社团报名记录</h1>
 
     <p class="page_desc">填写以下基本信息查询</p>
 </div>

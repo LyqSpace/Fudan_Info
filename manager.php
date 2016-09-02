@@ -224,6 +224,18 @@ if (isset($_COOKIE['login_serial'])) {
                             <a class="weui_btn weui_btn_plain_primary" href="edit_profile.php">修改我的基本信息</a>
                             <a class="weui_btn weui_btn_plain_default" onclick="logout()">退出</a>
                         </div>
+                        <br>
+                        <hr />
+                        <br>
+                        <div class="page_desc">
+                            <p>【致谢】</p>
+                            <p>所有在这里精心维护和更新信息的主办方们</p>
+                            <br>
+                            <p>【特别致谢】</p>
+                            <p>我的动力和信仰：悦儿</p>
+                            <p>最完美的前端支持：戍爷</p>
+                            <p>超热心的小伙伴：越越</p>
+                        </div>
                     </div>
                 </div>
             </div>

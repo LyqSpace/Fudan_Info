@@ -13,11 +13,11 @@
     <script type="text/javascript" src="js/register_events.js"></script>
     <script type="text/javascript" src="js/guest_cookie.js"></script>
 
-    <title>找回活动入场码 | FDUTOPIA</title>
+    <title>活动入场码 | FDUTOPIA</title>
 </head>
 <body ontouchstart>
 <div class="page_header">
-    <h1 class="page_title">找回活动入场码</h1>
+    <h1 class="page_title">活动入场码</h1>
 
     <p class="page_desc">填写以下基本信息查询</p>
 </div>
