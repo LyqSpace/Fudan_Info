@@ -126,7 +126,7 @@ function check_regsiter_recruit() {
         btn.className = btn.className.replace("disabled", "");
         btn.removeAttribute("disabled");
 
-        var msg_box = document.getElementById("error_message");
+        var msg_box = document.getElementById("error_message_recruits");
         msg_box.innerHTML =
             '<div id="dialog">' +
             '   <div class="weui_mask"></div>' +

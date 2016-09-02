@@ -130,7 +130,7 @@ function check_register() {
         btn.className = btn.className.replace("disabled", "");
         btn.removeAttribute("disabled");
 
-        var msg_box = document.getElementById("error_message");
+        var msg_box = document.getElementById("error_message_events");
         msg_box.innerHTML =
             '<div id="dialog">' +
             '   <div class="weui_mask"></div>' +

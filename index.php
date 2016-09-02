@@ -288,7 +288,6 @@ function count_str($str)
                         <div class="weui_btn_area">
                             <a class="weui_btn weui_btn_plain_default" href="register_events_forgotten.php">找回入场码</a>
                         </div>
-                        <div id="error_message"></div>
 
                         <?php
                         if (isset($_COOKIE['guest_id']) && isset($_COOKIE['guest_name']) && isset($_COOKIE['guest_phone'])) {
@@ -366,6 +365,9 @@ function count_str($str)
                         }
                         ?>
                     </div>
+
+                    <div id="error_message_events"></div>
+
                 </div>
 
                 <div class="mp-slide" data-anchor="page_guest_recruits">
@@ -601,7 +603,6 @@ function count_str($str)
                         <div class="weui_btn_area">
                             <a class="weui_btn weui_btn_plain_default" href="register_recruit_history.php">查询社团报名记录</a>
                         </div>
-                        <div id="error_message"></div>
 
                         <br>
                         <hr>
@@ -683,6 +684,9 @@ function count_str($str)
                         }
                         ?>
                     </div>
+
+                    <div id="error_message_recruits"></div>
+
                 </div>
 
                 <div class="mp-slide" data-anchor="page_guest_review">
