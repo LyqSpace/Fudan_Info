@@ -468,7 +468,7 @@ function count_str($str)
                             while ($clubs_category = mysql_fetch_assoc($clubs_category_list)) {
 
                                 $query = sprintf("SELECT * FROM users NATURAL JOIN recruit_info_common WHERE user_category='%s' AND
-                username NOT IN ('admin', 'fdubot') ;",
+                username NOT IN ('admin', 'fdubot') order by edit_time;",
                                     $clubs_category['user_category']);
                                 //echo $query;
                                 $clubs_list = mysql_query($query, $mysql);
