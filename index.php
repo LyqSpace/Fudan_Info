@@ -532,18 +532,20 @@ function count_str($str)
                                                         while ($activity_info = mysql_fetch_assoc($activity_list)) {
                                                             ?>
                                                             <li>
-                                                                <p>
-                                                                    【名称】<?php echo $activity_info['activity_name']; ?></p>
+                                                                <p><strong style="font-size: 16px">
+                                                                        <?php echo $activity_info['activity_name']; ?></strong>
+                                                                </p>
 
-                                                                <p>
+                                                                <p style="font-size: 13.5px; margin-left: -0.75em;">
                                                                     【时间】<?php echo $activity_info['activity_date']; ?></p>
 
-                                                                <p>
+                                                                <p style="font-size: 13.5px; margin-left: -0.75em;">
                                                                     【地点】<?php echo $activity_info['activity_location']; ?></p>
 
-                                                                <p>
+                                                                <p style="font-size: 13.5px; margin-left: -0.75em;">
                                                                     【简介】<?php echo $activity_info['activity_details']; ?></p>
                                                             </li>
+                                                            <br>
                                                             <?php
                                                         }
                                                         ?>

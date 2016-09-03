@@ -174,13 +174,14 @@ if (isset($_COOKIE['login_serial'])) {
                                 while ($row = mysql_fetch_assoc($res)) {
                                     ?>
                                     <li>
-                                        <p><?php echo '【名称】' . $row['activity_name']; ?></p>
+                                        <p><strong style="font-size: 16px"><?php echo $row['activity_name']; ?></strong>
+                                        </p>
 
-                                        <p><?php echo '【时间】' . $row['activity_date']; ?></p>
+                                        <p style="font-size: 13.5px; margin-left: -0.75em;"><?php echo '【时间】' . $row['activity_date']; ?></p>
 
-                                        <p><?php echo '【地点】' . $row['activity_location']; ?></p>
+                                        <p style="font-size: 13.5px; margin-left: -0.75em;"><?php echo '【地点】' . $row['activity_location']; ?></p>
 
-                                        <p><?php echo '【详细】' . $row['activity_details']; ?></p>
+                                        <p style="font-size: 13.5px; margin-left: -0.75em;"><?php echo '【详细】' . $row['activity_details']; ?></p>
                                     </li>
                                     <?php
                                 }
