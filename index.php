@@ -529,7 +529,11 @@ function count_str($str)
                                                 <article class="club_recruit_article">
                                                     <ol style="padding-left: 8px">
                                                         <?php
+                                                        $activity_cnt = 0;
                                                         while ($activity_info = mysql_fetch_assoc($activity_list)) {
+                                                            if ($activity_cnt > 0) {
+                                                                echo '<br>';
+                                                            }
                                                             ?>
                                                             <li>
                                                                 <p><strong style="font-size: 16px">
@@ -545,8 +549,8 @@ function count_str($str)
                                                                 <p style="font-size: 13.5px; margin-left: -0.75em;">
                                                                     【简介】<?php echo $activity_info['activity_details']; ?></p>
                                                             </li>
-                                                            <br>
                                                             <?php
+                                                            $activity_cnt++;
                                                         }
                                                         ?>
 

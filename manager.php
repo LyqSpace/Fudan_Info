@@ -153,44 +153,51 @@ if (isset($_COOKIE['login_serial'])) {
                         $query = sprintf("SELECT * FROM recruit_info_common WHERE username='%s';", $username);
                         $res = mysql_query($query, $mysql);
                         if ($row = mysql_fetch_assoc($res)) {
-                        ?>
-                        <article class="weui_article">
-                            <div class="section_box">
-                                <div class="section_header">
-                                    <span class="section_body">招新信息</span>
+                            ?>
+                            <article class="weui_article">
+                                <div class="section_box">
+                                    <div class="section_header">
+                                        <span class="section_body">招新信息</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <p><?php echo $row['details']; ?></p>
+                                <p><?php echo $row['details']; ?></p>
 
-                            <div class="section_box">
-                                <div class="section_header">
-                                    <span class="section_body">活动介绍</span>
+                                <div class="section_box">
+                                    <div class="section_header">
+                                        <span class="section_body">活动介绍</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <ol style="padding-left: 8px;">
-                                <?php
-                                $query = sprintf("SELECT * FROM recruit_info_activities WHERE username='%s';", $username);
-                                $res = mysql_query($query, $mysql);
-                                while ($row = mysql_fetch_assoc($res)) {
-                                    ?>
-                                    <li>
-                                        <p><strong style="font-size: 16px"><?php echo $row['activity_name']; ?></strong>
-                                        </p>
-
-                                        <p style="font-size: 13.5px; margin-left: -0.75em;"><?php echo '【时间】' . $row['activity_date']; ?></p>
-
-                                        <p style="font-size: 13.5px; margin-left: -0.75em;"><?php echo '【地点】' . $row['activity_location']; ?></p>
-
-                                        <p style="font-size: 13.5px; margin-left: -0.75em;"><?php echo '【详细】' . $row['activity_details']; ?></p>
-                                    </li>
+                                <ol style="padding-left: 8px;">
                                     <?php
-                                }
-                                }
-                                mysql_close($mysql);
-                                ?>
-                            </ol>
-                            </section>
-                        </article>
+                                    $query = sprintf("SELECT * FROM recruit_info_activities WHERE username='%s';", $username);
+                                    $res = mysql_query($query, $mysql);
+                                    $activity_cnt = 0;
+                                    while ($row = mysql_fetch_assoc($res)) {
+                                        if ($activity_cnt > 0) {
+                                            echo '<br>';
+                                        }
+                                        ?>
+                                        <li>
+                                            <p><strong
+                                                    style="font-size: 16px"><?php echo $row['activity_name']; ?></strong>
+                                            </p>
+
+                                            <p style="font-size: 13.5px; margin-left: -0.75em;"><?php echo '【时间】' . $row['activity_date']; ?></p>
+
+                                            <p style="font-size: 13.5px; margin-left: -0.75em;"><?php echo '【地点】' . $row['activity_location']; ?></p>
+
+                                            <p style="font-size: 13.5px; margin-left: -0.75em;"><?php echo '【详细】' . $row['activity_details']; ?></p>
+                                        </li>
+                                        <?php
+                                        $activity_cnt++;
+                                    }
+                                    ?>
+                                </ol>
+                            </article>
+                            <?php
+                        }
+                        mysql_close($mysql);
+                        ?>
                     </div>
                 </div>
 
