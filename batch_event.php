@@ -138,7 +138,7 @@ function print_events(&$html, &$res, &$order_id, $update_next_week)
         $html .= '<li>';
         $html .= sprintf('<p style="font-size: 16px;"><strong>%s', $row['title']);
         if ($row['confirm']) {
-            $html .= '<span style="color: #0099CC">（文末报名）</span>';
+            $html .= '<span style="color: #5c89b7">（文末报名）</span>';
         }
         if ($row['notification'] == 1) {
             $html .= '&nbsp;<span style="text-align: center; padding: 0px;line-height: 16px; margin: 0px;width: 16px; display: inline-block; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;height: 16px;background-color: #0099CC; color: rgb(255, 255, 255);">i</span>';

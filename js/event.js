@@ -160,7 +160,7 @@ function check_event(btn) {
 
         var msg_box = document.getElementById("error_message");
         msg_box.innerHTML =
-            '<div id="dialog">' +
+            '<div id="dialog" >' +
             '   <div class="weui_mask"></div>' +
             '   <div class="weui_dialog">' +
             '       <div class="weui_dialog_hd">' +

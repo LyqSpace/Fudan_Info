@@ -44,7 +44,7 @@ function count_str($str)
     <div class="weui_tab">
         <div class="weui_tab_bd" id="fullpage">
             <div class="mp-section fp-auto-height">
-                <div class="mp-slide" data-anchor="page_guest_events">
+                <div class="mp-slide" id="page_guest_events" data-anchor="page_guest_events">
                     <div class="page_header">
                         <h1 class="page_title">报名/取票表</h1>
 
@@ -370,7 +370,7 @@ function count_str($str)
 
                 </div>
 
-                <div class="mp-slide" data-anchor="page_guest_recruits">
+                <div class="mp-slide" id="page_guest_recruits" data-anchor="page_guest_recruits">
                     <div class="page_header">
                         <h1 class="page_title">社团招新表</h1>
 
@@ -689,7 +689,7 @@ function count_str($str)
 
                 </div>
 
-                <div class="mp-slide" data-anchor="page_guest_review">
+                <div class="mp-slide" id="page_guest_reviews" data-anchor="page_guest_reviews">
                     <div class="page_header">
                         <h1 class="page_title">精彩活动回顾</h1>
 
@@ -774,19 +774,19 @@ function count_str($str)
         </div>
 
         <div class="weui_tabbar">
-            <a href="#" class="weui_tabbar_item" id="btn_events">
+            <a href="#" class="weui_tabbar_item" id="btn_guest_events">
                 <div class="weui_tabbar_icon">
                     <img src="./images/icon_nav_button.png">
                 </div>
                 <p class="weui_tabbar_label">活动报名</p>
             </a>
-            <a href="#" class="weui_tabbar_item" id="btn_recruits">
+            <a href="#" class="weui_tabbar_item" id="btn_guest_recruits">
                 <div class="weui_tabbar_icon">
                     <img src="./images/icon_nav_button.png">
                 </div>
                 <p class="weui_tabbar_label">招新报名</p>
             </a>
-            <a href="#" class="weui_tabbar_item" id="btn_settings">
+            <a href="#" class="weui_tabbar_item" id="btn_guest_reviews">
                 <div class="weui_tabbar_icon">
                     <img src="./images/icon_nav_cell.png">
                 </div>

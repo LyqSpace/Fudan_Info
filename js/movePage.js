@@ -15,6 +15,22 @@ $(document).ready(function () {
     }
 
     function init() {
+        switch (w.location.href.split('#')[1]) {
+            case 'page_client_events':
+            case 'page_events':
+                initialPos = 0;
+                break;
+            case 'page_client_recruits':
+            case 'page_recruits':
+                initialPos = 1;
+                break;
+            case 'page_client_reviews':
+            case 'page_settings':
+                initialPos = 2;
+                break;
+            default:
+                break;
+        }
         moveTo(initialPos, true)
     }
 

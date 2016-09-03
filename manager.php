@@ -45,7 +45,8 @@ if (isset($_COOKIE['login_serial'])) {
     <div class="weui_tab">
         <div class="weui_tab_bd" id="fullpage">
             <div class="mp-section fp-auto-height">
-                <div class="mp-slide" data-anchor="page_events">
+
+                <div class="mp-slide" id="page_events" data-anchor="page_events">
                     <div class="page_header">
                         <h1 class="page_title">活动管理</h1>
 
@@ -121,7 +122,7 @@ if (isset($_COOKIE['login_serial'])) {
                     </div>
                 </div>
 
-                <div class="mp-slide" data-anchor="page_recruits">
+                <div class="mp-slide" id="page_recruits" data-anchor="page_recruits">
                     <div class="page_header">
                         <h1 class="page_title">招新管理</h1>
 
@@ -192,7 +193,7 @@ if (isset($_COOKIE['login_serial'])) {
                     </div>
                 </div>
 
-                <div class="mp-slide" data-anchor="page_settings">
+                <div class="mp-slide" id="page_settings" data-anchor="page_settings">
                     <div class="page_header">
                         <h1 class="page_title">我的信息</h1>
 
