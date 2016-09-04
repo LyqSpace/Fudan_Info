@@ -433,7 +433,9 @@ function count_str($str)
                         mysql_query("set names 'utf8'");
                         mysql_select_db("fudan_info");
 
-                        $query = "SELECT * FROM users WHERE username NOT IN ('admin', 'fdubot') GROUP BY user_category";
+                        $query = "SELECT * FROM users NATURAL JOIN recruit_info_common WHERE username NOT IN ('admin', 'fdubot') GROUP BY user_category
+                            ORDER BY field(user_category, '书院团学联', '人文历史类', '科学技术类', '社科经管类', '体育运动类', '国际交流类', '能力拓展类',
+                            '艺术类', '公益类', '棋牌类', '兴趣类', '枫林社团', '江湾社团', '张江社团', '其它')";
                         $res = mysql_query($query, $mysql);
 
                         ?>
@@ -468,7 +470,7 @@ function count_str($str)
                             while ($clubs_category = mysql_fetch_assoc($clubs_category_list)) {
 
                                 $query = sprintf("SELECT * FROM users NATURAL JOIN recruit_info_common WHERE user_category='%s' AND
-                username NOT IN ('admin', 'fdubot') order by edit_time;",
+                username NOT IN ('admin', 'fdubot') ORDER BY edit_time;",
                                     $clubs_category['user_category']);
                                 //echo $query;
                                 $clubs_list = mysql_query($query, $mysql);

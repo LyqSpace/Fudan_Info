@@ -271,10 +271,10 @@ if (isset($_COOKIE['login_serial'])) {
                         <option value="人文历史类">人文历史类</option>
                         <option value="科学技术类">科学技术类</option>
                         <option value="社科经管类">社科经管类</option>
-                        <option value="歌舞戏剧类">歌舞戏剧类</option>
                         <option value="体育运动类">体育运动类</option>
                         <option value="国际交流类">国际交流类</option>
                         <option value="能力拓展类">能力拓展类</option>
+                        <option value="艺术类">艺术类</option>
                         <option value="公益类">公益类</option>
                         <option value="棋牌类">棋牌类</option>
                         <option value="兴趣类">兴趣类</option>
