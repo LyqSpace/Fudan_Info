@@ -274,7 +274,7 @@ if (isset($_COOKIE['login_serial'])) {
                 <div class="weui_tabbar_icon">
                     <img src="./images/icon_nav_cell.png">
                 </div>
-                <p class="weui_tabbar_label">设置</p>
+                <p class="weui_tabbar_label">我的信息</p>
             </a>
         </div>
     </div>
