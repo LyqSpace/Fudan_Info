@@ -43,11 +43,12 @@ $(document).ready(function () {
             $section.addClass('animate')
         }
 
-        $slides.css('transform', 'translate3d(-' + (index * 100) + '%, 0, 0)')
-        $slides.css('-o-transform', '-o-translate3d(-' + (index * 100) + '%, 0, 0)')
-        $slides.css('-ms-transform', '-ms-translate3d(-' + (index * 100) + '%, 0, 0)')
-        $slides.css('-moz-transform', '-moz-translate3d(-' + (index * 100) + '%, 0, 0)')
-        $slides.css('-webkit-transform', '-webkit-translate3d(-' + (index * 100) + '%, 0, 0)')
+        //$slides.css('transform', 'translate3d(-' + (index * 100) + '%, 0, 0)')
+        //$slides.css('-o-transform', '-o-translate3d(-' + (index * 100) + '%, 0, 0)')
+        //$slides.css('-ms-transform', '-ms-translate3d(-' + (index * 100) + '%, 0, 0)')
+        //$slides.css('-moz-transform', '-moz-translate3d(-' + (index * 100) + '%, 0, 0)')
+        //$slides.css('-webkit-transform', '-webkit-translate3d(-' + (index * 100) + '%, 0, 0)')
+	$slides[0].style.marginLeft = '-' + (index * 100) + '%'
 
         if (localStorage && localStorage.setItem) {
             localStorage.setItem('movepage-' + w.location.href.pathname, index)

@@ -18,10 +18,6 @@
 }
 
 .mp-section.animate .mp-slide {
-    transition: transform 300ms ease;
-    -o-transition: -o-transform 300ms ease;
-    -ms-transition: -ms-transform 300ms ease;
-    -moz-transition: -moz-transform 300ms ease;
-    -webkit-transition: -webkit-transform 300ms ease;
+    transition: margin 300ms ease;
 }
 

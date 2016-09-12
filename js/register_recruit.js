@@ -127,9 +127,9 @@ function check_regsiter_recruit() {
         btn.removeAttribute("disabled");
 
         var msg_box = document.getElementById("error_message_recruits");
-        var scrollTop = $('#page_guest_recruits').scrollTop();
-        var mask_top = 'style="top:' + scrollTop + 'px"';
-        var dialog_top = 'style="top:' + (scrollTop + $(window).height() / 2 - 50) + 'px"';
+        //var scrollTop = $('#page_guest_recruits').scrollTop();
+        var mask_top = 'style="top:0px"';
+        var dialog_top = 'style="top:' + ($(window).height() / 2 - 50) + 'px"';
         msg_box.innerHTML =
             '<div id="dialog">' +
             '   <div class="weui_mask"' + mask_top + '></div>' +
