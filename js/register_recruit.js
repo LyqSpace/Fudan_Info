@@ -128,11 +128,11 @@ function check_regsiter_recruit() {
 
         var msg_box = document.getElementById("error_message_recruits");
         //var scrollTop = $('#page_guest_recruits').scrollTop();
-        var mask_top = 'style="top:0px"';
+        //var mask_top = 'style="top:0px"';
         var dialog_top = 'style="top:' + ($(window).height() / 2 - 50) + 'px"';
         msg_box.innerHTML =
             '<div id="dialog">' +
-            '   <div class="weui_mask"' + mask_top + '></div>' +
+            '   <div class="weui_mask"></div>' +
             '   <div class="weui_dialog"' + dialog_top + '>' +
             '       <div class="weui_dialog_hd">' +
             '           <strong class="weui_dialog_title">报名结果</strong>' +
