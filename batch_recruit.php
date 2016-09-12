@@ -50,7 +50,7 @@ function print_title($index, $category_name_cn)
 function print_article($mysql, $category_name)
 {
 
-    global $user_category_point;
+    global $user_category_point, $club_cnt;
 
     $query = sprintf("SELECT * FROM recruit_info_common NATURAL JOIN users WHERE user_category='%s' ORDER BY edit_time;", $category_name);
     $res = mysql_query($query, $mysql);
@@ -58,7 +58,7 @@ function print_article($mysql, $category_name)
 
     $user_category_point++;
     print_title($user_category_point, $category_name);
-    $html = '<ol style="list-style-type: decimal;" class=" list-paddingleft-2">';
+    $html = '<ol style="list-style-type: decimal;" class=" list-paddingleft-2" start="' . ($club_cnt+1) . '">';
     while ($row = mysql_fetch_assoc($res)) {
 
         $html .= '<li>';
@@ -66,6 +66,7 @@ function print_article($mysql, $category_name)
         $html .= sprintf('<p style="font-size: 13.5px; margin-left: -0.75em;">%s</p>', $row['details']);
         $html .= '</li><br>';
 
+        $club_cnt++;
     }
 
     $html .= '</ol>';
@@ -94,6 +95,7 @@ $user_category = array('书院团学联', '人文历史类', '科学技术类', 
     '艺术类', '公益类', '棋牌类', '兴趣类', '枫林社团', '江湾社团', '张江社团', '其它');
 $user_category_cnt = 15;
 $user_category_point = 0;
+$club_cnt = 0;
 for ($i = 0; $i < $user_category_cnt; $i++) {
     print_article($mysql, $user_category[$i]);
 }
