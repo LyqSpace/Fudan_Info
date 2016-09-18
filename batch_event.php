@@ -61,7 +61,7 @@ function check_update()
 {
     $cur_time_week = date('N', time());
     $cur_time_hour = date('H', time());
-    if ($cur_time_week == 7 && (24 - $cur_time_hour) <= 6) {
+    if ($cur_time_week == 7 && (24 - $cur_time_hour) <= 8) {
         return true;
     }
     return false;
@@ -173,15 +173,15 @@ function print_article(&$order_id, $category_id)
 {
 
     global $category_id_bias, $category_name_cn, $category_name_en, $week_st, $week_ed, $mysql, $update_next_week;
-    $query = sprintf("SELECT * FROM event_info AS i NATURAL JOIN users LEFT JOIN event_registration_common AS c ON i.event_id=c.event_id
+    $query = sprintf("SELECT *,i.event_id AS event_id FROM event_info AS i NATURAL JOIN users LEFT JOIN event_registration_common AS c ON i.event_id=c.event_id
         WHERE category='%s' AND
         ((date_type='date_st' AND date>='%s' AND date<'%s') OR
          (date_type='date_ed' AND date>='%s') OR
          (register=TRUE AND register_date_type='date_st' AND date>='%s') OR
          (register=TRUE AND  register_date_type='date_ed' AND register_date>='%s')) ORDER BY date;",
         $category_name_en[$category_id], $week_st, $week_ed, $week_st, $week_st, $week_st);
-
     $res = mysql_query($query, $mysql);
+
     if (!mysql_num_rows($res)) {
         $category_id_bias++;
         return;
