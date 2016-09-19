@@ -81,6 +81,7 @@ $recruit_register_timestamp = "2016-08-01 00:00:00";
             $res = mysql_query($query, $mysql);
             ?>
             <p class="page_title">成功</p>
+	    <p class="page_desc">欢迎分享该公众号给喜欢社团的小伙伴们</p>
             <br>
             <div class="weui_btn_area">
                 <a class="weui_btn weui_btn_plain_default" href="index.php#page_guest_recruits">返回招新报名系统</a>
